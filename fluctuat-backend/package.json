@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "date-fns": "^1.29.0",
     "express": "^4.16.4",
     "pdfmake": "^0.1.39"
   },
