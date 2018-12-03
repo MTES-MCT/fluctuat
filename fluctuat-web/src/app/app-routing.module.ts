@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { FormNewTransporter } from './form-new-transporter/form-new-transporter.component';
+import { RouterModule, Routes } from '@angular/router';
+import { FormTransporterComponent } from './form-transporter/form-transporter.component';
 
 const routes: Routes = [
-  {path: '', component: FormNewTransporter}
+  { path: '', component: FormTransporterComponent },
 ];
 
 @NgModule({

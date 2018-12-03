@@ -1,24 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FormNewTransporter } from './form-new-transporter/form-new-transporter.component';
+import { FormTransporter } from './form-transporter/form-transporter.component';
+import { TransporterService } from './form-transporter/transporter.service';
 import { FromNewPathComponent } from './from-new-path/from-new-path.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FormNewTransporter,
+    FormTransporter,
     FromNewPathComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    TransporterService
+  ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}

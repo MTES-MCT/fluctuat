@@ -1,0 +1,104 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Transporteur</h1>
+
+    <!-- Company -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">
+          <span class="icon is-small is-left">
+            <i class="fas fa-building"></i>
+          </span>
+        </div>
+        <div class="card-header-title">Société</div>
+      </div>
+
+
+      <div class="card-content">
+
+        <div class="field">
+          <label class="label">Nom</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="transporter.name" placeholder="Nom">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Adresse</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="transporter.address.street" placeholder="Adresse">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Code Postal</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="transporter.address.zipCode" placeholder="Code Postal">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Ville</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="transporter.address.city" placeholder="Ville">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Téléphone</label>
+          <div class="control has-icons-left">
+            <input class="input" type="tel" [(ngModel)]="transporter.phone" placeholder="Téléphone">
+            <span class="icon is-small is-left">
+                <i class="fas fa-phone"></i>
+              </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" [(ngModel)]="transporter.email" placeholder="Email">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Ship -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">
+          <span class="icon is-small is-left">
+            <i class="fas fa-ship"></i>
+          </span>
+        </div>
+        <div class="card-header-title">Bateau</div>
+      </div>
+
+      <div class="card-content">
+
+        <div class="field">
+          <label class="label">Nom (Devise)</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="transporter.ship.name" placeholder="Nom (Devise)">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Matricule</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="transporter.ship.regNumber" placeholder="Matricule">
+          </div>
+        </div>
+
+        <div class="field">
+          <button class="button" (click)="save()">Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
