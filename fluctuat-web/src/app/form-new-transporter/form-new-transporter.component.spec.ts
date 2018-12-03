@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormNewComponent } from './form-new.component';
+import { FormNewTransporter } from './form-new-transporter.component';
 
-describe('FormNewComponent', () => {
-  let component: FormNewComponent;
-  let fixture: ComponentFixture<FormNewComponent>;
+describe('FormNewTransporterComponent', () => {
+  let component: FormNewTransporter;
+  let fixture: ComponentFixture<FormNewTransporter>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormNewComponent ]
+      declarations: [ FormNewTransporter ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormNewComponent);
+    fixture = TestBed.createComponent(FormNewTransporter);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
