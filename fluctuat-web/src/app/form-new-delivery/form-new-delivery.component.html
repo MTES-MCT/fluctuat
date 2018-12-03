@@ -1,0 +1,262 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">
+      Livraison
+    </h1>
+
+    <!-- Customer -->
+    <div class="card">
+
+      <div class="card-header">
+        <div class="card-header-icon">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user-tie"></i>
+          </span>
+        </div>
+        <div class="card-header-title">Client</div>
+      </div>
+
+      <div class="card-content">
+
+        <div class="field">
+          <label class="label">Nom</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="delivery.client.name" placeholder="Nom">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Adresse</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="delivery.client.address.street" placeholder="Adresse">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Code Postal</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="delivery.client.address.zipCode" placeholder="Code Postal">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Ville</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="delivery.client.address.city" placeholder="Ville">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Téléphone</label>
+          <div class="control has-icons-left">
+            <input class="input" type="tel" [(ngModel)]="delivery.client.phone" placeholder="Téléphone">
+            <span class="icon is-small is-left">
+                      <i class="fas fa-phone"></i>
+                    </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" [(ngModel)]="delivery.client.email" placeholder="Email">
+            <span class="icon is-small is-left">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Merchandise Path-->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">
+          <span class="icon is-small is is-left">
+            <i class="fa fa-compass"></i>
+          </span>
+        </div>
+        <div class="card-header-title">Trajet</div>
+      </div>
+
+      <div class="card-content">
+
+        <div class="field">
+          <label class="label">Port d'origine</label>
+
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-anchor"></i>
+            </span>
+            <input class="input" [(ngModel)]="delivery.origin" placeholder="Port">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Date de départ</label>
+
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-calendar"></i>
+            </span>
+            <input class="input" type="datetime-local" [(ngModel)]="delivery.departureTime">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Port de destination</label>
+
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-anchor"></i>
+            </span>
+            <input class="input" placeholder="Port" [(ngModel)]="delivery.destination">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Date d'arrivée</label>
+
+          <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fas fa-calendar"></i>
+            </span>
+            <input class="input" type="datetime-local" [(ngModel)]="delivery.arrivalTime">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Merchandise -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">
+          <span class="icon is-small is is-left">
+            <i class="fa fa-truck-loading"></i>
+          </span>
+        </div>
+        <div class="card-header-title">Merchandise</div>
+      </div>
+
+      <div class="card-content">
+
+        <div class="field">
+          <label class="label">Type de merchandise</label>
+
+          <div class="control">
+            <input class="input" placeholder="type de merchandise" [(ngModel)]="delivery.type">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Tonnage</label>
+
+          <div class="control">
+            <input class="input" placeholder="Tonnage" [(ngModel)]="delivery.weight">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Délai de planche</label>
+
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input" placeholder="Délai de planche" [(ngModel)]="delivery.loadDelay">
+            </div>
+            <div class="control">
+              <span class="button is-static">jours au chargement</span>
+            </div>
+          </div>
+
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input" placeholder="Délai de planche" [(ngModel)]="delivery.unloadDelay">
+            </div>
+            <div class="control">
+              <span class="button is-static">jours au déchargement</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <label class="label">Matières dangereuses</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" [(ngModel)]="delivery.dangerous" [value]="true">
+              Oui
+            </label>
+            <label class="radio">
+              <input type="radio" [(ngModel)]="delivery.dangerous" [value]="false">
+              Non
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tarifes -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon">
+          <span class="icon is-small is is-left">
+            <i class="fa fa-money-bill"></i>
+          </span>
+        </div>
+        <div class="card-header-title">Tarifes</div>
+      </div>
+
+      <div class="card-content">
+
+        <div class="field">
+          <label class="label">Prix</label>
+
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input" placeholder="Prix à la tonne" [(ngModel)]="delivery.price">
+            </div>
+            <div class="control">
+              <span class="button is-static">euros par tonne</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Les péages et taxes sont prise en charge par le client ?</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="oui" [(ngModel)]="delivery.clientPayTaxes" [value]="true">
+              Oui
+            </label>
+            <label class="radio">
+              <input type="radio" name="non" [(ngModel)]="delivery.clientPayTaxes" [value]="false">
+              Non
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Surestaries</label>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input" placeholder="Surestaires" [(ngModel)]="delivery.delayPenalty">
+            </div>
+            <div class="control">
+              <span class="button is-static">euros par jour</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <button class="button" (click)="save()">Sauvegarder</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

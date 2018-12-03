@@ -1,5 +1,8 @@
+import { Injectable } from '@angular/core';
+
 import { Transporter } from './transporter';
 
+@Injectable()
 export class TransporterService {
 
   save(transporter: Transporter) {

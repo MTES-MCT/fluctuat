@@ -1,11 +1,7 @@
-import { Address } from './address';
+import { Company } from '../shared/company';
 import { Ship } from './ship';
 
-export class Transporter {
+export class Transporter extends Company {
 
-  name: string;
-  address: Address = new Address();
-  phone: string;
-  email: string;
   ship: Ship = new Ship();
 }
