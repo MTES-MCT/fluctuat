@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Transporter } from './transporter';
 
 import { TransporterService } from './transporter.service';
-import { Transporter } from './transporter';
 
 @Component({
   selector: 'flu-form-transporter',
@@ -11,7 +12,7 @@ export class FormTransporterComponent implements OnInit {
 
   transporter: Transporter = new Transporter();
 
-  constructor(private transporterService: TransporterService) {
+  constructor(private transporterService: TransporterService, private router: Router) {
   }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class FormTransporterComponent implements OnInit {
   }
 
   save() {
-    this.transporterService.save(this.transporter)
+    this.transporterService.save(this.transporter);
+    this.router.navigateByUrl('/trajet')
   }
 }
