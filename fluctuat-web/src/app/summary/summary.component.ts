@@ -14,9 +14,10 @@ export class SummaryComponent {
   }
 
   send() {
-    this.contractService.send().subscribe(() => {
+    this.contractService.send().subscribe((location) => {
       this.available = true;
-      return console.log('send ok!');
+      console.log(location);
+      window.open(location, "_blank");
     });
   }
 

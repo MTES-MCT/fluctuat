@@ -15,7 +15,7 @@ app.post('/api/contract', (req, res) => {
   delivery = req.body.delivery;
 
   console.log('contract date settled');
-  return res.status(201).end();
+  return res.status(201).location('/api/contract').end();
 });
 
 app.get('/api/contract', (req, res) => {
