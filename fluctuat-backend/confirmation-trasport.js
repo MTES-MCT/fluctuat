@@ -27,7 +27,7 @@ const getContent = (transporter, delivery) => ({
     '\n',
     `- Déchargement :   ${format(delivery.arrivalTime, '[le] D MMMM YYYY [à] H[h] mm', {locale: fr})}`,
     '\n',
-    `- Marchandises : ${delivery.weight} tonnes de ${delivery.type}`,
+    `- Merchandise : ${delivery.weight} tonnes de ${delivery.type}`,
     '\n',
     `- Prix du fret :  ${delivery.price} € par tonne`,
     '\n',
@@ -51,11 +51,7 @@ const getContent = (transporter, delivery) => ({
     },
     '\n',
     '\n',
-    'Je vous remercie de bien vouloir me retourner par fax ou par e-mail cette confirmation de transport' +
-    'signée afin que je puisse assurer la prise en charge de ce transport. Sans retour de votre part, il ne' +
-    'me sera pas possible de donner suite à ce transport.',
     '\n',
-    'Veuillez agréer, Madame, Monsieur, l’expression de mes salutations cordiales.',
     '\n',
     '\n',
     'Signature du transporteur                       Signature du client',

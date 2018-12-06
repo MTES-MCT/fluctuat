@@ -14,12 +14,13 @@ app.post('/api/contract', (req, res) => {
   transporter = req.body.transporter;
   delivery = req.body.delivery;
 
-  console.log('contract date settled');
+  console.log('contract data settled');
   return res.status(201).location('/api/contract').end();
 });
 
 app.get('/api/contract', (req, res) => {
   generatePdf().then(result => {
+    console.log('get contract');
     res.setHeader('Content-Type', 'application/pdf');
     res.send(result);
   }).catch(err => {
