@@ -1,19 +1,27 @@
 const router = require('express').Router();
 
-let transporter;
-let delivery;
+let contracts = [];
 
 router.post('/', (req, res) => {
-  transporter = req.body.transporter;
-  delivery = req.body.delivery;
+  let contract = req.body;
+  if (!contract.id) {
+    contract.id = contracts.length;
+    contracts.push(contract);
+  }
 
-  console.log('contract data settled');
-  return res.status(201).location('/api/contract').end();
+  console.log(`contract ${contract.id} data settled`);
+  return res.status(201).location(`/api/contract/${contract.id}`).json(contract);
 });
 
 router.get('/', (req, res) => {
-  generatePdf().then(result => {
-    console.log('get contract');
+  return res.json(contracts);
+});
+
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(`get contract ${id}`);
+  generatePdf(contracts[id]).then(result => {
+
     res.setHeader('Content-Type', 'application/pdf');
     res.send(result);
   }).catch(err => {
@@ -27,8 +35,8 @@ router.get('/', (req, res) => {
 
 const pdfMakePrinter = require('pdfmake/src/printer');
 const {getContent} = require('../confirmation-trasport');
-const generatePdf = () => {
-  const docDefinition = getContent(transporter, delivery);
+const generatePdf = (contract) => {
+  const docDefinition = getContent(contract.transporter, contract.delivery);
   const fonts = {
     Roboto: {
       normal: './fonts/Roboto-Regular.ttf'
