@@ -12,6 +12,7 @@ import { FormTransporterComponent } from './form-transporter/form-transporter.co
 import { TransporterService } from './form-transporter/transporter.service';
 import { HeaderComponent } from './header/header.component';
 import { SummaryComponent } from './summary/summary.component';
+import { DatePickerDirective } from './form-new-delivery/date-picker.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SummaryComponent } from './summary/summary.component';
     HeaderComponent,
     FormTransporterComponent,
     FormNewDeliveryComponent,
-    SummaryComponent
+    SummaryComponent,
+    DatePickerDirective
   ],
   imports: [
     AppRoutingModule,

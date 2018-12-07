@@ -22,6 +22,7 @@
     "@fortawesome/fontawesome-free": "^5.5.0",
     "bulma": "^0.7.2",
     "core-js": "^2.5.4",
+    "flatpickr": "^4.5.2",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"

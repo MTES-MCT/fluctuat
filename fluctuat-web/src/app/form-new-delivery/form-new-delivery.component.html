@@ -101,7 +101,7 @@
             <span class="icon is-small is-left">
               <i class="fas fa-calendar"></i>
             </span>
-            <input class="input" type="datetime-local" [(ngModel)]="delivery.departureTime">
+            <input class="input" fluDatePicker [(date)]="delivery.departureTime">
           </div>
         </div>
 
@@ -123,7 +123,7 @@
             <span class="icon is-small is-left">
               <i class="fas fa-calendar"></i>
             </span>
-            <input class="input" type="datetime-local" [(ngModel)]="delivery.arrivalTime">
+            <input class="input" fluDatePicker [(date)]="delivery.arrivalTime">
           </div>
         </div>
 
