@@ -83,6 +83,10 @@
 
       <div class="card-content">
 
+        <datalist id="ports">
+          <option *ngFor="let port of ports" [value]="port">
+        </datalist>
+
         <div class="field">
           <label class="label">Port d'origine</label>
 
@@ -90,7 +94,7 @@
             <span class="icon is-small is-left">
               <i class="fas fa-anchor"></i>
             </span>
-            <input class="input" [(ngModel)]="delivery.origin" placeholder="Port">
+            <input class="input" [(ngModel)]="delivery.origin" list="ports" placeholder="Port">
           </div>
         </div>
 
@@ -112,7 +116,7 @@
             <span class="icon is-small is-left">
               <i class="fas fa-anchor"></i>
             </span>
-            <input class="input" placeholder="Port" [(ngModel)]="delivery.destination">
+            <input class="input" [(ngModel)]="delivery.destination" list="ports" placeholder="Port">
           </div>
         </div>
 
