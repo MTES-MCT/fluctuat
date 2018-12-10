@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Delivery } from './delivery';
@@ -11,6 +12,10 @@ import { DeliveryService } from './delivery.service';
 export class FormNewDeliveryComponent implements OnInit {
 
   delivery: Delivery = new Delivery();
+
+  @ViewChild('deliveryForm')
+  public deliveryForm: NgForm;
+  public formSubmitted = false;
 
   readonly ports = [
     'Grand Port maritime du Havre',
@@ -62,7 +67,17 @@ export class FormNewDeliveryComponent implements OnInit {
   }
 
   save() {
+    this.formSubmitted = true;
+    if (this.deliveryForm.invalid) {
+      console.log('no way')
+      return;
+    }
+
     this.deliveryService.save(this.delivery);
     this.router.navigateByUrl('/resume')
+  }
+
+  showError(formValue) {
+    return formValue.invalid && (this.deliveryForm.submitted || formValue.dirty || formValue.touched)
   }
 }

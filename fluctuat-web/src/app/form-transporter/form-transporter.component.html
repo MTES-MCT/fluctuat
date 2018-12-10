@@ -1,5 +1,5 @@
 <section class="section">
-  <div class="container">
+  <form class="container" novalidate #transporterForm="ngForm">
     <h1 class="title">Transporteur</h1>
 
     <!-- Company -->
@@ -13,55 +13,69 @@
         <div class="card-header-title">Société</div>
       </div>
 
-
       <div class="card-content">
 
         <div class="field">
           <label class="label">Nom</label>
           <div class="control">
-            <input class="input" [(ngModel)]="transporter.name" placeholder="Nom">
+            <input class="input" name="name" [(ngModel)]="transporter.name" placeholder="Nom"
+                   [ngClass]="{'is-danger': showError(name)}" #name="ngModel" required>
           </div>
+          <p *ngIf="showError(name)" class="help is-danger">Veuillez renseigner ce champ</p>
         </div>
 
-        <div class="field">
-          <label class="label">Adresse</label>
-          <div class="control">
-            <input class="input" [(ngModel)]="transporter.address.street" placeholder="Adresse">
+        <ng-container ngModelGroup="address">
+          <div class="field">
+            <label class="label">Adresse</label>
+            <div class="control">
+              <input class="input" name="street" [(ngModel)]="transporter.address.street" placeholder="Adresse"
+                     [ngClass]="{'is-danger': showError(street)}" #street="ngModel" required>
+            </div>
+            <p *ngIf="showError(street)" class="help is-danger">Veuillez renseigner ce champ</p>
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label">Code Postal</label>
-          <div class="control">
-            <input class="input" [(ngModel)]="transporter.address.zipCode" placeholder="Code Postal">
+          <div class="field">
+            <label class="label">Code Postal</label>
+            <div class="control">
+              <input class="input" name="zipCode" [(ngModel)]="transporter.address.zipCode" placeholder="Code Postal"
+                     [ngClass]="{'is-danger': showError(zipCode)}" #zipCode="ngModel" required>
+            </div>
+            <p *ngIf="showError(zipCode)" class="help is-danger">Veuillez renseigner ce champ</p>
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label">Ville</label>
-          <div class="control">
-            <input class="input" [(ngModel)]="transporter.address.city" placeholder="Ville">
+          <div class="field">
+            <label class="label">Ville</label>
+            <div class="control">
+              <input class="input" name="city" [(ngModel)]="transporter.address.city" placeholder="Ville"
+                     [ngClass]="{'is-danger': showError(city)}" #city="ngModel" required>
+            </div>
+            <p *ngIf="showError(city)" class="help is-danger">Veuillez renseigner ce champ</p>
           </div>
-        </div>
+
+        </ng-container>
 
         <div class="field">
           <label class="label">Téléphone</label>
           <div class="control has-icons-left">
-            <input class="input" type="tel" [(ngModel)]="transporter.phone" placeholder="Téléphone">
+            <input class="input" type="tel" name="phone" [(ngModel)]="transporter.phone" placeholder="Téléphone"
+                   [ngClass]="{'is-danger': showError(phone)}" #phone="ngModel" required>
             <span class="icon is-small is-left">
-                <i class="fas fa-phone"></i>
-              </span>
+              <i class="fas fa-phone"></i>
+            </span>
           </div>
+          <p *ngIf="showError(phone)" class="help is-danger">Veuillez renseigner ce champ</p>
         </div>
 
         <div class="field">
           <label class="label">Email</label>
           <div class="control has-icons-left">
-            <input class="input" type="email" [(ngModel)]="transporter.email" placeholder="Email">
+            <input class="input" type="email" name="email" [(ngModel)]="transporter.email" placeholder="Email"
+                   [ngClass]="{'is-danger': showError(email)}" #email="ngModel" required>
             <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
+              <i class="fas fa-envelope"></i>
+            </span>
           </div>
+          <p *ngIf="showError(email)" class="help is-danger">Veuillez renseigner ce champ</p>
         </div>
 
       </div>
@@ -78,19 +92,21 @@
         <div class="card-header-title">Bateau</div>
       </div>
 
-      <div class="card-content">
+      <div class="card-content" ngModelGroup="ship">
 
         <div class="field">
           <label class="label">Nom (Devise)</label>
           <div class="control">
-            <input class="input" [(ngModel)]="transporter.ship.name" placeholder="Nom (Devise)">
+            <input class="input" name="name" [(ngModel)]="transporter.ship.name" placeholder="Nom (Devise)"
+                   [ngClass]="{'is-danger': showError(shipName)}" #shipName="ngModel" required>
           </div>
+          <p *ngIf="showError(shipName)" class="help is-danger">Veuillez renseigner ce champ</p>
         </div>
 
         <div class="field">
           <label class="label">Matricule</label>
           <div class="control">
-            <input class="input" [(ngModel)]="transporter.ship.regNumber" placeholder="Matricule">
+            <input class="input" name="regNumber" [(ngModel)]="transporter.ship.regNumber" placeholder="Matricule">
           </div>
         </div>
 
@@ -100,5 +116,5 @@
       </div>
     </div>
 
-  </div>
+  </form>
 </section>
