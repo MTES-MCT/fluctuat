@@ -2,11 +2,83 @@
   <div class="container">
     <h1 class="title">Résumé</h1>
 
-    <button class="button" (click)="send()">Générer la confirmation de transport</button>
-
-    <div *ngIf="contractId">
-      <a [href]="'/api/contract/' + contractId" target="_blank">Télécharger la confirmation de transport</a>
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">Transporteur</div>
+          </div>
+          <div class="card-content">
+            {{contract.transporter.name}}
+            <div>{{ printAddress(contract.transporter.address) }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">Client</div>
+          </div>
+          <div class="card-content">
+            {{contract.delivery.client.name}}
+            <div>{{ printAddress(contract.delivery.client.address) }}</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <h2 class="title is-4">Trajet</h2>
+
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="title is-4">{{contract.delivery.weight}} tonnes de {{contract.delivery.type}}</p>
+          <p *ngIf="contract.delivery.dangerous">La merchandise est dangereuse</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="level is-mobile">
+      <div class="level-item has-text-centered">
+        <div>
+          <p>{{contract.delivery.departureTime}}</p>
+          <p>{{contract.delivery.origin}}</p>
+          <p>{{contract.delivery.loadDelay}} jours au chargement</p>
+        </div>
+      </div>
+      <div class="level-item">
+        <span class="icon is-large">
+          <i class="fas fa-angle-right is-size-3"></i>
+        </span>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p>{{contract.delivery.arrivalTime}}</p>
+          <p>{{contract.delivery.destination}}</p>
+          <p>{{contract.delivery.unloadDelay}} jours au dechargement</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="level">
+      <div class="level-item">
+        <p class="title is-4">{{contract.transporter.ship.name}} - {{contract.transporter.ship.regNumber}}</p>
+      </div>
+    </div>
+
+
+    <h2 class="title is-4">Tarifs</h2>
+
+    <div>{{contract.delivery.price}} € par tonne.</div>
+    <div *ngIf="contract.delivery.clientPayTaxes">Les péages et taxes sont prise en charge par le client.</div>
+    <div>Surestaries de {{contract.delivery.delayPenalty}} € par jour.</div>
+
+    <div class="level"></div>
+    <button class="button is-link" (click)="send()">Générer la confirmation de transport</button>
+
+    <a class="button is-text" *ngIf="contract.id" [href]="'/api/contract/' + contract.id" target="_blank">
+      Télécharger la confirmation de transport
+    </a>
 
   </div>
 </section>
