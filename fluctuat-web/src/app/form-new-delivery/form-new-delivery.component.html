@@ -154,16 +154,16 @@
             <i class="fa fa-truck-loading"></i>
           </span>
         </div>
-        <div class="card-header-title">Merchandise</div>
+        <div class="card-header-title">Marchandise</div>
       </div>
 
       <div class="card-content">
 
         <div class="field">
-          <label class="label">Type de merchandise</label>
+          <label class="label">Type de marchandise</label>
 
           <div class="control">
-            <input class="input" name="type" [(ngModel)]="delivery.type" placeholder="type de merchandise"
+            <input class="input" name="type" [(ngModel)]="delivery.type" placeholder="type de marchandise"
                    [ngClass]="{'is-danger': showError(type)}" #type="ngModel" required>
           </div>
           <p *ngIf="showError(type)" class="help is-danger">Veuillez renseigner ce champ</p>

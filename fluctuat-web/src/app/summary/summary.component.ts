@@ -12,7 +12,7 @@ import { Delivery } from '../form-new-delivery/delivery';
 })
 export class SummaryComponent implements OnInit {
 
-  contract: {id: string, delivery: Delivery, transporter: Transporter};
+  contract: {id?: string, delivery: Delivery, transporter: Transporter};
 
   constructor(private contractService: ContractService,
               private transporterService: TransporterService,

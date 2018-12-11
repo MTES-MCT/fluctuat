@@ -16,7 +16,8 @@ const getContent = (transporter, delivery) => ({
       text: `${delivery.client.address.street}, ${delivery.client.address.zipCode}, ${delivery.client.address.city}`,
       alignment: 'right'
     },
-    {text: `${transporter.address.city}, ${format(new Date(), '[le] D MMMM YYYY', {locale: fr})}`, alignment: 'right'}, // TODO
+    '\n',
+    {text: `${transporter.address.city}, ${format(new Date(), '[le] D MMMM YYYY', {locale: fr})}`, alignment: 'right'},
     '\n',
     'Madame, Monsieur,',
     '\n',
@@ -27,7 +28,7 @@ const getContent = (transporter, delivery) => ({
     '\n',
     `- Déchargement :   ${format(delivery.arrivalTime, '[le] D MMMM YYYY [à] H[h] mm', {locale: fr})}`,
     '\n',
-    `- Merchandise : ${delivery.weight} tonnes de ${delivery.type}`,
+    `- Marchandise : ${delivery.weight} tonnes de ${delivery.type}`,
     '\n',
     `- Prix du fret :  ${delivery.price} € par tonne`,
     '\n',

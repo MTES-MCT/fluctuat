@@ -10,14 +10,14 @@ router.post('/', (req, res) => {
   }
 
   console.log(`contract ${contract.id} data settled`);
-  return res.status(201).location(`/api/contract/${contract.id}`).json(contract);
+  return res.status(201).location(`/api/contract/${contract.id}/confirmation-transport.pdf`).json(contract);
 });
 
 router.get('/', (req, res) => {
   return res.json(contracts);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id/confirmation-transport.pdf', (req, res) => {
   const id = req.params.id;
   console.log(`get contract ${id}`);
   generatePdf(contracts[id]).then(result => {
