@@ -1,0 +1,50 @@
+<flu-hero-container class="flu-text-form">
+  <h1 class="title">Nouveau Transport Fluvial</h1>
+  <h2 class="subtitle">Quelles sont les conditions tarifaires ?</h2>
+
+  <div class="content">
+
+    <div class="columns is-paddingless is-marginless is-vcentered">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">Le prix du fret est de </p>
+      </div>
+      <div class="column">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-5">
+            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.price"></div>
+          </div>
+          <div class="column is-narrow">
+            <p class="subtitle is-3">€ par tonne</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless is-vcentered">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">Les surestaries sont de</p>
+      </div>
+      <div class="column">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-5">
+            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.delayPenalty"></div>
+          </div>
+          <div class="column is-narrow">
+            <p class="subtitle is-3">€ par jour</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-text" (click)="nextStep()">Continuer</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</flu-hero-container>

@@ -1,0 +1,95 @@
+<flu-hero-container class="flu-text-form">
+  <h1 class="title">Nouveau Transport Fluvial</h1>
+  <h2 class="subtitle">Quel est le trajet ?</h2>
+
+  <div class="content">
+
+    <datalist id="ports">
+      <option *ngFor="let port of ports" [value]="port">
+    </datalist>
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-paddingless is-marginless">
+
+        <div class="columns is-paddingless is-marginless">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Départ du</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" list="ports" [(ngModel)]="delivery.origin">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column is-paddingless is-marginless is-3">
+
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">le</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" fluDatePicker [(date)]="delivery.departureDate">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column is-paddingless is-marginless is-2">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" fluTimePicker [(date)]="delivery.departureTime">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-paddingless is-marginless">
+
+        <div class="columns is-paddingless is-marginless">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Arrivé au</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" list="ports" [(ngModel)]="delivery.destination">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column is-paddingless is-marginless is-3">
+
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">le</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="delivery.arrivalDate">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column is-paddingless is-marginless is-2">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" [fluWhenEnterPressed]="nextStep" fluTimePicker [(date)]="delivery.arrivalTime">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <button class="level-item button is-text" (click)="nextStep()">Continuer</button>
+      </div>
+    </div>
+
+  </div>
+</flu-hero-container>

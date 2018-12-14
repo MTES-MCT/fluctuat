@@ -1,0 +1,47 @@
+<flu-hero-container class="flu-text-form">
+  <h1 class="title">Nouveau Transport Fluvial</h1>
+  <h2 class="subtitle">Qui achète le transport ?</h2>
+
+  <div class="content">
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">Le donneur d'ordre est</p>
+      </div>
+
+      <div class="column">
+        <p class="control"><input class="input is-medium" [(ngModel)]="delivery.client.name"></p>
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">Expédiée par</p>
+      </div>
+
+      <div class="column">
+        <p class="control"><input class="input is-medium" [(ngModel)]="delivery.sender"></p>
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">Le destinataire est</p>
+      </div>
+
+      <div class="column">
+        <p class="control"><input class="input is-medium" [(ngModel)]="delivery.receiver"></p>
+      </div>
+    </div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-text" (click)="nextStep()">Continuer</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</flu-hero-container>

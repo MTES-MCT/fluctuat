@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContractService } from '../form-new-delivery/contract.service';
-import { DeliveryService } from '../form-new-delivery/delivery.service';
-import { TransporterService } from '../form-transporter/transporter.service';
 import { Transporter } from '../form-transporter/transporter';
-import { Delivery } from '../form-new-delivery/delivery';
+import { TransporterService } from '../form-transporter/transporter.service';
+import { Delivery } from '../delivery/delivery';
+import { DeliveryService } from '../delivery/delivery.service';
 
 @Component({
   selector: 'flu-summary',

@@ -1,11 +1,10 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import flatpickr from 'flatpickr';
-import { French } from 'flatpickr/dist/l10n/fr';
 
 @Directive({
-  selector: '[fluDatePicker]'
+  selector: '[fluTimePicker]'
 })
-export class DatePickerDirective {
+export class TimePickerDirective {
 
   fp: any;
 
@@ -15,17 +14,15 @@ export class DatePickerDirective {
   constructor(el: ElementRef) {
 
     this.fp = flatpickr(el.nativeElement, {
-      locale: French,
       enableTime: true,
-      altInput: true,
-      altFormat: 'd/m/Y, H:i',
-      dateFormat: 'Y-m-dTH:i',
+      noCalendar: true,
+      dateFormat: 'H:i',
       time_24hr: true,
     });
   }
 
   @Input()
-  set date(value: Date) {
+  set date(value: string) {
     this.fp.setDate(value, false)
   };
 

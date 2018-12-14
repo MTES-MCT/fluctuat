@@ -1,0 +1,56 @@
+<flu-hero-container class="flu-text-form">
+  <h1 class="title">Nouveau Transport Fluvial</h1>
+  <h2 class="subtitle">Quelles sont les délais de planche ?</h2>
+
+  <div class="content">
+
+    <div class="columns is-paddingless is-marginless is-vcentered">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">Le délai de planche de </p>
+      </div>
+      <div class="column is-3">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column">
+            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.loadDelay"></div>
+          </div>
+          <div class="column is-narrow">
+            <p class="subtitle is-3">jours</p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">au chargement </p>
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless is-vcentered">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">et de</p>
+      </div>
+      <div class="column is-3">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column">
+            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.unloadDelay"></div>
+          </div>
+          <div class="column is-narrow">
+            <p class="subtitle is-3">jours</p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">au déchargement </p>
+      </div>
+    </div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-text" (click)="nextStep()">Continuer</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</flu-hero-container>

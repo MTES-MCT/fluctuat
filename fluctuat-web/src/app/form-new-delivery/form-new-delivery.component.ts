@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Delivery } from './delivery';
-import { DeliveryService } from './delivery.service';
+import { DeliveryService } from '../delivery/delivery.service';
+import { Delivery } from '../delivery/delivery';
 
 @Component({
   selector: 'flu-form-new-path',
