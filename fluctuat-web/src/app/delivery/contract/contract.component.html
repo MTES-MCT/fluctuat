@@ -1,0 +1,16 @@
+<flu-hero-container *ngIf="contract$ | async as contract" class="content">
+  <h1 class="title">Contrat de transport #{{contract.id}}</h1>
+  <h3>Transporteur</h3>
+
+  <p>{{contract.transporter.name}}</p>
+
+  <flu-delivery-detail [delivery]="contract.delivery"></flu-delivery-detail>
+
+  <div class="level"></div>
+  <p *ngIf="contract.status === STATUS.CREATED">
+    <button class="button" (click)="accept(contract)">J'accepte</button>
+  </p>
+  <p *ngIf="contract.status !== STATUS.CREATED">
+    Contrat accepté le {{contract.acceptedAt}}.
+  </p>
+</flu-hero-container>
