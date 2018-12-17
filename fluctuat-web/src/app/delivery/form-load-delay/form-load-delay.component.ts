@@ -14,7 +14,7 @@ export class FormLoadDelayComponent implements OnInit {
   delivery: Delivery;
 
   constructor(private deliveryService: DeliveryService, router: Router) {
-    const goNext = buildGoNext(router, '/conditions-tarifaires');
+    const goNext = buildGoNext(router, '/nouveau-transport/conditions-tarifaires');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);

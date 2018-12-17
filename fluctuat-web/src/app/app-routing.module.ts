@@ -12,12 +12,13 @@ import { FormTransporterComponent } from './form-transporter/form-transporter.co
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },
   { path: 'livraison', component: FormNewDeliveryComponent },
-  { path: 'resume', component: SummaryComponent },
-  { path: 'client', component: FormCustomerComponent },
-  { path: 'marchandise', component: FormMerchandiseComponent },
-  { path: 'trajet', component: FormPathComponent },
-  { path: 'delai-de-planche', component: FormLoadDelayComponent },
-  { path: 'conditions-tarifaires', component: FormPricesComponent },
+  { path: 'nouveau-transport/resume', component: SummaryComponent },
+  { path: 'nouveau-transport/client', component: FormCustomerComponent},
+  { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
+  { path: 'nouveau-transport/trajet', component: FormPathComponent },
+  { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
+  { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
+
 ];
 
 @NgModule({

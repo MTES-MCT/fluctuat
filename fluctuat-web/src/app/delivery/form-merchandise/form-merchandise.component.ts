@@ -14,7 +14,7 @@ export class FormMerchandiseComponent implements OnInit {
   delivery: Delivery;
 
   constructor(private deliveryService: DeliveryService, router: Router) {
-    const goNext = buildGoNext(router, '/trajet');
+    const goNext = buildGoNext(router, '/nouveau-transport/trajet');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);

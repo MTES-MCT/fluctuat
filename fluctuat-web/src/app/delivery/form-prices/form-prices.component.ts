@@ -15,7 +15,7 @@ export class FormPricesComponent implements OnInit {
   delivery: Delivery;
 
   constructor(private deliveryService: DeliveryService, router: Router) {
-    const goNext = buildGoNext(router, '/resume');
+    const goNext = buildGoNext(router, '/nouveau-transport/resume');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);

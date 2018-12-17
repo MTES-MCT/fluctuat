@@ -15,7 +15,7 @@ export class FormCustomerComponent implements OnInit {
   nextStep: () => any;
 
   constructor(private deliveryService: DeliveryService, router: Router) {
-    const goNext = buildGoNext(router, '/marchandise');
+    const goNext = buildGoNext(router, '/nouveau-transport/marchandise');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);

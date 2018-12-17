@@ -17,7 +17,7 @@ export class FormPathComponent implements OnInit {
   delivery: Delivery;
 
   constructor(private deliveryService: DeliveryService, router: Router) {
-    const goNext = buildGoNext(router, '/delai-de-planche');
+    const goNext = buildGoNext(router, '/nouveau-transport/delai-de-planche');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);
