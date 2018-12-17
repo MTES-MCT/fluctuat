@@ -5,9 +5,9 @@ import { FormLoadDelayComponent } from './delivery/form-load-delay/form-load-del
 import { FormMerchandiseComponent } from './delivery/form-merchandise/form-merchandise.component';
 import { FormPathComponent } from './delivery/form-path/form-path.component';
 import { FormPricesComponent } from './delivery/form-prices/form-prices.component';
+import { SummaryComponent } from './delivery/summary/summary.component';
 import { FormNewDeliveryComponent } from './form-new-delivery/form-new-delivery.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
-import { SummaryComponent } from './summary/summary.component';
 
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ContractService } from '../form-new-delivery/contract.service';
-import { Transporter } from '../form-transporter/transporter';
-import { TransporterService } from '../form-transporter/transporter.service';
-import { Delivery } from '../delivery/delivery';
-import { DeliveryService } from '../delivery/delivery.service';
+import { Transporter } from '../../form-transporter/transporter';
+import { TransporterService } from '../../form-transporter/transporter.service';
+import { ContractService } from '../contract.service';
+import { Delivery } from '../delivery';
+import { DeliveryService } from '../delivery.service';
 
 @Component({
   selector: 'flu-summary',
@@ -12,7 +12,7 @@ import { DeliveryService } from '../delivery/delivery.service';
 })
 export class SummaryComponent implements OnInit {
 
-  contract: {id?: string, delivery: Delivery, transporter: Transporter};
+  contract: { id?: string, delivery: Delivery, transporter: Transporter };
 
   constructor(private contractService: ContractService,
               private transporterService: TransporterService,
