@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/index';
+import { Contract } from './contract';
 
 @Injectable()
 export class ContractService {
@@ -9,7 +10,18 @@ export class ContractService {
   }
 
   create(contract) {
-    return this.http.post('/api/contract', contract, { observe: 'response' })
-      .pipe(map(response => response.headers.get('Location')));
+    return this.http.post('/api/contract', contract)
+  }
+
+  getAll(): Observable<Contract[]> {
+    return this.http.get<Contract[]>('/api/contract')
+  }
+
+  get(id) {
+    return this.http.get<Contract>(`/api/contract/${id}`)
+  }
+
+  accept(id) {
+    return this.http.post(`/api/contract/${id}/accept`)
   }
 }

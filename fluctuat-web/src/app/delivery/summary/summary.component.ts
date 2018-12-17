@@ -12,7 +12,7 @@ import { DeliveryService } from '../delivery.service';
 })
 export class SummaryComponent implements OnInit {
 
-  contract: { id?: string, delivery: Delivery, transporter: Transporter };
+  contract: Contract;
 
   constructor(private contractService: ContractService,
               private transporterService: TransporterService,
