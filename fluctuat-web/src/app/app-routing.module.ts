@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContractComponent } from './delivery/contract/contract.component';
+import { DashboardComponent } from './delivery/dashboard/dashboard.component';
 import { FormCustomerComponent } from './delivery/form-customer/form-customer.component';
 import { FormLoadDelayComponent } from './delivery/form-load-delay/form-load-delay.component';
 import { FormMerchandiseComponent } from './delivery/form-merchandise/form-merchandise.component';
@@ -13,11 +15,13 @@ const routes: Routes = [
   { path: '', component: FormTransporterComponent },
   { path: 'livraison', component: FormNewDeliveryComponent },
   { path: 'nouveau-transport/resume', component: SummaryComponent },
-  { path: 'nouveau-transport/client', component: FormCustomerComponent},
+  { path: 'nouveau-transport/client', component: FormCustomerComponent },
   { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
   { path: 'nouveau-transport/trajet', component: FormPathComponent },
   { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
   { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
+  { path: 'contrat/:id', component: ContractComponent },
+  { path: 'mes-transports', component: DashboardComponent },
 
 ];
 

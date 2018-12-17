@@ -21,6 +21,9 @@ import { DatePickerDirective } from './shared/date-picker.directive';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
 import { TimePickerDirective } from './shared/time-picker.directive';
 import { WhenEnterPressedDirective } from './shared/when-enter-pressed.directive';
+import { DashboardComponent } from './delivery/dashboard/dashboard.component';
+import { DeliveryDetailComponent } from './delivery/delivery-detail/delivery-detail.component';
+import { ContractComponent } from './delivery/contract/contract.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { WhenEnterPressedDirective } from './shared/when-enter-pressed.directive
     FormMerchandiseComponent,
     FormPathComponent,
     FormPricesComponent,
+    DashboardComponent,
+    DeliveryDetailComponent,
+    ContractComponent,
   ],
   imports: [
     AppRoutingModule,

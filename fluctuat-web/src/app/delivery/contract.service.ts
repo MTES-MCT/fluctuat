@@ -22,6 +22,6 @@ export class ContractService {
   }
 
   accept(id) {
-    return this.http.post(`/api/contract/${id}/accept`)
+    return this.http.post(`/api/contract/${id}/accept`, null)
   }
 }

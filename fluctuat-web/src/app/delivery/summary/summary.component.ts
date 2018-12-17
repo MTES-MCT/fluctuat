@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Transporter } from '../../form-transporter/transporter';
 import { TransporterService } from '../../form-transporter/transporter.service';
+import { Contract } from '../contract';
 import { ContractService } from '../contract.service';
-import { Delivery } from '../delivery';
 import { DeliveryService } from '../delivery.service';
 
 @Component({
@@ -20,22 +19,16 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contract = {
+    this.contract = Object.assign(new Contract(), {
       delivery: this.deliveryService.get(),
       transporter: this.transporterService.get(),
-    }
+    })
   }
 
   send() {
-    this.contractService.create(this.contract).subscribe((location) => {
-      this.contract.id = location.split('/').pop();
-      console.log(location);
-      window.open(location, '_blank');
+    this.contractService.create(this.contract).subscribe((contract: Contract) => {
+      this.contract = contract;
     });
-  }
-
-  printAddress(address) {
-    return `${address.street}, ${address.zipCode} ${address.city}`
   }
 
 }
