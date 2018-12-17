@@ -1,19 +1,21 @@
 const {format} = require('date-fns');
 const fr = require('date-fns/locale/fr');
 
+const printAddress = (address) => `${address.street}, ${address.zipCode} ${address.city}`;
+
 const getContent = (transporter, delivery) => ({
   content: [
     {text: 'Confirmation de transport', fontSize: 18, alignment: 'center'},
     '\n',
     transporter.name,
     transporter.ship.name,
-    `${transporter.address.street}, ${transporter.address.zipCode}, ${transporter.address.city}`,
+    printAddress(transporter.address),
     transporter.phone,
     transporter.email,
 
     {text: delivery.client.name, alignment: 'right'},
     {
-      text: `${delivery.client.address.street}, ${delivery.client.address.zipCode}, ${delivery.client.address.city}`,
+      text: printAddress(delivery.client.address),
       alignment: 'right'
     },
     '\n',
@@ -24,15 +26,15 @@ const getContent = (transporter, delivery) => ({
     'Conformément à notre discussion, je vous confirme que je suis disposé à prendre en charge le transport' +
     ' que vous me proposez dans les conditions suivantes :',
     '\n',
-    `- Chargement :       ${format(delivery.departureTime, '[le] D MMMM YYYY [à] H[h] mm', {locale: fr})}`,
+    `- Chargement :       le ${delivery.departureDate} à ${delivery.departureTime}`,
     '\n',
-    `- Déchargement :   ${format(delivery.arrivalTime, '[le] D MMMM YYYY [à] H[h] mm', {locale: fr})}`,
+    `- Déchargement :   le ${delivery.arrivalDate} à ${delivery.departureTime}`,
     '\n',
-    `- Marchandise : ${delivery.weight} tonnes de ${delivery.type}`,
+    `- Marchandise : ${delivery.merchandise.weight} tonnes de ${delivery.merchandise.type}`,
     '\n',
     `- Prix du fret :  ${delivery.price} € par tonne`,
-    '\n',
-    `- Péages et taxes : prise en charge par le courtier/client (tiers payant):  ${delivery.clientPayTaxes ? 'Oui' : 'Non'}`,
+    //'\n',
+    //`- Péages et taxes : prise en charge par le courtier/client (tiers payant):  ${delivery.clientPayTaxes ? 'Oui' : 'Non'}`,
     '\n',
     ' - Délais de planche dont nous avons convenu :',
     '\n',

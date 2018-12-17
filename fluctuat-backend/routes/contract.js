@@ -4,22 +4,32 @@ let contracts = [];
 
 router.post('/', (req, res) => {
   let contract = req.body;
-  if (!contract.id) {
-    contract.id = contracts.length;
-    contracts.push(contract);
-  }
+  contract.id = contracts.length;
+  contracts.push(contract);
+
+  contract.status = 'CREATED';
+  contract.documentUrl = `/api/contract/${contract.id}/confirmation-transport.pdf`;
+  contract.createdAt = new Date();
 
   console.log(`contract ${contract.id} data settled`);
-  return res.status(201).location(`/api/contract/${contract.id}/confirmation-transport.pdf`).json(contract);
+
+  return res.status(201).location(`/api/contract/${contract.id}`).json(contract);
 });
 
 router.get('/', (req, res) => {
   return res.json(contracts);
 });
 
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(`get contract ${id} pdf`);
+
+  res.json(contracts[id]);
+});
+
 router.get('/:id/confirmation-transport.pdf', (req, res) => {
   const id = req.params.id;
-  console.log(`get contract ${id}`);
+  console.log(`get contract ${id} pdf`);
   generatePdf(contracts[id]).then(result => {
 
     res.setHeader('Content-Type', 'application/pdf');
@@ -30,6 +40,14 @@ router.get('/:id/confirmation-transport.pdf', (req, res) => {
   })
 });
 
+router.post('/:id/accept', (req, res) => {
+  const id = req.params.id;
+
+  contracts[id].status = 'ACCEPTED';
+  contracts[id].acceptedAt = new Date();
+
+  return res.status(204).end()
+});
 
 // Based on https://medium.com/@kainikhil/nodejs-how-to-generate-and-properly-serve-pdf-6835737d118e
 
