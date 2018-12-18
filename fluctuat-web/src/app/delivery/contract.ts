@@ -1,4 +1,5 @@
-import { Transporter } from '../form-transporter/transporter';
+import { Ship } from '../form-transporter/ship';
+import { Company } from '../shared/company';
 import { ContractStatus } from './contract-status.enum';
 import { Delivery } from './delivery';
 
@@ -6,7 +7,8 @@ export class Contract {
   id: string;
   status: ContractStatus;
   delivery: Delivery;
-  transporter: Transporter;
+  transporter: Company;
+  ship: Ship;
   documentUrl: string;
   acceptedAt: Date;
   createdAt: Date;

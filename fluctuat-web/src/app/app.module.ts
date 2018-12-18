@@ -54,6 +54,7 @@ import { ContractComponent } from './delivery/contract/contract.component';
   providers: [
     DeliveryService,
     TransporterService,
+    ShipService,
     ContractService
   ],
   bootstrap: [ AppComponent ]

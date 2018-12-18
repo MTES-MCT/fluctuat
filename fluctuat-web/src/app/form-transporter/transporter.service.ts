@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import { Transporter } from './transporter';
+import { Company } from '../shared/company';
 
 @Injectable()
 export class TransporterService {
 
-  save(transporter: Transporter) {
+  save(transporter: Company) {
     localStorage.transporter = JSON.stringify(transporter);
   }
 
   get() {
-    return localStorage.transporter ? JSON.parse(localStorage.transporter) : new Transporter();
+    return localStorage.transporter ? JSON.parse(localStorage.transporter) : new Company();
   }
 }

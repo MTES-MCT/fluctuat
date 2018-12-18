@@ -97,7 +97,7 @@
         <div class="field">
           <label class="label">Nom (Devise)</label>
           <div class="control">
-            <input class="input" name="name" [(ngModel)]="transporter.ship.name" placeholder="Nom (Devise)"
+            <input class="input" name="name" [(ngModel)]="ship.name" placeholder="Nom (Devise)"
                    [ngClass]="{'is-danger': showError(shipName)}" #shipName="ngModel" required>
           </div>
           <p *ngIf="showError(shipName)" class="help is-danger">Veuillez renseigner ce champ</p>
@@ -106,7 +106,7 @@
         <div class="field">
           <label class="label">Matricule</label>
           <div class="control">
-            <input class="input" name="regNumber" [(ngModel)]="transporter.ship.regNumber" placeholder="Matricule">
+            <input class="input" name="regNumber" [(ngModel)]="ship.regNumber" placeholder="Matricule">
           </div>
         </div>
 

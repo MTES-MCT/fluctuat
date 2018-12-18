@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Transporter } from './transporter';
+import { Company } from '../shared/company';
+import { Ship } from './ship';
+import { ShipService } from './ship.service';
 
 import { TransporterService } from './transporter.service';
 
@@ -11,17 +13,20 @@ import { TransporterService } from './transporter.service';
 })
 export class FormTransporterComponent implements OnInit {
 
-  transporter: Transporter = new Transporter();
+  transporter = new Company();
+  ship = new Ship();
 
   @ViewChild('transporterForm')
   public transporterForm: NgForm;
   public formSubmitted = false;
 
-  constructor(private transporterService: TransporterService, private router: Router) {
+  constructor(private transporterService: TransporterService, private shipService: ShipService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.transporter = this.transporterService.get();
+    this.ship = this.shipService.get();
   }
 
   save() {
@@ -31,7 +36,8 @@ export class FormTransporterComponent implements OnInit {
     }
 
     this.transporterService.save(this.transporter);
-    this.router.navigateByUrl('/trajet')
+    this.shipService.save(this.ship)
+    this.router.navigateByUrl('/')
   }
 
   showError(formValue) {
