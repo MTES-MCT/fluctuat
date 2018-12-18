@@ -4,5 +4,5 @@ export enum ContractStatus {
   LOADED = 'LOADED',
   CONFIRMED = 'CONFIRMED',
   UNLOADED = 'UNLOADED',
-  FINISHED = 'FINISHED'
+  RECEIVED = 'RECEIVED'
 }

@@ -8,12 +8,17 @@ import { FormMerchandiseComponent } from './delivery/form-merchandise/form-merch
 import { FormPathComponent } from './delivery/form-path/form-path.component';
 import { FormPricesComponent } from './delivery/form-prices/form-prices.component';
 import { SummaryComponent } from './delivery/summary/summary.component';
-import { FormNewDeliveryComponent } from './form-new-delivery/form-new-delivery.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
+import { FormLoadingComponent } from './waybill/form-loading/form-loading.component';
+import { FormShipComponent } from './waybill/form-ship/form-ship.component';
+import { FormUnloadComponent } from './waybill/form-unload/form-unload.component';
+import { WaybillConfirmComponent } from './waybill/waybill-confirm/waybill-confirm.component';
+import { WaybillLoadComponent } from './waybill/waybill-load/waybill-load.component';
+import { WaybillUnloadComponent } from './waybill/waybill-unload/waybill-unload.component';
 
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },
-  { path: 'livraison', component: FormNewDeliveryComponent },
+  // { path: 'livraison', component: FormNewDeliveryComponent }, //TODO remove later
   { path: 'nouveau-transport/resume', component: SummaryComponent },
   { path: 'nouveau-transport/client', component: FormCustomerComponent },
   { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
@@ -21,6 +26,12 @@ const routes: Routes = [
   { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
   { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
   { path: 'contrat/:id', component: ContractComponent },
+  { path: 'contrat/:id/bateau', component: FormShipComponent },
+  { path: 'contrat/:id/chargement', component: FormLoadingComponent },
+  { path: 'contrat/:id/lettre-voiture-chargement', component: WaybillLoadComponent },
+  { path: 'contrat/:id/lettre-voiture', component: WaybillConfirmComponent },
+  { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
+  { path: 'contrat/:id/lettre-voiture-dechargement', component: WaybillUnloadComponent },
   { path: 'mes-transports', component: DashboardComponent },
 
 ];

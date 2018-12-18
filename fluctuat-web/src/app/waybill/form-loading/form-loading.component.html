@@ -1,0 +1,80 @@
+<flu-hero-container class="flu-text-form">
+  <h1 class="title">Chargement marchandise</h1>
+  <h2 class="subtitle">Quels sont les détails du chargement ?</h2>
+
+  <div class="content">
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-paddingless is-marginless">
+
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Le chargement a commencé le</p>
+          </div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="loadInfo.loadStartDate">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column is-paddingless is-marginless is-2">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" fluTimePicker [(date)]="loadInfo.loadStartTime">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-paddingless is-marginless">
+
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Fini le</p>
+          </div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="loadInfo.loadEndDate">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column is-paddingless is-marginless is-2">
+        <div class="columns is-paddingless is-marginless is-mobile">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" fluTimePicker [(date)]="loadInfo.loadEndTime">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="subtitle is-3">Observations :</div>
+
+    <div class="control">
+      <textarea class="textarea is-large is-shadowless" placeholder="Vous avez besoin de signaler quelque chose ?"
+                [(ngModel)]="loadInfo.observations"></textarea>
+    </div>
+
+    <div class="level"></div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-text" (click)="nextStep()">Continuer</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</flu-hero-container>

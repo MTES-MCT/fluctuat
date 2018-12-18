@@ -1,0 +1,55 @@
+<flu-hero-container class="flu-text-form">
+  <h1 class="title">Chargement marchandise</h1>
+  <h2 class="subtitle">Qui transporte la marchandise ?</h2>
+
+  <div class="content">
+
+    <div class="columns is-paddingless is-marginless is-desktop">
+      <div class="column is-paddingless is-marginless">
+
+        <div class="columns is-paddingless is-marginless">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Le bateau devise</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" [(ngModel)]="ship.name">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="column is-paddingless is-marginless">
+
+        <div class="columns is-paddingless is-marginless">
+          <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">et matricule</p></div>
+          <div class="column">
+            <div class="control">
+              <input class="input is-medium" [(ngModel)]="ship.regNumber">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="columns is-paddingless is-marginless">
+      <div class="column is-narrow" style="padding-left: 0">
+        <p class="subtitle is-3">conduit par</p>
+      </div>
+
+      <div class="column">
+        <p class="control"><input class="input is-medium" [(ngModel)]="ship.captain"></p>
+      </div>
+    </div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-text" (click)="nextStep()">Continuer</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</flu-hero-container>

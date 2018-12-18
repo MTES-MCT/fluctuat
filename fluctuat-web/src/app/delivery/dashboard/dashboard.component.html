@@ -13,7 +13,12 @@
       <td><a [routerLink]="'/contrat/' + contract.id">{{contract.id}}</a></td>
       <td>{{contract.delivery.client.name}}</td>
       <td>{{contract.status}}</td>
-      <td></td>
+      <td>
+        <button *ngIf="contract.status === STATUS.ACCEPTED" [routerLink]="'/contrat/' + contract.id + '/bateau'"
+                class="button is-link">La marchandise est chargée</button>
+        <button *ngIf="contract.status === STATUS.CONFIRMED" [routerLink]="'/contrat/' + contract.id + '/dechargement'"
+                       class="button is-link">La marchandise est déchargée</button>
+      </td>
     </tr>
     </tbody>
   </table>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/index';
-import { shareReplay, switchMap, tap } from 'rxjs/internal/operators';
+import { Observable } from 'rxjs';
+import { shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Contract } from '../contract';
 import { ContractStatus } from '../contract-status.enum';
 import { ContractService } from '../contract.service';

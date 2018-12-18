@@ -7,10 +7,10 @@
   <flu-delivery-detail [delivery]="contract.delivery"></flu-delivery-detail>
 
   <div class="level"></div>
-  <p *ngIf="contract.status === STATUS.CREATED">
+  <p *ngIf="!contract.acceptedAt">
     <button class="button" (click)="accept(contract)">J'accepte</button>
   </p>
-  <p *ngIf="contract.status !== STATUS.CREATED">
+  <p *ngIf="contract.acceptedAt" class="has-text-success">
     Contrat accepté le {{contract.acceptedAt}}.
   </p>
 </flu-hero-container>

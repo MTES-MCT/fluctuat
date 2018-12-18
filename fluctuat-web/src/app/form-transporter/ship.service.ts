@@ -9,6 +9,6 @@ export class ShipService {
   }
 
   get() {
-    return localStorage.ship ? JSON.parse(ship) : new Ship();
+    return localStorage.ship ? JSON.parse(localStorage.ship) : new Ship();
   }
 }

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Company } from '../shared/company';
 import { Ship } from './ship';
 import { ShipService } from './ship.service';
-
 import { TransporterService } from './transporter.service';
 
 @Component({
@@ -32,12 +31,13 @@ export class FormTransporterComponent implements OnInit {
   save() {
     this.formSubmitted = true;
     if (this.transporterForm.invalid) {
+      console.warn('form invalid');
       return;
     }
 
     this.transporterService.save(this.transporter);
-    this.shipService.save(this.ship)
-    this.router.navigateByUrl('/')
+    this.shipService.save(this.ship);
+    this.router.navigateByUrl('/mes-transports')
   }
 
   showError(formValue) {

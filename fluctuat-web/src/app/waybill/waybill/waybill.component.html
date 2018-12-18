@@ -1,0 +1,41 @@
+<h1>Lettre de voiture</h1>
+
+<h3>Transport Fluviale</h3>
+
+<p>Expéditeur : <strong>{{contract.delivery.sender}}</strong></p>
+<p>Destinatire : <strong>{{contract.delivery.receiver}}</strong></p>
+<p>Transporteur: <strong>{{contract.transporter.name}}</strong></p>
+
+<p>Il vous est expédié sur le bateau <strong class="is-uppercase">{{contract.ship.name}}</strong>
+  Matricule <strong>{{contract.ship.regNumber}}</strong>
+</p>
+<p>Conduit par <strong>{{contract.ship.captain}}</strong> un tonnage de
+  <strong>{{contract.delivery.merchandise.weight}}</strong> tonnes de
+  <strong>{{contract.delivery.merchandise.type}}</strong>
+  d'une valeur déclarée de <strong>{{contract.delivery.merchandise.price}} €</strong>
+  par tonne, qui a été chargé au <strong>{{contract.delivery.origin}}</strong> et que le transporteur déclare avoir
+  reçu et s'engage à transporter au <strong>{{contract.delivery.destination}}</strong>.</p>
+
+
+<h3>Le Chargement</h3>
+
+<p>Le Chargement à commencé le {{contract.loadInfo.loadStartDate}} à {{contract.loadInfo.loadStartTime}}</p>
+<p>et fini le {{contract.loadInfo.loadEndDate}} à {{contract.loadInfo.loadEndTime}}</p>
+
+<ng-container *ngIf="contract.loadInfo.observations">
+  <h4>Observations</h4>
+  <p>{{contract.loadInfo.observations}}</p>
+</ng-container>
+
+<ng-container *ngIf="contract.unloadInfo">
+  <h3>Le déchargement</h3>
+
+  <p>Le déchargement à commencé le {{contract.unloadInfo.unloadStartDate}} à {{contract.unloadInfo.unloadStartTime}}</p>
+  <p>et fini le {{contract.unloadInfo.unloadEndDate}} à {{contract.unloadInfo.unloadEndTime}}</p>
+
+  <ng-container *ngIf="contract.unloadInfo.observations">
+    <h4>Observations</h4>
+    <p>{{contract.unloadInfo.observations}}</p>
+  </ng-container>
+
+</ng-container>

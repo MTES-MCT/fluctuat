@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { DeliveryService } from '../delivery/delivery.service';
 import { Delivery } from '../delivery/delivery';
 
-@Component({
-  selector: 'flu-form-new-path',
-  templateUrl: './form-new-delivery.component.html'
-})
+import { DeliveryService } from '../delivery/delivery.service';
+
+//@Component({
+  //selector: 'flu-form-new-path',
+  //templateUrl: './form-new-delivery.component.html'
+//})
 export class FormNewDeliveryComponent implements OnInit {
 
   delivery: Delivery = new Delivery();

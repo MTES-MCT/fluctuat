@@ -43,10 +43,59 @@ router.get('/:id/confirmation-transport.pdf', (req, res) => {
 router.post('/:id/accept', (req, res) => {
   const id = req.params.id;
 
-  contracts[id].status = 'ACCEPTED';
-  contracts[id].acceptedAt = new Date();
+  Object.assign(contracts[id], {
+    status: 'ACCEPTED',
+    acceptedAt: new Date()
+  });
 
   return res.status(204).end()
+});
+
+router.post('/:id/load', (req, res) => {
+  const id = req.params.id;
+
+  Object.assign(contracts[id], {
+    status: 'LOADED',
+    loadedAt: new Date(),
+    ship: req.body.ship,
+    loadInfo: req.body.loadInfo
+  });
+
+  return res.status(204).end();
+});
+
+router.post('/:id/confirm', (req, res) => {
+  const id = req.params.id;
+
+  Object.assign(contracts[id], {
+    status: 'CONFIRMED',
+    confirmedAt: new Date()
+  });
+
+  return res.status(204).end();
+});
+
+router.post('/:id/unload', (req, res) => {
+  const id = req.params.id;
+
+  Object.assign(contracts[id], {
+    status: 'UNLOADED',
+    unloadedAt: new Date(),
+    unloadInfo: req.body.unloadInfo
+  });
+
+  return res.status(204).end();
+});
+
+router.post('/:id/received', (req, res) => {
+  const id = req.params.id;
+
+  Object.assign(contracts[id], {
+    status: 'RECEIVED',
+    receivedAt: new Date()
+  });
+
+  return res.status(204).end();
 });
 
 // Based on https://medium.com/@kainikhil/nodejs-how-to-generate-and-properly-serve-pdf-6835737d118e

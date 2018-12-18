@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/index';
-import { shareReplay } from 'rxjs/internal/operators';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 import { Contract } from '../contract';
+import { ContractStatus } from '../contract-status.enum';
 import { ContractService } from '../contract.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ContractService } from '../contract.service';
 })
 export class DashboardComponent implements OnInit {
 
+  readonly STATUS = ContractStatus;
   contracts$: Observable<Contract[]>;
 
   constructor(private contractService: ContractService) {
