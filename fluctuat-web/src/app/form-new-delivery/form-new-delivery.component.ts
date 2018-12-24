@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Delivery } from '../delivery/delivery';
 
-import { DeliveryService } from '../delivery/delivery.service';
+import { Delivery } from '../shared/model/delivery.model';
+import { DeliveryService } from '../providers/delivery.service';
 
 //@Component({
-  //selector: 'flu-form-new-path',
-  //templateUrl: './form-new-delivery.component.html'
+//selector: 'flu-form-new-path',
+//templateUrl: './form-new-delivery.component.html'
 //})
 export class FormNewDeliveryComponent implements OnInit {
 
@@ -59,7 +58,7 @@ export class FormNewDeliveryComponent implements OnInit {
     'Port de Reims-Colbert',
   ];
 
-  constructor(private deliveryService: DeliveryService, private router: Router) {
+  constructor(private deliveryService: DeliveryService) {
   }
 
   ngOnInit() {
@@ -74,7 +73,6 @@ export class FormNewDeliveryComponent implements OnInit {
     }
 
     this.deliveryService.save(this.delivery);
-    this.router.navigateByUrl('/resume')
   }
 
   showError(formValue) {

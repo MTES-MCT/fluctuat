@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs'
 import { shareReplay, switchMap, tap } from 'rxjs/operators';
-import { Contract } from '../../delivery/contract';
-import { ContractService } from '../../delivery/contract.service';
-import { ShipService } from '../../form-transporter/ship.service';
-import { LoadInfoService } from '../form-loading/load-info.service';
+
+import { ContractService } from '../../providers/contract.service';
+import { LoadInfoService } from '../../providers/load-info.service';
+import { ShipService } from '../../providers/ship.service';
+import { Contract } from '../../shared/model/contract.model';
 
 @Component({
   selector: 'flu-waybill-load',

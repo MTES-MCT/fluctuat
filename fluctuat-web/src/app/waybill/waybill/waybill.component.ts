@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Contract } from '../../delivery/contract';
+import { Contract } from '../../shared/model/contract.model';
 
 @Component({
   selector: 'flu-waybill',

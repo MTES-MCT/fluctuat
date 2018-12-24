@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Company } from '../shared/company';
-import { Ship } from './ship';
-import { ShipService } from './ship.service';
-import { TransporterService } from './transporter.service';
+import { ShipService } from '../providers/ship.service';
+
+import { TransporterService } from '../providers/transporter.service';
+import { Company } from '../shared/model/company.model';
+import { Ship } from '../shared/model/ship.model';
 
 @Component({
   selector: 'flu-form-transporter',

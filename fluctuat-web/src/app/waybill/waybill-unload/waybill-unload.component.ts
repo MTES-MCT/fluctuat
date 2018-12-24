@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { shareReplay, switchMap, tap } from 'rxjs/operators';
-import { Contract } from '../../delivery/contract';
-import { ContractService } from '../../delivery/contract.service';
-import { UnloadInfoService } from '../form-unload/unload-info.service';
+
+import { ContractService } from '../../providers/contract.service';
+import { UnloadInfoService } from '../../providers/unload-info.service';
+import { Contract } from '../../shared/model/contract.model';
 
 @Component({
   selector: 'flu-waybill-unload',

@@ -1,36 +1,35 @@
+///<reference path="../../node_modules/@angular/platform-browser/src/browser.d.ts"/>
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DeliveryService } from './delivery//delivery.service';
-import { ContractService } from './delivery/contract.service';
-import { ContractComponent } from './delivery/contract/contract.component';
-import { DashboardComponent } from './delivery/dashboard/dashboard.component';
-import { DeliveryDetailComponent } from './delivery/delivery-detail/delivery-detail.component';
-import { FormCustomerComponent } from './delivery/form-customer/form-customer.component';
-import { FormLoadDelayComponent } from './delivery/form-load-delay/form-load-delay.component';
-import { FormMerchandiseComponent } from './delivery/form-merchandise/form-merchandise.component';
-import { FormPathComponent } from './delivery/form-path/form-path.component';
-import { FormPricesComponent } from './delivery/form-prices/form-prices.component';
-import { SummaryComponent } from './delivery/summary/summary.component';
-import { FormNewDeliveryComponent } from './form-new-delivery/form-new-delivery.component';
+import { FormCustomerComponent } from './contract-new/form-customer/form-customer.component';
+import { FormLoadDelayComponent } from './contract-new/form-load-delay/form-load-delay.component';
+import { FormMerchandiseComponent } from './contract-new/form-merchandise/form-merchandise.component';
+import { FormPathComponent } from './contract-new/form-path/form-path.component';
+import { FormPricesComponent } from './contract-new/form-prices/form-prices.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormLoadComponent } from './form-load/form-load.component';
+import { FormShipComponent } from './form-ship/form-ship.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
-import { ShipService } from './form-transporter/ship.service';
-import { TransporterService } from './form-transporter/transporter.service';
+import { FormUnloadComponent } from './form-unload/form-unload.component';
 import { HeaderComponent } from './header/header.component';
+import { ContractService } from './providers/contract.service';
+import { DeliveryService } from './providers/delivery.service';
+import { LoadInfoService } from './providers/load-info.service';
+import { ShipService } from './providers/ship.service';
+import { TransporterService } from './providers/transporter.service';
+import { UnloadInfoService } from './providers/unload-info.service';
 import { DatePickerDirective } from './shared/date-picker.directive';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
 import { TimePickerDirective } from './shared/time-picker.directive';
 import { WhenEnterPressedDirective } from './shared/when-enter-pressed.directive';
-import { FormLoadingComponent } from './waybill/form-loading/form-loading.component';
-import { LoadInfoService } from './waybill/form-loading/load-info.service';
-import { FormShipComponent } from './waybill/form-ship/form-ship.component';
-import { FormUnloadComponent } from './waybill/form-unload/form-unload.component';
-import { UnloadInfoService } from './waybill/form-unload/unload-info.service';
-import { WaybillConfirmComponent } from './waybill/waybill-confirm/waybill-confirm.component';
+import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
+import { DeliveryDetailComponent } from './transport-confirmation/delivery-detail/delivery-detail.component';
+import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
+import { ClientWaybillComponent } from './waybill/client-waybill/client-waybill.component';
 import { WaybillLoadComponent } from './waybill/waybill-load/waybill-load.component';
 import { WaybillUnloadComponent } from './waybill/waybill-unload/waybill-unload.component';
 import { WaybillComponent } from './waybill/waybill/waybill.component';
@@ -41,7 +40,7 @@ import { WaybillComponent } from './waybill/waybill/waybill.component';
     HeaderComponent,
     FormTransporterComponent,
     // FormNewDeliveryComponent, //TODO remove when implemented away
-    SummaryComponent,
+    TransporterContractComponent,
     TimePickerDirective,
     DatePickerDirective,
     WhenEnterPressedDirective,
@@ -53,12 +52,12 @@ import { WaybillComponent } from './waybill/waybill/waybill.component';
     FormPricesComponent,
     DashboardComponent,
     DeliveryDetailComponent,
-    ContractComponent,
-    FormLoadingComponent,
+    ClientContractComponent,
+    FormLoadComponent,
     FormShipComponent,
     WaybillLoadComponent,
     WaybillComponent,
-    WaybillConfirmComponent,
+    ClientWaybillComponent,
     FormUnloadComponent,
     WaybillUnloadComponent,
   ],
