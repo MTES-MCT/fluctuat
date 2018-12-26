@@ -25,11 +25,12 @@ const routes: Routes = [
   { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
   { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
   { path: 'nouveau-transport/confirmation-transport', component: TransporterContractComponent },
-  { path: 'client/contrat/:id', component: ClientContractComponent },
+  { path: 'contrat/:id/confirmation-transport', component: TransporterContractComponent },
   { path: 'contrat/:id/bateau', component: FormShipComponent },
   { path: 'contrat/:id/chargement', component: FormLoadComponent },
   { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
   { path: 'contrat/:id/lettre-voiture', component: WaybillTransporterComponent },
+  { path: 'client/contrat/:id/confirmation-transport', component: ClientContractComponent },
   { path: 'client/contrat/:id/lettre-voiture', component: WaybillClientComponent },
   { path: 'mes-transports', component: DashboardComponent },
 

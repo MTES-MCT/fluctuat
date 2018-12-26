@@ -1,4 +1,3 @@
-///<reference path="../../node_modules/@angular/platform-browser/src/browser.d.ts"/>
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +24,7 @@ import { UnloadInfoService } from './providers/unload-info.service';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
 import { SharedModule } from './shared/shared.module';
 import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
-import { DeliveryDetailComponent } from './transport-confirmation/delivery-detail/delivery-detail.component';
+import { DeliveryDetailComponent } from './transport-confirmation/shared/delivery-detail/delivery-detail.component';
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
 import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';

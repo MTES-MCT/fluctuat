@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Delivery } from '../../shared/model/delivery.model';
+import { Delivery } from '../../../shared/model/delivery.model';
 
 @Component({
   selector: 'flu-delivery-detail',

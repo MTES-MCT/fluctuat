@@ -9,8 +9,8 @@ export class ContractService {
   constructor(private http: HttpClient) {
   }
 
-  create(contract) {
-    return this.http.post('/api/contract', contract)
+  create(contract): Observable<Contract> {
+    return this.http.post<Contract>('/api/contract', contract)
   }
 
   getAll(): Observable<Contract[]> {

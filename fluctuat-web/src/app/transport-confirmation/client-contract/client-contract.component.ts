@@ -21,20 +21,19 @@ export class ClientContractComponent implements OnInit {
 
   ngOnInit() {
     this.contract$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.contractService.get(params.get('id'))),
-      shareReplay(1)
-    );
+      switchMap((params: ParamMap) => this.getContract(params.get('id')))
+    )
   }
 
   accept(contract) {
     this.contractService.accept(contract.id).pipe(
-      tap(() => console.log('contract accepted')),
       // TODO optim: avoid resend a get request
-      switchMap(() => this.contractService.get(contract.id))
-    ).subscribe((contractUpdated: Contract) => {
-      contract.status = contractUpdated.status;
-      contract.acceptedAt = contractUpdated.acceptedAt;
-    });
+      tap(() => this.contract$ = this.getContract(contract.id))
+    ).subscribe(() => console.log('contract accepted'));
+  }
+
+  private getContract(id): Observable<Contract> {
+    return this.contractService.get(id).pipe(shareReplay(1));
   }
 
 }

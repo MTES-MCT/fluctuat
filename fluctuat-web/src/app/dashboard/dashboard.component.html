@@ -10,7 +10,7 @@
 
     <tbody>
     <tr *ngFor="let contract of contracts">
-      <td><a [routerLink]="'/client/contrat/' + contract.id">{{contract.id}}</a></td>
+      <td><a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">{{contract.id}}</a></td>
       <td>{{contract.delivery.client.name}}</td>
       <td>{{contract.status}}</td>
       <td>

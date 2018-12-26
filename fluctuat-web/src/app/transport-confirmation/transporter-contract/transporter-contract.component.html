@@ -1,11 +1,11 @@
-<flu-hero-container class="content">
+<flu-hero-container *ngIf="contract$ | async as contract" class="content">
   <h1>Confirmation de transport</h1>
 
-  <flu-delivery-detail *ngIf="contract" [delivery]="contract.delivery"></flu-delivery-detail>
+  <flu-delivery-detail [delivery]="contract.delivery"></flu-delivery-detail>
 
   <div class="level"></div>
 
-  <button *ngIf="!contract.createdAt" class="button is-link" (click)="send()">Créer</button>
+  <button *ngIf="!contract.createdAt" class="button is-link" (click)="send(contract)">Créer</button>
 
   <p *ngIf="contract.createdAt">Crée le {{contract.createdAt}}</p>
 
