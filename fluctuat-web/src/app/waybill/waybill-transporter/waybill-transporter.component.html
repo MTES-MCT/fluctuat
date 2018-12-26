@@ -14,11 +14,11 @@
 
 
   <p *ngIf="contract.loadedAt" class="has-text-success">
-    Lettre de voiture chargement crée le {{contract.loadedAt}}.
+    Lettre de voiture chargement crée le {{contract.loadedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
   </p>
 
   <p *ngIf="contract.unloadedAt" class="has-text-success">
-    Lettre de voiture déchargement validé le {{contract.unloadedAt}}.
+    Lettre de voiture déchargement validé le {{contract.unloadedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
   </p>
 
 </flu-hero-container>

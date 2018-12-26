@@ -9,7 +9,7 @@
   </p>
 
   <p *ngIf="contract.confirmedAt" class="has-text-success">
-    Chargement confirmé le {{contract.confirmedAt}}
+    Chargement confirmé le {{contract.confirmedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
   </p>
 
   <p *ngIf="contract.unloadedAt && !contract.receivedAt">
@@ -17,7 +17,7 @@
   </p>
 
   <p *ngIf="contract.unloadedAt && contract.receivedAt" class="has-text-success">
-    Déchargement confirmé le {{contract.receivedAt}}.
+    Déchargement confirmé le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}.
   </p>
 
 </flu-hero-container>

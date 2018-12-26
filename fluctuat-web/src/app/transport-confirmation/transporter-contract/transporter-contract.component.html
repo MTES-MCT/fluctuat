@@ -7,7 +7,9 @@
 
   <button *ngIf="!contract.createdAt" class="button is-link" (click)="send(contract)">Créer</button>
 
-  <p *ngIf="contract.createdAt">Crée le {{contract.createdAt}}</p>
+  <p *ngIf="contract.createdAt" class="has-text-success">
+    Crée le {{contract.createdAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+  </p>
 
   <a class="button is-text" *ngIf="contract.createdAt" [href]="contract.documentUrl" target="_blank">
     Télécharger la confirmation de transport

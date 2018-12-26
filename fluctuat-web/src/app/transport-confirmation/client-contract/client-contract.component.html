@@ -11,7 +11,7 @@
     <button class="button" (click)="accept(contract)">J'accepte</button>
   </p>
   <p *ngIf="contract.acceptedAt" class="has-text-success">
-    Contrat accepté le {{contract.acceptedAt}}.
+    Contrat accepté le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}.
   </p>
 
   <a class="button is-text" *ngIf="contract.acceptedAt" [href]="contract.documentUrl" target="_blank">
