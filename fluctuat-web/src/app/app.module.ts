@@ -27,10 +27,9 @@ import { SharedModule } from './shared/shared.module';
 import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
 import { DeliveryDetailComponent } from './transport-confirmation/delivery-detail/delivery-detail.component';
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
-import { ClientWaybillComponent } from './waybill/client-waybill/client-waybill.component';
-import { WaybillLoadComponent } from './waybill/waybill-load/waybill-load.component';
-import { WaybillUnloadComponent } from './waybill/waybill-unload/waybill-unload.component';
-import { WaybillComponent } from './waybill/waybill/waybill.component';
+import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
+import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
+import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 
 @NgModule({
   declarations: [
@@ -50,11 +49,10 @@ import { WaybillComponent } from './waybill/waybill/waybill.component';
     ClientContractComponent,
     FormLoadComponent,
     FormShipComponent,
-    WaybillLoadComponent,
+    WaybillClientComponent,
+    WaybillTransporterComponent,
     WaybillComponent,
-    ClientWaybillComponent,
     FormUnloadComponent,
-    WaybillUnloadComponent,
   ],
   imports: [
     AppRoutingModule,

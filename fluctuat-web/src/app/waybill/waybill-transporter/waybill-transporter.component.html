@@ -1,0 +1,24 @@
+<flu-hero-container *ngIf="contract$ | async as contract" class="content">
+
+  <flu-waybill [contract]="contract"></flu-waybill>
+
+  <div class="level"></div>
+
+  <button *ngIf="!contract.loadedAt" class="button is-link" (click)="saveLoadInfo(contract)">
+    Je valide le chargement
+  </button>
+
+  <button *ngIf="contract.status === STATUS.CONFIRMED" class="button is-link" (click)="saveUnloadInfo(contract)">
+    Je valide le déchargement
+  </button>
+
+
+  <p *ngIf="contract.loadedAt" class="has-text-success">
+    Lettre de voiture chargement crée le {{contract.loadedAt}}.
+  </p>
+
+  <p *ngIf="contract.unloadedAt" class="has-text-success">
+    Lettre de voiture déchargement validé le {{contract.unloadedAt}}.
+  </p>
+
+</flu-hero-container>

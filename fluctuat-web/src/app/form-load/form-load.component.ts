@@ -21,7 +21,7 @@ export class FormLoadComponent implements OnInit {
     this.loadInfo = this.loadInfoService.get();
     const contractId = this.route.snapshot.params[ 'id' ];
 
-    const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture-chargement`);
+    const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture`);
 
     this.nextStep = () => {
       this.loadInfoService.save(this.loadInfo);

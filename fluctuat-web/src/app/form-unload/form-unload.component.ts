@@ -22,7 +22,7 @@ export class FormUnloadComponent implements OnInit {
     this.unloadInfo = this.unloadInfoService.get();
     const contractId = this.route.snapshot.params[ 'id' ];
 
-    const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture-dechargement`);
+    const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture`);
 
     this.nextStep = () => {
       this.unloadInfoService.save(this.unloadInfo);

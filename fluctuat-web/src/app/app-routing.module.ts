@@ -13,9 +13,8 @@ import { FormTransporterComponent } from './form-transporter/form-transporter.co
 import { FormUnloadComponent } from './form-unload/form-unload.component';
 import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
-import { ClientWaybillComponent } from './waybill/client-waybill/client-waybill.component';
-import { WaybillLoadComponent } from './waybill/waybill-load/waybill-load.component';
-import { WaybillUnloadComponent } from './waybill/waybill-unload/waybill-unload.component';
+import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
+import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },
@@ -30,9 +29,8 @@ const routes: Routes = [
   { path: 'contrat/:id/bateau', component: FormShipComponent },
   { path: 'contrat/:id/chargement', component: FormLoadComponent },
   { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
-  { path: 'contrat/:id/lettre-voiture-chargement', component: WaybillLoadComponent },
-  { path: 'contrat/:id/lettre-voiture-dechargement', component: WaybillUnloadComponent },
-  { path: 'contrat/:id/lettre-voiture', component: ClientWaybillComponent },
+  { path: 'contrat/:id/lettre-voiture', component: WaybillTransporterComponent },
+  { path: 'client/contrat/:id/lettre-voiture', component: WaybillClientComponent },
   { path: 'mes-transports', component: DashboardComponent },
 
 ];

@@ -7,9 +7,9 @@ import { Contract } from '../../shared/model/contract.model';
 
 @Component({
   selector: 'flu-client-waybill',
-  templateUrl: './client-waybill.component.html'
+  templateUrl: './waybill-client.component.html'
 })
-export class ClientWaybillComponent implements OnInit {
+export class WaybillClientComponent implements OnInit {
 
   contract$: Observable<Contract>;
 
