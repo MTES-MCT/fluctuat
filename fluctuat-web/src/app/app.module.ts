@@ -22,10 +22,8 @@ import { LoadInfoService } from './providers/load-info.service';
 import { ShipService } from './providers/ship.service';
 import { TransporterService } from './providers/transporter.service';
 import { UnloadInfoService } from './providers/unload-info.service';
-import { DatePickerDirective } from './shared/date-picker.directive';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
-import { TimePickerDirective } from './shared/time-picker.directive';
-import { WhenEnterPressedDirective } from './shared/when-enter-pressed.directive';
+import { SharedModule } from './shared/shared.module';
 import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
 import { DeliveryDetailComponent } from './transport-confirmation/delivery-detail/delivery-detail.component';
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
@@ -41,9 +39,6 @@ import { WaybillComponent } from './waybill/waybill/waybill.component';
     FormTransporterComponent,
     // FormNewDeliveryComponent, //TODO remove when implemented away
     TransporterContractComponent,
-    TimePickerDirective,
-    DatePickerDirective,
-    WhenEnterPressedDirective,
     HeroContainerComponent,
     FormCustomerComponent,
     FormLoadDelayComponent,
@@ -63,6 +58,7 @@ import { WaybillComponent } from './waybill/waybill/waybill.component';
   ],
   imports: [
     AppRoutingModule,
+    SharedModule,
     BrowserModule,
     FormsModule,
     HttpClientModule
