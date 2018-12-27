@@ -4,11 +4,11 @@
 
   <div class="level"></div>
 
-  <p *ngIf="!contract.confirmedAt">
+  <p *ngIf="contract.status === STATUS.LOADED">
     <button class="button" (click)="confirm(contract)">Je confirme le chargement</button>
   </p>
 
-  <p *ngIf="contract.unloadedAt && !contract.receivedAt">
+  <p *ngIf="contract.status === STATUS.UNLOADED">
     <button class="button" (click)="received(contract)">Je confirme le déchargement</button>
   </p>
 

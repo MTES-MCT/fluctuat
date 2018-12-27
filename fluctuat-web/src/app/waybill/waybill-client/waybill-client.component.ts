@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { shareReplay, switchMap, tap } from 'rxjs/operators';
+
 import { ContractService } from '../../providers/contract.service';
 import { Contract } from '../../shared/model/contract.model';
+import { ContractStatus } from '../../shared/model/contract-status.enum';
 
 @Component({
   selector: 'flu-client-waybill',
@@ -12,6 +14,8 @@ import { Contract } from '../../shared/model/contract.model';
 export class WaybillClientComponent implements OnInit {
 
   contract$: Observable<Contract>;
+
+  readonly STATUS = ContractStatus;
 
   constructor(private route: ActivatedRoute, private contractService: ContractService) {
   }

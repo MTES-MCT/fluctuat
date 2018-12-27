@@ -39,7 +39,7 @@ export class WaybillTransporterComponent implements OnInit {
         }
 
         // unload validation
-        if (contract.loadedAt) {
+        if (contract.loadedAt && contract.status === this.STATUS.CONFIRMED) {
           contract.unloadInfo = this.unloadInfoService.get();
           return;
         }

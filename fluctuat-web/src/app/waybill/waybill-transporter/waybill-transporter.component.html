@@ -4,7 +4,7 @@
 
   <div class="level"></div>
 
-  <button *ngIf="!contract.loadedAt" class="button is-link" (click)="saveLoadInfo(contract)">
+  <button *ngIf="contract.status === STATUS.ACCEPTED" class="button is-link" (click)="saveLoadInfo(contract)">
     Je valide le chargement
   </button>
 
