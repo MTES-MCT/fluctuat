@@ -31,6 +31,7 @@ import { TransporterContractComponent } from './transport-confirmation/transport
 import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
+import { WaybillActivityComponent } from './waybill/shared/waybill-activity/waybill-activity.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
     FormUnloadComponent,
     ContractComponent,
     DeliveryActivityComponent,
+    WaybillActivityComponent,
   ],
   imports: [
     AppRoutingModule,

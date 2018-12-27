@@ -8,16 +8,12 @@
     <button class="button" (click)="confirm(contract)">Je confirme le chargement</button>
   </p>
 
-  <p *ngIf="contract.confirmedAt" class="has-text-success">
-    Chargement confirmé le {{contract.confirmedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
-  </p>
-
   <p *ngIf="contract.unloadedAt && !contract.receivedAt">
     <button class="button" (click)="received(contract)">Je confirme le déchargement</button>
   </p>
 
-  <p *ngIf="contract.unloadedAt && contract.receivedAt" class="has-text-success">
-    Déchargement confirmé le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}.
-  </p>
+  <div class="level"></div>
+
+  <flu-waybill-activity [contract]="contract"></flu-waybill-activity>
 
 </flu-hero-container>
