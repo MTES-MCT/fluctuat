@@ -16,7 +16,7 @@
             <div class="timeline-content">
               <p *ngIf="!contract.acceptedAt">En attente d'acceptation par le client</p>
               <p *ngIf="contract.acceptedAt">
-                Le client <strong>{{contract.delivery.client.name}}</strong> à acepté la confirmation de transport
+                Le client <strong>{{contract.delivery.client.name}}</strong> a acepté la confirmation de transport
                 le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'fr'}}
               </p>
               <p>Voir la
@@ -44,7 +44,7 @@
               <p class="has-text-grey-light" *ngIf="contract.status === STATUS.CREATED">Chargement de la marchandise</p>
               <p *ngIf="contract.loadedAt">La marchandise est chargée</p>
               <p *ngIf="contract.status ===  STATUS.LOADED">En attente de confirmation par le client</p>
-              <p *ngIf="contract.confirmedAt"> Le client <strong>{{contract.delivery.client.name}}</strong> à confirmé
+              <p *ngIf="contract.confirmedAt"> Le client <strong>{{contract.delivery.client.name}}</strong> a confirmé
                 le chargement le {{contract.confirmedAt| date: "d LLLL y \'à\' H'h' mm":'fr'}}
               </p>
               <p *ngIf="contract.loadedAt && !contract.unloadedAt">Voir la
@@ -72,7 +72,7 @@
               </p>
               <p *ngIf="contract.unloadedAt">La marchandise est déchargée</p>
               <p *ngIf="contract.status === STATUS.UNLOADED">En attente de confirmation par le client</p>
-              <p *ngIf="contract.receivedAt">Le client <strong>{{contract.delivery.client.name}}</strong> à confirmé
+              <p *ngIf="contract.receivedAt">Le client <strong>{{contract.delivery.client.name}}</strong> a confirmé
                 le déchargement le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'fr'}}
               </p>
               <p *ngIf="contract.unloadedAt">Voir la
