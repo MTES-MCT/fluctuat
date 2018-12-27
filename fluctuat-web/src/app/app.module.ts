@@ -9,6 +9,7 @@ import { FormLoadDelayComponent } from './contract-new/form-load-delay/form-load
 import { FormMerchandiseComponent } from './contract-new/form-merchandise/form-merchandise.component';
 import { FormPathComponent } from './contract-new/form-path/form-path.component';
 import { FormPricesComponent } from './contract-new/form-prices/form-prices.component';
+import { ContractComponent } from './contract/contract.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormLoadComponent } from './form-load/form-load.component';
 import { FormShipComponent } from './form-ship/form-ship.component';
@@ -52,6 +53,7 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
     WaybillTransporterComponent,
     WaybillComponent,
     FormUnloadComponent,
+    ContractComponent,
   ],
   imports: [
     AppRoutingModule,

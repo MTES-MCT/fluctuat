@@ -15,6 +15,7 @@ import { ClientContractComponent } from './transport-confirmation/client-contrac
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
+import { ContractComponent } from './contract/contract.component';
 
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
   { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
   { path: 'nouveau-transport/confirmation-transport', component: TransporterContractComponent },
+  { path: 'contrat/:id', component: ContractComponent },
   { path: 'contrat/:id/confirmation-transport', component: TransporterContractComponent },
   { path: 'contrat/:id/bateau', component: FormShipComponent },
   { path: 'contrat/:id/chargement', component: FormLoadComponent },

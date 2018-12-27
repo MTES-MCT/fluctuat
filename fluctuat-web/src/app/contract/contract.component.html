@@ -1,0 +1,57 @@
+<flu-hero-container class="content" *ngIf="contract$ | async as contract">
+  <h1 class="title">Transport #{{contract.id}}</h1>
+
+  <div class="timeline">
+    <div class="timeline-header">
+      <span class="tag is-medium is-link">Crée</span>
+    </div>
+    <div class="timeline-item" *ngIf="!contract.acceptedAt">
+      <div class="timeline-marker is-icon">
+        <i class="fa fa-flag"></i>
+      </div>
+      <div class="timeline-content">
+        <p>En attente d'acceptation par le client</p>
+        <p>Voir la <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
+        </p>
+      </div>
+    </div>
+    <div class="timeline-item" *ngIf="contract.acceptedAt">
+      <div class="timeline-marker is-icon">
+        <i class="fa fa-flag"></i>
+      </div>
+      <div class="timeline-content">
+        <p>Accepté le {{contract.acceptedAt}}</p>
+        <p>Le client <strong>{{contract.delivery.client.name}}</strong> à acepté les conditions de transport
+          le {{contract.acceptedAt}}</p>
+
+        <p>Voir la <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
+        </p>
+      </div>
+    </div>
+    <div class="timeline-header">
+      <span class="tag is-medium has-text-grey-light">Chargement</span>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker is-icon">
+        <i class="fa fa-truck-loading rotated"></i>
+      </div>
+      <div class="timeline-content has-text-grey-light">
+        <p>Chargement de la marchandise</p>
+      </div>
+    </div>
+    <div class="timeline-header">
+      <span class="tag is-medium has-text-grey-light">Déchargement</span>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker is-icon">
+        <i class="fas fa-truck-loading flu-flip-h"></i>
+      </div>
+      <div class="timeline-content has-text-grey-light">
+        <p>Déchargement de la marchandise</p>
+      </div>
+    </div>
+    <div class="timeline-header">
+      <span class="tag is-medium has-text-grey-light">Fini</span>
+    </div>
+  </div>
+</flu-hero-container>
