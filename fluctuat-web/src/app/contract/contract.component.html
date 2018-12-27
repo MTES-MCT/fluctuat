@@ -1,57 +1,92 @@
-<flu-hero-container class="content" *ngIf="contract$ | async as contract">
+<flu-hero-container *ngIf="contract$ | async as contract">
   <h1 class="title">Transport #{{contract.id}}</h1>
 
-  <div class="timeline">
-    <div class="timeline-header">
-      <span class="tag is-medium is-link">Crée</span>
-    </div>
-    <div class="timeline-item" *ngIf="!contract.acceptedAt">
-      <div class="timeline-marker is-icon">
-        <i class="fa fa-flag"></i>
+  <div class="level" style="padding-left: 30px">
+    <div class="level-right">
+      <div class="level-item">
+        <div class="timeline">
+          <div class="timeline-header">
+            <span class="tag is-medium is-link">Crée</span>
+          </div>
+          <div class="timeline-item" [ngClass]="{'is-link': contract.acceptedAt}">
+            <div class="timeline-marker is-icon" [ngClass]="{'has-background-link': contract.acceptedAt}">
+              <i class="fa"
+                 [ngClass]="{'fa-flag': !contract.acceptedAt, 'fa-check': contract.acceptedAt, 'has-text-success': contract.acceptedAt}"></i>
+            </div>
+            <div class="timeline-content">
+              <p *ngIf="!contract.acceptedAt">En attente d'acceptation par le client</p>
+              <p *ngIf="contract.acceptedAt">
+                Le client <strong>{{contract.delivery.client.name}}</strong> à acepté la confirmation de transport
+                le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'fr'}}
+              </p>
+              <p>Voir la
+                <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
+              </p>
+            </div>
+          </div>
+          <div class="timeline-header">
+            <span class="tag is-medium"
+                  [ngClass]="{'has-text-grey-light': !contract.acceptedAt, 'is-link': contract.loadedAt}">
+              Chargement
+            </span>
+          </div>
+          <div class="timeline-item" [ngClass]="{'is-link': contract.loadedAt}">
+            <div class="timeline-marker is-icon"
+                 [ngClass]="{'has-background-link': contract.loadedAt}">
+              <i class="fa fa-truck-loading" [ngClass]="{'has-text-success': contract.confirmedAt}"></i>
+            </div>
+            <div class="timeline-content">
+              <p *ngIf="contract.status === STATUS.ACCEPTED">
+                <button class="button is-text"
+                        [routerLink]="'/contrat/' + contract.id + '/bateau'">Chargement de la marchandise
+                </button>
+              </p>
+              <p class="has-text-grey-light" *ngIf="contract.status === STATUS.CREATED">Chargement de la marchandise</p>
+              <p *ngIf="contract.loadedAt">La marchandise est chargée</p>
+              <p *ngIf="contract.status ===  STATUS.LOADED">En attente de confirmation par le client</p>
+              <p *ngIf="contract.confirmedAt"> Le client <strong>{{contract.delivery.client.name}}</strong> à confirmé
+                le chargement le {{contract.confirmedAt| date: "d LLLL y \'à\' H'h' mm":'fr'}}
+              </p>
+              <p *ngIf="contract.loadedAt && !contract.unloadedAt">Voir la
+                <a [routerLink]="'/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
+              </p>
+            </div>
+          </div>
+          <div class="timeline-header">
+            <span class="tag is-medium"
+                  [ngClass]="{'has-text-grey-light': !contract.confirmedAt, 'is-link': contract.unloadedAt}">
+              Déchargement
+            </span>
+          </div>
+          <div class="timeline-item" [ngClass]="{'is-link': contract.unloadedAt}">
+            <div class="timeline-marker is-icon"
+                 [ngClass]="{'has-background-link': contract.unloadedAt}">
+              <i class="fas fa-truck-loading flu-flip-h" [ngClass]="{'has-text-success': contract.receivedAt}"></i>
+            </div>
+            <div class="timeline-content">
+              <p *ngIf="!contract.confirmedAt" class="has-text-grey-light">Déchargement de la marchandise</p>
+              <p *ngIf="contract.status === STATUS.CONFIRMED">
+                <button class="button is-text"
+                        [routerLink]="'/contrat/' + contract.id + '/dechargement'">Déchargement de la marchandise
+                </button>
+              </p>
+              <p *ngIf="contract.unloadedAt">La marchandise est déchargée</p>
+              <p *ngIf="contract.status === STATUS.UNLOADED">En attente de confirmation par le client</p>
+              <p *ngIf="contract.receivedAt">Le client <strong>{{contract.delivery.client.name}}</strong> à confirmé
+                le déchargement le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'fr'}}
+              </p>
+              <p *ngIf="contract.unloadedAt">Voir la
+                <a [routerLink]="'/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
+              </p>
+            </div>
+          </div>
+          <div class="timeline-header">
+            <span class="tag is-medium"
+                  [ngClass]="{'has-text-grey-light': !contract.unloadedAt, 'is-link': contract.receivedAt}">
+              Fini</span>
+          </div>
+        </div>
       </div>
-      <div class="timeline-content">
-        <p>En attente d'acceptation par le client</p>
-        <p>Voir la <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
-        </p>
-      </div>
-    </div>
-    <div class="timeline-item" *ngIf="contract.acceptedAt">
-      <div class="timeline-marker is-icon">
-        <i class="fa fa-flag"></i>
-      </div>
-      <div class="timeline-content">
-        <p>Accepté le {{contract.acceptedAt}}</p>
-        <p>Le client <strong>{{contract.delivery.client.name}}</strong> à acepté les conditions de transport
-          le {{contract.acceptedAt}}</p>
-
-        <p>Voir la <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
-        </p>
-      </div>
-    </div>
-    <div class="timeline-header">
-      <span class="tag is-medium has-text-grey-light">Chargement</span>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-marker is-icon">
-        <i class="fa fa-truck-loading rotated"></i>
-      </div>
-      <div class="timeline-content has-text-grey-light">
-        <p>Chargement de la marchandise</p>
-      </div>
-    </div>
-    <div class="timeline-header">
-      <span class="tag is-medium has-text-grey-light">Déchargement</span>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-marker is-icon">
-        <i class="fas fa-truck-loading flu-flip-h"></i>
-      </div>
-      <div class="timeline-content has-text-grey-light">
-        <p>Déchargement de la marchandise</p>
-      </div>
-    </div>
-    <div class="timeline-header">
-      <span class="tag is-medium has-text-grey-light">Fini</span>
     </div>
   </div>
 </flu-hero-container>

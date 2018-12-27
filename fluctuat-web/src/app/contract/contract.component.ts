@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/index';
 import { shareReplay, switchMap } from 'rxjs/internal/operators';
 
 import { ContractService } from '../providers/contract.service';
+import { ContractStatus } from '../shared/model/contract-status.enum';
 import { Contract } from '../shared/model/contract.model';
 
 @Component({
@@ -14,6 +15,7 @@ import { Contract } from '../shared/model/contract.model';
 export class ContractComponent implements OnInit {
 
   contract$: Observable<Contract>;
+  readonly STATUS = ContractStatus;
 
   constructor(public contractService: ContractService, public route: ActivatedRoute) {
   }
