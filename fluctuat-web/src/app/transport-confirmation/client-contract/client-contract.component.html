@@ -10,11 +10,13 @@
   <p *ngIf="!contract.acceptedAt">
     <button class="button" (click)="accept(contract)">J'accepte</button>
   </p>
-  <p *ngIf="contract.acceptedAt" class="has-text-success">
-    Contrat accepté le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}.
-  </p>
 
   <a class="button is-text" *ngIf="contract.acceptedAt" [href]="contract.documentUrl" target="_blank">
     Télécharger la confirmation de transport
   </a>
+
+  <div class="level"></div>
+
+  <flu-delivery-activity [contract]="contract"></flu-delivery-activity>
+
 </flu-hero-container>

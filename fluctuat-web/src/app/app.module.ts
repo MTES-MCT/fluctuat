@@ -25,6 +25,7 @@ import { UnloadInfoService } from './providers/unload-info.service';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
 import { SharedModule } from './shared/shared.module';
 import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
+import { DeliveryActivityComponent } from './transport-confirmation/shared/delivery-activity/delivery-activity.component';
 import { DeliveryDetailComponent } from './transport-confirmation/shared/delivery-detail/delivery-detail.component';
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
 import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
@@ -54,6 +55,7 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
     WaybillComponent,
     FormUnloadComponent,
     ContractComponent,
+    DeliveryActivityComponent,
   ],
   imports: [
     AppRoutingModule,
