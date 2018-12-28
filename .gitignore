@@ -36,3 +36,5 @@ Thumbs.db
 
 #keys
 *.pem
+
+fluctuad-backend/.data
