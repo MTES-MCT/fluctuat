@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const contract = require('./routes/contract');
+const contract = require('./routes/contract.route');
 
 app.use('/', express.static(__dirname));
 app.use(bodyParser.json());

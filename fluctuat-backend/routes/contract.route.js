@@ -1,36 +1,35 @@
 const router = require('express').Router();
-
-let contracts = [];
+const contractStorage = require('../storage/contract-storage');
 
 router.post('/', (req, res) => {
   let contract = req.body;
-  contract.id = contracts.length;
-  contracts.push(contract);
 
+  contract.id = contractStorage.count();
   contract.status = 'CREATED';
   contract.documentUrl = `/api/contract/${contract.id}/confirmation-transport.pdf`;
   contract.createdAt = new Date();
 
   console.log(`contract ${contract.id} data settled`);
+  contractStorage.put(contract);
 
   return res.status(201).location(`/api/contract/${contract.id}`).json(contract);
 });
 
 router.get('/', (req, res) => {
-  return res.json(contracts);
+  return res.json(contractStorage.getAll());
 });
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   console.log(`get contract ${id} pdf`);
 
-  res.json(contracts[id]);
+  res.json(contractStorage.get(id));
 });
 
 router.get('/:id/confirmation-transport.pdf', (req, res) => {
   const id = req.params.id;
   console.log(`get contract ${id} pdf`);
-  generatePdf(contracts[id]).then(result => {
+  generatePdf(contractStorage.get(id)).then(result => {
 
     res.setHeader('Content-Type', 'application/pdf');
     res.send(result);
@@ -43,7 +42,7 @@ router.get('/:id/confirmation-transport.pdf', (req, res) => {
 router.post('/:id/accept', (req, res) => {
   const id = req.params.id;
 
-  Object.assign(contracts[id], {
+  contractStorage.patch(id, {
     status: 'ACCEPTED',
     acceptedAt: new Date()
   });
@@ -54,7 +53,7 @@ router.post('/:id/accept', (req, res) => {
 router.post('/:id/load', (req, res) => {
   const id = req.params.id;
 
-  Object.assign(contracts[id], {
+  contractStorage.patch(id, {
     status: 'LOADED',
     loadedAt: new Date(),
     ship: req.body.ship,
@@ -67,7 +66,7 @@ router.post('/:id/load', (req, res) => {
 router.post('/:id/confirm', (req, res) => {
   const id = req.params.id;
 
-  Object.assign(contracts[id], {
+  contractStorage.patch(id, {
     status: 'CONFIRMED',
     confirmedAt: new Date()
   });
@@ -78,7 +77,7 @@ router.post('/:id/confirm', (req, res) => {
 router.post('/:id/unload', (req, res) => {
   const id = req.params.id;
 
-  Object.assign(contracts[id], {
+  contractStorage.patch(id, {
     status: 'UNLOADED',
     unloadedAt: new Date(),
     unloadInfo: req.body.unloadInfo
@@ -90,7 +89,7 @@ router.post('/:id/unload', (req, res) => {
 router.post('/:id/received', (req, res) => {
   const id = req.params.id;
 
-  Object.assign(contracts[id], {
+  contractStorage.patch(id, {
     status: 'RECEIVED',
     receivedAt: new Date()
   });
