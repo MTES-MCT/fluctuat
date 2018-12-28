@@ -1,15 +1,13 @@
 import { Component, Input } from '@angular/core';
-
-import { Delivery } from '../../../shared/model/delivery.model';
+import { Contract } from '../../../shared/model/contract.model';
 
 @Component({
   selector: 'flu-delivery-detail',
-  templateUrl: './delivery-detail.component.html',
-  styleUrls: [ './delivery-detail.component.sass' ]
+  templateUrl: './delivery-detail.component.html'
 })
 export class DeliveryDetailComponent {
 
   @Input()
-  delivery: Delivery;
+  contract: Contract;
 
 }

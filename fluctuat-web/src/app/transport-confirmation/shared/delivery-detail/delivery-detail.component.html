@@ -1,27 +1,31 @@
+<h3>Transporteur</h3>
+
+<p>{{contract.transporter.name}}</p>
+
 <h3>Marchandise</h3>
 
-<p>Le donneur d'ordre <strong class="is-uppercase">{{delivery.client.name}}</strong>
+<p>Le donneur d'ordre <strong class="is-uppercase">{{contract.delivery.client.name}}</strong>
   souhaite la prise en
-  charge du transport de <strong>{{delivery.merchandise.weight}}</strong> tonnes de
-  <strong class="is-uppercase">{{delivery.merchandise.type}}</strong>.</p>
+  charge du transport de <strong>{{contract.delivery.merchandise.weight}}</strong> tonnes de
+  <strong class="is-uppercase">{{contract.delivery.merchandise.type}}</strong>.</p>
 
-<p>La valeur déclarée est de <strong>{{delivery.merchandise.price}} € </strong> par tonne.</p>
+<p>La valeur déclarée est de <strong>{{contract.delivery.merchandise.price}} € </strong> par tonne.</p>
 
 <h3>Trajet</h3>
 
-<p>Départ du <strong>{{delivery.origin}}</strong> le
-  <strong>{{delivery.departureDate}}</strong> à <strong>{{delivery.departureTime}}</strong></p>
+<p>Départ du <strong>{{contract.delivery.origin}}</strong> le
+  <strong>{{contract.delivery.departureDate}}</strong> à <strong>{{contract.delivery.departureTime}}</strong></p>
 
-<p>Arrivé au <strong>{{delivery.destination}}</strong> le
-  <strong>{{delivery.arrivalDate}}</strong> à <strong>{{delivery.arrivalTime}}</strong></p>
+<p>Arrivé au <strong>{{contract.delivery.destination}}</strong> le
+  <strong>{{contract.delivery.arrivalDate}}</strong> à <strong>{{contract.delivery.arrivalTime}}</strong></p>
 
 <h3>Delai de planche</h3>
 
-<p>Le délai de planche est de <strong>{{delivery.loadDelay}}</strong> jours au chargement et de
-  <strong>{{delivery.unloadDelay}}</strong> au déchargement.</p>
+<p>Le délai de planche est de <strong>{{contract.delivery.loadDelay}}</strong> jours au chargement et de
+  <strong>{{contract.delivery.unloadDelay}}</strong> au déchargement.</p>
 
 <h3>Conditions Tarifaires</h3>
 
-<p>Le prix du fret convenu est de <strong>{{delivery.price}} € </strong> par tonne.</p>
+<p>Le prix du fret convenu est de <strong>{{contract.delivery.price}} € </strong> par tonne.</p>
 
-<p>Les surestaries convenus sont de <strong>{{delivery.delayPenalty}} € </strong> par jour.</p>
+<p>Les surestaries convenus sont de <strong>{{contract.delivery.delayPenalty}} € </strong> par jour.</p>
