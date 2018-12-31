@@ -45,8 +45,10 @@ export class WaybillTransporterComponent implements OnInit {
         }
 
         // load validation
-        contract.loadInfo = this.loadInfoService.get();
-        contract.ship = this.shipService.get();
+        if (!contract.loadedAt) {
+          contract.loadInfo = this.loadInfoService.get();
+          contract.ship = this.shipService.get();
+        }
       }),
       shareReplay(1)
     );
