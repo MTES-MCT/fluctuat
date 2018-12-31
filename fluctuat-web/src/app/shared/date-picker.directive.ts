@@ -1,11 +1,11 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import flatpickr from 'flatpickr';
 import { French } from 'flatpickr/dist/l10n/fr';
 
 @Directive({
   selector: '[fluDatePicker]'
 })
-export class DatePickerDirective {
+export class DatePickerDirective implements OnDestroy {
 
   fp: any;
 
@@ -33,6 +33,10 @@ export class DatePickerDirective {
   @HostListener('change', [ '$event.target.value' ])
   change(value) {
     this.dateChange.emit(value);
+  }
+
+  ngOnDestroy() {
+    this.fp.destroy();
   }
 
 }

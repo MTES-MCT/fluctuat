@@ -1,10 +1,10 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import flatpickr from 'flatpickr';
 
 @Directive({
   selector: '[fluTimePicker]'
 })
-export class TimePickerDirective {
+export class TimePickerDirective implements OnDestroy {
 
   fp: any;
 
@@ -36,4 +36,7 @@ export class TimePickerDirective {
     this.dateChange.emit(value);
   }
 
+  ngOnDestroy() {
+    this.fp.destroy();
+  }
 }
