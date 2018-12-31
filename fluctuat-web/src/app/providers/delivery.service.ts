@@ -5,10 +5,14 @@ import { Delivery } from '../shared/model/delivery.model';
 export class DeliveryService {
 
   save(delivery: Delivery) {
-    localStorage.delivery = JSON.stringify(delivery)
+    sessionStorage.delivery = JSON.stringify(delivery)
   }
 
   get() {
-    return localStorage.delivery ? JSON.parse(localStorage.delivery) : new Delivery();
+    return sessionStorage.delivery ? JSON.parse(sessionStorage.delivery) : new Delivery();
+  }
+
+  clear() {
+    delete sessionStorage.delivery;
   }
 }

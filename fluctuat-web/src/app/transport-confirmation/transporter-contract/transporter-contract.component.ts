@@ -44,6 +44,11 @@ export class TransporterContractComponent implements OnInit {
 
   send(contract) {
     this.contract$ = this.contractService.create(contract);
+
+    this.contract$.subscribe(() => {
+      //clean delivery
+      this.deliveryService.clear()
+    });
   }
 
 }
