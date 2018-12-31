@@ -5,7 +5,7 @@
       <th>Contract</th>
       <th>Client</th>
       <th>Status</th>
-      <th>Action</th>
+      <th>Prochaine étape</th>
     </thead>
 
     <tbody>
@@ -14,10 +14,12 @@
       <td>{{contract.delivery.client.name}}</td>
       <td>{{contract.status}}</td>
       <td>
+        <p *ngIf="contract.status === STATUS.CREATED">En attente d'acceptation par le client</p>
+        <p *ngIf="contract.status === STATUS.LOADED || contract.status === STATUS.UNLOADED">En attente de confirmation par le client</p>
         <button *ngIf="contract.status === STATUS.ACCEPTED" [routerLink]="'/contrat/' + contract.id + '/bateau'"
-                class="button is-link">La marchandise est chargée</button>
+                class="button is-link">La marchandise est chargée...</button>
         <button *ngIf="contract.status === STATUS.CONFIRMED" [routerLink]="'/contrat/' + contract.id + '/dechargement'"
-                       class="button is-link">La marchandise est déchargée</button>
+                       class="button is-link">La marchandise est déchargée...</button>
       </td>
     </tr>
     </tbody>
