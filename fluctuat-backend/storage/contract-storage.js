@@ -1,29 +1,12 @@
-const fs = require('fs');
 const path = require('path');
-
-const checkDataDir = (dir) => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, 0o755);
-    console.log('Create data directory', dir);
-  } else {
-    console.log('Data directory OK', dir);
-  }
-};
+const {checkDataDir, checkDataFile, getData, putData} = require('./storage-utils');
 
 checkDataDir('.data');
-const contractsFile = path.join('.data', 'contracts.json');
+const contractsData = path.join('.data', 'contracts.json');
+checkDataFile(contractsData, '[]');
 
-const checkContractsFile = () => {
-  if (!fs.existsSync(contractsFile)) {
-    fs.writeFileSync(contractsFile, '[]', 'utf-8');
-    console.log('Create contracts file');
-  }
-};
-
-checkContractsFile();
-
-const getContracts = () => JSON.parse(fs.readFileSync(contractsFile));
-const putContracts = (contracts) => fs.writeFileSync(contractsFile, JSON.stringify(contracts, null, 2));
+const getContracts = getData(contractsData);
+const putContracts = putData(contractsData);
 
 const count = () => getContracts().length;
 
