@@ -10,7 +10,9 @@
       <div class="column is-paddingless is-marginless is-4">
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column">
-            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.merchandise.weight"></div>
+            <div class="control">
+              <input class="input is-medium" [(ngModel)]="delivery.merchandise.weight" placeholder="100">
+            </div>
           </div>
           <div class="column is-narrow">
             <p class="subtitle is-3">tonnes</p>
@@ -26,7 +28,7 @@
           </div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [(ngModel)]="delivery.merchandise.type">
+              <input class="input is-medium" [(ngModel)]="delivery.merchandise.type" placeholder="tout venant">
             </div>
           </div>
         </div>
@@ -41,7 +43,9 @@
       <div class="column">
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column is-5">
-            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.merchandise.price"></div>
+            <div class="control">
+              <input class="input is-medium" [(ngModel)]="delivery.merchandise.price" placeholder="10">
+            </div>
           </div>
           <div class="column is-narrow">
             <p class="subtitle is-3">€ par tonne</p>

@@ -15,7 +15,7 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Départ du</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" list="ports" [(ngModel)]="delivery.origin">
+              <input class="input is-medium" list="ports" [(ngModel)]="delivery.origin" placeholder="Port de départ">
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">le</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" fluDatePicker [(date)]="delivery.departureDate">
+              <input class="input is-medium" fluDatePicker [(date)]="delivery.departureDate" placeholder="jj/mm/aaaa">
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" fluTimePicker [(date)]="delivery.departureTime">
+              <input class="input is-medium" fluTimePicker [(date)]="delivery.departureTime" placeholder="hh:mm">
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Arrivé au</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" list="ports" [(ngModel)]="delivery.destination">
+              <input class="input is-medium" list="ports" [(ngModel)]="delivery.destination" placeholder="Port d'arrivé">
             </div>
           </div>
         </div>
@@ -65,7 +65,8 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">le</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="delivery.arrivalDate">
+              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="delivery.arrivalDate"
+                     placeholder="jj/mm/aaaa">
             </div>
           </div>
         </div>
@@ -76,7 +77,8 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [fluWhenEnterPressed]="nextStep" fluTimePicker [(date)]="delivery.arrivalTime">
+              <input class="input is-medium" [fluWhenEnterPressed]="nextStep" fluTimePicker [(date)]="delivery.arrivalTime"
+                     placeholder="hh:mm">
             </div>
           </div>
         </div>
