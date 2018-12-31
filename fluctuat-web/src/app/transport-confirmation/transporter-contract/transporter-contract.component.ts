@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, of } from 'rxjs/index';
-import { shareReplay } from 'rxjs/internal/operators';
+import { Observable } from 'rxjs/index';
+import { map, shareReplay } from 'rxjs/internal/operators';
 
 import { ContractService } from '../../providers/contract.service';
 import { DeliveryService } from '../../providers/delivery.service';
@@ -25,15 +25,17 @@ export class TransporterContractComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
-      this.contract$ = id ? this.getContract(id) : of(this.createContract());
+      this.contract$ = id ? this.getContract(id) : this.createContract();
     });
   }
 
   createContract() {
-    return Object.assign(new Contract(), {
-      delivery: this.deliveryService.get(),
-      transporter: this.transporterService.get(),
-    });
+    return this.transporterService.get().pipe(
+      map((transporter) => Object.assign(new Contract(), {
+        delivery: this.deliveryService.get(),
+        transporter: transporter,
+      }))
+    )
   }
 
   getContract(id) {

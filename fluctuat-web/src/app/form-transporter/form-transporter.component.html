@@ -1,5 +1,5 @@
 <section class="section">
-  <form class="container" novalidate #transporterForm="ngForm">
+  <form class="container" novalidate #transporterForm="ngForm" *ngIf="transporter$ | async as transporter">
     <h1 class="title">Transporteur</h1>
 
     <!-- Company -->
@@ -118,7 +118,7 @@
         </div>
 
         <div class="field">
-          <button class="button" (click)="save()">Sauvegarder</button>
+          <button class="button" (click)="save(transporter)">Sauvegarder</button>
         </div>
       </div>
     </div>
