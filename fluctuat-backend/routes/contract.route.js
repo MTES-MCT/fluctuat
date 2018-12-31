@@ -100,9 +100,9 @@ router.post('/:id/received', (req, res) => {
 // Based on https://medium.com/@kainikhil/nodejs-how-to-generate-and-properly-serve-pdf-6835737d118e
 
 const pdfMakePrinter = require('pdfmake/src/printer');
-const {getContent} = require('../confirmation-trasport');
+const {transportConfirmation} = require('../confirmation-trasport');
 const generatePdf = (contract) => {
-  const docDefinition = getContent(contract.transporter, contract.delivery);
+  const docDefinition = transportConfirmation(contract);
   const fonts = {
     Roboto: {
       normal: './fonts/Roboto-Regular.ttf'
