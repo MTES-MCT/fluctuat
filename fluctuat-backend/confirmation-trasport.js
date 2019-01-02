@@ -18,6 +18,7 @@ const getContent = (contract) => {
       transporter.email,
 
       {text: delivery.client.name, alignment: 'right'},
+      {text: delivery.client.email, alignment: 'right'},
       {
         text: printAddress(delivery.client.address),
         alignment: 'right'
