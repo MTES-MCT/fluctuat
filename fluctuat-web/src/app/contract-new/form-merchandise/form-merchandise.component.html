@@ -2,7 +2,7 @@
   <h1 class="title">Nouveau Transport Fluvial</h1>
   <h2 class="subtitle">Quelle est la marchandise à transporter ?</h2>
 
-  <div class="content">
+  <form class="content" #formMerchandise="ngForm" novalidate>
 
     <div class="columns is-paddingless is-marginless">
 
@@ -11,7 +11,11 @@
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [(ngModel)]="delivery.merchandise.weight" placeholder="100">
+              <input [(ngModel)]="delivery.merchandise.weight" #merchandiseWeight="ngModel" name="merchandiseWeight"
+                     required
+                     pattern="\d+"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(merchandiseWeight)}"
+                     placeholder="100">
             </div>
           </div>
           <div class="column is-narrow">
@@ -28,7 +32,10 @@
           </div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [(ngModel)]="delivery.merchandise.type" placeholder="tout venant">
+              <input [(ngModel)]="delivery.merchandise.type" #merchandiseType="ngModel" name="merchandiseType"
+                     required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(merchandiseType)}"
+                     placeholder="tout venant">
             </div>
           </div>
         </div>
@@ -44,7 +51,11 @@
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column is-5">
             <div class="control">
-              <input class="input is-medium" [(ngModel)]="delivery.merchandise.price" placeholder="10">
+              <input [(ngModel)]="delivery.merchandise.price" #merchandisePrice="ngModel" name="merchandisePrice"
+                     required
+                     pattern="\d+"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(merchandisePrice)}"
+                     placeholder="10">
             </div>
           </div>
           <div class="column is-narrow">
@@ -55,14 +66,17 @@
     </div>
 
     <div class="level">
-      <div class="level-item"></div>
+      <div class="level-item">
+        <p *ngIf="formMerchandise.invalid && submitted" class="notification is-danger">Veuillez vérifier votre
+          saisie</p>
+      </div>
       <div class="level-right">
         <div class="level-item">
-          <button class="button is-text" (click)="nextStep()">Continuer</button>
+          <button class="button is-text" type="button" (click)="submit()">Continuer</button>
         </div>
       </div>
     </div>
 
 
-  </div>
+  </form>
 </flu-hero-container>

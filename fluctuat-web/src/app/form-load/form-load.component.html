@@ -2,7 +2,7 @@
   <h1 class="title">Chargement marchandise</h1>
   <h2 class="subtitle">Quels sont les détails du chargement ?</h2>
 
-  <div class="content">
+  <form class="content" #formLoad="ngForm" novalidate>
 
     <div class="columns is-paddingless is-marginless">
       <div class="column is-paddingless is-marginless">
@@ -11,10 +11,12 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Le chargement a commencé le</p>
           </div>
           <div class="column">
-            <div class="control">
-              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="loadInfo.loadStartDate"
-              placeholder="jj/mm/aaaa">
-            </div>
+            <p class="control">
+              <input fluDatePicker [(date)]="loadInfo.loadStartDate"
+                     [(ngModel)]="loadInfo.loadStartDate" #loadStartDate="ngModel" name="loadStartDate" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(loadStartDate)}"
+                     placeholder="jj/mm/aaaa">
+            </p>
           </div>
         </div>
 
@@ -23,9 +25,12 @@
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
           <div class="column">
-            <div class="control">
-              <input class="input is-medium" fluTimePicker [(date)]="loadInfo.loadStartTime" placeholder="hh:mm">
-            </div>
+            <p class="control">
+              <input fluTimePicker [(date)]="loadInfo.loadStartTime"
+                     [(ngModel)]="loadInfo.loadStartTime" #loadStartTime="ngModel" name="loadStartTime" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(loadStartTime)}"
+                     placeholder="hh:mm">
+            </p>
           </div>
         </div>
 
@@ -39,10 +44,12 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Fini le</p>
           </div>
           <div class="column">
-            <div class="control">
-              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="loadInfo.loadEndDate"
+            <p class="control">
+              <input fluDatePicker [(date)]="loadInfo.loadEndDate"
+                     [(ngModel)]="loadInfo.loadEndDate" #loadEndDate="ngModel" name="loadEndDate" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(loadEndDate)}"
                      placeholder="jj/mm/aaaa">
-            </div>
+            </p>
           </div>
         </div>
 
@@ -51,9 +58,12 @@
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
           <div class="column">
-            <div class="control">
-              <input class="input is-medium" fluTimePicker [(date)]="loadInfo.loadEndTime" placeholder="hh:mm">
-            </div>
+            <p class="control">
+              <input fluTimePicker [(date)]="loadInfo.loadEndTime"
+                     [(ngModel)]="loadInfo.loadEndTime" #loadEndTime="ngModel" name="loadEndTime" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(loadEndTime)}"
+                     placeholder="hh:mm">
+            </p>
           </div>
         </div>
 
@@ -64,19 +74,21 @@
 
     <div class="control">
       <textarea class="textarea is-large is-shadowless" placeholder="Vous avez besoin de signaler quelque chose ?"
-                [(ngModel)]="loadInfo.observations"></textarea>
+                [(ngModel)]="loadInfo.observations" name="observations"></textarea>
     </div>
 
     <div class="level"></div>
 
     <div class="level">
-      <div class="level-item"></div>
+      <div class="level-item">
+        <p *ngIf="formLoad.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>
+      </div>
       <div class="level-right">
         <div class="level-item">
-          <button class="button is-text" (click)="nextStep()">Continuer</button>
+          <button class="button is-text" type="button" (click)="submit()">Continuer</button>
         </div>
       </div>
     </div>
 
-  </div>
+  </form>
 </flu-hero-container>

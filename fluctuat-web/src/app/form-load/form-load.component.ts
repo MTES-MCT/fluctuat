@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadInfo } from '../shared/model/load-info.model';
+
 import { LoadInfoService } from '../providers/load-info.service';
+import { AbstractForm } from '../shared/abstract-form';
+import { LoadInfo } from '../shared/model/load-info.model';
 import { buildGoNext } from '../shared/router-utils';
 
 @Component({
   selector: 'flu-form-load',
   templateUrl: './form-load.component.html'
 })
-export class FormLoadComponent implements OnInit {
+export class FormLoadComponent extends AbstractForm implements OnInit {
 
-  loadInfo = new LoadInfo();
+  @ViewChild('formLoad')
+  form: NgForm;
+
+  loadInfo: LoadInfo;
 
   nextStep: () => any;
 
   constructor(private loadInfoService: LoadInfoService, private route: ActivatedRoute, private router: Router) {
+    super();
   }
 
   ngOnInit() {

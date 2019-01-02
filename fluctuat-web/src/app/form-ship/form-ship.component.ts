@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Ship } from '../shared/model/ship.model';
 import { ShipService } from '../providers/ship.service';
+import { AbstractForm } from '../shared/abstract-form';
+import { Ship } from '../shared/model/ship.model';
 import { buildGoNext } from '../shared/router-utils';
 
 @Component({
   selector: 'flu-form-ship',
   templateUrl: './form-ship.component.html'
 })
-export class FormShipComponent implements OnInit {
+export class FormShipComponent extends AbstractForm implements OnInit {
+
+  @ViewChild('formShip')
+  form: NgForm;
 
   ship: Ship;
 
   nextStep: () => any;
 
   constructor(private shipService: ShipService, private router: Router, private route: ActivatedRoute) {
+    super();
   }
 
   ngOnInit() {

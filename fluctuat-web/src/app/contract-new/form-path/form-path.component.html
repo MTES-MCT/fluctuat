@@ -2,7 +2,7 @@
   <h1 class="title">Nouveau Transport Fluvial</h1>
   <h2 class="subtitle">Quel est le trajet ?</h2>
 
-  <div class="content">
+  <form class="content" #formPath="ngForm" novalidate>
 
     <datalist id="ports">
       <option *ngFor="let port of ports" [value]="port">
@@ -15,7 +15,10 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Départ du</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" list="ports" [(ngModel)]="delivery.origin" placeholder="Port de départ">
+              <input [(ngModel)]="delivery.origin" #origin="ngModel" name="origin" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(origin)}"
+                     list="ports"
+                     placeholder="Port de départ">
             </div>
           </div>
         </div>
@@ -27,7 +30,10 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">le</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" fluDatePicker [(date)]="delivery.departureDate" placeholder="jj/mm/aaaa">
+              <input fluDatePicker [(date)]="delivery.departureDate"
+                     [(ngModel)]="delivery.departureDate" #departureDate="ngModel" name="departureDate" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(departureDate)}"
+                     placeholder="jj/mm/aaaa">
             </div>
           </div>
         </div>
@@ -38,7 +44,10 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" fluTimePicker [(date)]="delivery.departureTime" placeholder="hh:mm">
+              <input fluTimePicker [(date)]="delivery.departureTime"
+                     [(ngModel)]="delivery.departureTime" #departureTime="ngModel" name="departureTime" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(departureTime)}"
+                     placeholder="hh:mm">
             </div>
           </div>
         </div>
@@ -53,7 +62,10 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">Arrivé au</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" list="ports" [(ngModel)]="delivery.destination" placeholder="Port d'arrivé">
+              <input [(ngModel)]="delivery.destination" #destination="ngModel" name="destination" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(destination)}"
+                     list="ports"
+                     placeholder="Port d'arrivé">
             </div>
           </div>
         </div>
@@ -65,7 +77,9 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">le</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" title="date d'arrivée" fluDatePicker [(date)]="delivery.arrivalDate"
+              <input fluDatePicker [(date)]="delivery.arrivalDate"
+                     [(ngModel)]="delivery.arrivalDate" #arrivalDate="ngModel" name="arrivalDate" required
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(arrivalDate)}"
                      placeholder="jj/mm/aaaa">
             </div>
           </div>
@@ -77,7 +91,10 @@
           <div class="column is-narrow" style="padding-left: 0"><p class="subtitle is-3">à</p></div>
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [fluWhenEnterPressed]="nextStep" fluTimePicker [(date)]="delivery.arrivalTime"
+              <input fluTimePicker [(date)]="delivery.arrivalTime"
+                     [(ngModel)]="delivery.arrivalTime" #arrivalTime="ngModel" name="arrivalTime" required
+                     [fluWhenEnterPressed]="nextStep"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(arrivalTime)}"
                      placeholder="hh:mm">
             </div>
           </div>
@@ -87,11 +104,15 @@
     </div>
 
     <div class="level">
-      <div class="level-item"></div>
+      <div class="level-item">
+        <div class="level-item">
+          <p *ngIf="formPath.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>
+        </div>
+      </div>
       <div class="level-right">
-        <button class="level-item button is-text" (click)="nextStep()">Continuer</button>
+        <button class="level-item button is-text" type="button" (click)="submit()">Continuer</button>
       </div>
     </div>
 
-  </div>
+  </form>
 </flu-hero-container>

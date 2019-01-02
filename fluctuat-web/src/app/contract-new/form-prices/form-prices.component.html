@@ -2,7 +2,7 @@
   <h1 class="title">Nouveau Transport Fluvial</h1>
   <h2 class="subtitle">Quelles sont les conditions tarifaires ?</h2>
 
-  <div class="content">
+  <form class="content" #formPrices="ngForm" novalidate>
 
     <div class="columns is-paddingless is-marginless is-vcentered">
       <div class="column is-narrow" style="padding-left: 0">
@@ -11,7 +11,12 @@
       <div class="column">
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column is-5">
-            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.price" placeholder="100"></div>
+            <p class="control">
+              <input [(ngModel)]="delivery.price" #price="ngModel" name="price" required
+                     pattern="\d+"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(price)}"
+                     placeholder="100">
+            </p>
           </div>
           <div class="column is-narrow">
             <p class="subtitle is-3">€ par tonne</p>
@@ -27,7 +32,12 @@
       <div class="column">
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column is-5">
-            <div class="control"><input class="input is-medium" [(ngModel)]="delivery.delayPenalty" placeholder="10"></div>
+            <p class="control">
+              <input [(ngModel)]="delivery.delayPenalty" #delayPenalty="ngModel" name="delayPenalty" required
+                     pattern="\d+"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(delayPenalty)}"
+                     placeholder="10">
+            </p>
           </div>
           <div class="column is-narrow">
             <p class="subtitle is-3">€ par jour</p>
@@ -37,14 +47,15 @@
     </div>
 
     <div class="level">
-      <div class="level-item"></div>
+      <div class="level-item">
+        <p *ngIf="formPrices.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>
+      </div>
       <div class="level-right">
         <div class="level-item">
-          <button class="button is-text" (click)="nextStep()">Continuer</button>
+          <button class="button is-text" type="button" (click)="submit()">Continuer</button>
         </div>
-
       </div>
     </div>
 
-  </div>
+  </form>
 </flu-hero-container>

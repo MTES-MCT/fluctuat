@@ -2,7 +2,7 @@
   <h1 class="title">Nouveau Transport Fluvial</h1>
   <h2 class="subtitle">Quelles sont les délais de planche ?</h2>
 
-  <div class="content">
+  <form class="content" #formLoadDelay="ngForm" novalidate>
 
     <div class="columns is-paddingless is-marginless is-vcentered">
       <div class="column is-narrow" style="padding-left: 0">
@@ -12,7 +12,10 @@
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [(ngModel)]="delivery.loadDelay" placeholder="2">
+              <input [(ngModel)]="delivery.loadDelay" #loadDelay="ngModel" name="loadDelay" required
+                     pattern="\d+"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(loadDelay)}"
+                     placeholder="2">
             </div>
           </div>
           <div class="column is-narrow">
@@ -33,7 +36,10 @@
         <div class="columns is-paddingless is-marginless is-mobile">
           <div class="column">
             <div class="control">
-              <input class="input is-medium" [(ngModel)]="delivery.unloadDelay" placeholder="2">
+              <input [(ngModel)]="delivery.unloadDelay" #unloadDelay="ngModel" name="unloadDelay" required
+                     pattern="\d+"
+                     class="input is-medium" [ngClass]="{'is-danger': hasError(unloadDelay)}"
+                     placeholder="2">
             </div>
           </div>
           <div class="column is-narrow">
@@ -47,14 +53,16 @@
     </div>
 
     <div class="level">
-      <div class="level-item"></div>
+      <div class="level-item">
+        <p *ngIf="formLoadDelay.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>
+      </div>
       <div class="level-right">
         <div class="level-item">
-          <button class="button is-text" (click)="nextStep()">Continuer</button>
+          <button type="button" class="button is-text" (click)="submit()">Continuer</button>
         </div>
 
       </div>
     </div>
 
-  </div>
+  </form>
 </flu-hero-container>
