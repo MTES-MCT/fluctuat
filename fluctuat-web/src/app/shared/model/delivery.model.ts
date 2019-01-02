@@ -24,7 +24,7 @@ export class Delivery {
 
   //prices
   price: string;
-  clientPayTaxes: boolean = false;
+  clientPayTaxes: boolean = true;
   delayPenalty: string
 
 }

@@ -46,6 +46,23 @@
       </div>
     </div>
 
+    <div class="columns is-paddingless is-marginless is-vcentered">
+      <div class="column is-narrow-desktop" style="padding-left: 0">
+        <p class="subtitle is-3">Les péages et taxes sont prises en charge par le</p>
+      </div>
+
+      <div class="column">
+        <div class="control">
+          <input [(ngModel)]="delivery.clientPayTaxes" [value]="true"
+                 class="is-checkradio is-info is-medium" id="clientPayTaxes" type="radio" name="clientPayTaxes">
+          <label for="clientPayTaxes">client</label>
+          <input [(ngModel)]="delivery.clientPayTaxes" [value]="false"
+                 class="is-checkradio is-info is-medium" id="transporterPayTaxes" type="radio" name="transporterPayTaxes">
+          <label for="transporterPayTaxes">transporteur</label>
+        </div>
+      </div>
+    </div>
+
     <div class="level">
       <div class="level-item">
         <p *ngIf="formPrices.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>

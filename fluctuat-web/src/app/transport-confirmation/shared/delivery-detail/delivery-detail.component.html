@@ -29,3 +29,7 @@
 <p>Le prix du fret convenu est de <strong>{{contract.delivery.price}} € </strong> par tonne.</p>
 
 <p>Les surestaries convenus sont de <strong>{{contract.delivery.delayPenalty}} € </strong> par jour.</p>
+
+<p>Les péages et taxes sont prises en charge par le
+  <strong>{{contract.delivery.clientPayTaxes? 'client' :'transporteur'}}</strong>.
+</p>

@@ -21,6 +21,7 @@
     "@angular/router": "~7.1.0",
     "@fortawesome/fontawesome-free": "^5.5.0",
     "bulma": "^0.7.2",
+    "bulma-checkradio": "^2.1.0",
     "bulma-timeline": "^3.0.0",
     "core-js": "^2.5.4",
     "flatpickr": "^4.5.2",
