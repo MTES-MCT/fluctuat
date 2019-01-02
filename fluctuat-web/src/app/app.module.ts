@@ -38,7 +38,6 @@ import { WaybillActivityComponent } from './waybill/shared/waybill-activity/wayb
     AppComponent,
     HeaderComponent,
     FormTransporterComponent,
-    // FormNewDeliveryComponent, //TODO remove when implemented away
     TransporterContractComponent,
     HeroContainerComponent,
     FormCustomerComponent,

@@ -19,7 +19,6 @@ import { ContractComponent } from './contract/contract.component';
 
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },
-  // { path: 'livraison', component: FormNewDeliveryComponent }, //TODO remove later
   { path: 'nouveau-transport/client', component: FormCustomerComponent },
   { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
   { path: 'nouveau-transport/trajet', component: FormPathComponent },
