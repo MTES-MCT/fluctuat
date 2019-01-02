@@ -15,6 +15,10 @@
 
   <div class="level"></div>
 
+  <div class="level" *ngIf="errorMsg">
+    <div class="level-item notification is-danger">{{errorMsg}}</div>
+  </div>
+
   <flu-delivery-activity [contract]="contract"></flu-delivery-activity>
 
 </flu-hero-container>

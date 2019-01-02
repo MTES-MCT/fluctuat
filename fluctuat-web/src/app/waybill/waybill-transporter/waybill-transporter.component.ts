@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Observable } from 'rxjs'
-import { shareReplay, switchMap, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs'
+import { catchError, shareReplay, switchMap, tap } from 'rxjs/operators';
 
 import { ContractService } from '../../providers/contract.service';
 import { LoadInfoService } from '../../providers/load-info.service';
@@ -17,6 +17,8 @@ import { Contract } from '../../shared/model/contract.model';
 export class WaybillTransporterComponent implements OnInit {
 
   contract$: Observable<Contract>;
+
+  errorMsg: string;
 
   readonly STATUS = ContractStatus;
 
@@ -55,21 +57,28 @@ export class WaybillTransporterComponent implements OnInit {
   }
 
   saveLoadInfo(contract) {
-    this.contractService.load(contract.id, contract.ship, contract.loadInfo)
-      .subscribe(() => {
-        // clean loadInfo
-        this.loadInfoService.clear();
-        return this.router.navigateByUrl('/mes-transports');
+    this.errorMsg = undefined;
+
+    this.contractService.load(contract.id, contract.ship, contract.loadInfo).pipe(
+      // clean loadInfo
+      tap(() => this.loadInfoService.clear()),
+      catchError((error) => {
+        console.error(error);
+        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
+    ).subscribe(() => this.router.navigateByUrl('/mes-transports'), error => this.errorMsg = error)
   }
 
   saveUnloadInfo(contract) {
-    this.contractService.unload(contract.id, contract.unloadInfo)
-      .subscribe(() => {
-        // clean unloadInfo
-        this.unloadInfoService.clear();
-        return this.router.navigateByUrl('/mes-transports');
+    this.errorMsg = undefined;
+
+    this.contractService.unload(contract.id, contract.unloadInfo).pipe(
+      tap(() => this.unloadInfoService.clear()),
+      catchError((error) => {
+        console.error(error);
+        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
+    ).subscribe(() => this.router.navigateByUrl('/mes-transports'), error => this.errorMsg = error)
   }
 
 }

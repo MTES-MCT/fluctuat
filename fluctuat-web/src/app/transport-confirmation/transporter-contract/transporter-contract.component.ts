@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/index';
-import { map, shareReplay } from 'rxjs/internal/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { ContractService } from '../../providers/contract.service';
 import { DeliveryService } from '../../providers/delivery.service';
@@ -15,6 +15,8 @@ import { Contract } from '../../shared/model/contract.model';
 export class TransporterContractComponent implements OnInit {
 
   contract$: Observable<Contract>;
+
+  errorMsg: string;
 
   constructor(private contractService: ContractService,
               private transporterService: TransporterService,
@@ -43,12 +45,20 @@ export class TransporterContractComponent implements OnInit {
   }
 
   send(contract) {
-    this.contract$ = this.contractService.create(contract);
+    this.errorMsg = undefined;
 
-    this.contract$.subscribe(() => {
+    this.contractService.create(contract).pipe(
+      tap((contract) => this.contract$ = of(contract)),
       //clean delivery
-      this.deliveryService.clear()
-    });
+      tap(() => this.deliveryService.clear()),
+      catchError((error) => {
+        console.error(error);
+        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
+      })
+    ).subscribe(() => {
+      console.log('contract created')
+    }, error => this.errorMsg = error);
+
   }
 
 }

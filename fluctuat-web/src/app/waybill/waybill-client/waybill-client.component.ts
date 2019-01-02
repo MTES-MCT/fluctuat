@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
-import { shareReplay, switchMap, tap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, shareReplay, switchMap, tap } from 'rxjs/operators';
 
 import { ContractService } from '../../providers/contract.service';
-import { Contract } from '../../shared/model/contract.model';
 import { ContractStatus } from '../../shared/model/contract-status.enum';
+import { Contract } from '../../shared/model/contract.model';
 
 @Component({
   selector: 'flu-client-waybill',
@@ -14,6 +14,8 @@ import { ContractStatus } from '../../shared/model/contract-status.enum';
 export class WaybillClientComponent implements OnInit {
 
   contract$: Observable<Contract>;
+
+  errorMsg: string;
 
   readonly STATUS = ContractStatus;
 
@@ -28,25 +30,31 @@ export class WaybillClientComponent implements OnInit {
   }
 
   confirm(contract) {
+    this.errorMsg = undefined;
 
     this.contractService.confirm(contract.id).pipe(
       tap(() => console.log('waybill confirmed')),
-      // TODO optim: avoid resend a get request
-      switchMap(() => this.contractService.get(contract.id))
-    ).subscribe((contractUpdated: Contract) => {
-      contract.status = contractUpdated.status; // TODO look if need
-      contract.confirmedAt = contractUpdated.confirmedAt;
-    });
+      // TODO optim: look at avoid resend a get request
+      switchMap(() => this.contractService.get(contract.id)),
+      tap((contract) => this.contract$ = of(contract)),
+      catchError((error) => {
+        console.error(error);
+        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
+      })
+    ).subscribe(() => console.log('contract confirmed'), error => this.errorMsg = error)
   }
 
   received(contract) {
+    this.errorMsg = undefined;
+
     this.contractService.received(contract.id).pipe(
-      switchMap(() => this.contractService.get(contract.id))
-    ).subscribe((contractUpdated: Contract) => {
-        contract.status = contractUpdated.status;
-        contract.receivedAt = contractUpdated.confirmedAt;
-      }
-    );
+      switchMap(() => this.contractService.get(contract.id)),
+      tap((contract) => this.contract$ = of(contract)),
+      catchError((error) => {
+        console.error(error);
+        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
+      })
+    ).subscribe(() => console.log('contract accepted'), error => this.errorMsg = error)
   }
 
 }
