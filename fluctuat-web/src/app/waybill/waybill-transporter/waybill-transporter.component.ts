@@ -56,12 +56,20 @@ export class WaybillTransporterComponent implements OnInit {
 
   saveLoadInfo(contract) {
     this.contractService.load(contract.id, contract.ship, contract.loadInfo)
-      .subscribe(() => this.router.navigateByUrl('/mes-transports'))
+      .subscribe(() => {
+        // clean loadInfo
+        this.loadInfoService.clear();
+        return this.router.navigateByUrl('/mes-transports');
+      })
   }
 
   saveUnloadInfo(contract) {
     this.contractService.unload(contract.id, contract.unloadInfo)
-      .subscribe(() => this.router.navigateByUrl('/mes-transports'))
+      .subscribe(() => {
+        // clean unloadInfo
+        this.unloadInfoService.clear();
+        return this.router.navigateByUrl('/mes-transports');
+      })
   }
 
 }

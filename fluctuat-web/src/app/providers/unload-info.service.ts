@@ -5,10 +5,14 @@ import { UnloadInfo } from '../shared/model/unload-info.model';
 export class UnloadInfoService {
 
   save(unloadInfo: UnloadInfo) {
-    localStorage.unloadInfo = JSON.stringify(unloadInfo)
+    sessionStorage.unloadInfo = JSON.stringify(unloadInfo)
   }
 
   get() {
-    return localStorage.unloadInfo ? JSON.parse(localStorage.unloadInfo) : new UnloadInfo();
+    return sessionStorage.unloadInfo ? JSON.parse(sessionStorage.unloadInfo) : new UnloadInfo();
+  }
+
+  clear() {
+    delete sessionStorage.unloadInfo;
   }
 }

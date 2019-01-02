@@ -5,10 +5,14 @@ import { LoadInfo } from '../shared/model/load-info.model';
 export class LoadInfoService {
 
   save(loadInfo: LoadInfo) {
-    localStorage.loadInfo = JSON.stringify(loadInfo)
+    sessionStorage.loadInfo = JSON.stringify(loadInfo)
   }
 
   get() {
-    return localStorage.loadInfo ? JSON.parse(localStorage.loadInfo) : new LoadInfo();
+    return sessionStorage.loadInfo ? JSON.parse(sessionStorage.loadInfo) : new LoadInfo();
+  }
+
+  clear() {
+    delete sessionStorage.loadInfo;
   }
 }
