@@ -36,7 +36,6 @@ export class TransportConfirmationClientComponent implements OnInit {
     this.errorMsg = undefined;
 
     this.contractService.accept(contract.id).pipe(
-      switchMap(() => this.contractService.get(contract.id)),
       tap((contract) => this.contract$ = of(contract)),
       catchError((error) => {
         console.error(error);

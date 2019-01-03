@@ -22,22 +22,22 @@ export class ContractService {
   }
 
   accept(id) {
-    return this.http.post(`/api/contract/${id}/accept`, null)
+    return this.http.post<Contract>(`/api/contract/${id}/accept`, null)
   }
 
   load(id, ship, loadInfo) {
-    return this.http.post(`/api/contract/${id}/load`, { ship: ship, loadInfo: loadInfo })
+    return this.http.post<Contract>(`/api/contract/${id}/load`, { ship: ship, loadInfo: loadInfo })
   }
 
   unload(id, unloadInfo) {
-    return this.http.post(`/api/contract/${id}/unload`, { unloadInfo: unloadInfo })
+    return this.http.post<Contract>(`/api/contract/${id}/unload`, { unloadInfo: unloadInfo })
   }
 
   confirm(id) {
-    return this.http.post(`/api/contract/${id}/confirm`, null)
+    return this.http.post<Contract>(`/api/contract/${id}/confirm`, null)
   }
 
   received(id) {
-    return this.http.post(`/api/contract/${id}/received`, null)
+    return this.http.post<Contract>(`/api/contract/${id}/received`, null)
   }
 }

@@ -34,8 +34,6 @@ export class WaybillClientComponent implements OnInit {
 
     this.contractService.confirm(contract.id).pipe(
       tap(() => console.log('waybill confirmed')),
-      // TODO optim: look at avoid resend a get request
-      switchMap(() => this.contractService.get(contract.id)),
       tap((contract) => this.contract$ = of(contract)),
       catchError((error) => {
         console.error(error);
@@ -48,7 +46,6 @@ export class WaybillClientComponent implements OnInit {
     this.errorMsg = undefined;
 
     this.contractService.received(contract.id).pipe(
-      switchMap(() => this.contractService.get(contract.id)),
       tap((contract) => this.contract$ = of(contract)),
       catchError((error) => {
         console.error(error);

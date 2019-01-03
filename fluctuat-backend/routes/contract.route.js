@@ -47,7 +47,7 @@ router.post('/:id/accept', (req, res) => {
     acceptedAt: new Date()
   });
 
-  return res.status(204).end()
+  res.status(200).json(contractStorage.get(id));
 });
 
 router.post('/:id/load', (req, res) => {
@@ -60,7 +60,7 @@ router.post('/:id/load', (req, res) => {
     loadInfo: req.body.loadInfo
   });
 
-  return res.status(204).end();
+  res.status(200).json(contractStorage.get(id));
 });
 
 router.post('/:id/confirm', (req, res) => {
@@ -71,7 +71,7 @@ router.post('/:id/confirm', (req, res) => {
     confirmedAt: new Date()
   });
 
-  return res.status(204).end();
+  res.status(200).json(contractStorage.get(id));
 });
 
 router.post('/:id/unload', (req, res) => {
@@ -83,7 +83,7 @@ router.post('/:id/unload', (req, res) => {
     unloadInfo: req.body.unloadInfo
   });
 
-  return res.status(204).end();
+  res.status(200).json(contractStorage.get(id));
 });
 
 router.post('/:id/received', (req, res) => {
@@ -94,7 +94,7 @@ router.post('/:id/received', (req, res) => {
     receivedAt: new Date()
   });
 
-  return res.status(204).end();
+  res.status(200).json(contractStorage.get(id));
 });
 
 // Based on https://medium.com/@kainikhil/nodejs-how-to-generate-and-properly-serve-pdf-6835737d118e
