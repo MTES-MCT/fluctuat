@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FormCustomerComponent } from './contract-new/form-customer/form-customer.component';
-import { FormLoadDelayComponent } from './contract-new/form-load-delay/form-load-delay.component';
-import { FormMerchandiseComponent } from './contract-new/form-merchandise/form-merchandise.component';
-import { FormPathComponent } from './contract-new/form-path/form-path.component';
-import { FormPricesComponent } from './contract-new/form-prices/form-prices.component';
+import { FormCustomerComponent } from './contract-forms/form-customer/form-customer.component';
+import { FormLoadDelayComponent } from './contract-forms/form-load-delay/form-load-delay.component';
+import { FormLoadComponent } from './contract-forms/form-load/form-load.component';
+import { FormMerchandiseComponent } from './contract-forms/form-merchandise/form-merchandise.component';
+import { FormPathComponent } from './contract-forms/form-path/form-path.component';
+import { FormPricesComponent } from './contract-forms/form-prices/form-prices.component';
+import { FormShipComponent } from './contract-forms/form-ship/form-ship.component';
+import { FormUnloadComponent } from './contract-forms/form-unload/form-unload.component';
+import { ContractComponent } from './contract/contract.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormLoadComponent } from './form-load/form-load.component';
-import { FormShipComponent } from './form-ship/form-ship.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
-import { FormUnloadComponent } from './form-unload/form-unload.component';
 import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
 import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
-import { ContractComponent } from './contract/contract.component';
 
 const routes: Routes = [
   { path: '', component: FormTransporterComponent },

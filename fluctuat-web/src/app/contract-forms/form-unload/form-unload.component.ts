@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UnloadInfoService } from '../providers/unload-info.service';
-import { AbstractForm } from '../shared/abstract-form';
-import { UnloadInfo } from '../shared/model/unload-info.model';
-import { buildGoNext } from '../shared/router-utils';
+
+import { UnloadInfoService } from '../../providers/unload-info.service';
+import { AbstractForm } from '../abstract-form';
+import { UnloadInfo } from '../../shared/model/unload-info.model';
+import { buildGoNext } from '../../shared/router-utils';
 
 @Component({
   selector: 'flu-form-unload',
-  templateUrl: './form-unload.component.html',
-  styleUrls: [ './form-unload.component.sass' ]
+  templateUrl: './form-unload.component.html'
 })
 export class FormUnloadComponent extends AbstractForm implements OnInit {
 

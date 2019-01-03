@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LoadInfoService } from '../providers/load-info.service';
-import { AbstractForm } from '../shared/abstract-form';
-import { LoadInfo } from '../shared/model/load-info.model';
-import { buildGoNext } from '../shared/router-utils';
+import { LoadInfoService } from '../../providers/load-info.service';
+import { AbstractForm } from '../abstract-form';
+import { LoadInfo } from '../../shared/model/load-info.model';
+import { buildGoNext } from '../../shared/router-utils';
+
 
 @Component({
   selector: 'flu-form-load',

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { DeliveryService } from '../../providers/delivery.service';
-import { AbstractForm } from '../../shared/abstract-form';
+import { AbstractForm } from '../abstract-form';
 import { Delivery } from '../../shared/model/delivery.model';
 import { buildGoNext } from '../../shared/router-utils';
 import { PortList } from './ports-list';

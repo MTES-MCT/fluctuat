@@ -3,18 +3,17 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { DeliveryService } from '../../providers/delivery.service';
-import { AbstractForm } from '../../shared/abstract-form';
 import { Delivery } from '../../shared/model/delivery.model';
 import { buildGoNext } from '../../shared/router-utils';
-
+import { AbstractForm } from '../abstract-form';
 
 @Component({
-  selector: 'flu-form-load-delay',
-  templateUrl: './form-load-delay.component.html'
+  selector: 'flu-form-prices',
+  templateUrl: './form-prices.component.html'
 })
-export class FormLoadDelayComponent extends AbstractForm implements OnInit {
+export class FormPricesComponent extends AbstractForm implements OnInit {
 
-  @ViewChild('formLoadDelay')
+  @ViewChild('formPrices')
   form: NgForm;
 
   delivery: Delivery;
@@ -22,13 +21,13 @@ export class FormLoadDelayComponent extends AbstractForm implements OnInit {
   nextStep: () => any;
 
   constructor(private deliveryService: DeliveryService, private router: Router) {
-    super()
+    super();
   }
 
   ngOnInit() {
     this.delivery = this.deliveryService.get();
 
-    const goNext = buildGoNext(this.router, '/nouveau-transport/conditions-tarifaires');
+    const goNext = buildGoNext(this.router, '/nouveau-transport/confirmation-transport');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);
