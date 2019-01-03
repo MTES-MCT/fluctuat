@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { LoadInfo } from '../shared/model/load-info.model';
 
+const KEY = 'loadInfo';
+const getKey = (id) => `${KEY}-${id}`;
+
 @Injectable()
 export class LoadInfoService {
 
-  save(loadInfo: LoadInfo) {
-    sessionStorage.loadInfo = JSON.stringify(loadInfo)
+  save(id, loadInfo: LoadInfo) {
+    sessionStorage.setItem(getKey(id), JSON.stringify(loadInfo))
   }
 
-  get() {
-    return sessionStorage.loadInfo ? JSON.parse(sessionStorage.loadInfo) : new LoadInfo();
+  get(id) {
+    return sessionStorage.getItem(getKey(id)) ? JSON.parse(sessionStorage.getItem(getKey(id))) : new LoadInfo();
   }
 
-  clear() {
-    delete sessionStorage.loadInfo;
+  clear(id) {
+    sessionStorage.removeItem(getKey(id));
   }
 }

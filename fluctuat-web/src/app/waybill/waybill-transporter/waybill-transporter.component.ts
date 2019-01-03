@@ -42,13 +42,13 @@ export class WaybillTransporterComponent implements OnInit {
 
         // unload validation
         if (contract.loadedAt && contract.status === this.STATUS.CONFIRMED) {
-          contract.unloadInfo = this.unloadInfoService.get();
+          contract.unloadInfo = this.unloadInfoService.get(contract.id);
           return;
         }
 
         // load validation
         if (!contract.loadedAt) {
-          contract.loadInfo = this.loadInfoService.get();
+          contract.loadInfo = this.loadInfoService.get(contract.id);
           contract.ship = this.shipService.get();
         }
       }),
@@ -61,7 +61,7 @@ export class WaybillTransporterComponent implements OnInit {
 
     this.contractService.load(contract.id, contract.ship, contract.loadInfo).pipe(
       // clean loadInfo
-      tap(() => this.loadInfoService.clear()),
+      tap(() => this.loadInfoService.clear(contract.id)),
       catchError((error) => {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
@@ -73,7 +73,7 @@ export class WaybillTransporterComponent implements OnInit {
     this.errorMsg = undefined;
 
     this.contractService.unload(contract.id, contract.unloadInfo).pipe(
-      tap(() => this.unloadInfoService.clear()),
+      tap(() => this.unloadInfoService.clear(contract.id)),
       catchError((error) => {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');

@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { UnloadInfo } from '../shared/model/unload-info.model';
 
+const KEY = 'unloadInfo';
+const getKey = (id) => `${KEY}-${id}`;
+
 @Injectable()
 export class UnloadInfoService {
 
-  save(unloadInfo: UnloadInfo) {
-    sessionStorage.unloadInfo = JSON.stringify(unloadInfo)
+  save(id, unloadInfo: UnloadInfo) {
+    sessionStorage.setItem(getKey(id), JSON.stringify(unloadInfo))
   }
 
-  get() {
-    return sessionStorage.unloadInfo ? JSON.parse(sessionStorage.unloadInfo) : new UnloadInfo();
+  get(id) {
+    return sessionStorage.getItem(getKey(id)) ? JSON.parse(sessionStorage.getItem(getKey(id))) : new UnloadInfo();
   }
 
-  clear() {
-    delete sessionStorage.unloadInfo;
+  clear(id) {
+    sessionStorage.removeItem(getKey(id));
   }
 }
