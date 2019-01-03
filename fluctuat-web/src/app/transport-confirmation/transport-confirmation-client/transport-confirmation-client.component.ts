@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, shareReplay, switchMap, tap } from 'rxjs/operators';
+
 import { ContractService } from '../../providers/contract.service';
 import { ContractStatus } from '../../shared/model/contract-status.enum';
 import { Contract } from '../../shared/model/contract.model';
 
 @Component({
-  selector: 'flu-client-contract',
-  templateUrl: './client-contract.component.html'
+  selector: 'flu-transport-confirmation-client',
+  templateUrl: './transport-confirmation-client.component.html'
 })
-export class ClientContractComponent implements OnInit {
+export class TransportConfirmationClientComponent implements OnInit {
 
   contract$: Observable<Contract>;
 

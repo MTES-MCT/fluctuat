@@ -25,10 +25,10 @@ import { TransporterService } from './providers/transporter.service';
 import { UnloadInfoService } from './providers/unload-info.service';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
 import { SharedModule } from './shared/shared.module';
-import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
 import { DeliveryActivityComponent } from './transport-confirmation/shared/delivery-activity/delivery-activity.component';
 import { DeliveryDetailComponent } from './transport-confirmation/shared/delivery-detail/delivery-detail.component';
-import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
+import { TransportConfirmationClientComponent } from './transport-confirmation/transport-confirmation-client/transport-confirmation-client.component';
+import { TransportConfirmationTransporterComponent } from './transport-confirmation/transport-confirmation-transporter/transport-confirmation-transporter.component';
 import { WaybillActivityComponent } from './waybill/shared/waybill-activity/waybill-activity.component';
 import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
@@ -50,8 +50,8 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
     FormUnloadComponent,
     DashboardComponent,
     DeliveryDetailComponent,
-    TransporterContractComponent,
-    ClientContractComponent,
+    TransportConfirmationTransporterComponent,
+    TransportConfirmationClientComponent,
     DeliveryActivityComponent,
     WaybillClientComponent,
     WaybillTransporterComponent,

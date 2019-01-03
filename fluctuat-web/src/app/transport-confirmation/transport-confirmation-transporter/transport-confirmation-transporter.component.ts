@@ -9,10 +9,10 @@ import { TransporterService } from '../../providers/transporter.service';
 import { Contract } from '../../shared/model/contract.model';
 
 @Component({
-  selector: 'flu-transporter-contract',
-  templateUrl: './transporter-contract.component.html'
+  selector: 'flu-transport-confirmation-transporter',
+  templateUrl: './transport-confirmation-transporter.component.html'
 })
-export class TransporterContractComponent implements OnInit {
+export class TransportConfirmationTransporterComponent implements OnInit {
 
   contract$: Observable<Contract>;
 

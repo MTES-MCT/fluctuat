@@ -12,8 +12,8 @@ import { FormUnloadComponent } from './contract-forms/form-unload/form-unload.co
 import { ContractComponent } from './contract/contract.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
-import { ClientContractComponent } from './transport-confirmation/client-contract/client-contract.component';
-import { TransporterContractComponent } from './transport-confirmation/transporter-contract/transporter-contract.component';
+import { TransportConfirmationClientComponent } from './transport-confirmation/transport-confirmation-client/transport-confirmation-client.component';
+import { TransportConfirmationTransporterComponent } from './transport-confirmation/transport-confirmation-transporter/transport-confirmation-transporter.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 
@@ -24,14 +24,14 @@ const routes: Routes = [
   { path: 'nouveau-transport/trajet', component: FormPathComponent },
   { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
   { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
-  { path: 'nouveau-transport/confirmation-transport', component: TransporterContractComponent },
+  { path: 'nouveau-transport/confirmation-transport', component: TransportConfirmationTransporterComponent },
   { path: 'contrat/:id', component: ContractComponent },
-  { path: 'contrat/:id/confirmation-transport', component: TransporterContractComponent },
+  { path: 'contrat/:id/confirmation-transport', component: TransportConfirmationTransporterComponent },
   { path: 'contrat/:id/bateau', component: FormShipComponent },
   { path: 'contrat/:id/chargement', component: FormLoadComponent },
   { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
   { path: 'contrat/:id/lettre-voiture', component: WaybillTransporterComponent },
-  { path: 'client/contrat/:id/confirmation-transport', component: ClientContractComponent },
+  { path: 'client/contrat/:id/confirmation-transport', component: TransportConfirmationClientComponent },
   { path: 'client/contrat/:id/lettre-voiture', component: WaybillClientComponent },
   { path: 'mes-transports', component: DashboardComponent },
 
