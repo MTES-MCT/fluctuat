@@ -1,4 +1,4 @@
-<flu-hero-container *ngIf="contract$ | async as contract" class="content">
+<flu-hero-container *ngIf="contract$ | async as contract; else loading" class="content">
   <h1 class="title">Confirmation Transport #{{contract.id}}</h1>
 
   <flu-delivery-detail [contract]="contract"></flu-delivery-detail>
@@ -22,3 +22,7 @@
   <flu-delivery-activity [contract]="contract"></flu-delivery-activity>
 
 </flu-hero-container>
+
+<ng-template #loading>
+  <flu-loading></flu-loading>
+</ng-template>

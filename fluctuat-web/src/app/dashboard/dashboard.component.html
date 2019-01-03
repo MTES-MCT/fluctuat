@@ -1,6 +1,6 @@
 <flu-hero-container class="content">
   <h1 class="title">Mes Transports</h1>
-  <table class="table" *ngIf="contracts$ | async as contracts">
+  <table class="table" *ngIf="contracts$ | async as contracts; else loading">
     <thead>
       <th>Contract</th>
       <th>Client</th>
@@ -25,3 +25,7 @@
     </tbody>
   </table>
 </flu-hero-container>
+
+<ng-template #loading>
+  <flu-loading></flu-loading>
+</ng-template>
