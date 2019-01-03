@@ -17,6 +17,7 @@ export class TransportConfirmationTransporterComponent implements OnInit {
   contract$: Observable<Contract>;
 
   errorMsg: string;
+  waitingFor: boolean;
 
   constructor(private contractService: ContractService,
               private transporterService: TransporterService,
@@ -45,14 +46,20 @@ export class TransportConfirmationTransporterComponent implements OnInit {
   }
 
   send(contract) {
+    if (this.waitingFor) {
+      return;
+    }
     this.errorMsg = undefined;
+    this.waitingFor = true;
 
     this.contractService.create(contract).pipe(
       tap((contract) => this.contract$ = of(contract)),
       //clean delivery
       tap(() => this.deliveryService.clear()),
+      tap(() => this.waitingFor = false),
       catchError((error) => {
         console.error(error);
+        this.waitingFor = false;
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
     ).subscribe(() => {

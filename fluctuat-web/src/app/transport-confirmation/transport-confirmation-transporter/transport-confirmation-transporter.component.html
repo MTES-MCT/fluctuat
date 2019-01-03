@@ -4,7 +4,8 @@
 
   <div class="level"></div>
 
-  <button *ngIf="!contract.createdAt" class="button is-link" (click)="send(contract)">
+  <button *ngIf="!contract.createdAt" class="button is-link" (click)="send(contract)"
+          [ngClass]="{'is-loading': waitingFor}">
     Créer
   </button>
 
