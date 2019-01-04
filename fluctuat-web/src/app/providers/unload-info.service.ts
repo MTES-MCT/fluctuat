@@ -12,7 +12,7 @@ export class UnloadInfoService {
   }
 
   get(id) {
-    return sessionStorage.getItem(getKey(id)) ? JSON.parse(sessionStorage.getItem(getKey(id))) : new UnloadInfo();
+    return sessionStorage.getItem(getKey(id)) ? JSON.parse(sessionStorage.getItem(getKey(id))) : undefined;
   }
 
   clear(id) {

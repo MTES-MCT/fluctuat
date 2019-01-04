@@ -16,7 +16,7 @@ export class FormUnloadComponent extends AbstractForm implements OnInit {
   @ViewChild('formUnload')
   form: NgForm;
 
-  unloadInfo = new UnloadInfo();
+  unloadInfo: UnloadInfo;
 
   nextStep: () => any;
 
@@ -26,7 +26,7 @@ export class FormUnloadComponent extends AbstractForm implements OnInit {
 
   ngOnInit() {
     const contractId = this.route.snapshot.params[ 'id' ];
-    this.unloadInfo = this.unloadInfoService.get(contractId);
+    this.unloadInfo = this.unloadInfoService.get(contractId) || new UnloadInfo();
 
     const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture`);
 

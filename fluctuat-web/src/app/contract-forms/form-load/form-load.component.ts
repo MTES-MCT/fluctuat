@@ -27,7 +27,7 @@ export class FormLoadComponent extends AbstractForm implements OnInit {
 
   ngOnInit() {
     const contractId = this.route.snapshot.params[ 'id' ];
-    this.loadInfo = this.loadInfoService.get(contractId);
+    this.loadInfo = this.loadInfoService.get(contractId) || new LoadInfo();
 
     const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture`);
 

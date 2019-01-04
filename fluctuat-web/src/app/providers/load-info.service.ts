@@ -12,7 +12,7 @@ export class LoadInfoService {
   }
 
   get(id) {
-    return sessionStorage.getItem(getKey(id)) ? JSON.parse(sessionStorage.getItem(getKey(id))) : new LoadInfo();
+    return sessionStorage.getItem(getKey(id)) ? JSON.parse(sessionStorage.getItem(getKey(id))) : undefined;
   }
 
   clear(id) {
