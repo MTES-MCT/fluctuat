@@ -4,9 +4,14 @@
 
 <h3>Marchandise</h3>
 
-<p>Le donneur d'ordre <strong class="is-uppercase">{{contract.delivery.client.name}}</strong>
+<p>Le donneur d'ordre <strong
+  class="is-uppercase">{{contract.delivery.client.name}}</strong> ({{contract.delivery.client.email}})
   souhaite la prise en charge du transport de <strong>{{contract.delivery.merchandise.weight}}</strong> tonnes de
   <strong class="is-uppercase">{{contract.delivery.merchandise.type}}</strong>.</p>
+
+<p>L'expéditeur est <strong class="is-uppercase">{{contract.delivery.sender}}</strong>.
+  Le destinataire est <strong class="is-uppercase">{{contract.delivery.receiver}}</strong>.
+</p>
 
 <p>La valeur déclarée est de <strong>{{contract.delivery.merchandise.price}} € </strong> par tonne.</p>
 
