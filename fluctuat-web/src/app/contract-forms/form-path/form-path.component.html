@@ -105,12 +105,12 @@
 
     <div class="level">
       <div class="level-item">
-        <div class="level-item">
-          <p *ngIf="formPath.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>
-        </div>
+        <p *ngIf="formPath.invalid && submitted" class="notification is-danger">Veuillez vérifier votre saisie</p>
       </div>
       <div class="level-right">
-        <button class="level-item button is-text" type="button" (click)="submit()">Continuer</button>
+        <div class="level-item">
+          <button class="level-item button is-text" type="button" (click)="submit()">Continuer</button>
+        </div>
       </div>
     </div>
 

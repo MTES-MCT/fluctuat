@@ -3,9 +3,8 @@
   <table class="table" *ngIf="contracts$ | async as contracts; else loading">
     <thead>
     <tr>
-      <th>Contract</th>
+      <th>#</th>
       <th>Client</th>
-      <th>Status</th>
       <th>Prochaine étape</th>
     </tr>
     </thead>
@@ -14,7 +13,6 @@
     <tr *ngFor="let contract of contracts">
       <td><a [routerLink]="'/contrat/' + contract.id">{{contract.id}}</a></td>
       <td>{{contract.delivery.client.name}}</td>
-      <td>{{contract.status}}</td>
       <td>
         <p *ngIf="contract.status === STATUS.CREATED">En attente d'acceptation de la Confirmation de Transport</p>
         <p *ngIf="contract.status === STATUS.LOADED">En attente de confirmation du Chargement</p>
@@ -22,12 +20,12 @@
         <button *ngIf="contract.status === STATUS.ACCEPTED"
                 [routerLink]="'/contrat/' + contract.id + '/bateau'"
                 class="button is-link">
-          La marchandise est chargée...
+          Chargement...
         </button>
         <button *ngIf="contract.status === STATUS.CONFIRMED"
                 [routerLink]="'/contrat/' + contract.id + '/dechargement'"
                 class="button is-link">
-          La marchandise est déchargée...
+          Déchargement...
         </button>
       </td>
     </tr>
