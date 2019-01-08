@@ -17,7 +17,7 @@
               <p *ngIf="!contract.acceptedAt">En attente d'acceptation par le client</p>
               <p *ngIf="contract.acceptedAt">
                 Le client <strong>{{contract.delivery.client.name}}</strong> a acepté la confirmation de transport
-                le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'fr'}}
+                le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
               </p>
               <p>Voir la
                 <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
@@ -45,7 +45,7 @@
               <p *ngIf="contract.loadedAt">La marchandise est chargée</p>
               <p *ngIf="contract.status ===  STATUS.LOADED">En attente de confirmation par le client</p>
               <p *ngIf="contract.confirmedAt"> Le client <strong>{{contract.delivery.client.name}}</strong> a confirmé
-                le chargement le {{contract.confirmedAt| date: "d LLLL y \'à\' H'h' mm":'fr'}}
+                le chargement le {{contract.confirmedAt| date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
               </p>
               <p *ngIf="contract.loadedAt && !contract.unloadedAt">Voir la
                 <a [routerLink]="'/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
@@ -73,7 +73,7 @@
               <p *ngIf="contract.unloadedAt">La marchandise est déchargée</p>
               <p *ngIf="contract.status === STATUS.UNLOADED">En attente de confirmation par le client</p>
               <p *ngIf="contract.receivedAt">Le client <strong>{{contract.delivery.client.name}}</strong> a confirmé
-                le déchargement le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'fr'}}
+                le déchargement le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
               </p>
               <p *ngIf="contract.unloadedAt">Voir la
                 <a [routerLink]="'/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>

@@ -36,7 +36,7 @@ const getContent = (contract) => {
       '\n',
       `- Chargement :       le ${delivery.departureDate} à ${delivery.departureTime}`,
       '\n',
-      `- Déchargement :   le ${delivery.arrivalDate} à ${delivery.departureTime}`,
+      `- Déchargement :   le ${delivery.arrivalDate} à ${delivery.arrivalTime}`,
       '\n',
       `- Marchandise : ${delivery.merchandise.weight} tonnes de ${delivery.merchandise.type}`,
       '\n',
@@ -78,11 +78,11 @@ const getContent = (contract) => {
         columns: [
           {
             width: '50%',
-            text: `Signé le ${format(contract.createdAt, 'D MMMM YYYY [à] hh:mm', {locale: fr})}`
+            text: `Signé le ${format(contract.createdAt, 'D MMMM YYYY [à] H[h] mm', {locale: fr})}`
           },
           {
             width: '50%',
-            text: contract.acceptedAt ?  `Signé le ${format(contract.acceptedAt, 'D MMMM YYYY [à] hh:mm', {locale: fr})}`: ''
+            text: contract.acceptedAt ?  `Signé le ${format(contract.acceptedAt, 'D MMMM YYYY [à] H[h] mm', {locale: fr})}`: ''
           }
         ]
       }
