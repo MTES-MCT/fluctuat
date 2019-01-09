@@ -20,7 +20,7 @@
                 le {{contract.acceptedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
               </p>
               <p>Voir la
-                <a [routerLink]="'/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
+                <a [routerLink]="'/transporteur/contrat/' + contract.id + '/confirmation-transport'">Confirmation de Transport</a>
               </p>
             </div>
           </div>
@@ -38,7 +38,7 @@
             <div class="timeline-content">
               <p *ngIf="contract.status === STATUS.ACCEPTED">
                 <button class="button is-text"
-                        [routerLink]="'/contrat/' + contract.id + '/bateau'">Chargement de la marchandise...
+                        [routerLink]="'/transporteur/contrat/' + contract.id + '/bateau'">Chargement de la marchandise...
                 </button>
               </p>
               <p class="has-text-grey-light" *ngIf="contract.status === STATUS.CREATED">Chargement de la marchandise</p>
@@ -48,7 +48,7 @@
                 le chargement le {{contract.confirmedAt| date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
               </p>
               <p *ngIf="contract.loadedAt && !contract.unloadedAt">Voir la
-                <a [routerLink]="'/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
+                <a [routerLink]="'/transporteur/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
               </p>
             </div>
           </div>
@@ -67,7 +67,7 @@
               <p *ngIf="!contract.confirmedAt" class="has-text-grey-light">Déchargement de la marchandise</p>
               <p *ngIf="contract.status === STATUS.CONFIRMED">
                 <button class="button is-text"
-                        [routerLink]="'/contrat/' + contract.id + '/dechargement'">Déchargement de la marchandise...
+                        [routerLink]="'/transporteur/contrat/' + contract.id + '/dechargement'">Déchargement de la marchandise...
                 </button>
               </p>
               <p *ngIf="contract.unloadedAt">La marchandise est déchargée</p>
@@ -76,7 +76,7 @@
                 le déchargement le {{contract.receivedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
               </p>
               <p *ngIf="contract.unloadedAt">Voir la
-                <a [routerLink]="'/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
+                <a [routerLink]="'/transporteur/contrat/' + contract.id + '/lettre-voiture'">Lettre de Voiture</a>
               </p>
             </div>
           </div>

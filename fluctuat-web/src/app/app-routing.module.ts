@@ -11,30 +11,39 @@ import { FormShipComponent } from './contract-forms/form-ship/form-ship.componen
 import { FormUnloadComponent } from './contract-forms/form-unload/form-unload.component';
 import { ContractComponent } from './contract/contract.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormTransporterComponent } from './form-transporter/form-transporter.component';
+import { HomeComponent } from './home/home.component';
 import { TransportConfirmationClientComponent } from './transport-confirmation/transport-confirmation-client/transport-confirmation-client.component';
 import { TransportConfirmationTransporterComponent } from './transport-confirmation/transport-confirmation-transporter/transport-confirmation-transporter.component';
+import { TransporterComponent } from './transporter/transporter.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
+import { FormTransporterComponent } from './form-transporter/form-transporter.component';
 
 const routes: Routes = [
-  { path: '', component: FormTransporterComponent },
-  { path: 'nouveau-transport/client', component: FormCustomerComponent },
-  { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
-  { path: 'nouveau-transport/trajet', component: FormPathComponent },
-  { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
-  { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
-  { path: 'nouveau-transport/confirmation-transport', component: TransportConfirmationTransporterComponent },
-  { path: 'contrat/:id', component: ContractComponent },
-  { path: 'contrat/:id/confirmation-transport', component: TransportConfirmationTransporterComponent },
-  { path: 'contrat/:id/bateau', component: FormShipComponent },
-  { path: 'contrat/:id/chargement', component: FormLoadComponent },
-  { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
-  { path: 'contrat/:id/lettre-voiture', component: WaybillTransporterComponent },
+  { path: '', component: HomeComponent },
+  {
+    path: 'transporteur', component: TransporterComponent,
+    children: [
+      { path: '', redirectTo:'mes-transports', pathMatch:"full" },
+      { path: 'mon-compte', component: FormTransporterComponent },
+      { path: 'nouveau-transport/client', component: FormCustomerComponent },
+      { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
+      { path: 'nouveau-transport/trajet', component: FormPathComponent },
+      { path: 'nouveau-transport/delai-de-planche', component: FormLoadDelayComponent },
+      { path: 'nouveau-transport/conditions-tarifaires', component: FormPricesComponent },
+      { path: 'nouveau-transport/confirmation-transport', component: TransportConfirmationTransporterComponent },
+      { path: 'contrat/:id', component: ContractComponent },
+      { path: 'contrat/:id/confirmation-transport', component: TransportConfirmationTransporterComponent },
+      { path: 'contrat/:id/bateau', component: FormShipComponent },
+      { path: 'contrat/:id/chargement', component: FormLoadComponent },
+      { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
+      { path: 'contrat/:id/lettre-voiture', component: WaybillTransporterComponent },
+      { path: 'mes-transports', component: DashboardComponent },
+    ]
+  },
+
   { path: 'client/contrat/:id/confirmation-transport', component: TransportConfirmationClientComponent },
   { path: 'client/contrat/:id/lettre-voiture', component: WaybillClientComponent },
-  { path: 'mes-transports', component: DashboardComponent },
-
 ];
 
 @NgModule({

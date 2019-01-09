@@ -28,7 +28,7 @@ export class FormUnloadComponent extends AbstractForm implements OnInit {
     const contractId = this.route.snapshot.params[ 'id' ];
     this.unloadInfo = this.unloadInfoService.get(contractId) || new UnloadInfo();
 
-    const goNext = buildGoNext(this.router, `/contrat/${contractId}/lettre-voiture`);
+    const goNext = buildGoNext(this.router, `/transporteur/contrat/${contractId}/lettre-voiture`);
 
     this.nextStep = () => {
       this.unloadInfoService.save(contractId, this.unloadInfo);

@@ -30,7 +30,7 @@ export class FormPathComponent extends AbstractForm implements OnInit {
   ngOnInit() {
     this.delivery = this.deliveryService.get();
 
-    const goNext = buildGoNext(this.router, '/nouveau-transport/delai-de-planche');
+    const goNext = buildGoNext(this.router, '/transporteur/nouveau-transport/delai-de-planche');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);

@@ -33,6 +33,8 @@ import { WaybillActivityComponent } from './waybill/shared/waybill-activity/wayb
 import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
 import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
+import { HomeComponent } from './home/home.component';
+import { TransporterComponent } from './transporter/transporter.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
     WaybillComponent,
     WaybillActivityComponent,
     ContractComponent,
+    HomeComponent,
+    TransporterComponent,
   ],
   imports: [
     AppRoutingModule,

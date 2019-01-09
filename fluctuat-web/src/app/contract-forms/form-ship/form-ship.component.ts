@@ -28,7 +28,7 @@ export class FormShipComponent extends AbstractForm implements OnInit {
     this.ship = this.shipService.get();
     const contractId = this.route.snapshot.params[ 'id' ];
 
-    const goNext = buildGoNext(this.router, `/contrat/${contractId}/chargement`);
+    const goNext = buildGoNext(this.router, `/transporteur/contrat/${contractId}/chargement`);
 
     this.nextStep = () => {
       this.shipService.save(this.ship);

@@ -66,7 +66,7 @@ export class WaybillTransporterComponent implements OnInit {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
-    ).subscribe(() => this.router.navigateByUrl('/mes-transports'), error => this.errorMsg = error)
+    ).subscribe(() => this.router.navigateByUrl('/transporteur/mes-transports'), error => this.errorMsg = error)
   }
 
   saveUnloadInfo(contract) {
@@ -78,7 +78,7 @@ export class WaybillTransporterComponent implements OnInit {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
-    ).subscribe(() => this.router.navigateByUrl('/mes-transports'), error => this.errorMsg = error)
+    ).subscribe(() => this.router.navigateByUrl('transporteur/mes-transports'), error => this.errorMsg = error)
   }
 
 }

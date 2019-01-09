@@ -27,7 +27,7 @@ export class FormMerchandiseComponent extends AbstractForm implements OnInit {
   ngOnInit() {
     this.delivery = this.deliveryService.get();
 
-    const goNext = buildGoNext(this.router, '/nouveau-transport/trajet');
+    const goNext = buildGoNext(this.router, '/transporteur/nouveau-transport/trajet');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);

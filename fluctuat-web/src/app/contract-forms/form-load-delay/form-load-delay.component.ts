@@ -28,7 +28,7 @@ export class FormLoadDelayComponent extends AbstractForm implements OnInit {
   ngOnInit() {
     this.delivery = this.deliveryService.get();
 
-    const goNext = buildGoNext(this.router, '/nouveau-transport/conditions-tarifaires');
+    const goNext = buildGoNext(this.router, '/transporteur/nouveau-transport/conditions-tarifaires');
 
     this.nextStep = () => {
       this.deliveryService.save(this.delivery);
