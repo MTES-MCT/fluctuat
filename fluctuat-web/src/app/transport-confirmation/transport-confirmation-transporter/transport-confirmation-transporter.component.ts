@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
@@ -22,7 +22,8 @@ export class TransportConfirmationTransporterComponent implements OnInit {
   constructor(private contractService: ContractService,
               private transporterService: TransporterService,
               private deliveryService: DeliveryService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -62,8 +63,9 @@ export class TransportConfirmationTransporterComponent implements OnInit {
         this.waitingFor = false;
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
-    ).subscribe(() => {
-      console.log('contract created')
+    ).subscribe((contract) => {
+      console.log('contract created');
+      this.router.navigateByUrl(`/transporteur/contrat/${contract.id}`);
     }, error => this.errorMsg = error);
 
   }
