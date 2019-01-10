@@ -35,6 +35,7 @@ import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
+import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { TransporterComponent } from './transporter/transporter.component';
     ContractComponent,
     HomeComponent,
     TransporterComponent,
+    TransporterHeaderComponent,
   ],
   imports: [
     AppRoutingModule,
