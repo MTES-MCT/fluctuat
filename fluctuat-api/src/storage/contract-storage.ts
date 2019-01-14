@@ -1,5 +1,7 @@
+import { checkDataDir, checkDataFile, getData, putData } from './storage-utils';
+
 const path = require('path');
-const {checkDataDir, checkDataFile, getData, putData} = require('./storage-utils');
+
 
 checkDataDir('.data');
 const contractsData = path.join('.data', 'contracts.json');
@@ -27,10 +29,4 @@ const put = (contract) => {
   putContracts(contracts);
 };
 
-module.exports = {
-  count: count,
-  get: get,
-  getAll: getAll,
-  patch: patch,
-  put: put
-};
+export { count, get, getAll, patch, put };

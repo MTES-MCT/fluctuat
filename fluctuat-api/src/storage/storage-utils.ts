@@ -19,9 +19,4 @@ const getData = (file) => () => JSON.parse(fs.readFileSync(file));
 
 const putData = (file) => (data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
-module.exports = {
-  checkDataDir: checkDataDir,
-  checkDataFile: checkDataFile,
-  getData: getData,
-  putData: putData
-};
+export { getData, checkDataDir, putData, checkDataFile };

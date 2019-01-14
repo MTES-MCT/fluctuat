@@ -33,7 +33,4 @@ const patch = (id, values) => {
   putTransporters(contracts);
 };
 
-module.exports = {
-  get: get,
-  patch: patch
-};
+export { get, patch }

@@ -3,5 +3,5 @@
 echo "build webapp ..." &&
 cd ../fluctuat-web && yarn && yarn build --prod &&
 
-echo "build backend ..." &&
-cd ../fluctuat-backend && npm ci
+echo "build api ..." &&
+cd ../fluctuat-api && yarn && yarn build

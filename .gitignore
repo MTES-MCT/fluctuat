@@ -2,6 +2,7 @@
 
 # compiled output
 fluctuat-web/dist
+fluctuat-api/dist
 /tmp
 /out-tsc
 
@@ -37,4 +38,4 @@ Thumbs.db
 #keys
 *.pem
 
-fluctuat-backend/.data
+fluctuat-api/.data

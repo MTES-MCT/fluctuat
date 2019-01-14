@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const contractStorage = require('../storage/contract-storage');
+import { Router } from 'express';
 
+import * as contractStorage from '../storage/contract-storage';
+
+const router = Router();
 router.post('/', (req, res) => {
   let contract = req.body;
 

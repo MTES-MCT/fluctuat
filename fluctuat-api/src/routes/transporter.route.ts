@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const transporterStorage = require('../storage/transporter-storage');
+import { Router } from 'express';
+import * as transporterStorage from '../storage/transporter-storage';
+
+const router = Router();
 
 router.get('/me', (req, res) => {
   console.log('get transporter data');
