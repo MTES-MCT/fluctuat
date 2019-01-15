@@ -23,14 +23,12 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  console.log(`get contract ${id} pdf`);
 
   res.json(contractStorage.get(id));
 });
 
 router.get('/:id/confirmation-transport.pdf', (req, res) => {
   const id = req.params.id;
-  console.log(`get contract ${id} pdf`);
   generatePdf(contractStorage.get(id)).then(result => {
 
     res.setHeader('Content-Type', 'application/pdf');
