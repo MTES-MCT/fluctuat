@@ -13,6 +13,9 @@ app.use('/api/contract', contract);
 const transporter = require('./routes/transporter.route');
 app.use('/api/transporter', transporter);
 
+const auth = require('./routes/auth.route');
+app.use('/api/auth', auth);
+
 /** Start server **/
 const port = process.argv[2] || 9000;
 
