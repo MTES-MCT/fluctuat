@@ -1,7 +1,13 @@
 import { Router } from 'express';
 
 import * as userStorage from '../storage/user-storage';
-import { generateHash, generateToken, isPasswordMatch } from '../security/security-utils';
+import {
+  generateHash,
+  generateToken,
+  getTokenFromHeaders,
+  isPasswordMatch,
+  tokenDecode
+} from '../security/security-utils';
 import { UserCredentials } from '../models/user-credentials';
 
 const router = Router();
@@ -53,6 +59,18 @@ router.post('/sign-up', (req, res) => {
 
   return res.status(201).json({token: token});
 
+});
+
+router.get('/get-user', (req, res) => {
+  const token = getTokenFromHeaders(req);
+  let user;
+  try {
+    user = tokenDecode(token);
+  } catch (err) {
+    return res.status(401).send('Invalid Token')
+  }
+
+  return res.json(user);
 });
 
 module.exports = router;
