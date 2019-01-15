@@ -1,6 +1,7 @@
 import { Router } from 'express';
+
 import * as userStorage from '../storage/user-storage';
-import { generateToken, isPasswordMatch } from '../security/security-utils';
+import { generateHash, generateToken, isPasswordMatch } from '../security/security-utils';
 import { UserCredentials } from '../models/user-credentials';
 
 const router = Router();
@@ -28,5 +29,30 @@ router.post('/login', (req, res) => {
   return res.json({ token: token });
 });
 
+router.post('/sign-up', (req, res) => {
+  let credentials = req.body;
+
+  if (!credentials || !credentials.email || !credentials.password) {
+    return res.status(400).send(`Invalid request`)
+  }
+
+  const isExistingUser = !!userStorage.get(credentials.email);
+
+  if (isExistingUser) {
+    return res.status(400).send(`Le compte ${credentials.email} existe déjà dans notre système.`)
+  }
+
+  let user = {
+    email: credentials.email,
+    hash: generateHash(credentials.password)
+  };
+
+  userStorage.put(user);
+
+  const token = generateToken(user);
+
+  return res.status(201).json({token: token});
+
+});
 
 module.exports = router;
