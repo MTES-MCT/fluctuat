@@ -19,9 +19,11 @@ import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.
 import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'connexion', component: LoginComponent },
   { path: 'inscription', component: SignUpComponent },
   {
     path: 'transporteur', component: TransporterComponent,

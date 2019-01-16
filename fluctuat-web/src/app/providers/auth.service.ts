@@ -11,4 +11,8 @@ export class AuthService {
   signUp(userCredentials: UserCredentials) {
     return this.http.post('/api/auth/sign-up', userCredentials)
   }
+
+  login(userCredentials: UserCredentials) {
+    return this.http.post('/api/auth/login', userCredentials)
+  }
 }
