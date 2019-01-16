@@ -36,6 +36,8 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
 import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
 import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { AuthService } from './providers/auth.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { TransporterHeaderComponent } from './transporter-header/transporter-hea
     HomeComponent,
     TransporterComponent,
     TransporterHeaderComponent,
+    SignUpComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -73,6 +76,7 @@ import { TransporterHeaderComponent } from './transporter-header/transporter-hea
     HttpClientModule
   ],
   providers: [
+    AuthService,
     DeliveryService,
     TransporterService,
     ShipService,
