@@ -1,6 +1,11 @@
 <flu-hero-container>
   <h2 class="title">Connexion</h2>
+
   <form style="max-width: 400px" #loginForm="ngForm">
+
+    <div class="level" *ngIf="showMsgRedirect">
+      <div class="level-item notification is-link">Merci de vous reconnecter sur la plateforme.</div>
+    </div>
 
     <div class="field">
       <div class="control">

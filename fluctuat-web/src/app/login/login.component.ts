@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserCredentials } from '../shared/model/user-credentials.model';
 import { AuthService } from '../providers/auth/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -13,10 +13,12 @@ export class LoginComponent {
 
   errorMsg: string;
   waitingFor: boolean;
+  showMsgRedirect: boolean;
 
   userCredentials: UserCredentials = new UserCredentials();
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+    this.showMsgRedirect = this.route.snapshot.queryParams['redirectTo'];
   }
 
   login() {
@@ -28,7 +30,11 @@ export class LoginComponent {
         return throwError(errorResponse.error);
       }))
       .subscribe(() => {
-        this.router.navigateByUrl('/transporteur')
+        const paramRedirect = this.route.snapshot.queryParams['redirectTo'];
+
+        const redirectUrl = paramRedirect ? paramRedirect : '/transporteur';
+
+        this.router.navigateByUrl(redirectUrl)
 
       }, error => this.errorMsg = error);
   }
