@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { UserCredentials } from '../shared/model/user-credentials.model';
-import { AuthService } from '../providers/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+
+import { UserCredentials } from '../providers/auth/user-credentials.model';
+import { AuthService } from '../providers/auth/auth.service';
 
 @Component({
   selector: 'flu-login',

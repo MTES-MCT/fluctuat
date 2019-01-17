@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserCredentials } from '../../shared/model/user-credentials.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { UserCredentials } from './user-credentials.model';
 
 @Injectable()
 export class AuthService {

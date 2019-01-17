@@ -1,8 +1,8 @@
+import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
 
 /**
  * Handle unauthorized responses (401)
