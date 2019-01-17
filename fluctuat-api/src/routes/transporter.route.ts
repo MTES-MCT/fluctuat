@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import * as transporterStorage from '../storage/transporter-storage';
+import { verifyJWT } from '../security/verify-jwt.middleware';
 
 const router = Router();
+
+router.use(verifyJWT);
 
 router.get('/me', (req, res) => {
   const id = 0;
