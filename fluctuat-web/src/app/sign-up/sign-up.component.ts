@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserCredentials } from '../shared/model/user-credentials.model';
 import { AuthService } from '../providers/auth/auth.service';
 import { catchError, tap } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class SignUpComponent {
 
   userCredentials: UserCredentials = new UserCredentials();
 
-  constructor(private authService: AuthService, private router: Router,) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   signUp() {

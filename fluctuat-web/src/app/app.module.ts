@@ -99,7 +99,7 @@ import { AuthRequestInterceptor } from './providers/auth/auth-request.intercepto
       deps: [AuthService]
     }
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

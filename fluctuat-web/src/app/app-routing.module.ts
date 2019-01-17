@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [ AuthGuard ],
     canActivateChild: [ AuthGuard ],
     children: [
-      { path: '', redirectTo:'mes-transports', pathMatch:"full" },
+      { path: '', redirectTo: 'mes-transports', pathMatch: 'full' },
       { path: 'mon-compte', component: FormTransporterComponent },
       { path: 'nouveau-transport/client', component: FormCustomerComponent },
       { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },

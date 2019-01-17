@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/index';
+import { Observable } from 'rxjs';
 import { shareReplay, switchMap } from 'rxjs/internal/operators';
 
 import { ContractService } from '../providers/contract.service';
