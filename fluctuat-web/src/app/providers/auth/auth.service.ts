@@ -21,4 +21,6 @@ export class AuthService {
 
   saveToken = (result: { token: string }) => sessionStorage.setItem('access_token', result.token);
 
+  getToken = () => sessionStorage.getItem('access_token');
+
 }

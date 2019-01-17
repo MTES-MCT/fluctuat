@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,6 +39,8 @@ import { TransporterHeaderComponent } from './transporter-header/transporter-hea
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './providers/auth/auth.service';
 import { LoginComponent } from './login/login.component';
+import { UnauthorizedInterceptor } from './providers/auth/unauthorized.interceptor';
+import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,18 @@ import { LoginComponent } from './login/login.component';
     ShipService,
     LoadInfoService,
     UnloadInfoService,
-    ContractService
+    ContractService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthRequestInterceptor,
+      multi: true,
+      deps: [AuthService]
+    }
   ],
   bootstrap: [ AppComponent ]
 })
