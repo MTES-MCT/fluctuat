@@ -37,7 +37,7 @@ import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
 import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { AuthService } from './providers/auth.service';
+import { AuthService } from './providers/auth/auth.service';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserCredentials } from '../shared/model/user-credentials.model';
-import { AuthService } from '../providers/auth.service';
+import { AuthService } from '../providers/auth/auth.service';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -27,8 +27,7 @@ export class LoginComponent {
         this.waitingFor = false;
         return throwError(errorResponse.error);
       }))
-      .subscribe((result: any) => {
-        sessionStorage.setItem('userToken', result.token);
+      .subscribe(() => {
         this.router.navigateByUrl('/transporteur')
 
       }, error => this.errorMsg = error);

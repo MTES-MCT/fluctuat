@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserCredentials } from '../shared/model/user-credentials.model';
-import { AuthService } from '../providers/auth.service';
+import { AuthService } from '../providers/auth/auth.service';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -32,10 +32,8 @@ export class SignUpComponent {
         this.waitingFor = false;
         return throwError(errorResponse.error);
       }))
-      .subscribe((result: any) => {
-        sessionStorage.setItem('userToken', result.token);
+      .subscribe(() => {
         this.router.navigateByUrl('/transporteur')
-
       }, error => this.errorMsg = error);
 
   }
