@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const app = express();
 
-app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
