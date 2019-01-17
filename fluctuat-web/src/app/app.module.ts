@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,6 +36,11 @@ import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybi
 import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
 import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { AuthService } from './providers/auth/auth.service';
+import { LoginComponent } from './login/login.component';
+import { UnauthorizedInterceptor } from './providers/auth/unauthorized.interceptor';
+import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,6 +69,8 @@ import { TransporterHeaderComponent } from './transporter-header/transporter-hea
     HomeComponent,
     TransporterComponent,
     TransporterHeaderComponent,
+    SignUpComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
@@ -73,12 +80,24 @@ import { TransporterHeaderComponent } from './transporter-header/transporter-hea
     HttpClientModule
   ],
   providers: [
+    AuthService,
     DeliveryService,
     TransporterService,
     ShipService,
     LoadInfoService,
     UnloadInfoService,
-    ContractService
+    ContractService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthRequestInterceptor,
+      multi: true,
+      deps: [AuthService]
+    }
   ],
   bootstrap: [ AppComponent ]
 })

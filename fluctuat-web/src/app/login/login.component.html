@@ -1,0 +1,37 @@
+<flu-hero-container>
+  <h2 class="title">Connexion</h2>
+
+  <form style="max-width: 400px" #loginForm="ngForm">
+
+    <div class="level" *ngIf="showMsgRedirect">
+      <div class="level-item notification is-link">Merci de vous reconnecter sur la plateforme.</div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <label class="label">Email</label>
+        <input class="input is-medium" type="email" name="email" [(ngModel)]="userCredentials.email"
+               autocomplete="email" email required>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <label class="label">Password</label>
+        <input class="input is-medium" type="password" name="password" [(ngModel)]="userCredentials.password" required>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link" (click)="login()" [disabled]="loginForm.invalid">Se connecter</button>
+      </div>
+      <div class="control">
+        <button class="button is-white" routerLink="/inscription">Créer une compte</button>
+      </div>
+    </div>
+
+    <div class="level" *ngIf="errorMsg">
+      <div class="level-item notification is-danger">{{errorMsg}}</div>
+    </div>
+  </form>
+</flu-hero-container>

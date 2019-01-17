@@ -1,5 +1,9 @@
 # fluctuat-api
 
+# Prerequites
+
+   bcrypt requires g++ (included in build-essential ubuntu package ubuntu)
+
 # Installation
 
 Run the command

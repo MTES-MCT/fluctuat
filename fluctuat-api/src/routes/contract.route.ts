@@ -1,9 +1,13 @@
 import { Router } from 'express';
 
 import * as contractStorage from '../storage/contract-storage';
+import { verifyJWT } from '../security/verify-jwt.middleware';
 
 const router = Router();
-router.post('/', (req, res) => {
+
+//TODO extract unprotected url to another route
+
+router.post('/', verifyJWT, (req, res) => {
   let contract = req.body;
 
   contract.id = contractStorage.count();
@@ -17,7 +21,7 @@ router.post('/', (req, res) => {
   return res.status(201).location(`/api/contract/${contract.id}`).json(contract);
 });
 
-router.get('/', (req, res) => {
+router.get('/', verifyJWT, (req, res) => {
   return res.json(contractStorage.getAll());
 });
 
@@ -39,6 +43,7 @@ router.get('/:id/confirmation-transport.pdf', (req, res) => {
   })
 });
 
+// Client action
 router.post('/:id/accept', (req, res) => {
   const id = req.params.id;
 
@@ -50,7 +55,7 @@ router.post('/:id/accept', (req, res) => {
   res.status(200).json(contractStorage.get(id));
 });
 
-router.post('/:id/load', (req, res) => {
+router.post('/:id/load', verifyJWT, (req, res) => {
   const id = req.params.id;
 
   contractStorage.patch(id, {
@@ -63,6 +68,7 @@ router.post('/:id/load', (req, res) => {
   res.status(200).json(contractStorage.get(id));
 });
 
+// Client action
 router.post('/:id/confirm', (req, res) => {
   const id = req.params.id;
 
@@ -74,7 +80,7 @@ router.post('/:id/confirm', (req, res) => {
   res.status(200).json(contractStorage.get(id));
 });
 
-router.post('/:id/unload', (req, res) => {
+router.post('/:id/unload', verifyJWT, (req, res) => {
   const id = req.params.id;
 
   contractStorage.patch(id, {
@@ -86,6 +92,7 @@ router.post('/:id/unload', (req, res) => {
   res.status(200).json(contractStorage.get(id));
 });
 
+// Client action
 router.post('/:id/received', (req, res) => {
   const id = req.params.id;
 
