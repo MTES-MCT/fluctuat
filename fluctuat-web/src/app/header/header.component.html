@@ -9,11 +9,16 @@
   </div>
 
   <div class="navbar-end">
-    <div class="navbar-item">
+
+    <div class="navbar-item" *ngIf="authenticated$ | async">
+      <button (click)="logout()" class="button is-white is-medium">Déconnexion</button>
+    </div>
+    <div class="navbar-item" *ngIf="!(authenticated$ | async)">
       <button routerLink="/inscription" class="button is-white is-medium">Creer une compte</button>
     </div>
-    <div class="navbar-item">
+    <div class="navbar-item" *ngIf="!(authenticated$ | async)">
       <button routerLink="/connexion" class="button is-white is-medium">Connexion</button>
     </div>
+
   </div>
 </nav>
