@@ -1,12 +1,28 @@
 import { Router } from 'express';
+import * as waybillStorage from '../storage/waybill-storage'
+
+const randomstring = require('randomstring');
 
 const router = Router();
 
+const generateId = () => {
+
+  const id = randomstring.generate({
+    length: 6,
+    readable: true,
+    capitalization: 'uppercase'
+  });
+  // if id exist retry;
+  return waybillStorage.get(id) ? generateId() : id;
+};
+
 router.post('/', (req, res) => {
+  let waybill = req.body;
 
-  console.log(req.body);
+  waybill.id = generateId();
+  waybillStorage.put(waybill);
 
-  res.status(201).json(req.body);
+  res.status(201).json(waybill);
 });
 
 module.exports = router;
