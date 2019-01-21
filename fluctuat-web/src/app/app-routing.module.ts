@@ -22,11 +22,13 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './providers/auth/auth.guard';
 import { AlreadyLoggedGuard } from './providers/auth/already-logged.guard';
+import { WaybillNewComponent } from './waybill-new/waybill-new.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'connexion', component: LoginComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'inscription', component: SignUpComponent, canActivate: [ AlreadyLoggedGuard ] },
+  { path: 'lettre-de-voiture/new', component: WaybillNewComponent },
   {
     path: 'transporteur', component: TransporterComponent,
     canActivate: [ AuthGuard ],

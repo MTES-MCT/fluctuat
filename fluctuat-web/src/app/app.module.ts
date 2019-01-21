@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,6 +41,8 @@ import { AuthService } from './providers/auth/auth.service';
 import { LoginComponent } from './login/login.component';
 import { UnauthorizedInterceptor } from './providers/auth/unauthorized.interceptor';
 import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
+import { WaybillNewComponent } from './waybill-new/waybill-new.component';
+import { WaybillService } from './waybill-new/waybill.service';
 
 @NgModule({
   declarations: [
@@ -70,13 +72,15 @@ import { AuthRequestInterceptor } from './providers/auth/auth-request.intercepto
     TransporterComponent,
     TransporterHeaderComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    WaybillNewComponent
   ],
   imports: [
     AppRoutingModule,
     SharedModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [
@@ -87,6 +91,7 @@ import { AuthRequestInterceptor } from './providers/auth/auth-request.intercepto
     LoadInfoService,
     UnloadInfoService,
     ContractService,
+    WaybillService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
