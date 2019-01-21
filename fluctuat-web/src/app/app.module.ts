@@ -96,10 +96,10 @@ import { AuthRequestInterceptor } from './providers/auth/auth-request.intercepto
       provide: HTTP_INTERCEPTORS,
       useClass: AuthRequestInterceptor,
       multi: true,
-      deps: [AuthService]
+      deps: [ AuthService ]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {
 }
