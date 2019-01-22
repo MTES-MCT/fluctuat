@@ -5,19 +5,22 @@ import { DatePickerDirective } from './date-picker.directive';
 import { LoadingComponent } from './loading/loading.component';
 import { TimePickerDirective } from './time-picker.directive';
 import { WhenEnterPressedDirective } from './when-enter-pressed.directive';
+import { ErrorComponent } from './error.component';
 
 @NgModule({
   declarations: [
     DatePickerDirective,
     TimePickerDirective,
     WhenEnterPressedDirective,
-    LoadingComponent
+    LoadingComponent,
+    ErrorComponent
   ],
   exports: [
     DatePickerDirective,
     TimePickerDirective,
     WhenEnterPressedDirective,
-    LoadingComponent
+    LoadingComponent,
+    ErrorComponent
   ],
   imports: [
     CommonModule

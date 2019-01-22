@@ -111,13 +111,18 @@
       </div>
     </div>
 
+    <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
     <div class="level"></div>
 
     <div class="level">
       <div class="level-item"></div>
       <div class="level-right">
         <div class="level-item">
-          <button class="button is-link" type="submit">Créer</button>
+          <button class="button is-link" type="submit"
+                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+            Créer
+          </button>
         </div>
       </div>
     </div>
