@@ -25,4 +25,10 @@ router.post('/', (req, res) => {
   res.status(201).json(waybill);
 });
 
+router.put('/:id/load-info', (req, res) => {
+  console.log(req.body);
+
+  res.status(204).end();
+});
+
 module.exports = router;

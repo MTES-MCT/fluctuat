@@ -50,10 +50,10 @@ export class WaybillNewComponent implements OnInit {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
-    ).subscribe((result: Waybill) => {
-      console.log(result);
+    ).subscribe((waybill: Waybill) => {
+      console.log(waybill);
       this.result.success()
-      this.router.navigate(['lettre-de-voiture', result.id, 'chargement'], )
+      this.router.navigate(['lettre-de-voiture', waybill.id, 'chargement'], )
     }, (err) => this.result.error(err))
   }
 

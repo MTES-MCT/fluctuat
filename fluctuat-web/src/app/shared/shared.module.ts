@@ -6,6 +6,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { TimePickerDirective } from './time-picker.directive';
 import { WhenEnterPressedDirective } from './when-enter-pressed.directive';
 import { ErrorComponent } from './error.component';
+import { FormFieldComponent } from './form-field.component';
 
 @NgModule({
   declarations: [
@@ -13,14 +14,16 @@ import { ErrorComponent } from './error.component';
     TimePickerDirective,
     WhenEnterPressedDirective,
     LoadingComponent,
-    ErrorComponent
+    ErrorComponent,
+    FormFieldComponent
   ],
   exports: [
     DatePickerDirective,
     TimePickerDirective,
     WhenEnterPressedDirective,
     LoadingComponent,
-    ErrorComponent
+    ErrorComponent,
+    FormFieldComponent
   ],
   imports: [
     CommonModule
