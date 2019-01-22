@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { WaybillService } from './waybill.service';
 import { ResultHelper } from './result-helper';
+import { Waybill } from './waybill.model';
 
 @Component({
   selector: 'flu-waybill-new',
@@ -16,7 +18,8 @@ export class WaybillNewComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
 
-  constructor(private fromBuilder: FormBuilder, private waybillService: WaybillService) {
+  constructor(private fromBuilder: FormBuilder, private waybillService: WaybillService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -47,9 +50,10 @@ export class WaybillNewComponent implements OnInit {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
-    ).subscribe((result) => {
+    ).subscribe((result: Waybill) => {
       console.log(result);
       this.result.success()
+      this.router.navigate(['lettre-de-voiture', result.id, 'chargement'], )
     }, (err) => this.result.error(err))
   }
 

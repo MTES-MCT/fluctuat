@@ -43,6 +43,7 @@ import { UnauthorizedInterceptor } from './providers/auth/unauthorized.intercept
 import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
 import { WaybillNewComponent } from './waybill-new/waybill-new.component';
 import { WaybillService } from './waybill-new/waybill.service';
+import { WaybillLoadingComponent } from './waybill-loading/waybill-loading.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { WaybillService } from './waybill-new/waybill.service';
     TransporterHeaderComponent,
     SignUpComponent,
     LoginComponent,
-    WaybillNewComponent
+    WaybillNewComponent,
+    WaybillLoadingComponent
   ],
   imports: [
     AppRoutingModule,

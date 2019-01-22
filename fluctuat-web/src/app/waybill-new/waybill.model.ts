@@ -2,6 +2,7 @@ import { Person } from './person.model';
 import { Ship } from './ship.model';
 
 export class Waybill {
+  id: string;
   customer: Person;
   sender: Person;
   receiver: Person;
