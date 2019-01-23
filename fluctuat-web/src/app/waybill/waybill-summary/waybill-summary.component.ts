@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { WaybillService } from '../waybill-new/waybill.service';
-import { Observable } from 'rxjs';
-import { Waybill } from '../waybill-new/waybill.model';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
+
+import { Waybill } from '../shared/models/waybill.model';
+import { WaybillService } from '../shared/waybill.service';
 
 @Component({
   selector: 'flu-waybill-summary',

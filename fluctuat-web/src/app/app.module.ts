@@ -29,10 +29,6 @@ import { DeliveryActivityComponent } from './transport-confirmation/shared/deliv
 import { DeliveryDetailComponent } from './transport-confirmation/shared/delivery-detail/delivery-detail.component';
 import { TransportConfirmationClientComponent } from './transport-confirmation/transport-confirmation-client/transport-confirmation-client.component';
 import { TransportConfirmationTransporterComponent } from './transport-confirmation/transport-confirmation-transporter/transport-confirmation-transporter.component';
-import { WaybillActivityComponent } from './waybill/shared/waybill-activity/waybill-activity.component';
-import { WaybillComponent } from './waybill/shared/waybill/waybill.component';
-import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
-import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
 import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
@@ -41,12 +37,12 @@ import { AuthService } from './providers/auth/auth.service';
 import { LoginComponent } from './login/login.component';
 import { UnauthorizedInterceptor } from './providers/auth/unauthorized.interceptor';
 import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
-import { WaybillNewComponent } from './waybill-new/waybill-new.component';
-import { WaybillService } from './waybill-new/waybill.service';
-import { WaybillLoadingComponent } from './waybill-loading/waybill-loading.component';
-import { WaybillOrderInfoComponent } from './waybill-new/waybill-order-info/waybill-order-info.component';
-import { WaybillEditionComponent } from './waybill-new/waybill-edition.component';
-import { WaybillSummaryComponent } from './waybill-summary/waybill-summary.component';
+import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
+import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
+import { WaybillOrderInfoComponent } from './waybill/waybill-order/shared/waybill-order-info/waybill-order-info.component';
+import { WaybillSummaryComponent } from './waybill/waybill-summary/waybill-summary.component';
+import { WaybillNewComponent } from './waybill/waybill-order/waybil-new/waybill-new.component';
+import { WaybillService } from './waybill/shared/waybill.service';
 
 @NgModule({
   declarations: [
@@ -67,10 +63,6 @@ import { WaybillSummaryComponent } from './waybill-summary/waybill-summary.compo
     TransportConfirmationTransporterComponent,
     TransportConfirmationClientComponent,
     DeliveryActivityComponent,
-    WaybillClientComponent,
-    WaybillTransporterComponent,
-    WaybillComponent,
-    WaybillActivityComponent,
     ContractComponent,
     HomeComponent,
     TransporterComponent,

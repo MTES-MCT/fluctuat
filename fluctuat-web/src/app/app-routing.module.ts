@@ -15,17 +15,15 @@ import { HomeComponent } from './home/home.component';
 import { TransportConfirmationClientComponent } from './transport-confirmation/transport-confirmation-client/transport-confirmation-client.component';
 import { TransportConfirmationTransporterComponent } from './transport-confirmation/transport-confirmation-transporter/transport-confirmation-transporter.component';
 import { TransporterComponent } from './transporter/transporter.component';
-import { WaybillClientComponent } from './waybill/waybill-client/waybill-client.component';
-import { WaybillTransporterComponent } from './waybill/waybill-transporter/waybill-transporter.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './providers/auth/auth.guard';
 import { AlreadyLoggedGuard } from './providers/auth/already-logged.guard';
-import { WaybillNewComponent } from './waybill-new/waybill-new.component';
-import { WaybillLoadingComponent } from './waybill-loading/waybill-loading.component';
-import { WaybillEditionComponent } from './waybill-new/waybill-edition.component';
-import { WaybillSummaryComponent } from './waybill-summary/waybill-summary.component';
+import { WaybillNewComponent } from './waybill/waybill-order/waybil-new/waybill-new.component';
+import { WaybillSummaryComponent } from './waybill/waybill-summary/waybill-summary.component';
+import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
+import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,13 +51,11 @@ const routes: Routes = [
       { path: 'contrat/:id/bateau', component: FormShipComponent },
       { path: 'contrat/:id/chargement', component: FormLoadComponent },
       { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
-      { path: 'contrat/:id/lettre-voiture', component: WaybillTransporterComponent },
       { path: 'mes-transports', component: DashboardComponent },
     ]
   },
 
   { path: 'client/contrat/:id/confirmation-transport', component: TransportConfirmationClientComponent },
-  { path: 'client/contrat/:id/lettre-voiture', component: WaybillClientComponent },
 ];
 
 @NgModule({

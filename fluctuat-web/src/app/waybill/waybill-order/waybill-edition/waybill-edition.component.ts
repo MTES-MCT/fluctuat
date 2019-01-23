@@ -3,11 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { WaybillService } from './waybill.service';
-import { ResultHelper } from './result-helper';
-import { Waybill } from './waybill.model';
-import { OrderInfo } from './order-info.model';
-import { WaybillOrderInfoComponent } from './waybill-order-info/waybill-order-info.component';
+import { ResultHelper } from '../../shared/result-helper';
+import { WaybillOrderInfoComponent } from '../shared/waybill-order-info/waybill-order-info.component';
+import { WaybillService } from '../../shared/waybill.service';
+
 
 @Component({
   selector: 'flu-waybill-edition',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OrderInfo } from '../../../shared/models/order-info.model';
+import { Person } from '../../../shared/models/person.model';
 
-import { OrderInfo } from '../order-info.model';
-import { Person } from '../person.model';
 
 @Component({
   selector: 'flu-waybill-order-info',

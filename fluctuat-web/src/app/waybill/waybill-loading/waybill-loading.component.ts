@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ResultHelper } from '../waybill-new/result-helper';
-import { WaybillService } from '../waybill-new/waybill.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { LoadInfo } from './load-info.model';
+
+import { ResultHelper } from '../shared/result-helper';
+import { WaybillService } from '../shared/waybill.service';
+import { LoadInfo } from '../shared/models/load-info.model';
 
 @Component({
   selector: 'flu-waybill-loading',

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { WaybillService } from './waybill.service';
-import { ResultHelper } from './result-helper';
-import { Waybill } from './waybill.model';
-import { OrderInfo } from './order-info.model';
-import { WaybillOrderInfoComponent } from './waybill-order-info/waybill-order-info.component';
+import { WaybillOrderInfoComponent } from '../shared/waybill-order-info/waybill-order-info.component';
+import { WaybillService } from '../../shared/waybill.service';
+import { ResultHelper } from '../../shared/result-helper';
+import { OrderInfo } from '../../shared/models/order-info.model';
+import { Waybill } from '../../shared/models/waybill.model';
 
 @Component({
   selector: 'flu-waybill-new',
@@ -39,7 +39,7 @@ export class WaybillNewComponent implements OnInit {
       })
     ).subscribe((waybill: Waybill) => {
       console.log(waybill);
-      this.result.success()
+      this.result.success();
       this.router.navigate(['lettre-de-voiture', waybill.id, 'commande'])
     }, (err) => this.result.error(err))
   }

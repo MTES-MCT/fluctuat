@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Waybill } from './waybill.model';
-import { LoadInfo } from '../waybill-loading/load-info.model';
-import { OrderInfo } from './order-info.model';
+import { Waybill } from './models/waybill.model';
+import { LoadInfo } from './models/load-info.model';
+import { OrderInfo } from './models/order-info.model';
 
 @Injectable({
   providedIn: 'root'
