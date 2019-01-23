@@ -19,9 +19,10 @@ const generateId = () => {
 };
 
 router.post('/', (req, res) => {
-  let waybill = req.body;
+  let waybill: Waybill = req.body;
 
   waybill.id = generateId();
+  waybill.loadInfo = new LoadInfo();
   waybillStorage.put(waybill);
 
   res.status(201).json(waybill);
@@ -31,7 +32,7 @@ router.put('/:id/load-info', (req, res) => {
   const id = req.params.id;
 
   const waybill: Waybill = waybillStorage.get(id);
-  //TODO 404
+  //TODO handle 404
 
   const loadInfo: LoadInfo = req.body;
   console.log(loadInfo);
@@ -40,6 +41,15 @@ router.put('/:id/load-info', (req, res) => {
   waybillStorage.put(waybill);
 
   res.status(204).end();
+});
+
+router.get('/:id/load-info', (req, res) => {
+  const id = req.params.id;
+
+  const waybill: Waybill = waybillStorage.get(id);
+  //TODO handle 404
+
+  return res.json(waybill.loadInfo);
 });
 
 module.exports = router;

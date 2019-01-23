@@ -1,7 +1,7 @@
 <flu-hero-container>
   <h2 class="title">Lettre de voiture nº {{ waybillId }} </h2>
 
-  <form [formGroup]="loadInfoForm" (ngSubmit)="sendLoadInfo()">
+  <form *ngIf="loadInfoForm; else loading" [formGroup]="loadInfoForm" (ngSubmit)="sendLoadInfo()">
 
     <div class="card">
       <div class="card-content">
@@ -90,4 +90,9 @@
     </div>
 
   </form>
+
+  <ng-template #loading>
+    <flu-loading></flu-loading>
+  </ng-template>
+
 </flu-hero-container>

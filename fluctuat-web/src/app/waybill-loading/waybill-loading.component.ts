@@ -5,6 +5,7 @@ import { WaybillService } from '../waybill-new/waybill.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { LoadInfo } from './load-info.model';
 
 @Component({
   selector: 'flu-waybill-loading',
@@ -26,19 +27,24 @@ export class WaybillLoadingComponent implements OnInit {
 
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
+    this.waybillService.getLoadInfo(this.waybillId)
+      .subscribe((loadInfo) => this.fillForm(loadInfo))
+  }
+
+  fillForm(loadInfo: LoadInfo) {
     this.loadInfoForm = this.formBuilder.group({
-      origin: [''],
-      destination: [''],
-      arrivalDate: [''],
-      merchandiseType: [''],
-      merchandiseWeight: [''],
-      merchandisePrice: [''],
-      loadStartDate: [''],
-      loadEndDate: [''],
-      comments: [''],
+      origin: [loadInfo.origin],
+      destination: [loadInfo.destination],
+      arrivalDate: [loadInfo.arrivalDate],
+      merchandiseType: [loadInfo.merchandiseType],
+      merchandiseWeight: [loadInfo.merchandiseWeight],
+      merchandisePrice: [loadInfo.merchandisePrice],
+      loadStartDate: [loadInfo.loadStartDate],
+      loadEndDate: [loadInfo.loadEndDate],
+      comments: [loadInfo.comments],
       loadManager: this.formBuilder.group({
-        name: [''],
-        jobFunction: ['']
+        name: [loadInfo.loadManager.name],
+        jobFunction: [loadInfo.loadManager.jobFunction]
       })
     })
   }

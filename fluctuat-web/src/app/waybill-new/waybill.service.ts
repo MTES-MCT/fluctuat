@@ -19,4 +19,8 @@ export class WaybillService {
   sendLoadInfo(id: string, loadInfo: LoadInfo) {
     return this.http.put(`/api/waybill/${id}/load-info`, loadInfo);
   }
+
+  getLoadInfo(id: string): Observable<LoadInfo> {
+    return this.http.get<LoadInfo>(`/api/waybill/${id}/load-info`);
+  }
 }
