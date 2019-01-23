@@ -27,19 +27,15 @@ export class WaybillLoadingComponent implements OnInit {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.loadInfoForm = this.formBuilder.group({
-      merchandise: this.formBuilder.group({
-        type: [''],
-        weight: [''],
-        price: ['']
-      }),
-      loadInfo: this.formBuilder.group({
-        origin: [''],
-        destination: [''],
-        arrivalDate: [''],
-        loadStartDate: [''],
-        loadEndDate: [''],
-        comments: ['']
-      }),
+      origin: [''],
+      destination: [''],
+      arrivalDate: [''],
+      merchandiseType: [''],
+      merchandiseWeight: [''],
+      merchandisePrice: [''],
+      loadStartDate: [''],
+      loadEndDate: [''],
+      comments: [''],
       loadManager: this.formBuilder.group({
         name: [''],
         jobFunction: ['']
@@ -59,7 +55,7 @@ export class WaybillLoadingComponent implements OnInit {
       .subscribe(() => this.result.success(), (err => this.result.error(err)));
 
     console.log(this.loadInfoForm.value);
-    console.log('send load info')
+    console.log('send load info');
     this.result.success();
   }
 }

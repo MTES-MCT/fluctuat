@@ -4,31 +4,7 @@
   <form [formGroup]="loadInfoForm" (ngSubmit)="sendLoadInfo()">
 
     <div class="card">
-      <div class="card-content" formGroupName="merchandise">
-        <p class="title">Marchandise</p>
-
-        <flu-form-field>
-          <label class="label">Type de marchandise</label>
-          <input class="input is-medium" formControlName="type">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Tonnage</label>
-          <input class="input is-medium" formControlName="weight">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Valeur déclarée</label>
-          <input class="input is-medium" formControlName="price">
-        </flu-form-field>
-
-      </div>
-    </div>
-
-    <div class="level"></div>
-
-    <div class="card">
-      <div class="card-content" formGroupName="loadInfo">
+      <div class="card-content">
         <p class="title">Chargement</p>
 
         <flu-form-field>
@@ -47,6 +23,21 @@
         </flu-form-field>
 
         <flu-form-field>
+          <label class="label">Nature de la marchandise</label>
+          <input class="input is-medium" formControlName="merchandiseType">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Tonnage</label>
+          <input class="input is-medium" formControlName="merchandiseWeight">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
+          <input class="input is-medium" formControlName="merchandisePrice">
+        </flu-form-field>
+
+        <flu-form-field>
           <label class="label">Date de début du chargement</label>
           <input class="input is-medium" formControlName="loadStartDate">
         </flu-form-field>
@@ -58,7 +49,7 @@
 
         <flu-form-field>
           <label class="label">Commentaires</label>
-          <textarea class="textarea is-medium"></textarea>
+          <textarea class="textarea is-medium" formControlName="comments"></textarea>
         </flu-form-field>
       </div>
     </div>
