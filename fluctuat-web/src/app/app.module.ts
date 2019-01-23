@@ -44,6 +44,8 @@ import { AuthRequestInterceptor } from './providers/auth/auth-request.intercepto
 import { WaybillNewComponent } from './waybill-new/waybill-new.component';
 import { WaybillService } from './waybill-new/waybill.service';
 import { WaybillLoadingComponent } from './waybill-loading/waybill-loading.component';
+import { WaybillOrderInfoComponent } from './waybill-new/waybill-order-info/waybill-order-info.component';
+import { WaybillEditionComponent } from './waybill-new/waybill-edition.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { WaybillLoadingComponent } from './waybill-loading/waybill-loading.compo
     SignUpComponent,
     LoginComponent,
     WaybillNewComponent,
-    WaybillLoadingComponent
+    WaybillEditionComponent,
+    WaybillLoadingComponent,
+    WaybillOrderInfoComponent
   ],
   imports: [
     AppRoutingModule,

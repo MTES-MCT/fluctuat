@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -10,37 +10,40 @@ import { OrderInfo } from './order-info.model';
 import { WaybillOrderInfoComponent } from './waybill-order-info/waybill-order-info.component';
 
 @Component({
-  selector: 'flu-waybill-new',
-  templateUrl: './waybill-new.component.html'
+  selector: 'flu-waybill-edition',
+  templateUrl: './waybill-edition.component.html'
 })
-export class WaybillNewComponent implements OnInit {
+export class WaybillEditionComponent implements OnInit {
 
   @ViewChild(WaybillOrderInfoComponent)
   orderFormComponent: WaybillOrderInfoComponent;
 
   result: ResultHelper = new ResultHelper();
 
-  constructor(private waybillService: WaybillService,
+  waybillId: string;
+
+  constructor(private waybillService: WaybillService, private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.orderFormComponent.setValue(new OrderInfo());
+    this.waybillId = this.route.snapshot.paramMap.get('id');
+
+    this.waybillService.getOrderInfo(this.waybillId)
+      .subscribe((orderInfo) => this.orderFormComponent.setValue(orderInfo))
   }
 
-  create() {
+  sendOrderInfo() {
     this.result.waiting();
-    const waybill = new Waybill();
-    waybill.order = this.orderFormComponent.getValue();
-    this.waybillService.create(waybill).pipe(
+
+    this.waybillService.sendOrderInfo(this.waybillId, this.orderFormComponent.getValue()).pipe(
       catchError((error) => {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
       })
-    ).subscribe((waybill: Waybill) => {
-      console.log(waybill);
+    ).subscribe(() => {
       this.result.success()
-      this.router.navigate(['lettre-de-voiture', waybill.id, 'commande'])
+      this.router.navigate(['lettre-de-voiture', this.waybillId, 'chargement'])
     }, (err) => this.result.error(err))
   }
 
