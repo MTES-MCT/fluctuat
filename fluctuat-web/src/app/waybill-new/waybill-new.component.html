@@ -1,117 +1,23 @@
 <flu-hero-container>
 
   <h2 class="title">Nouvelle Lettre de Voiture</h2>
-  <form [formGroup]="orderForm" (ngSubmit)="create()">
 
-    <div class="card">
-      <div class="card-content" formGroupName="customer">
-        <p class="title">Donneur d'ordre</p>
+  <flu-waybill-order-info></flu-waybill-order-info>
 
-        <flu-form-field>
-          <label class="label">Nom</label>
-          <input class="input is-medium" formControlName="name">
-        </flu-form-field>
+  <flu-error [errorMsg]="result.errorMsg"></flu-error>
 
-        <flu-form-field>
-          <label class="label">Email</label>
-          <input class="input is-medium" formControlName="email" type="email">
-        </flu-form-field>
+  <div class="level"></div>
 
+  <div class="level">
+    <div class="level-item"></div>
+    <div class="level-right">
+      <div class="level-item">
+        <button class="button is-link" (click)="create()"
+                [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+          Créer
+        </button>
       </div>
     </div>
-
-    <div class="level"></div>
-
-    <div class="card">
-      <div class="card-content" formGroupName="sender">
-        <p class="title">Expéditeur</p>
-
-        <flu-form-field>
-          <label class="label">Nom</label>
-          <input class="input is-medium" formControlName="name">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Email</label>
-          <input class="input is-medium" formControlName="email" type="email">
-        </flu-form-field>
-
-      </div>
-    </div>
-
-    <div class="level"></div>
-
-    <div class="card">
-      <div class="card-content" formGroupName="receiver">
-        <p class="title">Destinataire</p>
-
-        <flu-form-field>
-          <label class="label">Nom</label>
-          <input class="input is-medium" formControlName="name">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Email</label>
-          <input class="input is-medium" formControlName="email" type="email">
-        </flu-form-field>
-
-      </div>
-    </div>
-
-    <div class="level"></div>
-
-    <div class="card">
-      <div class="card-content" formGroupName="transporter">
-        <p class="title">Transporteur</p>
-
-        <flu-form-field>
-          <label class="label">Nom</label>
-          <input class="input is-medium" formControlName="name">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Email</label>
-          <input class="input is-medium" formControlName="email" type="email">
-        </flu-form-field>
-
-      </div>
-    </div>
-
-    <div class="level"></div>
-
-    <div class="card">
-      <div class="card-content" formGroupName="ship">
-        <p class="title">Bateau</p>
-
-        <flu-form-field>
-          <label class="label">Devise</label>
-          <input class="input is-medium" formControlName="name">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Matricule</label>
-          <input class="input is-medium" formControlName="regNumber">
-        </flu-form-field>
-
-      </div>
-    </div>
-
-    <flu-error [errorMsg]="result.errorMsg"></flu-error>
-
-    <div class="level"></div>
-
-    <div class="level">
-      <div class="level-item"></div>
-      <div class="level-right">
-        <div class="level-item">
-          <button class="button is-link" type="submit"
-                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
-            Créer
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </form>
+  </div>
 
 </flu-hero-container>
