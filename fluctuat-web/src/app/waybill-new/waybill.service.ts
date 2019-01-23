@@ -17,6 +17,10 @@ export class WaybillService {
     return this.http.post<Waybill>('/api/waybill', waybill)
   }
 
+  get(id: string): Observable<Waybill> {
+    return this.http.get<Waybill>(`/api/waybill/${id}`);
+  }
+
   sendOrderInfo(id: string, orderInfo: OrderInfo) {
     return this.http.put(`/api/waybill/${id}/order-info`, orderInfo);
   }

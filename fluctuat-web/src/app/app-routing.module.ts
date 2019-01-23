@@ -25,12 +25,14 @@ import { AlreadyLoggedGuard } from './providers/auth/already-logged.guard';
 import { WaybillNewComponent } from './waybill-new/waybill-new.component';
 import { WaybillLoadingComponent } from './waybill-loading/waybill-loading.component';
 import { WaybillEditionComponent } from './waybill-new/waybill-edition.component';
+import { WaybillSummaryComponent } from './waybill-summary/waybill-summary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'connexion', component: LoginComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'inscription', component: SignUpComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'lettre-de-voiture/new', component: WaybillNewComponent },
+  { path: 'lettre-de-voiture/:id/resume', component: WaybillSummaryComponent },
   { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
   { path: 'lettre-de-voiture/:id/chargement', component: WaybillLoadingComponent },
   {
