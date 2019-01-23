@@ -19,7 +19,8 @@
 
         <flu-form-field>
           <label class="label">Date d'arrivée prévue</label>
-          <input class="input is-medium" formControlName="arrivalDate">
+          <input class="input is-medium" formControlName="arrivalDate" fluDatetimePicker
+                 [(date)]="loadInfoForm.value.arrivalDate">
         </flu-form-field>
 
         <flu-form-field>
@@ -39,12 +40,14 @@
 
         <flu-form-field>
           <label class="label">Date de début du chargement</label>
-          <input class="input is-medium" formControlName="loadStartDate">
+          <input class="input is-medium" formControlName="loadStartDate" fluDatetimePicker
+                 [(date)]="loadInfoForm.value.loadStartDate">
         </flu-form-field>
 
         <flu-form-field>
           <label class="label">Date de fin du chargement</label>
-          <input class="input is-medium" formControlName="loadEndDate">
+          <input class="input is-medium" formControlName="loadEndDate" fluDatetimePicker
+                 [(date)]="loadInfoForm.value.loadEndDate">
         </flu-form-field>
 
         <flu-form-field>
