@@ -14,7 +14,7 @@ import { Waybill } from './waybill.model';
 })
 export class WaybillNewComponent implements OnInit {
 
-  waybillForm: FormGroup;
+  orderForm: FormGroup;
 
   result: ResultHelper = new ResultHelper();
 
@@ -23,7 +23,7 @@ export class WaybillNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.waybillForm = this.fromBuilder.group({
+    this.orderForm = this.fromBuilder.group({
       customer: this.buildPersonFormGroup(),
       sender: this.buildPersonFormGroup(),
       receiver: this.buildPersonFormGroup(),
@@ -44,8 +44,9 @@ export class WaybillNewComponent implements OnInit {
 
   create() {
     this.result.waiting();
-
-    this.waybillService.create(this.waybillForm.value).pipe(
+    const waybill = new Waybill();
+    waybill.order = this.orderForm.value;
+    this.waybillService.create(waybill).pipe(
       catchError((error) => {
         console.error(error);
         return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
@@ -53,7 +54,7 @@ export class WaybillNewComponent implements OnInit {
     ).subscribe((waybill: Waybill) => {
       console.log(waybill);
       this.result.success()
-      this.router.navigate(['lettre-de-voiture', waybill.id, 'chargement'], )
+      this.router.navigate(['lettre-de-voiture', waybill.id, 'chargement'])
     }, (err) => this.result.error(err))
   }
 

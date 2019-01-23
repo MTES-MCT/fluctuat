@@ -1,11 +1,6 @@
-import { Person } from './person.model';
-import { Ship } from './ship.model';
+import { OrderInfo } from './order-info.model';
 
 export class Waybill {
   id: string;
-  customer: Person;
-  sender: Person;
-  receiver: Person;
-  transporter: Person;
-  ship: Ship
+  order: OrderInfo
 }
