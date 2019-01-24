@@ -16,7 +16,7 @@ const auth = require('./routes/auth.route');
 app.use('/api/auth', auth);
 
 const waybill = require('./routes/waybill.route');
-app.use('/api/waybill', waybill)
+app.use('/api/waybill', waybill);
 
 /** Start server **/
 const port = process.argv[2] || 9000;

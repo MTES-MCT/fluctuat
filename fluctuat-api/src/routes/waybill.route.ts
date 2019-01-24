@@ -2,7 +2,6 @@ import { Router } from 'express';
 import * as waybillStorage from '../storage/waybill-storage'
 import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
-import { OrderInfo } from '../models/order-info';
 import { UnloadInfo } from '../models/unload-info';
 
 const randomstring = require('randomstring');
@@ -69,9 +68,7 @@ router.put('/:id/load-info', (req, res) => {
   const waybill: Waybill = waybillStorage.get(id);
   //TODO handle 404
 
-  const loadInfo: LoadInfo = req.body;
-
-  waybill.loadInfo = loadInfo;
+  waybill.loadInfo = req.body;
 
   waybillStorage.put(waybill);
 
@@ -93,12 +90,14 @@ router.post('/:id/load-info/validate', (req, res) => {
   const waybill: Waybill = waybillStorage.get(id);
   //TODO handle 404
 
-  if (!waybill.loadInfo.validatedAt) {
-    waybill.loadInfo.validatedAt = new Date();
+  const loadInfo = waybill.loadInfo;
+
+  if (!loadInfo.validatedAt) {
+    loadInfo.validatedAt = new Date();
     waybillStorage.put(waybill);
   }
 
-  res.json(waybill.loadInfo);
+  res.json(loadInfo);
 });
 
 router.get('/:id/unload-info', (req, res) => {
