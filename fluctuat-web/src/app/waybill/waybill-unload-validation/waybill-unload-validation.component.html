@@ -4,7 +4,11 @@
 
   <ng-container *ngIf="waybill$ | async as waybill; else loading">
 
-    <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
+    <flu-waybill-order-info [order]="waybill.order"></flu-waybill-order-info>
+
+    <div class="level"></div>
+
+    <flu-waybill-load-info [loadInfo]="waybill.loadInfo"></flu-waybill-load-info>
 
     <div class="level"></div>
 

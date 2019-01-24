@@ -1,26 +1,18 @@
-<p>Donneur d'ordre: <strong>{{waybill.order.customer.name}}</strong></p>
-<p>Expéditeur : <strong>{{waybill.order.sender.name}}</strong></p>
-<p>Destinatire : <strong>{{waybill.order.receiver.name}}</strong></p>
-
-<p>Il vous est expédié sur le bateau <strong class="is-uppercase">{{waybill.order.ship.name}}</strong>
-  Matricule <strong>{{waybill.order.ship.regNumber}}</strong>
-</p>
-<p>Conduit par <strong>{{waybill.order.transporter.name}}</strong> un tonnage de
-  <strong>{{waybill.loadInfo.merchandiseWeight}}</strong> tonnes de
-  <strong>{{waybill.loadInfo.merchandiseType}}</strong>
-  d'une valeur déclarée de <strong>{{waybill.loadInfo.merchandisePrice}} €</strong>
-  par tonne, qui a été chargé au <strong>{{waybill.loadInfo.origin}}</strong> et que le transporteur déclare avoir
-  reçu et s'engage à transporter au <strong>{{waybill.loadInfo.destination}}</strong>.</p>
+<p> Il vous est expédié un tonnage de <strong>{{loadInfo.merchandiseWeight}}</strong> tonnes de
+  <strong>{{loadInfo.merchandiseType}}</strong>
+  d'une valeur déclarée de <strong>{{loadInfo.merchandisePrice}} €</strong>
+  par tonne, qui a été chargé au <strong>{{loadInfo.origin}}</strong> et que le transporteur déclare avoir
+  reçu et s'engage à transporter au <strong>{{loadInfo.destination}}</strong>.</p>
 
 <h3>Le Chargement</h3>
 
-<p><strong class="is-uppercase">{{waybill.loadInfo.loadManager.name}}</strong> ({{waybill.loadInfo.loadManager.jobFunction}}) est le responsable du chargement.</p>
-<p>Le chargement a commencé le <strong>{{waybill.loadInfo.loadStartDate}}</strong>
-  et fini le <strong>{{waybill.loadInfo.loadEndDate}}</strong>.</p>
+<p><strong class="is-uppercase">{{loadInfo.loadManager.name}}</strong> ({{loadInfo.loadManager.jobFunction}}) est le responsable du chargement.</p>
+<p>Le chargement a commencé le <strong>{{loadInfo.loadStartDate}}</strong>
+  et fini le <strong>{{loadInfo.loadEndDate}}</strong>.</p>
 
-<p>Tonnage chargé: <strong>{{waybill.loadInfo.merchandiseWeight}}</strong> tonnes.</p>
+<p>Tonnage chargé: <strong>{{loadInfo.merchandiseWeight}}</strong> tonnes.</p>
 
-<ng-container *ngIf="waybill.loadInfo.comments">
+<ng-container *ngIf="loadInfo.comments">
   <h4>Commentaires</h4>
-  <p>{{waybill.loadInfo.comments}}</p>
+  <p>{{loadInfo.comments}}</p>
 </ng-container>

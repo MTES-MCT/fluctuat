@@ -44,6 +44,7 @@ import { WaybillLoadValidationComponent } from './waybill/waybill-load-validatio
 import { WaybillLoadInfoComponent } from './waybill/shared/waybill-load-info/waybill-load-info.component';
 import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
 import { WaybillUnloadInfoComponent } from './waybill/shared/waybill-unload-info/waybill-unload-info.component';
+import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/waybill-order-info.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { WaybillUnloadInfoComponent } from './waybill/shared/waybill-unload-info
     WaybillNewComponent,
     WaybillEditionComponent,
     WaybillLoadingComponent,
+    WaybillOrderInfoComponent,
     WaybillOrderFormComponent,
     WaybillSummaryComponent,
     WaybillUnloadingComponent,
