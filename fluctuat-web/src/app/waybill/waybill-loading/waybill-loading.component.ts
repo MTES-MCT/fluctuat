@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ResultHelper } from '../shared/result-helper';
 import { WaybillService } from '../shared/waybill.service';
 import { LoadInfo } from '../shared/models/load-info.model';
+import { PortList } from './ports-list';
 
 @Component({
   selector: 'flu-waybill-loading',
@@ -19,6 +20,8 @@ export class WaybillLoadingComponent implements OnInit {
   result: ResultHelper = new ResultHelper();
 
   waybillId: string;
+
+  readonly ports = PortList;
 
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
               private route: ActivatedRoute) {
