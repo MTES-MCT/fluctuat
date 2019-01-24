@@ -1,0 +1,39 @@
+<flu-hero-container class="content">
+
+  <h1>Lettre de voiture nº {{waybillId}}</h1>
+
+  <ng-container *ngIf="waybill$ | async as waybill; else loading">
+
+    <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
+
+    <div class="level"></div>
+
+    <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
+
+    <flu-success *ngIf="waybill.unloadInfo.validatedAt">
+      Déchargement validé le {{waybill.unloadInfo.validatedAt}}
+    </flu-success>
+
+    <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
+    <div class="level"></div>
+
+    <div class="level" *ngIf="!waybill.unloadInfo.validatedAt">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-link" (click)="validateUnloadInfo(waybill)"
+                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+            Valider le déchargement...
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <ng-template #loading>
+    <flu-loading></flu-loading>
+  </ng-template>
+
+</flu-hero-container>

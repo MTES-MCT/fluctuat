@@ -50,4 +50,8 @@ export class WaybillService {
     return this.http.get<UnloadInfo>(`/api/waybill/${id}/unload-info`)
   }
 
+  validateUnloadInfo(id: string): Observable<UnloadInfo> {
+    return this.http.post<UnloadInfo>(`/api/waybill/${id}/unload-info/validate`, null);
+  }
+
 }

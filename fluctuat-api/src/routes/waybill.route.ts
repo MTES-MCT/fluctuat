@@ -117,13 +117,27 @@ router.put('/:id/unload-info', (req, res) => {
   const waybill: Waybill = waybillStorage.get(id);
   //TODO handle 404
 
-  const unloadInfo: UnloadInfo = req.body;
-
-  waybill.unloadInfo = unloadInfo;
+  waybill.unloadInfo = req.body;
 
   waybillStorage.put(waybill);
 
   res.status(204).end();
+});
+
+router.post('/:id/unload-info/validate', (req, res) => {
+  const id = req.params.id;
+
+  const waybill: Waybill = waybillStorage.get(id);
+  //TODO handle 404
+
+  const unloadInfo = waybill.unloadInfo;
+
+  if (!unloadInfo.validatedAt) {
+    unloadInfo.validatedAt = new Date();
+    waybillStorage.put(waybill);
+  }
+
+  res.json(unloadInfo);
 });
 
 module.exports = router;

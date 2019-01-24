@@ -26,6 +26,7 @@ import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition
 import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
 import { WaybillUnloadingComponent } from './waybill/waybill-unloading/waybill-unloading.component';
 import { WaybillLoadValidationComponent } from './waybill/waybill-load-validation/waybill-load-validation.component';
+import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'lettre-de-voiture/:id/chargement', component: WaybillLoadingComponent },
   { path: 'lettre-de-voiture/:id/validation-chargement', component: WaybillLoadValidationComponent },
   { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
+  { path: 'lettre-de-voiture/:id/validation-dechargement', component: WaybillUnloadValidationComponent },
   {
     path: 'transporteur', component: TransporterComponent,
     canActivate: [ AuthGuard ],
