@@ -25,10 +25,6 @@ import { TransporterService } from './providers/transporter.service';
 import { UnloadInfoService } from './providers/unload-info.service';
 import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
 import { SharedModule } from './shared/shared.module';
-import { DeliveryActivityComponent } from './transport-confirmation/shared/delivery-activity/delivery-activity.component';
-import { DeliveryDetailComponent } from './transport-confirmation/shared/delivery-detail/delivery-detail.component';
-import { TransportConfirmationClientComponent } from './transport-confirmation/transport-confirmation-client/transport-confirmation-client.component';
-import { TransportConfirmationTransporterComponent } from './transport-confirmation/transport-confirmation-transporter/transport-confirmation-transporter.component';
 import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
 import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
@@ -64,10 +60,6 @@ import { WaybillUnloadInfoComponent } from './waybill/shared/waybill-unload-info
     FormLoadComponent,
     FormUnloadComponent,
     DashboardComponent,
-    DeliveryDetailComponent,
-    TransportConfirmationTransporterComponent,
-    TransportConfirmationClientComponent,
-    DeliveryActivityComponent,
     ContractComponent,
     HomeComponent,
     TransporterComponent,
