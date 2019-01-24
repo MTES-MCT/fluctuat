@@ -14,8 +14,11 @@
 
 <h3>Le Chargement</h3>
 
-<p>Le chargement a commencé le {{waybill.loadInfo.loadStartDate}} </p>
-<p>et fini le {{waybill.loadInfo.loadEndDate}} </p>
+<p><strong class="is-uppercase">{{waybill.loadInfo.loadManager.name}}</strong> ({{waybill.loadInfo.loadManager.jobFunction}}) est le responsable du chargement.</p>
+<p>Le chargement a commencé le <strong>{{waybill.loadInfo.loadStartDate}}</strong>
+  et fini le <strong>{{waybill.loadInfo.loadEndDate}}</strong>.</p>
+
+<p>Tonnage chargé: <strong>{{waybill.loadInfo.merchandiseWeight}}</strong> tonnes.</p>
 
 <ng-container *ngIf="waybill.loadInfo.comments">
   <h4>Commentaires</h4>
