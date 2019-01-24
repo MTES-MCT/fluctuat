@@ -43,6 +43,7 @@ import { WaybillOrderInfoComponent } from './waybill/waybill-order/shared/waybil
 import { WaybillSummaryComponent } from './waybill/waybill-summary/waybill-summary.component';
 import { WaybillNewComponent } from './waybill/waybill-order/waybil-new/waybill-new.component';
 import { WaybillService } from './waybill/shared/waybill.service';
+import { WaybillUnloadingComponent } from './waybill/waybill-unloading/waybill-unloading.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { WaybillService } from './waybill/shared/waybill.service';
     WaybillEditionComponent,
     WaybillLoadingComponent,
     WaybillOrderInfoComponent,
-    WaybillSummaryComponent
+    WaybillSummaryComponent,
+    WaybillUnloadingComponent
   ],
   imports: [
     AppRoutingModule,

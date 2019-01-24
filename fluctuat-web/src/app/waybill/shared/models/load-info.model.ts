@@ -1,3 +1,5 @@
+import { LoadManager } from './load-manager';
+
 export class LoadInfo {
 
   origin: string;
@@ -9,8 +11,5 @@ export class LoadInfo {
   loadStartDate: string;
   loadEndDate: string;
   comments: string;
-  loadManager: {
-    name?: string,
-    jobFunction?: string
-  } = {};
+  loadManager: LoadManager = new LoadManager()
 }

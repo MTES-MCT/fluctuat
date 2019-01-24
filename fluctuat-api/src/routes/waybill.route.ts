@@ -3,6 +3,7 @@ import * as waybillStorage from '../storage/waybill-storage'
 import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
 import { OrderInfo } from '../models/order-info';
+import { UnloadInfo } from '../models/unload-info';
 
 const randomstring = require('randomstring');
 
@@ -24,6 +25,8 @@ router.post('/', (req, res) => {
 
   waybill.id = generateId();
   waybill.loadInfo = new LoadInfo();
+  waybill.unloadInfo = new UnloadInfo();
+
   waybillStorage.put(waybill);
 
   res.status(201).json(waybill);
@@ -67,7 +70,7 @@ router.put('/:id/load-info', (req, res) => {
   //TODO handle 404
 
   const loadInfo: LoadInfo = req.body;
-  console.log(loadInfo);
+
   waybill.loadInfo = loadInfo;
 
   waybillStorage.put(waybill);
@@ -82,6 +85,31 @@ router.get('/:id/load-info', (req, res) => {
   //TODO handle 404
 
   return res.json(waybill.loadInfo);
+});
+
+router.get('/:id/unload-info', (req, res) => {
+  const id = req.params.id;
+
+  const waybill: Waybill = waybillStorage.get(id);
+  //TODO handle 404
+
+  return res.json(waybill.unloadInfo);
+});
+
+
+router.put('/:id/unload-info', (req, res) => {
+  const id = req.params.id;
+
+  const waybill: Waybill = waybillStorage.get(id);
+  //TODO handle 404
+
+  const unloadInfo: UnloadInfo = req.body;
+
+  waybill.unloadInfo = unloadInfo;
+
+  waybillStorage.put(waybill);
+
+  res.status(204).end();
 });
 
 module.exports = router;
