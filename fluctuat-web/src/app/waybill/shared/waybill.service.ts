@@ -38,6 +38,10 @@ export class WaybillService {
     return this.http.get<LoadInfo>(`/api/waybill/${id}/load-info`);
   }
 
+  validateLoadInfo(id: string): Observable<LoadInfo> {
+    return this.http.post<LoadInfo>(`/api/waybill/${id}/load-info/validate`, null);
+  }
+
   sendUnloadInfo(id: string, unloadInfo: UnloadInfo) {
     return this.http.put(`/api/waybill/${id}/unload-info`, unloadInfo);
   }

@@ -11,5 +11,7 @@ export class LoadInfo {
   loadStartDate: string;
   loadEndDate: string;
   comments: string;
-  loadManager: LoadManager = new LoadManager()
+  loadManager: LoadManager = new LoadManager();
+
+  validatedAt: Date;
 }

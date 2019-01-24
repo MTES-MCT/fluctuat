@@ -87,6 +87,20 @@ router.get('/:id/load-info', (req, res) => {
   return res.json(waybill.loadInfo);
 });
 
+router.post('/:id/load-info/validate', (req, res) => {
+  const id = req.params.id;
+
+  const waybill: Waybill = waybillStorage.get(id);
+  //TODO handle 404
+
+  if (!waybill.loadInfo.validatedAt) {
+    waybill.loadInfo.validatedAt = new Date();
+    waybillStorage.put(waybill);
+  }
+
+  res.json(waybill.loadInfo);
+});
+
 router.get('/:id/unload-info', (req, res) => {
   const id = req.params.id;
 

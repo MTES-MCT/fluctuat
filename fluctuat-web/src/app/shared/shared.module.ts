@@ -7,6 +7,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { TimePickerDirective } from './time-picker.directive';
 import { WhenEnterPressedDirective } from './when-enter-pressed.directive';
 import { ErrorComponent } from './error.component';
+import { SuccessComponent } from './success.component';
 import { FormFieldComponent } from './form-field.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormFieldComponent } from './form-field.component';
     WhenEnterPressedDirective,
     LoadingComponent,
     ErrorComponent,
+    SuccessComponent,
     FormFieldComponent
   ],
   exports: [
@@ -26,6 +28,7 @@ import { FormFieldComponent } from './form-field.component';
     WhenEnterPressedDirective,
     LoadingComponent,
     ErrorComponent,
+    SuccessComponent,
     FormFieldComponent
   ],
   imports: [

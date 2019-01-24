@@ -25,6 +25,7 @@ import { WaybillSummaryComponent } from './waybill/waybill-summary/waybill-summa
 import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
 import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
 import { WaybillUnloadingComponent } from './waybill/waybill-unloading/waybill-unloading.component';
+import { WaybillLoadValidationComponent } from './waybill/waybill-load-validation/waybill-load-validation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'lettre-de-voiture/:id/resume', component: WaybillSummaryComponent },
   { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
   { path: 'lettre-de-voiture/:id/chargement', component: WaybillLoadingComponent },
+  { path: 'lettre-de-voiture/:id/validation-chargement', component: WaybillLoadValidationComponent },
   { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
   {
     path: 'transporteur', component: TransporterComponent,

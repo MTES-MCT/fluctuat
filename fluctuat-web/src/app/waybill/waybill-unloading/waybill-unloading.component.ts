@@ -54,9 +54,5 @@ export class WaybillUnloadingComponent implements OnInit {
         }
       ))
       .subscribe(() => this.result.success(), (err => this.result.error(err)));
-
-    console.log(this.unloadInfoForm.value);
-    console.log('send unload info');
-    this.result.success();
   }
 }
