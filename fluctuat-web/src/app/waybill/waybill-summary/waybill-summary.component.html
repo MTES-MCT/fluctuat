@@ -4,10 +4,12 @@
 
   <ng-container *ngIf="waybill$ | async as waybill; else loading">
 
-   <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
+    <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
 
+    <div class="level"></div>
+
+    <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
   </ng-container>
-
 
   <ng-template #loading>
     <flu-loading></flu-loading>
