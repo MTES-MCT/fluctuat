@@ -5,10 +5,10 @@ import { Person } from '../../../shared/models/person.model';
 
 
 @Component({
-  selector: 'flu-waybill-order-info',
-  templateUrl: './waybill-order-info.component.html'
+  selector: 'flu-waybill-order-form',
+  templateUrl: './waybill-order-form.component.html'
 })
-export class WaybillOrderInfoComponent {
+export class WaybillOrderFormComponent {
 
   orderForm: FormGroup;
 

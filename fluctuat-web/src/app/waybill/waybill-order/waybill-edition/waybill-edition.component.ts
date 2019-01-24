@@ -4,8 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { ResultHelper } from '../../shared/result-helper';
-import { WaybillOrderInfoComponent } from '../shared/waybill-order-info/waybill-order-info.component';
 import { WaybillService } from '../../shared/waybill.service';
+import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
 
 
 @Component({
@@ -14,8 +14,8 @@ import { WaybillService } from '../../shared/waybill.service';
 })
 export class WaybillEditionComponent implements OnInit {
 
-  @ViewChild(WaybillOrderInfoComponent)
-  orderFormComponent: WaybillOrderInfoComponent;
+  @ViewChild(WaybillOrderFormComponent)
+  orderFormComponent: WaybillOrderFormComponent;
 
   result: ResultHelper = new ResultHelper();
 

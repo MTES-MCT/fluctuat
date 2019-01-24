@@ -35,7 +35,7 @@ import { UnauthorizedInterceptor } from './providers/auth/unauthorized.intercept
 import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
 import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
 import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
-import { WaybillOrderInfoComponent } from './waybill/waybill-order/shared/waybill-order-info/waybill-order-info.component';
+import { WaybillOrderFormComponent } from './waybill/waybill-order/shared/waybill-order-form/waybill-order-form.component';
 import { WaybillSummaryComponent } from './waybill/waybill-summary/waybill-summary.component';
 import { WaybillNewComponent } from './waybill/waybill-order/waybil-new/waybill-new.component';
 import { WaybillService } from './waybill/shared/waybill.service';
@@ -69,7 +69,7 @@ import { WaybillUnloadInfoComponent } from './waybill/shared/waybill-unload-info
     WaybillNewComponent,
     WaybillEditionComponent,
     WaybillLoadingComponent,
-    WaybillOrderInfoComponent,
+    WaybillOrderFormComponent,
     WaybillSummaryComponent,
     WaybillUnloadingComponent,
     WaybillLoadValidationComponent,
