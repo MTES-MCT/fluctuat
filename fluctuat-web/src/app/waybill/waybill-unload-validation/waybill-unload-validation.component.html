@@ -11,7 +11,7 @@
     <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
 
     <flu-success *ngIf="waybill.unloadInfo.validatedAt">
-      Déchargement validé le {{waybill.unloadInfo.validatedAt}}
+      Déchargement validé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}
     </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>

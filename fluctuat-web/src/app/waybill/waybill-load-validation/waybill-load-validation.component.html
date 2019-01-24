@@ -7,7 +7,7 @@
     <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
 
     <flu-success *ngIf="waybill.loadInfo.validatedAt">
-      Chargement validé le {{waybill.loadInfo.validatedAt}}
+      Chargement validé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
     </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>
