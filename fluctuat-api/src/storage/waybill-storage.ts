@@ -18,4 +18,10 @@ const put = (wayBill: Waybill) => {
   putWaybills(waybills);
 };
 
-export { get, put }
+const findByEmail = (email: string) => {
+  let waybills: Waybill[] = Object.values(getWaybills());
+
+  return waybills.filter(waybill => waybill.owner === email);
+};
+
+export { get, put, findByEmail }

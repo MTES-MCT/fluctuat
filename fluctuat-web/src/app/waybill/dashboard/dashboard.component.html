@@ -1,15 +1,24 @@
 <flu-hero-container class="content">
-  <h1 class="title">Mes Transports</h1>
-  <table class="table" *ngIf="contracts$ | async as contracts; else loading">
-    <thead>
-    <tr>
-      <th>#</th>
-      <th>Client</th>
-      <th>Prochaine étape</th>
-    </tr>
-    </thead>
 
-    <tbody>
+
+  <h1 class="title">Mes Lettres de voiture</h1>
+
+  <div class="level">
+    <div class="level-left">
+      <button class="button is-link" [routerLink]="'/lettre-de-voiture/new'">Nouvelle Lettre de Voiture</button>
+    </div>
+  </div>
+
+  <div *ngIf="waybills$ | async as waybills; else loading">
+    <div class="card" *ngFor="let waybill of waybills" style="margin-bottom: 0.75rem">
+      <div class="card-content">
+        <p class="is-size-4"><a [routerLink]="['/lettre-de-voiture', waybill.id, 'resume']">{{waybill.id}}</a> </p>
+
+        <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
+      </div>
+    </div>
+
+    <!--<tbody>
     <tr *ngFor="let contract of contracts">
       <td><a [routerLink]="['/transporteur/contrat/' + contract.id]">{{contract.id}}</a></td>
       <td>{{contract.delivery.client.name}}</td>
@@ -30,7 +39,8 @@
       </td>
     </tr>
     </tbody>
-  </table>
+  </table>-->
+  </div>
 </flu-hero-container>
 
 <ng-template #loading>

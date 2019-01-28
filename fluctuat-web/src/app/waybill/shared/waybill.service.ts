@@ -54,4 +54,7 @@ export class WaybillService {
     return this.http.post<UnloadInfo>(`/api/waybill/${id}/unload-info/validate`, null);
   }
 
+  getAllMe() {
+    return this.http.get<Waybill[]>('/api/waybill/me');
+  }
 }

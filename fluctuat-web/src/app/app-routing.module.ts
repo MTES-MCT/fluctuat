@@ -10,7 +10,7 @@ import { FormPricesComponent } from './contract-forms/form-prices/form-prices.co
 import { FormShipComponent } from './contract-forms/form-ship/form-ship.component';
 import { FormUnloadComponent } from './contract-forms/form-unload/form-unload.component';
 import { ContractComponent } from './contract/contract.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './waybill/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { TransporterComponent } from './transporter/transporter.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
@@ -37,12 +37,12 @@ const routes: Routes = [
   { path: 'lettre-de-voiture/:id/validation-chargement', component: WaybillLoadValidationComponent },
   { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
   { path: 'lettre-de-voiture/:id/validation-dechargement', component: WaybillUnloadValidationComponent },
+  { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [AuthGuard]},
   {
     path: 'transporteur', component: TransporterComponent,
     canActivate: [ AuthGuard ],
     canActivateChild: [ AuthGuard ],
     children: [
-      { path: '', redirectTo: 'mes-transports', pathMatch: 'full' },
       { path: 'mon-compte', component: FormTransporterComponent },
       { path: 'nouveau-transport/client', component: FormCustomerComponent },
       { path: 'nouveau-transport/marchandise', component: FormMerchandiseComponent },
@@ -53,7 +53,6 @@ const routes: Routes = [
       { path: 'contrat/:id/bateau', component: FormShipComponent },
       { path: 'contrat/:id/chargement', component: FormLoadComponent },
       { path: 'contrat/:id/dechargement', component: FormUnloadComponent },
-      { path: 'mes-transports', component: DashboardComponent },
     ]
   },
 

@@ -14,7 +14,6 @@ import { FormPricesComponent } from './contract-forms/form-prices/form-prices.co
 import { FormShipComponent } from './contract-forms/form-ship/form-ship.component';
 import { FormUnloadComponent } from './contract-forms/form-unload/form-unload.component';
 import { ContractComponent } from './contract/contract.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormTransporterComponent } from './form-transporter/form-transporter.component';
 import { HeaderComponent } from './header/header.component';
 import { ContractService } from './providers/contract.service';
@@ -45,6 +44,9 @@ import { WaybillLoadInfoComponent } from './waybill/shared/waybill-load-info/way
 import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
 import { WaybillUnloadInfoComponent } from './waybill/shared/waybill-unload-info/waybill-unload-info.component';
 import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/waybill-order-info.component';
+import { DashboardComponent } from './waybill/dashboard/dashboard.component';
+import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybill-options.component';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +62,6 @@ import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/w
     FormShipComponent,
     FormLoadComponent,
     FormUnloadComponent,
-    DashboardComponent,
     ContractComponent,
     HomeComponent,
     TransporterComponent,
@@ -77,7 +78,9 @@ import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/w
     WaybillLoadValidationComponent,
     WaybillLoadInfoComponent,
     WaybillUnloadValidationComponent,
-    WaybillUnloadInfoComponent
+    WaybillUnloadInfoComponent,
+    DashboardComponent,
+    WaybillOptionsComponent
   ],
   imports: [
     AppRoutingModule,

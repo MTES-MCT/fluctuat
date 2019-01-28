@@ -3,6 +3,7 @@ import * as waybillStorage from '../storage/waybill-storage'
 import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
+import { verifyJWT } from '../security/verify-jwt.middleware';
 
 const randomstring = require('randomstring');
 
@@ -19,16 +20,26 @@ const generateId = () => {
   return waybillStorage.get(id) ? generateId() : id;
 };
 
-router.post('/', (req, res) => {
+router.post('/', verifyJWT, (req, res) => {
   let waybill: Waybill = req.body;
 
   waybill.id = generateId();
+  waybill.owner = req['user'].email;
   waybill.loadInfo = new LoadInfo();
   waybill.unloadInfo = new UnloadInfo();
 
   waybillStorage.put(waybill);
 
   res.status(201).json(waybill);
+});
+
+router.get('/me', verifyJWT, (req, res) => {
+  const userEmail: string = req['user'].email;
+  console.log(userEmail);
+
+  const waybills: Waybill[] = waybillStorage.findByEmail(userEmail);
+
+  res.json(waybills);
 });
 
 router.get('/:id', (req, res) => {

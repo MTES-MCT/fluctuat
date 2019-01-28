@@ -33,7 +33,7 @@ export class LoginComponent {
       .subscribe(() => {
         const paramRedirect = this.route.snapshot.queryParams['redirectTo'];
 
-        const redirectUrl = paramRedirect ? paramRedirect : '/transporteur';
+        const redirectUrl = paramRedirect ? paramRedirect : '/mes-lettres-de-voiture';
 
         this.router.navigateByUrl(redirectUrl)
 

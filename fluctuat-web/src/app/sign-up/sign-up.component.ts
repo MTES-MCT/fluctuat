@@ -34,7 +34,7 @@ export class SignUpComponent {
         return throwError(errorResponse.error);
       }))
       .subscribe(() => {
-        this.router.navigateByUrl('/transporteur')
+        this.router.navigateByUrl('/mes-lettres-de-voiture')
       }, error => this.errorMsg = error);
 
   }

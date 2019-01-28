@@ -16,7 +16,7 @@ export class AlreadyLoggedGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate([ 'transporteur' ]); // TODO maybe handle redirectio with NavigationCancel event
+    this.router.navigate([ 'mes-lettres-de-voiture' ]); // TODO maybe handle redirectio with NavigationCancel event
     return false;
   }
 }

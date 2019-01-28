@@ -49,33 +49,7 @@
     <div class="level"></div>
 
     <!--Action Options -->
-    <div class="buttons">
-      <button class="button" *ngIf="isNotLoadStarted(waybill)"
-              [routerLink]="['/lettre-de-voiture', waybill.id, 'commande']">
-        Modifier
-      </button>
-
-      <button class="button is-link" *ngIf="isNotLoadStarted(waybill)"
-              [routerLink]="['/lettre-de-voiture', waybill.id, 'chargement']">
-        Démarrer le chargement...
-      </button>
-
-      <button class="button is-link" *ngIf="isNotLoadFinished(waybill)"
-              [routerLink]="['/lettre-de-voiture', waybill.id, 'chargement']">
-        Modifier le chargement
-      </button>
-
-      <button class="button is-link" *ngIf="isNotUnloadStarted(waybill)"
-              [routerLink]="['/lettre-de-voiture', waybill.id, 'dechargement']">
-        Démarrer le déchargement
-      </button>
-
-      <button class="button is-link" *ngIf="isNotUnloadFinished(waybill)"
-              [routerLink]="['/lettre-de-voiture', waybill.id, 'dechargement']">
-        Modifier le déchargement
-      </button>
-
-    </div>
+    <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
 
   </ng-container>
 
