@@ -6,12 +6,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-const contract = require('./routes/contract.route');
-app.use('/api/contract', contract);
-
-const transporter = require('./routes/transporter.route');
-app.use('/api/transporter', transporter);
-
 const auth = require('./routes/auth.route');
 app.use('/api/auth', auth);
 
