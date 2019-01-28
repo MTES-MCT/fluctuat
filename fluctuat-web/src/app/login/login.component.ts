@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { UserCredentials } from '../providers/auth/user-credentials.model';
-import { AuthService } from '../providers/auth/auth.service';
+import { UserCredentials } from '../core/auth/user-credentials.model';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   selector: 'flu-login',

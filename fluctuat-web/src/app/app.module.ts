@@ -5,33 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormCustomerComponent } from './contract-forms/form-customer/form-customer.component';
-import { FormLoadDelayComponent } from './contract-forms/form-load-delay/form-load-delay.component';
-import { FormLoadComponent } from './contract-forms/form-load/form-load.component';
-import { FormMerchandiseComponent } from './contract-forms/form-merchandise/form-merchandise.component';
-import { FormPathComponent } from './contract-forms/form-path/form-path.component';
-import { FormPricesComponent } from './contract-forms/form-prices/form-prices.component';
-import { FormShipComponent } from './contract-forms/form-ship/form-ship.component';
-import { FormUnloadComponent } from './contract-forms/form-unload/form-unload.component';
-import { ContractComponent } from './contract/contract.component';
-import { FormTransporterComponent } from './form-transporter/form-transporter.component';
 import { HeaderComponent } from './header/header.component';
-import { ContractService } from './providers/contract.service';
-import { DeliveryService } from './providers/delivery.service';
-import { LoadInfoService } from './providers/load-info.service';
-import { ShipService } from './providers/ship.service';
-import { TransporterService } from './providers/transporter.service';
-import { UnloadInfoService } from './providers/unload-info.service';
-import { HeroContainerComponent } from './shared/hero-container/hero-container.component';
+import { HeroContainerComponent } from './shared/hero-container.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
-import { TransporterComponent } from './transporter/transporter.component';
-import { TransporterHeaderComponent } from './transporter-header/transporter-header.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { AuthService } from './providers/auth/auth.service';
+import { AuthService } from './core/auth/auth.service';
 import { LoginComponent } from './login/login.component';
-import { UnauthorizedInterceptor } from './providers/auth/unauthorized.interceptor';
-import { AuthRequestInterceptor } from './providers/auth/auth-request.interceptor';
+import { UnauthorizedInterceptor } from './core/auth/unauthorized.interceptor';
+import { AuthRequestInterceptor } from './core/auth/auth-request.interceptor';
 import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
 import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
 import { WaybillOrderFormComponent } from './waybill/waybill-order/shared/waybill-order-form/waybill-order-form.component';
@@ -53,19 +35,7 @@ import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybil
     AppComponent,
     HeaderComponent,
     HeroContainerComponent,
-    FormTransporterComponent,
-    FormCustomerComponent,
-    FormLoadDelayComponent,
-    FormMerchandiseComponent,
-    FormPathComponent,
-    FormPricesComponent,
-    FormShipComponent,
-    FormLoadComponent,
-    FormUnloadComponent,
-    ContractComponent,
     HomeComponent,
-    TransporterComponent,
-    TransporterHeaderComponent,
     SignUpComponent,
     LoginComponent,
     WaybillNewComponent,
@@ -92,12 +62,6 @@ import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybil
   ],
   providers: [
     AuthService,
-    DeliveryService,
-    TransporterService,
-    ShipService,
-    LoadInfoService,
-    UnloadInfoService,
-    ContractService,
     WaybillService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -108,10 +72,10 @@ import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybil
       provide: HTTP_INTERCEPTORS,
       useClass: AuthRequestInterceptor,
       multi: true,
-      deps: [ AuthService ]
+      deps: [AuthService]
     }
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
