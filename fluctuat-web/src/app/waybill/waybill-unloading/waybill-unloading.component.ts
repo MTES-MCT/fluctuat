@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ResultHelper } from '../shared/result-helper';
 import { WaybillService } from '../shared/waybill.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UnloadInfo } from '../shared/models/unload-info.model';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -20,7 +20,7 @@ export class WaybillUnloadingComponent implements OnInit {
   waybillId: string;
 
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -53,6 +53,9 @@ export class WaybillUnloadingComponent implements OnInit {
           return throwError('Un problème est survenu. Veuillez réessayer plus tard.')
         }
       ))
-      .subscribe(() => this.result.success(), (err => this.result.error(err)));
+      .subscribe(() => {
+        this.result.success();
+        this.router.navigate(['lettre-de-voiture', this.waybillId, 'resume'])
+      }, (err => this.result.error(err)));
   }
 }

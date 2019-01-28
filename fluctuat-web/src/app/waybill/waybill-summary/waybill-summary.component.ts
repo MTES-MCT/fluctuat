@@ -26,4 +26,28 @@ export class WaybillSummaryComponent implements OnInit {
 
   }
 
+
+  isNotLoadStarted(waybill: Waybill) {
+    return !waybill.loadInfo.sentAt;
+  }
+
+  isNotLoadFinished(waybill: Waybill) {
+    return waybill.loadInfo.sentAt && !waybill.loadInfo.validatedAt;
+  }
+
+  isLoadFinished(waybill: Waybill) {
+    return waybill.loadInfo.validatedAt
+  }
+
+  isNotUnloadStarted(waybill: Waybill) {
+    return this.isLoadFinished(waybill) && !waybill.unloadInfo.sentAt
+  }
+
+  isNotUnloadFinished(waybill: Waybill) {
+    return waybill.unloadInfo.sentAt && !waybill.unloadInfo.validatedAt
+  }
+
+  isUnloadFinished(waybill: Waybill) {
+    return waybill.unloadInfo.validatedAt
+  }
 }

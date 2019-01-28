@@ -42,7 +42,7 @@ export class WaybillEditionComponent implements OnInit {
       })
     ).subscribe(() => {
       this.result.success()
-      this.router.navigate(['lettre-de-voiture', this.waybillId, 'chargement'])
+      this.router.navigate(['lettre-de-voiture', this.waybillId, 'resume'])
     }, (err) => this.result.error(err))
   }
 

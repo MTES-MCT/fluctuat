@@ -13,5 +13,6 @@ export class LoadInfo {
   comments: string;
   loadManager: LoadManager = new LoadManager();
 
+  sentAt: Date;
   validatedAt: Date;
 }

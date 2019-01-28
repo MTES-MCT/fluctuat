@@ -6,13 +6,77 @@
 
     <flu-waybill-order-info [order]="waybill.order"></flu-waybill-order-info>
 
+    <!--Load Info-->
+    <ng-container *ngIf="waybill.loadInfo.sentAt">
+      <div class="level"></div>
+
+      <flu-waybill-load-info [loadInfo]="waybill.loadInfo"></flu-waybill-load-info>
+
+      <div class="level"></div>
+
+      <!--status-->
+      <div class="level">
+        <div class="level-item notification" *ngIf="isNotLoadFinished(waybill)">
+          Le chargement n'a pas été encore validé par le transporteur
+        </div>
+
+        <div class="level-item notification" *ngIf="isLoadFinished(waybill)">
+          Chargement validé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+        </div>
+      </div>
+
+    </ng-container>
+
+    <!--Unload Info-->
+    <ng-container *ngIf="waybill.unloadInfo.sentAt">
+      <div class="level"></div>
+
+      <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
+
+      <div class="level"></div>
+
+      <div class="level">
+        <div class="level-item notification" *ngIf="isNotUnloadFinished(waybill)">
+          Le déchargement n'a pas été encore validé par le transporteur
+        </div>
+
+        <div class="level-item notification" *ngIf="isUnloadFinished(waybill)">
+          Déchargement validé le {{waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+        </div>
+      </div>
+    </ng-container>
+
     <div class="level"></div>
 
-    <flu-waybill-load-info [loadInfo]="waybill.loadInfo"></flu-waybill-load-info>
+    <!--Action Options -->
+    <div class="buttons">
+      <button class="button" *ngIf="isNotLoadStarted(waybill)"
+              [routerLink]="['/lettre-de-voiture', waybill.id, 'commande']">
+        Modifier
+      </button>
 
-    <div class="level"></div>
+      <button class="button is-link" *ngIf="isNotLoadStarted(waybill)"
+              [routerLink]="['/lettre-de-voiture', waybill.id, 'chargement']">
+        Démarrer le chargement...
+      </button>
 
-    <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
+      <button class="button is-link" *ngIf="isNotLoadFinished(waybill)"
+              [routerLink]="['/lettre-de-voiture', waybill.id, 'chargement']">
+        Modifier le chargement
+      </button>
+
+      <button class="button is-link" *ngIf="isNotUnloadStarted(waybill)"
+              [routerLink]="['/lettre-de-voiture', waybill.id, 'dechargement']">
+        Démarrer le déchargement
+      </button>
+
+      <button class="button is-link" *ngIf="isNotUnloadFinished(waybill)"
+              [routerLink]="['/lettre-de-voiture', waybill.id, 'dechargement']">
+        Modifier le déchargement
+      </button>
+
+    </div>
+
   </ng-container>
 
   <ng-template #loading>

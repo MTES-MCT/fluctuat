@@ -69,6 +69,7 @@ router.put('/:id/load-info', (req, res) => {
   //TODO handle 404
 
   waybill.loadInfo = req.body;
+  waybill.loadInfo.sentAt = new Date();
 
   waybillStorage.put(waybill);
 
@@ -117,6 +118,7 @@ router.put('/:id/unload-info', (req, res) => {
   //TODO handle 404
 
   waybill.unloadInfo = req.body;
+  waybill.unloadInfo.sentAt = new Date();
 
   waybillStorage.put(waybill);
 

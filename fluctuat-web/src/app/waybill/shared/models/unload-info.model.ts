@@ -8,5 +8,6 @@ export class UnloadInfo {
   comments: string;
   unloadManager: LoadManager = new LoadManager();
 
+  sentAt: Date;
   validatedAt: Date;
 }

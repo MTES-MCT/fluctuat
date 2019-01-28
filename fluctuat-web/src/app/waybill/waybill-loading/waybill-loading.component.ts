@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 
 import { ResultHelper } from '../shared/result-helper';
 import { WaybillService } from '../shared/waybill.service';
@@ -24,7 +24,7 @@ export class WaybillLoadingComponent implements OnInit {
   readonly ports = PortList;
 
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -62,7 +62,11 @@ export class WaybillLoadingComponent implements OnInit {
           return throwError('Un problème est survenu. Veuillez réessayer plus tard.')
         }
       ))
-      .subscribe(() => this.result.success(), (err => this.result.error(err)));
+      .subscribe(() => {
+        this.result.success();
+        this.router.navigate(['lettre-de-voiture', this.waybillId, 'resume'])
+
+      }, (err => this.result.error(err)));
 
     console.log(this.loadInfoForm.value);
     console.log('send load info');
