@@ -4,6 +4,8 @@ import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
+import { generatePdf } from '../generate-pdf';
+import { getDocDefinition } from '../lettre-de-voiture';
 
 const randomstring = require('randomstring');
 
@@ -49,6 +51,22 @@ router.get('/:id', (req, res) => {
   //TODO handle 404
 
   return res.json(waybill);
+});
+
+router.get('/:id/lettre-de-voiture.pdf', (req, res) => {
+  const id = req.params.id;
+
+  const waybill: Waybill = waybillStorage.get(id);
+  //TODO handle 404
+
+  generatePdf(getDocDefinition(waybill))
+    .then(pdf => {
+      res.setHeader('Content-Type', 'application/pdf');
+      res.send(pdf);
+    }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  })
 });
 
 router.get('/:id/order-info', (req, res) => {
