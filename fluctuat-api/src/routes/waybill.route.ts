@@ -5,7 +5,7 @@ import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import { generatePdf } from '../generate-pdf';
-import { getDocDefinition } from '../lettre-de-voiture';
+import { getDocDefinition } from '../waybill-pdf';
 
 const randomstring = require('randomstring');
 

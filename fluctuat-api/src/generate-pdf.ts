@@ -4,7 +4,8 @@ const pdfMakePrinter = require('pdfmake/src/printer');
 export function generatePdf(docDefinition) {
   const fonts = {
     Roboto: {
-      normal: './fonts/Roboto-Regular.ttf'
+      normal: './fonts/Roboto-Regular.ttf',
+      bold: './fonts/Roboto-Bold.ttf'
     }
   };
   return new Promise((success, reject) => {
