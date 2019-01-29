@@ -25,7 +25,7 @@ export function getDocDefinition(waybill: Waybill) {
         bold(loadInfo.origin), ' et que le transporteur déclare avoir reçu et s\'engage à transporter au ',
         bold(loadInfo.destination), '.'),
       '\n',
-      { text: 'Le Chargement', style: 'title2' },
+      { text: 'Chargement', style: 'title2' },
 
       chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
         'est le responsable du chargement.'),
@@ -53,7 +53,7 @@ export function getDocDefinition(waybill: Waybill) {
         ]
       },
       '\n',
-      { text: 'Le Déchargement', style: 'title2' },
+      { text: 'Déchargement', style: 'title2' },
 
       chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
         'est le responsable du chargement.'),
