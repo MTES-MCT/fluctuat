@@ -8,5 +8,7 @@ export class Waybill {
 
   order: OrderInfo;
   loadInfo: LoadInfo;
-  unloadInfo: UnloadInfo
+  unloadInfo: UnloadInfo;
+
+  documentUrl: string;
 }

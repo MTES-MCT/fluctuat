@@ -25,4 +25,8 @@
     Modifier le déchargement
   </button>
 
+  <a class="button is-text" *ngIf="waybill.documentUrl" [href]="waybill.documentUrl" target="_blank">
+    Télécharger en format pdf
+  </a>
+
 </div>

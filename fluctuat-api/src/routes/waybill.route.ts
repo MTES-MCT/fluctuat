@@ -162,6 +162,9 @@ router.post('/:id/unload-info/validate', (req, res) => {
 
   const unloadInfo = waybill.unloadInfo;
 
+  // add the link to pdf document
+  waybill.documentUrl = `/api/waybill/${id}/lettre-de-voiture.pdf`;
+
   if (!unloadInfo.validatedAt) {
     unloadInfo.validatedAt = new Date();
     waybillStorage.put(waybill);
