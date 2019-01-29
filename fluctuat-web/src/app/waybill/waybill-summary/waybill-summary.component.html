@@ -1,0 +1,60 @@
+<flu-hero-container class="content">
+
+  <h1>Lettre de voiture {{waybillId}}</h1>
+
+  <ng-container *ngIf="waybill$ | async as waybill; else loading">
+
+    <flu-waybill-order-info [order]="waybill.order"></flu-waybill-order-info>
+
+    <!--Load Info-->
+    <ng-container *ngIf="waybill.loadInfo.sentAt">
+      <div class="level"></div>
+
+      <flu-waybill-load-info [loadInfo]="waybill.loadInfo"></flu-waybill-load-info>
+
+      <div class="level"></div>
+
+      <!--status-->
+      <div class="level">
+        <div class="level-item notification" *ngIf="isNotLoadFinished(waybill)">
+          Le chargement n'a pas été encore validé par le transporteur
+        </div>
+
+        <div class="level-item notification" *ngIf="isLoadFinished(waybill)">
+          Chargement validé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+        </div>
+      </div>
+
+    </ng-container>
+
+    <!--Unload Info-->
+    <ng-container *ngIf="waybill.unloadInfo.sentAt">
+      <div class="level"></div>
+
+      <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
+
+      <div class="level"></div>
+
+      <div class="level">
+        <div class="level-item notification" *ngIf="isNotUnloadFinished(waybill)">
+          Le déchargement n'a pas été encore validé par le transporteur
+        </div>
+
+        <div class="level-item notification" *ngIf="isUnloadFinished(waybill)">
+          Déchargement validé le {{waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="level"></div>
+
+    <!--Action Options -->
+    <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
+
+  </ng-container>
+
+  <ng-template #loading>
+    <flu-loading></flu-loading>
+  </ng-template>
+
+</flu-hero-container>

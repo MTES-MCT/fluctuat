@@ -1,0 +1,105 @@
+<flu-hero-container>
+  <h2 class="title">Lettre de voiture nº {{ waybillId }} </h2>
+
+  <form *ngIf="loadInfoForm; else loading" [formGroup]="loadInfoForm" (ngSubmit)="sendLoadInfo()">
+
+    <datalist id="ports">
+      <option *ngFor="let port of ports" [value]="port">
+    </datalist>
+
+    <div class="card">
+      <div class="card-content">
+        <p class="title">Chargement</p>
+
+        <flu-form-field>
+          <label class="label">Lieu départ</label>
+          <input class="input is-medium" formControlName="origin" list="ports">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Lieu d'arrivée</label>
+          <input class="input is-medium" formControlName="destination" list="ports">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Date d'arrivée prévue</label>
+          <input class="input is-medium" formControlName="arrivalDate" fluDatetimePicker
+                 [(date)]="loadInfoForm.value.arrivalDate">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Nature de la marchandise</label>
+          <input class="input is-medium" formControlName="merchandiseType">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Tonnage</label>
+          <input class="input is-medium" formControlName="merchandiseWeight">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
+          <input class="input is-medium" formControlName="merchandisePrice">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Date de début du chargement</label>
+          <input class="input is-medium" formControlName="loadStartDate" fluDatetimePicker
+                 [(date)]="loadInfoForm.value.loadStartDate">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Date de fin du chargement</label>
+          <input class="input is-medium" formControlName="loadEndDate" fluDatetimePicker
+                 [(date)]="loadInfoForm.value.loadEndDate">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Commentaires</label>
+          <textarea class="textarea is-medium" formControlName="comments"></textarea>
+        </flu-form-field>
+      </div>
+    </div>
+
+    <div class="level"></div>
+
+    <div class="card">
+      <div class="card-content" formGroupName="loadManager">
+        <p class="title">Responsable du chargement</p>
+
+        <flu-form-field>
+          <label class="label">Nom</label>
+          <input class="input is-medium" formControlName="name">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Fonction</label>
+          <input class="input is-medium" formControlName="jobFunction">
+        </flu-form-field>
+
+      </div>
+    </div>
+
+    <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
+    <div class="level"></div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-link" type="submit"
+                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+            Chargement Terminé
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <ng-template #loading>
+    <flu-loading></flu-loading>
+  </ng-template>
+
+</flu-hero-container>

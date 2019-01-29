@@ -1,0 +1,14 @@
+<h3>Déchargement</h3>
+
+<p><strong class="is-uppercase">{{unloadInfo.unloadManager.name}}</strong> ({{unloadInfo.unloadManager.jobFunction}}) est le responsable du déchargement.</p>
+
+<p>Le déchargement a commencé le <strong>{{unloadInfo.unloadStartDate}} </strong>
+  et fini le <strong>{{unloadInfo.unloadEndDate}}. </strong>
+</p>
+
+<p>Tonnage déchargé : <strong>{{unloadInfo.merchandiseWeight}}</strong> tonnes.</p>
+
+<ng-container *ngIf="unloadInfo.comments">
+  <h4>Commentaires</h4>
+  <p>{{unloadInfo.comments}}</p>
+</ng-container>

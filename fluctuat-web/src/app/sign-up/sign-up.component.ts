@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { UserCredentials } from '../providers/auth/user-credentials.model';
-import { AuthService } from '../providers/auth/auth.service';
+import { UserCredentials } from '../core/auth/user-credentials.model';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   selector: 'flu-sign-up',
@@ -34,7 +34,7 @@ export class SignUpComponent {
         return throwError(errorResponse.error);
       }))
       .subscribe(() => {
-        this.router.navigateByUrl('/transporteur')
+        this.router.navigateByUrl('/mes-lettres-de-voiture')
       }, error => this.errorMsg = error);
 
   }

@@ -1,0 +1,23 @@
+<flu-hero-container>
+
+  <h2 class="title">Nouvelle Lettre de Voiture</h2>
+
+  <flu-waybill-order-form></flu-waybill-order-form>
+
+  <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
+  <div class="level"></div>
+
+  <div class="level">
+    <div class="level-item"></div>
+    <div class="level-right">
+      <div class="level-item">
+        <button class="button is-link" (click)="create()"
+                [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+          Créer
+        </button>
+      </div>
+    </div>
+  </div>
+
+</flu-hero-container>

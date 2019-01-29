@@ -1,0 +1,76 @@
+<flu-hero-container>
+  <h2 class="title">Lettre de voiture nº {{ waybillId }} </h2>
+
+  <form *ngIf="unloadInfoForm; else loading" [formGroup]="unloadInfoForm" (ngSubmit)="sendUnloadInfo()">
+
+    <div class="card">
+      <div class="card-content">
+        <p class="title">Déchargement</p>
+
+        <flu-form-field>
+          <label class="label">Date de début du déchargement</label>
+          <input class="input is-medium" formControlName="unloadStartDate" fluDatetimePicker
+                 [(date)]="unloadInfoForm.value.unloadStartDate">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Date de fin du déchargement</label>
+          <input class="input is-medium" formControlName="unloadEndDate" fluDatetimePicker
+                 [(date)]="unloadInfoForm.value.unloadEndDate">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Tonnage déchargé</label>
+          <input class="input is-medium" formControlName="merchandiseWeight">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Commentaires</label>
+          <textarea class="textarea is-medium" formControlName="comments"></textarea>
+        </flu-form-field>
+
+      </div>
+    </div>
+
+    <div class="level"></div>
+
+    <div class="card">
+      <div class="card-content" formGroupName="unloadManager">
+        <p class="title">Responsable du déchargement</p>
+
+        <flu-form-field>
+          <label class="label">Nom</label>
+          <input class="input is-medium" formControlName="name">
+        </flu-form-field>
+
+        <flu-form-field>
+          <label class="label">Fonction</label>
+          <input class="input is-medium" formControlName="jobFunction">
+        </flu-form-field>
+
+      </div>
+    </div>
+
+    <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
+    <div class="level"></div>
+
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-link" type="submit"
+                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+            Déchargement Terminé
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <ng-template #loading>
+    <flu-loading></flu-loading>
+  </ng-template>
+
+</flu-hero-container>

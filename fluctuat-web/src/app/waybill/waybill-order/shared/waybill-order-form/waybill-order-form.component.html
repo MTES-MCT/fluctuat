@@ -1,0 +1,100 @@
+<form *ngIf="orderForm; else loading" [formGroup]="orderForm">
+
+  <div class="card">
+    <div class="card-content" formGroupName="customer">
+      <p class="title">Donneur d'ordre</p>
+
+      <flu-form-field>
+        <label class="label">Nom</label>
+        <input class="input is-medium" formControlName="name">
+      </flu-form-field>
+
+      <flu-form-field>
+        <label class="label">Email</label>
+        <input class="input is-medium" formControlName="email" type="email">
+      </flu-form-field>
+
+    </div>
+  </div>
+
+  <div class="level"></div>
+
+  <div class="card">
+    <div class="card-content" formGroupName="sender">
+      <p class="title">Expéditeur</p>
+
+      <flu-form-field>
+        <label class="label">Nom</label>
+        <input class="input is-medium" formControlName="name">
+      </flu-form-field>
+
+      <flu-form-field>
+        <label class="label">Email</label>
+        <input class="input is-medium" formControlName="email" type="email">
+      </flu-form-field>
+
+    </div>
+  </div>
+
+  <div class="level"></div>
+
+  <div class="card">
+    <div class="card-content" formGroupName="receiver">
+      <p class="title">Destinataire</p>
+
+      <flu-form-field>
+        <label class="label">Nom</label>
+        <input class="input is-medium" formControlName="name">
+      </flu-form-field>
+
+      <flu-form-field>
+        <label class="label">Email</label>
+        <input class="input is-medium" formControlName="email" type="email">
+      </flu-form-field>
+
+    </div>
+  </div>
+
+  <div class="level"></div>
+
+  <div class="card">
+    <div class="card-content" formGroupName="transporter">
+      <p class="title">Transporteur</p>
+
+      <flu-form-field>
+        <label class="label">Nom</label>
+        <input class="input is-medium" formControlName="name">
+      </flu-form-field>
+
+      <flu-form-field>
+        <label class="label">Email</label>
+        <input class="input is-medium" formControlName="email" type="email">
+      </flu-form-field>
+
+    </div>
+  </div>
+
+  <div class="level"></div>
+
+  <div class="card">
+    <div class="card-content" formGroupName="ship">
+      <p class="title">Bateau</p>
+
+      <flu-form-field>
+        <label class="label">Devise</label>
+        <input class="input is-medium" formControlName="name">
+      </flu-form-field>
+
+      <flu-form-field>
+        <label class="label">Matricule</label>
+        <input class="input is-medium" formControlName="regNumber">
+      </flu-form-field>
+
+    </div>
+  </div>
+
+</form>
+
+<ng-template #loading>
+  <flu-loading></flu-loading>
+</ng-template>

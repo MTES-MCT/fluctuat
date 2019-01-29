@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "test": "jest",
     "start": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "start:prod": "pm2 start dist/server.js"
   },
@@ -16,12 +17,21 @@
     "date-fns": "^1.29.0",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
-    "pdfmake": "^0.1.39"
+    "pdfmake": "^0.1.39",
+    "randomstring": "^1.1.5"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.13",
+    "jest": "^23.3.12",
     "pm2": "^3.2.2",
+    "ts-jest": "^23.10.5",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.2.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverage": true
   }
 }
