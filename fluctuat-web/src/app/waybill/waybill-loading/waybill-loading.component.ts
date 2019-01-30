@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { ResultHelper } from '../shared/result-helper';
+import { ResultHelper } from '../../core/result-helper';
 import { WaybillService } from '../shared/waybill.service';
 import { LoadInfo } from '../shared/models/load-info.model';
 import { PortList } from './ports-list';

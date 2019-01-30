@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Waybill } from '../shared/models/waybill.model';
-import { ResultHelper } from '../shared/result-helper';
+import { ResultHelper } from '../../core/result-helper';
 import { WaybillService } from '../shared/waybill.service';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, shareReplay, tap } from 'rxjs/operators';

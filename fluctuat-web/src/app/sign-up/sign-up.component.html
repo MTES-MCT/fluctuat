@@ -18,15 +18,13 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link" (click)="signUp()" [disabled]="signUpForm.invalid">S'inscrire</button>
+        <button class="button is-link" (click)="signUp()" [disabled]="signUpForm.invalid || result.pending">S'inscrire</button>
       </div>
       <div class="control">
         <button class="button is-white" routerLink="/connexion">Déjà une compte ?</button>
       </div>
     </div>
 
-    <div class="level" *ngIf="errorMsg">
-      <div class="level-item notification is-danger">{{errorMsg}}</div>
-    </div>
+    <flu-error [errorMsg]="result.errorMsg"></flu-error>
   </form>
 </flu-hero-container>

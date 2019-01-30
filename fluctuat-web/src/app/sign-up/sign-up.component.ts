@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { UserCredentials } from '../core/auth/user-credentials.model';
 import { AuthService } from '../core/auth/auth.service';
+import { ResultHelper } from '../core/result-helper';
 
 @Component({
   selector: 'flu-sign-up',
@@ -12,8 +13,7 @@ import { AuthService } from '../core/auth/auth.service';
 })
 export class SignUpComponent {
 
-  errorMsg: string;
-  waitingFor: boolean;
+  result: ResultHelper = new ResultHelper();
 
   userCredentials: UserCredentials = new UserCredentials();
 
@@ -21,21 +21,16 @@ export class SignUpComponent {
   }
 
   signUp() {
-    if (this.waitingFor) {
-      return;
-    }
-    this.errorMsg = undefined;
-    this.waitingFor = true;
+    this.result.waiting();
 
     this.authService.signUp(this.userCredentials).pipe(
-      tap(() => this.waitingFor = false),
       catchError((errorResponse) => {
-        this.waitingFor = false;
         return throwError(errorResponse.error);
       }))
       .subscribe(() => {
+        this.result.success();
         this.router.navigateByUrl('/mes-lettres-de-voiture')
-      }, error => this.errorMsg = error);
+      }, error => this.result.error(error));
 
   }
 }

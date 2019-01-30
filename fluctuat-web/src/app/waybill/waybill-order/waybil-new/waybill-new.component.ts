@@ -5,9 +5,9 @@ import { throwError } from 'rxjs';
 
 import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
 import { WaybillService } from '../../shared/waybill.service';
-import { ResultHelper } from '../../shared/result-helper';
 import { OrderInfo } from '../../shared/models/order-info.model';
 import { Waybill } from '../../shared/models/waybill.model';
+import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 
 @Component({

@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { ResultHelper } from '../../shared/result-helper';
 import { WaybillService } from '../../shared/waybill.service';
 import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
+import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 
 @Component({
