@@ -4,8 +4,9 @@ import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
-import { generatePdf } from '../generate-pdf';
-import { getDocDefinition } from '../waybill-pdf';
+import { generatePdf } from '../pdf/generate-pdf';
+import { getDocDefinition } from '../pdf/waybill-pdf';
+import { sendWaybill} from '../service/send-waybill'
 
 const randomstring = require('randomstring');
 
@@ -169,6 +170,11 @@ router.post('/:id/unload-info/validate', (req, res) => {
     unloadInfo.validatedAt = new Date();
     waybillStorage.put(waybill);
   }
+
+  // send waybill by email
+  sendWaybill(waybill)
+    .then(() => console.log('waybill sent'))
+    .catch(console.error);
 
   res.json(unloadInfo);
 });

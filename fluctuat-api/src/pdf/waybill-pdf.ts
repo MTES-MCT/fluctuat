@@ -1,4 +1,4 @@
-import { Waybill } from './models/waybill';
+import { Waybill } from '../models/waybill';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
@@ -56,12 +56,12 @@ export function getDocDefinition(waybill: Waybill) {
       { text: 'Déchargement', style: 'title2' },
 
       chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
-        'est le responsable du chargement.'),
+        'est le responsable du déchargement.'),
       '\n',
-      chainText('Le chargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
+      chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
         bold(unloadInfo.unloadEndDate), '.'),
       '\n',
-      chainText('Tonnage chargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
+      chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
       '\n',
       { text: 'Commentaires', style: 'title3' },
       unloadInfo.comments,
