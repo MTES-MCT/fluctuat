@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WaybillService } from '../shared/waybill.service';
+import { GENERIC_ERROR } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-access',
@@ -9,6 +10,7 @@ import { WaybillService } from '../shared/waybill.service';
 export class WaybillAccessComponent implements OnInit {
 
   waybillId: string;
+  errorMsg: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private waybillService: WaybillService) {
   }
@@ -20,7 +22,9 @@ export class WaybillAccessComponent implements OnInit {
   send() {
     this.waybillService.get(this.waybillId).subscribe(() => {
       this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
-    }, error => console.log(error))
+    }, error => {
+      this.errorMsg = error.status === 404 ? error.error : GENERIC_ERROR
+    })
   }
 
 }
