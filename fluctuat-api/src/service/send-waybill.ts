@@ -1,5 +1,5 @@
-import { getDocDefinition } from '../waybill-pdf';
-import { generatePdf } from '../generate-pdf';
+import { getDocDefinition } from '../pdf/waybill-pdf';
+import { generatePdf } from '../pdf/generate-pdf';
 import { EmailService } from '../email/email.service';
 
 let account = JSON.parse(require('fs').readFileSync('.data/email.config.json'));
