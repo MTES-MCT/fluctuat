@@ -55,7 +55,7 @@ export class WaybillUnloadingComponent implements OnInit {
       ))
       .subscribe(() => {
         this.result.success();
-        this.router.navigate(['lettre-de-voiture', this.waybillId, 'resume'])
+        this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
       }, (err => this.result.error(err)));
   }
 }

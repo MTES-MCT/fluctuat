@@ -12,7 +12,7 @@
   <div *ngIf="waybills$ | async as waybills; else loading">
     <div class="card" *ngFor="let waybill of waybills" style="margin-bottom: 0.75rem">
       <div class="card-content">
-        <p class="is-size-4"><a [routerLink]="['/lettre-de-voiture', waybill.id, 'resume']">{{waybill.id}}</a> </p>
+        <p class="is-size-4"><a [routerLink]="['/lettre-de-voiture', waybill.id, 'detail']">{{waybill.id}}</a> </p>
 
         <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
       </div>

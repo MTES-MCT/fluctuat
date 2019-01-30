@@ -7,6 +7,7 @@ import { verifyJWT } from '../security/verify-jwt.middleware';
 import { generatePdf } from '../pdf/generate-pdf';
 import { getDocDefinition } from '../pdf/waybill-pdf';
 import { sendWaybill} from '../service/send-waybill'
+import { fetchWaybill } from './fetch-waybill.middleware';
 
 const randomstring = require('randomstring');
 
@@ -45,13 +46,8 @@ router.get('/me', verifyJWT, (req, res) => {
   res.json(waybills);
 });
 
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
-
-  return res.json(waybill);
+router.get('/:id', fetchWaybill, (req, res) => {
+  return res.json(req['waybill']);
 });
 
 router.get('/:id/lettre-de-voiture.pdf', (req, res) => {
