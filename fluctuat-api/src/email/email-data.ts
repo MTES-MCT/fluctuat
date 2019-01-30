@@ -1,8 +1,7 @@
+import { HasEmail } from '../models/has-email.interface';
+
 export interface EmailData {
-  to: {
-    email: string,
-    name: string
-  },
+  to: HasEmail[],
   subject: string,
   body: {
     text: string,
