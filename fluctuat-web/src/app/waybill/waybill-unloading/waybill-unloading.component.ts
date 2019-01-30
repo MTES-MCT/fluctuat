@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UnloadInfo } from '../shared/models/unload-info.model';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-unloading',
@@ -50,7 +51,7 @@ export class WaybillUnloadingComponent implements OnInit {
     this.waybillService.sendUnloadInfo(this.waybillId, this.unloadInfoForm.value).pipe(
       catchError((error) => {
           console.error(error);
-          return throwError('Un problème est survenu. Veuillez réessayer plus tard.')
+          return throwError(GENERIC_ERROR_MSG)
         }
       ))
       .subscribe(() => {

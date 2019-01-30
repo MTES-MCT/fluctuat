@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
 import { ResultHelper } from '../../shared/result-helper';
 import { WaybillService } from '../../shared/waybill.service';
 import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
-
+import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-edition',
@@ -38,7 +38,7 @@ export class WaybillEditionComponent implements OnInit {
     this.waybillService.sendOrderInfo(this.waybillId, this.orderFormComponent.getValue()).pipe(
       catchError((error) => {
         console.error(error);
-        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
+        return throwError(GENERIC_ERROR_MSG);
       })
     ).subscribe(() => {
       this.result.success()

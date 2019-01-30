@@ -8,6 +8,7 @@ import { WaybillService } from '../../shared/waybill.service';
 import { ResultHelper } from '../../shared/result-helper';
 import { OrderInfo } from '../../shared/models/order-info.model';
 import { Waybill } from '../../shared/models/waybill.model';
+import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-new',
@@ -35,7 +36,7 @@ export class WaybillNewComponent implements OnInit {
     this.waybillService.create(waybill).pipe(
       catchError((error) => {
         console.error(error);
-        return throwError('Un problème est survenu. Veuillez réessayer plus tard.');
+        return throwError(GENERIC_ERROR_MSG);
       })
     ).subscribe((waybill: Waybill) => {
       console.log(waybill);

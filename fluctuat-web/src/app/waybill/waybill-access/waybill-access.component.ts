@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WaybillService } from '../shared/waybill.service';
-import { GENERIC_ERROR } from '../../core/generic-error';
+import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-access',
@@ -23,7 +23,7 @@ export class WaybillAccessComponent implements OnInit {
     this.waybillService.get(this.waybillId).subscribe(() => {
       this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
     }, error => {
-      this.errorMsg = error.status === 404 ? error.error : GENERIC_ERROR
+      this.errorMsg = error.status === 404 ? error.error : GENERIC_ERROR_MSG
     })
   }
 

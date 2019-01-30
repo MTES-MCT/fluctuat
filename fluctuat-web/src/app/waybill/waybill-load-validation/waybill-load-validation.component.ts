@@ -5,6 +5,7 @@ import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { Waybill } from '../shared/models/waybill.model';
 import { ResultHelper } from '../shared/result-helper';
+import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-load-validation',
@@ -34,7 +35,7 @@ export class WaybillLoadValidationComponent implements OnInit {
       tap((loadInfo) => waybill.loadInfo = loadInfo), // update loadInfo
       catchError((error) => {
           console.error(error);
-          return throwError('Un problème est survenu. Veuillez réessayer plus tard.')
+          return throwError(GENERIC_ERROR_MSG)
         }
       ))
       .subscribe(() => this.result.success(), (err => this.result.error(err)));

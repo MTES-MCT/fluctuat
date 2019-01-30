@@ -8,6 +8,7 @@ import { ResultHelper } from '../shared/result-helper';
 import { WaybillService } from '../shared/waybill.service';
 import { LoadInfo } from '../shared/models/load-info.model';
 import { PortList } from './ports-list';
+import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-loading',
@@ -59,7 +60,7 @@ export class WaybillLoadingComponent implements OnInit {
     this.waybillService.sendLoadInfo(this.waybillId, this.loadInfoForm.value).pipe(
       catchError((error) => {
           console.error(error);
-          return throwError('Un problème est survenu. Veuillez réessayer plus tard.')
+          return throwError(GENERIC_ERROR_MSG)
         }
       ))
       .subscribe(() => {

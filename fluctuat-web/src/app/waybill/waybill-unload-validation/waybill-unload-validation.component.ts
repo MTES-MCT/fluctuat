@@ -5,6 +5,7 @@ import { ResultHelper } from '../shared/result-helper';
 import { WaybillService } from '../shared/waybill.service';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-unload-validation',
@@ -34,7 +35,7 @@ export class WaybillUnloadValidationComponent implements OnInit {
       tap((unloadInfo) => waybill.unloadInfo = unloadInfo), // update unloadInfo
       catchError((error) => {
           console.error(error);
-          return throwError('Un problème est survenu. Veuillez réessayer plus tard.')
+          return throwError(GENERIC_ERROR_MSG)
         }
       ))
       .subscribe(() => this.result.success(), (err => this.result.error(err)));
