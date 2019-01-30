@@ -28,6 +28,7 @@ import { WaybillUnloadInfoComponent } from './waybill/shared/waybill-unload-info
 import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/waybill-order-info.component';
 import { DashboardComponent } from './waybill/dashboard/dashboard.component';
 import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybill-options.component';
+import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybil
     WaybillUnloadValidationComponent,
     WaybillUnloadInfoComponent,
     DashboardComponent,
-    WaybillOptionsComponent
+    WaybillOptionsComponent,
+    WaybillAccessComponent
   ],
   imports: [
     AppRoutingModule,

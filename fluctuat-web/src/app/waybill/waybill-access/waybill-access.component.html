@@ -1,0 +1,23 @@
+<flu-hero-container>
+  <h2 class="title">Acceder à un lettre de voiture</h2>
+  <form style="max-width: 400px" #accessForm="ngForm">
+
+    <div class="field">
+      <div class="control">
+        <label class="label">Nº Lettre de voiture</label>
+        <input class="input is-medium" name="waybillId" [(ngModel)]="waybillId"
+               autocomplete="waybill-id" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <button class="button is-link" (click)="send()" [disabled]="accessForm.invalid">Accèder</button>
+      </div>
+    </div>
+
+    <div class="level" *ngIf="errorMsg">
+      <div class="level-item notification is-danger">{{errorMsg}}</div>
+    </div>
+  </form>
+</flu-hero-container>

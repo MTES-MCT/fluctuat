@@ -10,6 +10,15 @@
 
   <div class="navbar-end">
 
+
+    <div class="navbar-item">
+      <button routerLink="/acces-lettre-de-voiture" class="button is-white is-medium">Consulter une Lettre de Voiture</button>
+    </div>
+
+    <div class="navbar-item" *ngIf="authenticated$ | async">
+      <button routerLink="/mes-lettres-de-voiture" class="button is-white is-medium">Mes lettres de voiture</button>
+    </div>
+
     <div class="navbar-item" *ngIf="authenticated$ | async">
       <button (click)="logout()" class="button is-white is-medium">Déconnexion</button>
     </div>

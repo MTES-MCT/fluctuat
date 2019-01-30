@@ -13,11 +13,13 @@ import { WaybillUnloadingComponent } from './waybill/waybill-unloading/waybill-u
 import { WaybillLoadValidationComponent } from './waybill/waybill-load-validation/waybill-load-validation.component';
 import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
 import { WaybillDetailComponent } from './waybill/waybill-detail/waybill-detail.component';
+import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'connexion', component: LoginComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'inscription', component: SignUpComponent, canActivate: [ AlreadyLoggedGuard ] },
+  { path: 'acces-lettre-de-voiture', component: WaybillAccessComponent},
   { path: 'lettre-de-voiture/new', component: WaybillNewComponent },
   { path: 'lettre-de-voiture/:id/detail', component: WaybillDetailComponent },
   { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
