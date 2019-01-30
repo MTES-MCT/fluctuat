@@ -7,10 +7,10 @@ import { Waybill } from '../shared/models/waybill.model';
 import { WaybillService } from '../shared/waybill.service';
 
 @Component({
-  selector: 'flu-waybill-summary',
-  templateUrl: './waybill-summary.component.html'
+  selector: 'flu-waybill-detail',
+  templateUrl: './waybill-detail.component.html'
 })
-export class WaybillSummaryComponent implements OnInit {
+export class WaybillDetailComponent implements OnInit {
 
   waybill$: Observable<Waybill>;
   waybillId: string;
