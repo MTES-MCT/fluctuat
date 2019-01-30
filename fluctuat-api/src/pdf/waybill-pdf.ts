@@ -56,9 +56,9 @@ export function getDocDefinition(waybill: Waybill) {
       { text: 'Déchargement', style: 'title2' },
 
       chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
-        'est le responsable du chargement.'),
+        'est le responsable du déchargement.'),
       '\n',
-      chainText('Le chargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
+      chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
         bold(unloadInfo.unloadEndDate), '.'),
       '\n',
       chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
