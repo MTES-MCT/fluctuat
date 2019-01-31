@@ -11,6 +11,7 @@ export class AuthService {
   private isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
+    this.isAuthenticated(); // init value
   }
 
   signUp(userCredentials: UserCredentials) {
