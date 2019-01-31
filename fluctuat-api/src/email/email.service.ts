@@ -3,7 +3,7 @@ import * as mailjet from 'node-mailjet';
 
 const DEFAULT_FROM = {
   email: 'elias.boukamza@beta.gouv.fr',
-  name: 'Fluctuat ⛴'
+  name: 'Fluctuat Info'
 };
 
 export class EmailService {

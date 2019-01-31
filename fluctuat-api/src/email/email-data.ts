@@ -4,7 +4,7 @@ export interface EmailData {
   to: HasEmail[],
   subject: string,
   body: {
-    text: string,
-    html: string
+    text?: string,
+    html?: string
   }
 }

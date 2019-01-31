@@ -6,7 +6,7 @@ import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import { generatePdf } from '../pdf/generate-pdf';
 import { getDocDefinition } from '../pdf/waybill-pdf';
-import { sendWaybill} from '../service/send-waybill'
+import { sendWaybill, sendWaybillLoadValidation, sendWaybillUnloadValidation } from '../service/send-waybill.service'
 import { fetchWaybill } from './fetch-waybill.middleware';
 
 const randomstring = require('randomstring');
@@ -87,6 +87,11 @@ router.put('/:id/load-info', fetchWaybill, (req, res) => {
 
   waybillStorage.put(waybill);
 
+  // send validation email
+  sendWaybillLoadValidation(waybill, req.headers.origin as string)
+    .then(() => console.log('load validation sent'))
+    .catch(console.error);
+
   res.status(204).end();
 });
 
@@ -124,6 +129,11 @@ router.put('/:id/unload-info', fetchWaybill, (req, res) => {
 
   waybillStorage.put(waybill);
 
+  // send validation email
+  sendWaybillUnloadValidation(waybill, req.headers.origin as string)
+    .then(() => console.log('unload validation sent'))
+    .catch(console.error);
+
   res.status(204).end();
 });
 
@@ -138,12 +148,12 @@ router.post('/:id/unload-info/validate', fetchWaybill, (req, res) => {
   if (!unloadInfo.validatedAt) {
     unloadInfo.validatedAt = new Date();
     waybillStorage.put(waybill);
-  }
 
-  // send waybill by email
-  sendWaybill(waybill)
-    .then(() => console.log('waybill sent'))
-    .catch(console.error);
+    // send waybill by email
+    sendWaybill(waybill)
+      .then(() => console.log('waybill sent'))
+      .catch(console.error);
+  }
 
   res.json(unloadInfo);
 });
