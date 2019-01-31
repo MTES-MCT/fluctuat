@@ -50,11 +50,8 @@ router.get('/:id', fetchWaybill, (req, res) => {
   return res.json(req['waybill']);
 });
 
-router.get('/:id/lettre-de-voiture.pdf', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   generatePdf(getDocDefinition(waybill))
     .then(pdf => {
@@ -66,20 +63,14 @@ router.get('/:id/lettre-de-voiture.pdf', (req, res) => {
   })
 });
 
-router.get('/:id/order-info', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.get('/:id/order-info', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   return res.json(waybill.order);
 });
 
-router.put('/:id/order-info', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.put('/:id/order-info', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   waybill.order = req.body;
 
@@ -88,11 +79,8 @@ router.put('/:id/order-info', (req, res) => {
   res.status(204).end();
 });
 
-router.put('/:id/load-info', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.put('/:id/load-info', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   waybill.loadInfo = req.body;
   waybill.loadInfo.sentAt = new Date();
@@ -102,20 +90,14 @@ router.put('/:id/load-info', (req, res) => {
   res.status(204).end();
 });
 
-router.get('/:id/load-info', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.get('/:id/load-info', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   return res.json(waybill.loadInfo);
 });
 
-router.post('/:id/load-info/validate', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.post('/:id/load-info/validate', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   const loadInfo = waybill.loadInfo;
 
@@ -127,21 +109,15 @@ router.post('/:id/load-info/validate', (req, res) => {
   res.json(loadInfo);
 });
 
-router.get('/:id/unload-info', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.get('/:id/unload-info', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   return res.json(waybill.unloadInfo);
 });
 
 
-router.put('/:id/unload-info', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.put('/:id/unload-info', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   waybill.unloadInfo = req.body;
   waybill.unloadInfo.sentAt = new Date();
@@ -151,16 +127,13 @@ router.put('/:id/unload-info', (req, res) => {
   res.status(204).end();
 });
 
-router.post('/:id/unload-info/validate', (req, res) => {
-  const id = req.params.id;
-
-  const waybill: Waybill = waybillStorage.get(id);
-  //TODO handle 404
+router.post('/:id/unload-info/validate', fetchWaybill, (req, res) => {
+  const waybill: Waybill = req['waybill'];
 
   const unloadInfo = waybill.unloadInfo;
 
   // add the link to pdf document
-  waybill.documentUrl = `/api/waybill/${id}/lettre-de-voiture.pdf`;
+  waybill.documentUrl = `/api/waybill/${waybill.id}/lettre-de-voiture.pdf`;
 
   if (!unloadInfo.validatedAt) {
     unloadInfo.validatedAt = new Date();
