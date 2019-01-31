@@ -44,7 +44,7 @@ describe('WaybillOptions component tests', () => {
 
     const elem = fixture.nativeElement.querySelector('a');
 
-    expect(elem.innerHTML.trim()).toBe('Télécharger en format pdf');
+    expect(elem.innerHTML.trim()).toBe('Télécharger au format pdf');
     expect(elem.href).toBe(waybill.documentUrl)
   })
 
