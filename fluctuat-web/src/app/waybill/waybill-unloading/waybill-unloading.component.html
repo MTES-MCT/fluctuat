@@ -55,16 +55,11 @@
 
     <div class="level"></div>
 
-    <div class="level">
-      <div class="level-item"></div>
-      <div class="level-right">
-        <div class="level-item">
-          <button class="button is-link" type="submit"
-                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
-            Déchargement Terminé
-          </button>
-        </div>
-      </div>
+    <div class="buttons">
+      <button class="button is-link" type="submit"
+              [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+        Déchargement Terminé
+      </button>
     </div>
 
   </form>

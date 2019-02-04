@@ -18,16 +18,11 @@
 
     <div class="level"></div>
 
-    <div class="level" *ngIf="!waybill.loadInfo.validatedAt">
-      <div class="level-item"></div>
-      <div class="level-right">
-        <div class="level-item">
-          <button class="button is-link" (click)="validateLoadInfo(waybill)"
-                  [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
-            Valider le chargement...
-          </button>
-        </div>
-      </div>
+    <div class="buttons" *ngIf="!waybill.loadInfo.validatedAt">
+      <button class="button is-link" (click)="validateLoadInfo(waybill)"
+              [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
+        Valider le chargement...
+      </button>
     </div>
 
   </ng-container>
