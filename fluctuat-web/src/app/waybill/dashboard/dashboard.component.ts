@@ -17,9 +17,28 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.waybills$= this.waybillService.getAllMe().pipe(
+    this.waybills$ = this.waybillService.getAllMe().pipe(
       shareReplay(1)
     );
   }
 
+  getStatus(waybill: Waybill) {
+    if (waybill.unloadInfo.validatedAt) {
+      return 'Fini'
+    }
+
+    if (waybill.unloadInfo.sentAt) {
+      return 'Déchargement en cours'
+    }
+
+    if (waybill.loadInfo.validatedAt) {
+      return 'Chargément validé'
+    }
+
+    if (waybill.loadInfo.sentAt) {
+      return 'Chargement en cours'
+    }
+
+    return 'Crée'
+  }
 }
