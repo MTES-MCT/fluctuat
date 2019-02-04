@@ -1,0 +1,31 @@
+<div class="modal" [ngClass]="{'is-active': active}">
+  <div class="modal-background"></div>
+
+  <div class="modal-card">
+
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        Envoyez la lettre de voiture nº {{waybillId}} par SMS
+      </p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+
+    <form class="modal-card-body" #smsForm="ngForm">
+
+      <div class="field">
+        <div class="control">
+          <label class="label">Téléphone</label>
+          <input class="input is-medium" name="phone" [(ngModel)]="phone" required>
+        </div>
+      </div>
+
+    </form>
+
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button class="button is-link" (click)="send()" [disabled]="smsForm.invalid">Envoyer</button>
+      </div>
+    </footer>
+  </div>
+</div>

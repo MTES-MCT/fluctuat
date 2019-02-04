@@ -48,8 +48,12 @@
 
     <div class="level"></div>
 
+
     <!--Action Options -->
-    <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
+    <div class="buttons">
+      <button class="button" *ngIf="!waybill.documentUrl" (click)="openShareModal()">Envoyer par sms</button>
+      <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
+    </div>
 
   </ng-container>
 
@@ -58,3 +62,5 @@
   </ng-template>
 
 </flu-hero-container>
+
+<flu-waybill-share [(show)]="showShareModal" [waybillId]="waybillId"></flu-waybill-share>

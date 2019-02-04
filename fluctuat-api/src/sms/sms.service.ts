@@ -4,6 +4,8 @@ export class SmsService {
   mailjetService;
 
   constructor(apiToken: string) {
+    console.log('init sms service');
+
     this.mailjetService = mailjet.connect(apiToken, {
       url: 'api.mailjet.com',
       version: 'v4'

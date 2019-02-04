@@ -17,10 +17,19 @@ router.post('/waybill', (req, res) => {
   // todo check waybill
 
   const sms = `La Lettre de voiture ${smsData.waybillId} est disponible sur fluctuat.` +
-   `${req.headers.origin}/acces-lettre-de-voiture?id=${smsData.waybillId}`;
+    ` ${req.headers.origin}/acces-lettre-de-voiture?id=${smsData.waybillId}`;
 
-  smsService.sendSms(smsData.cellPhone, sms)
-    .then(() => console.log('sms sent'))
-    .then(() => res.sendStatus(204))
-    .catch(() => res.sendStatus(500))
+  /// TODO remove mock
+  console.log(sms);
+  return res.sendStatus(204)
+
+  // smsService.sendSms(smsData.cellPhone, sms)
+  //   .then((result) => console.log('sms sent', result))
+  //   .then(() => res.sendStatus(204))
+  //   .catch((error) => {
+  //     console.error(error);
+  //     return res.sendStatus(500);
+  //   })
 });
+
+module.exports = router;

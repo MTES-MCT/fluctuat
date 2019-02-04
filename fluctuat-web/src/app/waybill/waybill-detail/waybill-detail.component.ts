@@ -15,6 +15,8 @@ export class WaybillDetailComponent implements OnInit {
   waybill$: Observable<Waybill>;
   waybillId: string;
 
+  showShareModal = false;
+
   constructor(private waybillService: WaybillService, private route: ActivatedRoute) {
   }
 
@@ -40,5 +42,9 @@ export class WaybillDetailComponent implements OnInit {
 
   isUnloadFinished(waybill: Waybill) {
     return waybill.unloadInfo.validatedAt
+  }
+
+  openShareModal() {
+    this.showShareModal = true;
   }
 }
