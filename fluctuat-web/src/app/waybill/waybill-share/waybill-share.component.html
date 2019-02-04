@@ -20,11 +20,13 @@
         </div>
       </div>
 
+      <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
     </form>
 
     <footer class="modal-card-foot">
       <div class="buttons">
-        <button class="button is-link" (click)="send()" [disabled]="smsForm.invalid">Envoyer</button>
+        <button class="button is-link" (click)="send()" [disabled]="smsForm.invalid || result.pending">Envoyer</button>
       </div>
     </footer>
   </div>
