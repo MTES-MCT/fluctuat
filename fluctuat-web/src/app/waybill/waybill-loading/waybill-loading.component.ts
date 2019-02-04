@@ -24,6 +24,8 @@ export class WaybillLoadingComponent implements OnInit {
 
   readonly ports = PortList;
 
+  showShareModal = false;
+
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
               private route: ActivatedRoute, private router: Router) {
   }
@@ -72,5 +74,9 @@ export class WaybillLoadingComponent implements OnInit {
     console.log(this.loadInfoForm.value);
     console.log('send load info');
     this.result.success();
+  }
+
+  openShareModal() {
+    this.showShareModal = true;
   }
 }
