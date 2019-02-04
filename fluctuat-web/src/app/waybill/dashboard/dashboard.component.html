@@ -18,28 +18,6 @@
       </div>
     </div>
 
-    <!--<tbody>
-    <tr *ngFor="let contract of contracts">
-      <td><a [routerLink]="['/transporteur/contrat/' + contract.id]">{{contract.id}}</a></td>
-      <td>{{contract.delivery.client.name}}</td>
-      <td>
-        <p *ngIf="contract.status === STATUS.CREATED">En attente d'acceptation de la Confirmation de Transport</p>
-        <p *ngIf="contract.status === STATUS.LOADED">En attente de confirmation du Chargement</p>
-        <p *ngIf="contract.status === STATUS.UNLOADED">En attente de confirmation du Déchargement</p>
-        <button *ngIf="contract.status === STATUS.ACCEPTED"
-                [routerLink]="'/transporteur/contrat/' + contract.id + '/bateau'"
-                class="button is-link">
-          Chargement...
-        </button>
-        <button *ngIf="contract.status === STATUS.CONFIRMED"
-                [routerLink]="'/transporteur/contrat/' + contract.id + '/dechargement'"
-                class="button is-link">
-          Déchargement...
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>-->
   </div>
 </flu-hero-container>
 

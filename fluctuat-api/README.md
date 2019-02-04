@@ -4,6 +4,10 @@
 
    bcrypt requires g++ (included in build-essential ubuntu package ubuntu)
 
+   or
+
+   yum install gcc
+
 # Installation
 
 Run the command
