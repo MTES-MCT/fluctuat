@@ -16,8 +16,11 @@
       <div class="field">
         <div class="control">
           <label class="label">Téléphone</label>
-          <input class="input is-medium" name="phone" [(ngModel)]="phone" required>
+          <input class="input is-medium" name="phone" [(ngModel)]="phoneValue" #phone="ngModel"
+                 pattern="(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}" required
+                 [ngClass]="{'is-danger': hasError(phone)}">
         </div>
+        <p *ngIf="hasError(phone)" class="help is-danger">Le numéro de portable n'est pas valide</p>
       </div>
 
       <flu-error [errorMsg]="result.errorMsg"></flu-error>

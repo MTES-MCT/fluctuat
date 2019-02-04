@@ -13,7 +13,7 @@ export class WaybillShareComponent {
 
   active: boolean;
 
-  phone: string;
+  phoneValue: string;
 
   result: ResultHelper = new ResultHelper();
 
@@ -32,6 +32,10 @@ export class WaybillShareComponent {
   @Output()
   showChange = new EventEmitter();
 
+  hasError(formValue) {
+    return formValue.invalid && (formValue.dirty || formValue.touched)
+  }
+
   closeModal() {
     this.show = false;
   }
@@ -39,13 +43,13 @@ export class WaybillShareComponent {
   send() {
     this.result.waiting();
 
-    this.notifyService.sendNotification({ waybillId: this.waybillId, phone: this.phone }).pipe(
+    this.notifyService.sendNotification({ waybillId: this.waybillId, phone: this.phoneValue }).pipe(
       catchError((errorResponse) => {
         console.log(errorResponse);
         return throwError(GENERIC_ERROR_MSG);
       }))
       .subscribe(() => {
-        console.log('send sms', this.phone);
+        console.log('send sms', this.phoneValue);
         this.result.success();
         this.closeModal();
       }, error => this.result.error(error))
