@@ -13,6 +13,8 @@ export class SmsService {
   }
 
   sendSms(cellPhone: string, text: string) {
+    cellPhone = '+33'.concat(cellPhone) // add french prefix
+      .replace(/\s/g, '');// remove spaces
     const smsData = {
       Text: text,
       To: cellPhone,

@@ -78,7 +78,8 @@
                  [ngClass]="{'is-danger': hasError(orderForm.get('transporter').controls.cellPhone)}">
         </div>
       </div>
-      <p *ngIf="hasError(orderForm.get('transporter').controls.cellPhone)" class="help is-danger">Le numéro de portable n'est pas valide</p>
+      <p *ngIf="hasError(orderForm.get('transporter').controls.cellPhone)" class="help is-danger">
+        Le numéro de portable n'est pas au format 06 01 02 03 04</p>
     </div>
   </div>
 
