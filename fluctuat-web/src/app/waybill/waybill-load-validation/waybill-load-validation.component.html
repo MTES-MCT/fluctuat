@@ -11,7 +11,7 @@
     <flu-waybill-load-info [loadInfo]="waybill.loadInfo"></flu-waybill-load-info>
 
     <flu-success *ngIf="waybill.loadInfo.validatedAt">
-      Chargement validé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+      Chargement confirmé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
     </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>
@@ -21,7 +21,7 @@
     <div class="buttons" *ngIf="!waybill.loadInfo.validatedAt">
       <button class="button is-link" (click)="validateLoadInfo(waybill)"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
-        Valider le chargement...
+        Confirmer le chargement...
       </button>
     </div>
 

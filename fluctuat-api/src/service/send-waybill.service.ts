@@ -57,16 +57,16 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
 
 const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
   let transporter = waybill.order.transporter;
-  let validationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/validation-chargement`;
+  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/confirmation-chargement`;
 
   let email: EmailData = {
     to: [transporter],
-    subject: `⚓ Chargement à valider - Lettre de voiture nº ${waybill.id}`,
+    subject: `⚓ Chargement à confirmer - Lettre de voiture nº ${waybill.id}`,
     body: {
       html: `<p>Bonjour ${transporter.name},</p>
              <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.id} ont été enregistrés,
-              veuillez les valider dès maintenant.</p>
-             <a href="${validationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
+              veuillez les confirmer dès maintenant.</p>
+             <a href="${confirmationLink}">Cliquez sur ce lien pour accéder à votre lettre de voiture</a>
              <p>Fluctuat</p>`
     }
   };
@@ -76,16 +76,16 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
 
 const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
   let transporter = waybill.order.transporter;
-  let validationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/validation-dechargement`;
+  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/confirmation-dechargement`;
 
   let email: EmailData = {
     to: [transporter],
-    subject: `⚓ Déchargement à valider - Lettre de voiture nº ${waybill.id}`,
+    subject: `⚓ Déchargement à confirmer - Lettre de voiture nº ${waybill.id}`,
     body: {
       html: `<p>Bonjour ${transporter.name},</p>
              <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.id} ont été enregistrés,
-              veuillez les valider dès maintenant.</p>
-             <a href="${validationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
+              veuillez les confirmer dès maintenant.</p>
+             <a href="${confirmationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
              <p>Fluctuat</p>`
     }
   };

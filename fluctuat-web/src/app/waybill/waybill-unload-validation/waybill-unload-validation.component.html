@@ -15,7 +15,7 @@
     <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
 
     <flu-success *ngIf="waybill.unloadInfo.validatedAt">
-      Déchargement validé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}
+      Déchargement confirmé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}
     </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>
@@ -25,7 +25,7 @@
     <div class="buttons" *ngIf="!waybill.unloadInfo.validatedAt">
       <button class="button is-link" (click)="validateUnloadInfo(waybill)"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
-        Valider le déchargement...
+        Confirmer le déchargement...
       </button>
     </div>
 

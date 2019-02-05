@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     }
 
     if (waybill.loadInfo.validatedAt) {
-      return 'Chargément validé'
+      return 'Chargément confirmé'
     }
 
     if (waybill.loadInfo.sentAt) {

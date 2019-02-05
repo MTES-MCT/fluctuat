@@ -24,9 +24,9 @@ const routes: Routes = [
   { path: 'lettre-de-voiture/:id/detail', component: WaybillDetailComponent },
   { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
   { path: 'lettre-de-voiture/:id/chargement', component: WaybillLoadingComponent },
-  { path: 'lettre-de-voiture/:id/validation-chargement', component: WaybillLoadValidationComponent },
+  { path: 'lettre-de-voiture/:id/confirmation-chargement', component: WaybillLoadValidationComponent },
   { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
-  { path: 'lettre-de-voiture/:id/validation-dechargement', component: WaybillUnloadValidationComponent },
+  { path: 'lettre-de-voiture/:id/confirmation-dechargement', component: WaybillUnloadValidationComponent },
   { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [AuthGuard]},
 
 ];

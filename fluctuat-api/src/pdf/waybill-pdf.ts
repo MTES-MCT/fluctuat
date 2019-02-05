@@ -47,7 +47,7 @@ export function getDocDefinition(waybill: Waybill) {
           },
           {
             width: '50%',
-            text: chainText('Validé par ', order.transporter.name, format(loadInfo.validatedAt,
+            text: chainText('Confirmé par ', order.transporter.name, format(loadInfo.validatedAt,
               '[ le] D MMMM YYYY', { locale: fr })),
           }
         ]
@@ -75,7 +75,7 @@ export function getDocDefinition(waybill: Waybill) {
           },
           {
             width: '50%',
-            text: chainText('Validé par ', order.transporter.name, format(unloadInfo.validatedAt,
+            text: chainText('Confirmé par ', order.transporter.name, format(unloadInfo.validatedAt,
               '[ le] D MMMM YYYY', { locale: fr })),
           }
         ]

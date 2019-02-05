@@ -17,11 +17,11 @@
       <!--status-->
       <div class="level">
         <div class="level-item notification" *ngIf="isNotLoadFinished(waybill)">
-          Le chargement n'a pas été encore validé par le transporteur
+          Le chargement n'a pas été encore confirmé par le transporteur
         </div>
 
         <div class="level-item notification" *ngIf="isLoadFinished(waybill)">
-          Chargement validé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+          Chargement confirmé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
         </div>
       </div>
 
@@ -37,11 +37,11 @@
 
       <div class="level">
         <div class="level-item notification" *ngIf="isNotUnloadFinished(waybill)">
-          Le déchargement n'a pas été encore validé par le transporteur
+          Le déchargement n'a pas été encore confirmé par le transporteur
         </div>
 
         <div class="level-item notification" *ngIf="isUnloadFinished(waybill)">
-          Déchargement validé le {{waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+          Déchargement confirmé le {{waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
         </div>
       </div>
     </ng-container>
