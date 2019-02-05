@@ -33,6 +33,28 @@ const sendWaybill = (waybill: Waybill) => {
     .then(pdf => emailService.sendEmail(email, pdf))
 };
 
+const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
+
+  let email: EmailData = {
+    to: [
+      waybill.order.customer,
+      waybill.order.receiver,
+      waybill.order.sender
+    ],
+    subject: `⚓  Chargement confirmé -️ Lettre de voiture nº ${waybill.id}`,
+    body: {
+      text: '',
+      html: `<p>Bonjour,</p>
+             <p>Le chargement a été confirmé par le transporteur.</p>
+             <p>Vous pouvez consulter les informations en cliquant sur
+             <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.id}">ce lien</a></p>
+             <p>Fluctuat</p>`
+    }
+  };
+
+  return emailService.sendEmail(email);
+};
+
 const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
   let transporter = waybill.order.transporter;
   let validationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/validation-chargement`;
@@ -71,5 +93,5 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
   return emailService.sendEmail(email);
 };
 
-export { sendWaybill, sendWaybillLoadValidation, sendWaybillUnloadValidation }
+export { sendWaybill, sendWaybillLoaded, sendWaybillLoadValidation, sendWaybillUnloadValidation }
 

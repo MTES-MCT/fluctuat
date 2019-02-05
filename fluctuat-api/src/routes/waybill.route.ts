@@ -6,7 +6,12 @@ import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import { generatePdf } from '../pdf/generate-pdf';
 import { getDocDefinition } from '../pdf/waybill-pdf';
-import { sendWaybill, sendWaybillLoadValidation, sendWaybillUnloadValidation } from '../service/send-waybill.service'
+import {
+  sendWaybill,
+  sendWaybillLoaded,
+  sendWaybillLoadValidation,
+  sendWaybillUnloadValidation
+} from '../service/send-waybill.service'
 import { fetchWaybill } from './fetch-waybill.middleware';
 
 const randomstring = require('randomstring');
@@ -110,6 +115,11 @@ router.post('/:id/load-info/validate', fetchWaybill, (req, res) => {
     loadInfo.validatedAt = new Date();
     waybillStorage.put(waybill);
   }
+
+  // send waybill loaded email
+  sendWaybillLoaded(waybill, req.headers.origin as string)
+    .then(() => console.log('waybill loaded email sent'))
+    .catch(console.error);
 
   res.json(loadInfo);
 });
