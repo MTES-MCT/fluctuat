@@ -3,10 +3,14 @@ import { generatePdf } from '../pdf/generate-pdf';
 import { EmailService } from '../email/email.service';
 import { Waybill } from '../models/waybill';
 import { EmailData } from '../email/email-data';
+import { SmsService } from '../sms/sms.service';
+import { WaybillNotify } from '../models/waybill.notify';
 
 let account = JSON.parse(require('fs').readFileSync('.data/email.config.json'));
-
 let emailService = new EmailService(account.user, account.pass);
+
+let smsConfig = JSON.parse(require('fs').readFileSync('.data/sms.config.json'));
+const smsService = new SmsService(smsConfig.token, true);
 
 const sendWaybill = (waybill: Waybill) => {
   let email: EmailData = {
@@ -93,5 +97,18 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
   return emailService.sendEmail(email);
 };
 
-export { sendWaybill, sendWaybillLoaded, sendWaybillLoadValidation, sendWaybillUnloadValidation }
+const sendWaybillNotification = (notifyData: WaybillNotify, baseUrl: string) => {
+  const sms = `La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.` +
+    ` ${baseUrl}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
+
+  return smsService.sendSms(notifyData.cellphone, sms)
+};
+
+export {
+  sendWaybill,
+  sendWaybillLoaded,
+  sendWaybillLoadValidation,
+  sendWaybillUnloadValidation,
+  sendWaybillNotification
+}
 

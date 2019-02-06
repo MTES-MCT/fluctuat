@@ -1,11 +1,8 @@
 import { Router } from 'express';
-import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
+import { sendWaybillNotification } from '../service/send-waybill.service';
 
 const router = Router();
-
-let smsConfig = JSON.parse(require('fs').readFileSync('.data/sms.config.json'));
-const smsService = new SmsService(smsConfig.token);
 
 router.post('/waybill', (req, res) => {
 
@@ -13,10 +10,7 @@ router.post('/waybill', (req, res) => {
 
   // todo check if waybill exists
 
-  const sms = `La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.` +
-    ` ${req.headers.origin}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
-
-  smsService.sendSms(notifyData.cellphone, sms)
+  sendWaybillNotification(notifyData, req.headers.origin as string)
     .then(() => console.log('sms sent'))
     .then(() => res.sendStatus(204))
     .catch((error) => {
