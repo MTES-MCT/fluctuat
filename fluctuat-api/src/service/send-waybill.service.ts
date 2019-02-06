@@ -79,7 +79,7 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
 
   return Promise.all([
     emailService.sendEmail(email),
-    smsService.sendSms(transporter.cellPhone, sms)
+    smsService.sendSms(transporter.cellphone, sms)
   ]);
 };
 
@@ -103,7 +103,7 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
 
   return Promise.all([
     emailService.sendEmail(email),
-    smsService.sendSms(transporter.cellPhone, sms)
+    smsService.sendSms(transporter.cellphone, sms)
   ]);
 };
 

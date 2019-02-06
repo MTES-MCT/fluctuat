@@ -1,5 +1,5 @@
 export class Person {
   name: string;
   email: string;
-  cellPhone: string;
+  cellphone: string;
 }

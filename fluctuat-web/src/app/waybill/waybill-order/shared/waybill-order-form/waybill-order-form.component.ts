@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 import { Person } from '../../../shared/models/person.model';
-import { isFrenchCellPhone } from '../../../../core/is-french-cellphone';
+import { isFrenchCellphone } from '../../../../core/is-french-cellphone';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class WaybillOrderFormComponent {
     return this.fromBuilder.group({
       name: [person.name],
       email: [person.email, Validators.email],
-      cellPhone: [person.cellPhone, this.validatePhone]
+      cellphone: [person.cellphone, this.validatePhone]
     })
   }
 
@@ -46,7 +46,7 @@ export class WaybillOrderFormComponent {
   }
 
   validatePhone(control: AbstractControl) {
-    return isFrenchCellPhone(control.value) ? null : { 'invalidPhone': control.value }
+    return isFrenchCellphone(control.value) ? null : { 'invalidPhone': control.value }
   }
 
   hasError(formValue) {

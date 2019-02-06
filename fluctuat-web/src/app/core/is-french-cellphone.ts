@@ -1,5 +1,5 @@
-const cellPhoneRegEx = /^[\s]*0[6-7](?:[\s]*\d{2}){4}[\s]*$/;
+const cellphoneRegEx = /^[\s]*0[6-7](?:[\s]*\d{2}){4}[\s]*$/;
 
-const isFrenchCellPhone = (phone) => cellPhoneRegEx.test(phone);
+const isFrenchCellphone = (phone) => cellphoneRegEx.test(phone);
 
-export { isFrenchCellPhone }
+export { isFrenchCellphone }
