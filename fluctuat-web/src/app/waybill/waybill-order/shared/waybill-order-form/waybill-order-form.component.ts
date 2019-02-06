@@ -46,11 +46,10 @@ export class WaybillOrderFormComponent {
   }
 
   validatePhone(control: AbstractControl) {
-    return isFrenchCellphone(control.value) ? null : { 'invalidPhone': control.value }
+    return !control.value || isFrenchCellphone(control.value) ? null : { 'invalidPhone': control.value }
   }
 
   hasError(formValue) {
-    console.log(formValue);
     return formValue.invalid && (formValue.dirty || formValue.touched)
   }
 

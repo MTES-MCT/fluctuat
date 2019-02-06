@@ -33,6 +33,10 @@ export class WaybillEditionComponent implements OnInit {
   }
 
   sendOrderInfo() {
+    if (this.orderFormComponent.orderForm.invalid) {
+      return this.result.error('Veuillez vérifier votre saisie');
+    }
+
     this.result.waiting();
 
     this.waybillService.sendOrderInfo(this.waybillId, this.orderFormComponent.getValue()).pipe(

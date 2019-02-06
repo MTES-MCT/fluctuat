@@ -30,9 +30,14 @@ export class WaybillNewComponent implements OnInit {
   }
 
   create() {
+    if (this.orderFormComponent.orderForm.invalid) {
+      return this.result.error("Veuillez vérifier votre saisie");
+    }
+
     this.result.waiting();
     const waybill = new Waybill();
     waybill.order = this.orderFormComponent.getValue();
+
     this.waybillService.create(waybill).pipe(
       catchError((error) => {
         console.error(error);
