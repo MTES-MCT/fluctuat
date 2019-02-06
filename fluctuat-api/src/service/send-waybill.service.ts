@@ -6,11 +6,12 @@ import { EmailData } from '../email/email-data';
 import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
 
-let account = JSON.parse(require('fs').readFileSync('.data/email.config.json'));
-let emailService = new EmailService(account.user, account.pass, account.debug);
+const config = require('../../.data/config.json');
+let emailConfig = config.email;
+let emailService = new EmailService(emailConfig.user, emailConfig.pass, config.debug);
 
-let smsConfig = JSON.parse(require('fs').readFileSync('.data/sms.config.json'));
-const smsService = new SmsService(smsConfig.token, smsConfig.debug);
+let smsConfig = config.sms;
+const smsService = new SmsService(smsConfig.token, config.debug);
 
 const sendWaybill = (waybill: Waybill) => {
   let email: EmailData = {
