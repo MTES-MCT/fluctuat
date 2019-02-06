@@ -1,7 +1,7 @@
 <flu-hero-container>
   <h2 class="title">Lettre de voiture nº {{ waybillId }} </h2>
 
-  <form *ngIf="unloadInfoForm; else loading" [formGroup]="unloadInfoForm" (ngSubmit)="sendUnloadInfo()">
+  <form *ngIf="unloadInfoForm; else loading" [formGroup]="unloadInfoForm">
 
     <div class="card">
       <div class="card-content">
@@ -56,7 +56,9 @@
     <div class="level"></div>
 
     <div class="buttons">
-      <button class="button is-link" type="submit"
+      <button class="button" (click)="openShareModal()">Envoyer par sms</button>
+
+      <button class="button is-link" (click)="sendUnloadInfo()"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
         Déchargement Terminé
       </button>
@@ -69,3 +71,5 @@
   </ng-template>
 
 </flu-hero-container>
+
+<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillId]="waybillId"></flu-waybill-share>

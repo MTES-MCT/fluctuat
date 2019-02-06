@@ -71,6 +71,15 @@
         <input class="input is-medium" formControlName="email" type="email">
       </flu-form-field>
 
+      <div class="field">
+        <div class="control">
+          <label class="label">Téléphone</label>
+          <input class="input is-medium" formControlName="cellphone"
+                 [ngClass]="{'is-danger': hasError(orderForm.get('transporter').controls.cellphone)}">
+        </div>
+      </div>
+      <p *ngIf="hasError(orderForm.get('transporter').controls.cellphone)" class="help is-danger">
+        Le numéro de portable n'est pas au format 06 01 02 03 04</p>
     </div>
   </div>
 

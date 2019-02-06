@@ -1,0 +1,51 @@
+<div class="modal" [ngClass]="{'is-active': active}">
+  <div class="modal-background"></div>
+
+  <div class="modal-card">
+
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        Envoyez la lettre de voiture nº {{waybillId}} par SMS
+      </p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+
+    <form class="modal-card-body" #smsForm="ngForm">
+
+      <div class="field" *ngIf="!sent">
+        <div class="control">
+          <label class="label">Téléphone</label>
+          <input class="input is-medium" name="phone" [(ngModel)]="phoneValue" #phone="ngModel"
+                 pattern="^0[6-7](?:[\s]*\d{2}){4}$" required
+                 [ngClass]="{'is-danger': hasError(phone)}">
+        </div>
+        <p *ngIf="hasError(phone)" class="help is-danger">Le numéro de portable n'est pas au format 06 01 02 03 04</p>
+      </div>
+
+      <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
+      <flu-success *ngIf="sent">
+        <div class="columns is-vcentered is-mobile">
+          <div class="column is-narrow">
+            <span class="icon is-large is-vcentered"> <i class="fas fa-3x fa-check-circle"></i></span>
+          </div>
+          <div class="column">
+            SMS envoyé au {{phoneValue}} avec succès
+          </div>
+        </div>
+      </flu-success>
+
+    </form>
+
+
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button *ngIf="!sent" class="button is-link" (click)="send()" [disabled]="smsForm.invalid || result.pending">
+          Envoyer
+        </button>
+        <button *ngIf="sent" class="button" (click)="closeModal()">Fermer</button>
+      </div>
+    </footer>
+  </div>
+</div>

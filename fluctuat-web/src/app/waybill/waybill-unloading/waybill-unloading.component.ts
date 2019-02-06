@@ -21,6 +21,8 @@ export class WaybillUnloadingComponent implements OnInit {
 
   waybillId: string;
 
+  showShareModal = false;
+
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
               private route: ActivatedRoute, private router: Router) {
   }
@@ -59,5 +61,9 @@ export class WaybillUnloadingComponent implements OnInit {
         this.result.success();
         this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
       }, (err => this.result.error(err)));
+  }
+
+  openShareModal() {
+    this.showShareModal = true;
   }
 }
