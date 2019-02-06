@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NotifyService } from '../shared/notify.service';
-import { ResultHelper } from '../../core/result-helper';
-import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { GENERIC_ERROR_MSG } from '../../core/generic-error';
+import { catchError } from 'rxjs/operators';
+
+import { NotifyService } from '../notify.service';
+import { ResultHelper } from '../../../core/result-helper';
+import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 
 @Component({
   selector: 'flu-waybill-share',
@@ -16,6 +17,8 @@ export class WaybillShareComponent {
   phoneValue: string;
 
   result: ResultHelper = new ResultHelper();
+
+  sent: boolean;
 
   constructor(private notifyService: NotifyService) {
   }
@@ -50,8 +53,8 @@ export class WaybillShareComponent {
       }))
       .subscribe(() => {
         console.log('send sms', this.phoneValue);
+        this.sent = true;
         this.result.success();
-        this.closeModal();
       }, error => this.result.error(error))
   }
 

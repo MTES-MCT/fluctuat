@@ -29,7 +29,7 @@ import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/w
 import { DashboardComponent } from './waybill/dashboard/dashboard.component';
 import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybill-options.component';
 import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
-import { WaybillShareComponent } from './waybill/waybill-share/waybill-share.component';
+import { WaybillShareComponent } from './waybill/shared/waybill-share/waybill-share.component';
 import { NotifyService } from './waybill/shared/notify.service';
 
 

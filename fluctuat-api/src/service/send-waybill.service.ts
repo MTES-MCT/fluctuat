@@ -7,10 +7,10 @@ import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
 
 let account = JSON.parse(require('fs').readFileSync('.data/email.config.json'));
-let emailService = new EmailService(account.user, account.pass);
+let emailService = new EmailService(account.user, account.pass, account.debug);
 
 let smsConfig = JSON.parse(require('fs').readFileSync('.data/sms.config.json'));
-const smsService = new SmsService(smsConfig.token, true);
+const smsService = new SmsService(smsConfig.token, smsConfig.debug);
 
 const sendWaybill = (waybill: Waybill) => {
   let email: EmailData = {

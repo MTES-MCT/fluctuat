@@ -13,7 +13,7 @@
 
     <form class="modal-card-body" #smsForm="ngForm">
 
-      <div class="field">
+      <div class="field" *ngIf="!sent">
         <div class="control">
           <label class="label">Téléphone</label>
           <input class="input is-medium" name="phone" [(ngModel)]="phoneValue" #phone="ngModel"
@@ -25,11 +25,26 @@
 
       <flu-error [errorMsg]="result.errorMsg"></flu-error>
 
+      <flu-success *ngIf="sent">
+        <div class="columns is-vcentered is-mobile">
+          <div class="column is-narrow">
+            <span class="icon is-large is-vcentered"> <i class="fas fa-3x fa-check-circle"></i></span>
+          </div>
+          <div class="column">
+            SMS envoyé au {{phoneValue}} avec succès
+          </div>
+        </div>
+      </flu-success>
+
     </form>
+
 
     <footer class="modal-card-foot">
       <div class="buttons">
-        <button class="button is-link" (click)="send()" [disabled]="smsForm.invalid || result.pending">Envoyer</button>
+        <button *ngIf="!sent" class="button is-link" (click)="send()" [disabled]="smsForm.invalid || result.pending">
+          Envoyer
+        </button>
+        <button *ngIf="sent" class="button" (click)="closeModal()">Fermer</button>
       </div>
     </footer>
   </div>
