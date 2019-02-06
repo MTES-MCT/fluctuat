@@ -63,4 +63,4 @@
 
 </flu-hero-container>
 
-<flu-waybill-share [(show)]="showShareModal" [waybillId]="waybillId"></flu-waybill-share>
+<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillId]="waybillId"></flu-waybill-share>

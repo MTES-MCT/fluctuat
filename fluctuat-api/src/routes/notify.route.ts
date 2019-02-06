@@ -1,35 +1,28 @@
 import { Router } from 'express';
 import { SmsService } from '../sms/sms.service';
+import { WaybillNotify } from '../models/waybill.notify';
 
 const router = Router();
 
-let token = JSON.parse(require('fs').readFileSync('.data/sms.config.json'));
-const smsService = new SmsService(token);
+let smsConfig = JSON.parse(require('fs').readFileSync('.data/sms.config.json'));
+const smsService = new SmsService(smsConfig.token);
 
 router.post('/waybill', (req, res) => {
 
-  let smsData: {
-    waybillId: string,
-    cellPhone: string
-  } = req.body;
+  let notifyData: WaybillNotify = req.body;
 
-  // todo check phone format
-  // todo check waybill
+  // todo check if waybill exists
 
-  const sms = `La Lettre de voiture ${smsData.waybillId} est disponible sur fluctuat.` +
-    ` ${req.headers.origin}/acces-lettre-de-voiture?id=${smsData.waybillId}`;
+  const sms = `La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.` +
+    ` ${req.headers.origin}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
 
-  /// TODO remove mock
-  console.log(sms);
-  return res.sendStatus(204)
-
-  // smsService.sendSms(smsData.cellPhone, sms)
-  //   .then((result) => console.log('sms sent', result))
-  //   .then(() => res.sendStatus(204))
-  //   .catch((error) => {
-  //     console.error(error);
-  //     return res.sendStatus(500);
-  //   })
+  smsService.sendSms(notifyData.cellphone, sms)
+    .then(() => console.log('sms sent'))
+    .then(() => res.sendStatus(204))
+    .catch((error) => {
+      console.error(error);
+      return res.sendStatus(500);
+    })
 });
 
 module.exports = router;

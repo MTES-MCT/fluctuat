@@ -3,26 +3,34 @@ import * as mailjet from 'node-mailjet';
 export class SmsService {
   mailjetService;
 
-  constructor(apiToken: string) {
+  constructor(apiToken: string, debug=false) {
     console.log('init sms service');
 
     this.mailjetService = mailjet.connect(apiToken, {
       url: 'api.mailjet.com',
-      version: 'v4'
+      version: 'v4',
+      perform_api_call: !debug
     })
   }
 
-  sendSms(cellPhone: string, text: string) {
-    cellPhone = '+33'.concat(cellPhone) // add french prefix
-      .replace(/\s/g, '');// remove spaces
+  sendSms(cellphone: string, text: string) {
+
     const smsData = {
       Text: text,
-      To: cellPhone,
+      To: this.convert(cellphone),
       From: 'Fluctuat'
     };
 
+    console.log('sending sms', smsData);
     return this.mailjetService.post('sms-send')
       .request(smsData)
+  }
+
+  convert(cellphone) {
+    return '+33'.concat( //add french prefix
+      cellphone.replace(/\s/g, '') // remove spaces
+        .substring(1)// remove first 0
+    )
   }
 
 }

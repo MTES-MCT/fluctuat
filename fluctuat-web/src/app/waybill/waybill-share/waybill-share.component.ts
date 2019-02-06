@@ -43,7 +43,7 @@ export class WaybillShareComponent {
   send() {
     this.result.waiting();
 
-    this.notifyService.sendNotification({ waybillId: this.waybillId, phone: this.phoneValue }).pipe(
+    this.notifyService.sendNotification({ waybillId: this.waybillId, cellphone: this.phoneValue }).pipe(
       catchError((errorResponse) => {
         console.log(errorResponse);
         return throwError(GENERIC_ERROR_MSG);
