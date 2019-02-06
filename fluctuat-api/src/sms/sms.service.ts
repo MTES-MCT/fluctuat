@@ -3,8 +3,8 @@ import * as mailjet from 'node-mailjet';
 export class SmsService {
   mailjetService;
 
-  constructor(apiToken: string, debug=false) {
-    console.log('init sms service');
+  constructor(apiToken: string, debug = false) {
+    console.log('init sms service debug:', debug);
 
     this.mailjetService = mailjet.connect(apiToken, {
       url: 'api.mailjet.com',

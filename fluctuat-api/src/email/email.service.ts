@@ -11,7 +11,7 @@ export class EmailService {
   mailjetService;
 
   constructor(user: string, password: string, debug = false) {
-    console.log('init email service');
+    console.log('init email service. debug', debug);
     this.mailjetService = mailjet.connect(user, password, { version: 'v3.1', perform_api_call: !debug })
   }
 
