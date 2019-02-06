@@ -75,7 +75,12 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return emailService.sendEmail(email);
+  let sms = `Veuillez confirmer le chargement. ${confirmationLink}`;
+
+  return Promise.all([
+    emailService.sendEmail(email),
+    smsService.sendSms(transporter.cellPhone, sms)
+  ]);
 };
 
 const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
@@ -94,7 +99,12 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return emailService.sendEmail(email);
+  let sms = `Veuillez confirmer le déchargement. ${confirmationLink}`;
+
+  return Promise.all([
+    emailService.sendEmail(email),
+    smsService.sendSms(transporter.cellPhone, sms)
+  ]);
 };
 
 const sendWaybillNotification = (notifyData: WaybillNotify, baseUrl: string) => {

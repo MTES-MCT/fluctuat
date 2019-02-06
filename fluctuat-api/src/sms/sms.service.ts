@@ -14,6 +14,10 @@ export class SmsService {
   }
 
   sendSms(cellphone: string, text: string) {
+    if (!cellphone) {
+      console.log('No cellphone to send sms');
+      return;
+    }
 
     const smsData = {
       Text: text,
