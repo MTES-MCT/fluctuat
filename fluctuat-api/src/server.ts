@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const app = express();
 
+require('./storage/mongo-client');
+
 app.use(bodyParser.json());
 app.use(logger('dev'));
 

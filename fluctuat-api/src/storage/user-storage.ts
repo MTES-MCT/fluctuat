@@ -1,21 +1,12 @@
-import { checkDataDir, checkDataFile, getData, putData } from './storage-utils';
 import { User } from '../models/user';
+import { UserModel } from './schemas/user.schema';
 
-const path = require('path');
-
-checkDataDir('.data');
-const usersData = path.join('.data', 'users.json');
-checkDataFile(usersData, '{}');
-
-const getUsers = getData(usersData);
-const putUsers = putData(usersData);
-
-const get = (id) => getUsers()[id];
+const get = (email) => {
+  return UserModel.findOne({ email })
+};
 
 const put = (user: User) => {
-  let users = getUsers();
-  users[user.email] = user;
-  putUsers(users);
+  return new UserModel(user).save()
 };
 
 export { get, put }

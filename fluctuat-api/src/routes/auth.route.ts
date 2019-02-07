@@ -7,8 +7,9 @@ import { verifyJWT } from '../security/verify-jwt.middleware';
 
 const router = Router();
 
-const getUserFromCredentials = (credentials: UserCredentials) => {
-  const user = userStorage.get(credentials.email);
+const getUserFromCredentials = async (credentials: UserCredentials) => {
+  const user = await userStorage.get(credentials.email);
+
   if (!user || !isPasswordMatch(credentials.password, user.hash)) {
     return;
   }
@@ -16,10 +17,10 @@ const getUserFromCredentials = (credentials: UserCredentials) => {
   return user;
 };
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   let credentials = req.body;
 
-  let user = getUserFromCredentials(credentials);
+  let user = await getUserFromCredentials(credentials);
 
   if (!user) {
     return res.status(401).send('Erreur de connexion. Merci de vérifier les informations saisies.');
@@ -30,15 +31,14 @@ router.post('/login', (req, res) => {
   return res.json({ token: token });
 });
 
-router.post('/sign-up', (req, res) => {
+router.post('/sign-up', async (req, res) => {
   let credentials = req.body;
 
   if (!credentials || !credentials.email || !credentials.password) {
     return res.status(400).send(`Invalid request`)
   }
 
-  const isExistingUser = !!userStorage.get(credentials.email);
-
+  const isExistingUser = await userStorage.get(credentials.email);
   if (isExistingUser) {
     return res.status(400).send(`Le compte ${credentials.email} existe déjà dans notre système.`)
   }
@@ -48,11 +48,13 @@ router.post('/sign-up', (req, res) => {
     hash: generateHash(credentials.password)
   };
 
-  userStorage.put(user);
-
-  const token = generateToken(user);
-
-  return res.status(201).json({token: token});
+  try {
+    await userStorage.put(user);
+    const token = generateToken(user);
+    res.status(201).json({ token: token });
+  } catch (error) {
+    res.sendStatus(500);
+  }
 
 });
 
