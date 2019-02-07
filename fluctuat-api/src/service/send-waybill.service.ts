@@ -21,7 +21,7 @@ const sendWaybill = (waybill: Waybill) => {
       waybill.order.transporter,
       waybill.order.sender
     ],
-    subject: `⛴️ Lettre de voiture ${waybill.id}`,
+    subject: `⛴️ Lettre de voiture ${waybill.code}`,
     body: {
       text: 'Veuillez trouver ci-joint votre lettre de voiture.',
       html: '<h3>Veuillez trouver ci-joint votre lettre de voiture</h3><br><p>Fluctuat</p>'
@@ -31,7 +31,7 @@ const sendWaybill = (waybill: Waybill) => {
   return generatePdf(getDocDefinition(waybill))
     .then((buffer: any) => {
       return {
-        name: `${waybill.id}.pdf`,
+        name: `${waybill.code}.pdf`,
         content: Buffer.from(buffer).toString('base64')
       };
     })
@@ -46,13 +46,13 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
       waybill.order.receiver,
       waybill.order.sender
     ],
-    subject: `⚓  Chargement confirmé -️ Lettre de voiture nº ${waybill.id}`,
+    subject: `⚓  Chargement confirmé -️ Lettre de voiture nº ${waybill.code}`,
     body: {
       text: '',
       html: `<p>Bonjour,</p>
              <p>Le chargement a été confirmé par le transporteur.</p>
              <p>Vous pouvez consulter les informations en cliquant sur
-             <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.id}">ce lien</a></p>
+             <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
              <p>Fluctuat</p>`
     }
   };
@@ -62,14 +62,14 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
 
 const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
   let transporter = waybill.order.transporter;
-  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/confirmation-chargement`;
+  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-chargement`;
 
   let email: EmailData = {
     to: [transporter],
-    subject: `⚓ Chargement à confirmer - Lettre de voiture nº ${waybill.id}`,
+    subject: `⚓ Chargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
       html: `<p>Bonjour ${transporter.name},</p>
-             <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.id} ont été enregistreés,
+             <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.code} ont été enregistreés,
               veuillez les confirmer dès maintenant.</p>
              <a href="${confirmationLink}">Cliquez sur ce lien pour accéder à votre lettre de voiture</a>
              <p>Fluctuat</p>`
@@ -86,14 +86,14 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
 
 const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
   let transporter = waybill.order.transporter;
-  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.id}/confirmation-dechargement`;
+  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-dechargement`;
 
   let email: EmailData = {
     to: [transporter],
-    subject: `⚓ Déchargement à confirmer - Lettre de voiture nº ${waybill.id}`,
+    subject: `⚓ Déchargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
       html: `<p>Bonjour ${transporter.name},</p>
-             <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.id} ont été enregistreés,
+             <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.code} ont été enregistreés,
               veuillez les confirmer dès maintenant.</p>
              <a href="${confirmationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
              <p>Fluctuat</p>`

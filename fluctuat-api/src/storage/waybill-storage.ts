@@ -1,27 +1,16 @@
-import { checkDataDir, checkDataFile, getData, putData } from './storage-utils';
 import { Waybill } from '../models/waybill';
+import { Document, model, Model } from 'mongoose';
+import { WaybillSchema } from './schemas/waybill.schema';
 
-const path = require('path');
+interface WaybillDocument extends Waybill, Document {
+}
 
-checkDataDir('.data');
-const waybillData = path.join('.data', 'waybill.json');
-checkDataFile(waybillData, '{}');
+const WaybillDao: Model<WaybillDocument> = model<WaybillDocument>('Waybill', WaybillSchema);
 
-const getWaybills = getData(waybillData);
-const putWaybills = putData(waybillData);
+const get = (code) => WaybillDao.findOne({ code });
 
-const get = (id) => getWaybills()[id];
+const put = (waybill: Waybill) => new WaybillDao(waybill).save();
 
-const put = (wayBill: Waybill) => {
-  let waybills = getWaybills();
-  waybills[wayBill.id] = wayBill;
-  putWaybills(waybills);
-};
-
-const findByEmail = (email: string) => {
-  let waybills: Waybill[] = Object.values(getWaybills());
-
-  return waybills.filter(waybill => waybill.owner === email);
-};
+const findByEmail = (owner: string) => WaybillDao.find({ owner });
 
 export { get, put, findByEmail }

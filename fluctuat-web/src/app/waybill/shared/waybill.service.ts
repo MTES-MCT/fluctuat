@@ -6,9 +6,7 @@ import { LoadInfo } from './models/load-info.model';
 import { OrderInfo } from './models/order-info.model';
 import { UnloadInfo } from './models/unload-info.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class WaybillService {
 
   constructor(private http: HttpClient) {
@@ -18,40 +16,40 @@ export class WaybillService {
     return this.http.post<Waybill>('/api/waybill', waybill)
   }
 
-  get(id: string): Observable<Waybill> {
-    return this.http.get<Waybill>(`/api/waybill/${id}`);
+  get(code: string): Observable<Waybill> {
+    return this.http.get<Waybill>(`/api/waybill/${code}`);
   }
 
-  sendOrderInfo(id: string, orderInfo: OrderInfo) {
-    return this.http.put(`/api/waybill/${id}/order-info`, orderInfo);
+  sendOrderInfo(code: string, orderInfo: OrderInfo) {
+    return this.http.put(`/api/waybill/${code}/order-info`, orderInfo);
   }
 
-  getOrderInfo(id: string): Observable<OrderInfo> {
-    return this.http.get<OrderInfo>(`/api/waybill/${id}/order-info`);
+  getOrderInfo(code: string): Observable<OrderInfo> {
+    return this.http.get<OrderInfo>(`/api/waybill/${code}/order-info`);
   }
 
-  sendLoadInfo(id: string, loadInfo: LoadInfo) {
-    return this.http.put(`/api/waybill/${id}/load-info`, loadInfo);
+  sendLoadInfo(code: string, loadInfo: LoadInfo) {
+    return this.http.put(`/api/waybill/${code}/load-info`, loadInfo);
   }
 
-  getLoadInfo(id: string): Observable<LoadInfo> {
-    return this.http.get<LoadInfo>(`/api/waybill/${id}/load-info`);
+  getLoadInfo(code: string): Observable<LoadInfo> {
+    return this.http.get<LoadInfo>(`/api/waybill/${code}/load-info`);
   }
 
-  validateLoadInfo(id: string): Observable<LoadInfo> {
-    return this.http.post<LoadInfo>(`/api/waybill/${id}/load-info/validate`, null);
+  validateLoadInfo(code: string): Observable<LoadInfo> {
+    return this.http.post<LoadInfo>(`/api/waybill/${code}/load-info/validate`, null);
   }
 
-  sendUnloadInfo(id: string, unloadInfo: UnloadInfo) {
-    return this.http.put(`/api/waybill/${id}/unload-info`, unloadInfo);
+  sendUnloadInfo(code: string, unloadInfo: UnloadInfo) {
+    return this.http.put(`/api/waybill/${code}/unload-info`, unloadInfo);
   }
 
-  getUnloadInfo(id: string): Observable<UnloadInfo> {
-    return this.http.get<UnloadInfo>(`/api/waybill/${id}/unload-info`)
+  getUnloadInfo(code: string): Observable<UnloadInfo> {
+    return this.http.get<UnloadInfo>(`/api/waybill/${code}/unload-info`)
   }
 
-  validateUnloadInfo(id: string): Observable<UnloadInfo> {
-    return this.http.post<UnloadInfo>(`/api/waybill/${id}/unload-info/validate`, null);
+  validateUnloadInfo(code: string): Observable<UnloadInfo> {
+    return this.http.post<UnloadInfo>(`/api/waybill/${code}/unload-info/validate`, null);
   }
 
   getAllMe() {

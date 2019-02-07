@@ -1,12 +1,14 @@
 import { User } from '../models/user';
-import { UserModel } from './schemas/user.schema';
+import { Document, model, Model } from 'mongoose';
+import { UserSchema } from './schemas/user.schema';
 
-const get = (email) => {
-  return UserModel.findOne({ email })
-};
+interface UserDocument extends User, Document {
+}
 
-const put = (user: User) => {
-  return new UserModel(user).save()
-};
+const UserDao: Model<UserDocument> = model<UserDocument>('User', UserSchema);
+
+const get = (email) => UserDao.findOne({ email });
+
+const put = (user: User) => new UserDao(user).save();
 
 export { get, put }

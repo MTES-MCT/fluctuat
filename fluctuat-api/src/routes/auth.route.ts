@@ -3,7 +3,6 @@ import { Router } from 'express';
 import * as userStorage from '../storage/user-storage';
 import { generateHash, generateToken, isPasswordMatch } from '../security/security-utils';
 import { UserCredentials } from '../models/user-credentials';
-import { verifyJWT } from '../security/verify-jwt.middleware';
 
 const router = Router();
 
@@ -56,10 +55,6 @@ router.post('/sign-up', async (req, res) => {
     res.sendStatus(500);
   }
 
-});
-
-router.get('/get-user', verifyJWT, (req, res) => {
-  return res.json(req['user']);
 });
 
 module.exports = router;

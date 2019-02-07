@@ -4,7 +4,7 @@ import { UnloadInfo } from './unload-info.model';
 
 export class Waybill {
 
-  id: string;
+  code: string;
   order: OrderInfo;
   loadInfo: LoadInfo;
   unloadInfo: UnloadInfo;

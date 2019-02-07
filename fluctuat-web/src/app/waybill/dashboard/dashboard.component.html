@@ -12,7 +12,7 @@
     <div class="card" *ngFor="let waybill of waybills" style="margin-bottom: 0.75rem">
       <div class="card-content">
 
-        <p class="is-size-4"><a [routerLink]="['/lettre-de-voiture', waybill.id, 'detail']">{{waybill.id}}</a> </p>
+        <p class="is-size-4"><a [routerLink]="['/lettre-de-voiture', waybill.code, 'detail']">{{waybill.code}}</a> </p>
 
         <p>{{getStatus(waybill)}}</p>
 

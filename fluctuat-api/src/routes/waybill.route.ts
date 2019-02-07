@@ -18,7 +18,7 @@ const randomstring = require('randomstring');
 
 const router = Router();
 
-const generateId = () => {
+const generateId = async () => {
 
   const id = randomstring.generate({
     length: 6,
@@ -26,27 +26,27 @@ const generateId = () => {
     capitalization: 'uppercase'
   });
   // if id exist retry;
-  return waybillStorage.get(id) ? generateId() : id;
+  let waybill = await waybillStorage.get(id);
+  return waybill ? generateId() : id;
 };
 
-router.post('/', verifyJWT, (req, res) => {
+router.post('/', verifyJWT, async (req, res) => {
   let waybill: Waybill = req.body;
 
-  waybill.id = generateId();
+  waybill.code = await generateId();
   waybill.owner = req['user'].email;
   waybill.loadInfo = new LoadInfo();
   waybill.unloadInfo = new UnloadInfo();
 
-  waybillStorage.put(waybill);
+  await waybillStorage.put(waybill);
 
   res.status(201).json(waybill);
 });
 
-router.get('/me', verifyJWT, (req, res) => {
+router.get('/me', verifyJWT, async (req, res) => {
   const userEmail: string = req['user'].email;
-  console.log(userEmail);
 
-  const waybills: Waybill[] = waybillStorage.findByEmail(userEmail);
+  const waybills = await waybillStorage.findByEmail(userEmail);
 
   res.json(waybills);
 });
@@ -55,17 +55,17 @@ router.get('/:id', fetchWaybill, (req, res) => {
   return res.json(req['waybill']);
 });
 
-router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, (req, res) => {
+router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
-  generatePdf(getDocDefinition(waybill))
-    .then(pdf => {
-      res.setHeader('Content-Type', 'application/pdf');
-      res.send(pdf);
-    }).catch(err => {
-    console.log(err);
+  try {
+    const pdf = await generatePdf(getDocDefinition(waybill));
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdf);
+  } catch (error) {
     res.sendStatus(500);
-  })
+  }
 });
 
 router.get('/:id/order-info', fetchWaybill, (req, res) => {
@@ -84,13 +84,13 @@ router.put('/:id/order-info', fetchWaybill, (req, res) => {
   res.status(204).end();
 });
 
-router.put('/:id/load-info', fetchWaybill, (req, res) => {
+router.put('/:id/load-info', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
   waybill.loadInfo = req.body;
   waybill.loadInfo.sentAt = new Date();
 
-  waybillStorage.put(waybill);
+  await waybillStorage.put(waybill);
 
   // send validation email
   sendWaybillLoadValidation(waybill, req.headers.origin as string)
@@ -106,14 +106,14 @@ router.get('/:id/load-info', fetchWaybill, (req, res) => {
   return res.json(waybill.loadInfo);
 });
 
-router.post('/:id/load-info/validate', fetchWaybill, (req, res) => {
+router.post('/:id/load-info/validate', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
   const loadInfo = waybill.loadInfo;
 
   if (!loadInfo.validatedAt) {
     loadInfo.validatedAt = new Date();
-    waybillStorage.put(waybill);
+    await waybillStorage.put(waybill);
   }
 
   // send waybill loaded email
@@ -131,13 +131,13 @@ router.get('/:id/unload-info', fetchWaybill, (req, res) => {
 });
 
 
-router.put('/:id/unload-info', fetchWaybill, (req, res) => {
+router.put('/:id/unload-info', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
   waybill.unloadInfo = req.body;
   waybill.unloadInfo.sentAt = new Date();
 
-  waybillStorage.put(waybill);
+  await waybillStorage.put(waybill);
 
   // send validation email
   sendWaybillUnloadValidation(waybill, req.headers.origin as string)
@@ -147,17 +147,17 @@ router.put('/:id/unload-info', fetchWaybill, (req, res) => {
   res.status(204).end();
 });
 
-router.post('/:id/unload-info/validate', fetchWaybill, (req, res) => {
+router.post('/:id/unload-info/validate', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
   const unloadInfo = waybill.unloadInfo;
 
   // add the link to pdf document
-  waybill.documentUrl = `/api/waybill/${waybill.id}/lettre-de-voiture.pdf`;
+  waybill.documentUrl = `/api/waybill/${waybill.code}/lettre-de-voiture.pdf`;
 
   if (!unloadInfo.validatedAt) {
     unloadInfo.validatedAt = new Date();
-    waybillStorage.put(waybill);
+    await waybillStorage.put(waybill);
 
     // send waybill by email
     sendWaybill(waybill)
