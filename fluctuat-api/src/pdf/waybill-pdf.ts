@@ -9,7 +9,7 @@ export function getDocDefinition(waybill: Waybill) {
   const unloadInfo = waybill.unloadInfo;
   return {
     content: [
-      { text: `Lettre de voiture nº ${waybill.id}`, style: 'title' },
+      { text: `Lettre de voiture nº ${waybill.code}`, style: 'title' },
 
       chainText('Donneur d\'ordre : ', bold(order.customer.name)),
       chainText('Expéditeur : ', bold(order.sender.name)),

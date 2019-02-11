@@ -46,7 +46,7 @@ export class WaybillNewComponent implements OnInit {
     ).subscribe((waybill: Waybill) => {
       console.log(waybill);
       this.result.success();
-      this.router.navigate(['lettre-de-voiture', waybill.id, 'detail'])
+      this.router.navigate(['lettre-de-voiture', waybill.code, 'detail'])
     }, (err) => this.result.error(err))
   }
 

@@ -1,26 +1,26 @@
 <!--Action Options -->
 <button class="button" *ngIf="isNotLoadStarted(waybill)"
-        [routerLink]="['/lettre-de-voiture', waybill.id, 'commande']">
+        [routerLink]="['/lettre-de-voiture', waybill.code, 'commande']">
   Modifier
 </button>
 
 <button class="button is-link" *ngIf="isNotLoadStarted(waybill)"
-        [routerLink]="['/lettre-de-voiture', waybill.id, 'chargement']">
+        [routerLink]="['/lettre-de-voiture', waybill.code, 'chargement']">
   Démarrer le chargement...
 </button>
 
 <button class="button is-link" *ngIf="isNotLoadFinished(waybill)"
-        [routerLink]="['/lettre-de-voiture', waybill.id, 'chargement']">
+        [routerLink]="['/lettre-de-voiture', waybill.code, 'chargement']">
   Modifier le chargement
 </button>
 
 <button class="button is-link" *ngIf="isNotUnloadStarted(waybill)"
-        [routerLink]="['/lettre-de-voiture', waybill.id, 'dechargement']">
+        [routerLink]="['/lettre-de-voiture', waybill.code, 'dechargement']">
   Démarrer le déchargement
 </button>
 
 <button class="button is-link" *ngIf="isNotUnloadFinished(waybill)"
-        [routerLink]="['/lettre-de-voiture', waybill.id, 'dechargement']">
+        [routerLink]="['/lettre-de-voiture', waybill.code, 'dechargement']">
   Modifier le déchargement
 </button>
 

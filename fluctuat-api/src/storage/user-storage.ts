@@ -1,21 +1,14 @@
-import { checkDataDir, checkDataFile, getData, putData } from './storage-utils';
 import { User } from '../models/user';
+import { Document, model, Model } from 'mongoose';
+import { UserSchema } from './schemas/user.schema';
 
-const path = require('path');
+interface UserDocument extends User, Document {
+}
 
-checkDataDir('.data');
-const usersData = path.join('.data', 'users.json');
-checkDataFile(usersData, '{}');
+const UserDao: Model<UserDocument> = model<UserDocument>('User', UserSchema);
 
-const getUsers = getData(usersData);
-const putUsers = putData(usersData);
+const get = (email) => UserDao.findOne({ email });
 
-const get = (id) => getUsers()[id];
-
-const put = (user: User) => {
-  let users = getUsers();
-  users[user.email] = user;
-  putUsers(users);
-};
+const put = (user: User) => new UserDao(user).save();
 
 export { get, put }

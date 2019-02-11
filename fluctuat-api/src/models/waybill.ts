@@ -3,7 +3,7 @@ import { LoadInfo } from './load-info';
 import { UnloadInfo } from './unload-info';
 
 export class Waybill {
-  id: string;
+  code: string;
   owner: string;
 
   order: OrderInfo;

@@ -1,23 +1,34 @@
+import { mongoClient } from './storage/mongo-client';
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const app = express();
 
-app.use(bodyParser.json());
-app.use(logger('dev'));
+const main = async () => {
 
-const auth = require('./routes/auth.route');
-app.use('/api/auth', auth);
+  await mongoClient();
 
-const waybill = require('./routes/waybill.route');
-app.use('/api/waybill', waybill);
+  app.use(bodyParser.json());
+  app.use(logger('dev'));
 
-const notify = require('./routes/notify.route');
-app.use('/api/notify', notify);
+  const auth = require('./routes/auth.route');
+  app.use('/api/auth', auth);
 
-/** Start server **/
-const port = process.argv[2] || 9000;
+  const waybill = require('./routes/waybill.route');
+  app.use('/api/waybill', waybill);
 
-app.listen(port, function () {
-  console.log('Express server listening in http://localhost:%d', port);
+  const notify = require('./routes/notify.route');
+  app.use('/api/notify', notify);
+
+  /** Start server **/
+  const port = process.argv[2] || 9000;
+
+  app.listen(port, function () {
+    console.log('Express server listening in http://localhost:%d', port);
+  });
+};
+
+main().catch(error => {
+  console.error('server fails to start', error);
 });
