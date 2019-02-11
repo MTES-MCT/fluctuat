@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'secret'; //FIXME do not forget replace this.
+const JWT_SECRET  = require('../../.data/config.json').jwtSecret;
 
 /** Generate hash for a given password */
 export const generateHash = (password) => bcrypt.hashSync(password, 10);
