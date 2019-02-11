@@ -52,6 +52,7 @@ router.post('/sign-up', async (req, res) => {
     const token = generateToken(user);
     res.status(201).json({ token: token });
   } catch (error) {
+    console.error(error);
     res.sendStatus(500);
   }
 
