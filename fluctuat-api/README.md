@@ -14,6 +14,8 @@ Run the command
 
     yarn
 
+After install set up the config vars at `.data/config.json`
+
 ## Run in dev mode
 
 Start the server with a live reload deamon

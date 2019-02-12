@@ -15,8 +15,24 @@ const checkDataFile = (file, initValue) => {
   }
 };
 
-const getData = (file) => () => JSON.parse(fs.readFileSync(file));
+checkDataDir('./.data');
 
-const putData = (file) => (data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
+const initValue = JSON.stringify({
+  'debug': true,
+  'email': {
+    'user': '',
+    'pass': ''
+  },
+  'sms': {
+    'token': ''
+  },
+  'mongodb': {
+    'user': '',
+    'password': '',
+    'dbName': '',
+    'cluster': ''
+  },
+  'jwtSecret': ''
+}, null, 2);
 
-export { getData, checkDataDir, putData, checkDataFile };
+checkDataFile('./.data/config.json', initValue);
