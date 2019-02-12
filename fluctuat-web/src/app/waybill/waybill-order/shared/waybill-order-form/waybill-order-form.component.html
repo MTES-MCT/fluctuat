@@ -5,13 +5,13 @@
       <p class="title">Donneur d'ordre</p>
 
       <flu-form-field>
-        <label class="label">Nom</label>
+        <label class="label">Nom ou raison sociale</label>
         <input class="input is-medium" formControlName="name">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
-          <label class="label">Email</label>
+          <label class="label">Email de contact</label>
           <input class="input is-medium" formControlName="email" type="email"
                  [ngClass]="{'is-danger': hasError(orderForm.get('customer').controls.email)}">
         </div>
@@ -29,13 +29,13 @@
       <p class="title">Expéditeur</p>
 
       <flu-form-field>
-        <label class="label">Nom</label>
+        <label class="label">Nom ou raison sociale</label>
         <input class="input is-medium" formControlName="name">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
-          <label class="label">Email</label>
+          <label class="label">Email de contact</label>
           <input class="input is-medium" formControlName="email" type="email"
                  [ngClass]="{'is-danger': hasError(orderForm.get('sender').controls.email)}">
         </div>
@@ -53,13 +53,13 @@
       <p class="title">Destinataire</p>
 
       <flu-form-field>
-        <label class="label">Nom</label>
+        <label class="label">Nom ou raison sociale</label>
         <input class="input is-medium" formControlName="name">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
-          <label class="label">Email</label>
+          <label class="label">Email de contact</label>
           <input class="input is-medium" formControlName="email" type="email"
                  [ngClass]="{'is-danger': hasError(orderForm.get('receiver').controls.email)}">
         </div>
@@ -83,7 +83,7 @@
 
       <div class="field">
         <div class="control">
-          <label class="label">Email</label>
+          <label class="label">Email de contact</label>
           <input class="input is-medium" formControlName="email" type="email"
                  [ngClass]="{'is-danger': hasError(orderForm.get('transporter').controls.email)}">
         </div>
@@ -93,7 +93,7 @@
 
       <div class="field">
         <div class="control">
-          <label class="label">Téléphone</label>
+          <label class="label">Téléphone portable</label>
           <input class="input is-medium" formControlName="cellphone"
                  [ngClass]="{'is-danger': hasError(orderForm.get('transporter').controls.cellphone)}">
         </div>
