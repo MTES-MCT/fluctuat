@@ -18,22 +18,22 @@ const randomstring = require('randomstring');
 
 const router = Router();
 
-const generateId = async () => {
+const generateCode = async () => {
 
-  const id = randomstring.generate({
+  const code = randomstring.generate({
     length: 6,
     readable: true,
     capitalization: 'uppercase'
   });
-  // if id exist retry;
-  let waybill = await waybillStorage.get(id);
-  return waybill ? generateId() : id;
+  // if code exist retry;
+  let waybill = await waybillStorage.get(code);
+  return waybill ? generateCode() : code;
 };
 
 router.post('/', verifyJWT, async (req, res) => {
   let waybill: Waybill = req.body;
 
-  waybill.code = await generateId();
+  waybill.code = await generateCode();
   waybill.owner = req['user'].email;
   waybill.loadInfo = new LoadInfo();
   waybill.unloadInfo = new UnloadInfo();
