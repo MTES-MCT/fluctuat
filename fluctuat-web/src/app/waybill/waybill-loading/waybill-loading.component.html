@@ -21,11 +21,14 @@
           <input class="input is-medium" formControlName="destination" list="ports">
         </flu-form-field>
 
-        <flu-form-field>
-          <label class="label">Date d'arrivée prévue</label>
-          <input class="input is-medium" formControlName="arrivalDate" fluDatetimePicker
-                 [(date)]="loadInfoForm.value.arrivalDate">
-        </flu-form-field>
+        <div class="field">
+          <div class="control">
+            <label class="label">Date d'arrivée prévue</label>
+            <input class="input is-medium" formControlName="arrivalDate" fluDatetimePicker
+                   [(date)]="loadInfoForm.value.arrivalDate">
+          </div>
+          {{loadInfoForm.value.arrivalDate}}
+        </div>
 
         <flu-form-field>
           <label class="label">Nature de la marchandise</label>
@@ -42,17 +45,21 @@
           <input class="input is-medium" formControlName="merchandisePrice">
         </flu-form-field>
 
-        <flu-form-field>
-          <label class="label">Date de début du chargement</label>
-          <input class="input is-medium" formControlName="loadStartDate" fluDatetimePicker
-                 [(date)]="loadInfoForm.value.loadStartDate">
-        </flu-form-field>
+        <div class="field">
+          <div class="control">
+            <label class="label">Date de début du chargement</label>
+            <input class="input is-medium" formControlName="loadStartDate" fluDatetimePicker
+                   [(date)]="loadInfoForm.value.loadStartDate">
+          </div>
+        </div>
 
-        <flu-form-field>
-          <label class="label">Date de fin du chargement</label>
-          <input class="input is-medium" formControlName="loadEndDate" fluDatetimePicker
-                 [(date)]="loadInfoForm.value.loadEndDate">
-        </flu-form-field>
+        <div class="field">
+          <div class="control">
+            <label class="label">Date de fin du chargement</label>
+            <input class="input is-medium" formControlName="loadEndDate" fluDatetimePicker
+                   [(date)]="loadInfoForm.value.loadEndDate">
+          </div>
+        </div>
 
         <flu-form-field>
           <label class="label">Commentaires</label>

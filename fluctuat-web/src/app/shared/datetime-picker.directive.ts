@@ -18,8 +18,7 @@ export class DatetimePickerDirective implements OnDestroy {
       locale: French,
       enableTime: true,
       dateFormat: 'd/m/Y, H:i',
-      time_24hr: true,
-      disableMobile: true
+      time_24hr: true
     });
   }
 
