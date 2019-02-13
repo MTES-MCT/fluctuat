@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 import { Person } from '../../../shared/models/person.model';
 import { isFrenchCellphone } from '../../../../core/is-french-cellphone';
-
+import { Contacts } from '../../../shared/models/contacts';
 
 @Component({
   selector: 'flu-waybill-order-form',
@@ -12,6 +12,9 @@ import { isFrenchCellphone } from '../../../../core/is-french-cellphone';
 export class WaybillOrderFormComponent {
 
   orderForm: FormGroup;
+
+  @Input()
+  contacts: Contacts;
 
   constructor(private fromBuilder: FormBuilder) {
   }

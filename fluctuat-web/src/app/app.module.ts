@@ -31,6 +31,7 @@ import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybil
 import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
 import { WaybillShareComponent } from './waybill/shared/waybill-share/waybill-share.component';
 import { NotifyService } from './waybill/shared/notify.service';
+import { ContactsService } from './waybill/shared/contacts.service';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { NotifyService } from './waybill/shared/notify.service';
     AuthService,
     WaybillService,
     NotifyService,
+    ContactsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,

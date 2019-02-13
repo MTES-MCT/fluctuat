@@ -5,14 +5,22 @@
       <p class="title">Donneur d'ordre</p>
 
       <flu-form-field>
+        <datalist id="flu-customer-name">
+          <option *ngFor="let item of contacts?.customerNames" [value]="item">
+        </datalist>
+
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name">
+        <input class="input is-medium" formControlName="name" list="flu-customer-name">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
+          <datalist id="flu-customer-email">
+            <option *ngFor="let item of contacts?.customerEmails" [value]="item">
+          </datalist>
+
           <label class="label">Email de contact</label>
-          <input class="input is-medium" formControlName="email" type="email"
+          <input class="input is-medium" formControlName="email" type="email" list="flu-customer-email"
                  [ngClass]="{'is-danger': hasError(orderForm.get('customer').controls.email)}">
         </div>
         <p *ngIf="hasError(orderForm.get('customer').controls.email)" class="help is-danger">
@@ -29,14 +37,20 @@
       <p class="title">Expéditeur</p>
 
       <flu-form-field>
+        <datalist id="flu-sender-name">
+          <option *ngFor="let item of contacts?.senderNames" [value]="item">
+        </datalist>
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name">
+        <input class="input is-medium" formControlName="name" list="flu-sender-name">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
+          <datalist id="flu-sender-email">
+            <option *ngFor="let item of contacts?.senderEmails" [value]="item">
+          </datalist>
           <label class="label">Email de contact</label>
-          <input class="input is-medium" formControlName="email" type="email"
+          <input class="input is-medium" formControlName="email" type="email" list="flu-sender-email"
                  [ngClass]="{'is-danger': hasError(orderForm.get('sender').controls.email)}">
         </div>
         <p *ngIf="hasError(orderForm.get('sender').controls.email)" class="help is-danger">
@@ -53,14 +67,20 @@
       <p class="title">Destinataire</p>
 
       <flu-form-field>
+        <datalist id="flu-receiver-names">
+          <option *ngFor="let item of contacts?.receiverNames" [value]="item">
+        </datalist>
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name">
+        <input class="input is-medium" formControlName="name" list="flu-receiver-names">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
+          <datalist id="flu-receiver-emails">
+            <option *ngFor="let item of contacts?.receiverEmails" [value]="item">
+          </datalist>
           <label class="label">Email de contact</label>
-          <input class="input is-medium" formControlName="email" type="email"
+          <input class="input is-medium" formControlName="email" type="email" list="flu-receiver-emails"
                  [ngClass]="{'is-danger': hasError(orderForm.get('receiver').controls.email)}">
         </div>
         <p *ngIf="hasError(orderForm.get('receiver').controls.email)" class="help is-danger">
@@ -77,14 +97,20 @@
       <p class="title">Transporteur</p>
 
       <flu-form-field>
+        <datalist id="flu-transporter-names">
+          <option *ngFor="let item of contacts?.transporterNames" [value]="item">
+        </datalist>
         <label class="label">Nom</label>
-        <input class="input is-medium" formControlName="name">
+        <input class="input is-medium" formControlName="name" list="flu-transporter-names">
       </flu-form-field>
 
       <div class="field">
         <div class="control">
+          <datalist id="flu-transporter-emails">
+            <option *ngFor="let item of contacts?.transporterEmails" [value]="item">
+          </datalist>
           <label class="label">Email de contact</label>
-          <input class="input is-medium" formControlName="email" type="email"
+          <input class="input is-medium" formControlName="email" type="email" list="flu-transporter-emails"
                  [ngClass]="{'is-danger': hasError(orderForm.get('transporter').controls.email)}">
         </div>
         <p *ngIf="hasError(orderForm.get('transporter').controls.email)" class="help is-danger">
@@ -93,8 +119,11 @@
 
       <div class="field">
         <div class="control">
+          <datalist id="flu-transporter-cellphones">
+            <option *ngFor="let item of contacts?.transporterCellphones" [value]="item">
+          </datalist>
           <label class="label">Téléphone portable</label>
-          <input class="input is-medium" formControlName="cellphone"
+          <input class="input is-medium" formControlName="cellphone" list="flu-transporter-cellphones"
                  [ngClass]="{'is-danger': hasError(orderForm.get('transporter').controls.cellphone)}">
         </div>
       </div>
@@ -110,13 +139,19 @@
       <p class="title">Bateau</p>
 
       <flu-form-field>
+        <datalist id="flu-ship-names">
+          <option *ngFor="let item of contacts?.shipNames" [value]="item">
+        </datalist>
         <label class="label">Devise</label>
-        <input class="input is-medium" formControlName="name">
+        <input class="input is-medium" formControlName="name" list="flu-ship-names">
       </flu-form-field>
 
       <flu-form-field>
+        <datalist id="flu-ship-reg-numbers">
+          <option *ngFor="let item of contacts?.shipRegNumbers" [value]="item">
+        </datalist>
         <label class="label">Matricule</label>
-        <input class="input is-medium" formControlName="regNumber">
+        <input class="input is-medium" formControlName="regNumber" list="flu-ship-reg-numbers">
       </flu-form-field>
 
     </div>

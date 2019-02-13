@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, map, shareReplay } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 import { WaybillService } from '../../shared/waybill.service';
 import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
+import { ContactsService } from '../../shared/contacts.service';
+import { Contacts } from '../../shared/models/contacts';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'flu-waybill-edition',
@@ -21,15 +24,22 @@ export class WaybillEditionComponent implements OnInit {
 
   waybillId: string;
 
-  constructor(private waybillService: WaybillService, private route: ActivatedRoute,
-              private router: Router) {
+  contacts$: Observable<Contacts>;
+
+  constructor(private waybillService: WaybillService, private contactService: ContactsService,
+              private route: ActivatedRoute, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.waybillService.getOrderInfo(this.waybillId)
-      .subscribe((orderInfo) => this.orderFormComponent.setValue(orderInfo))
+      .subscribe((orderInfo) => this.orderFormComponent.setValue(orderInfo));
+
+    if (this.authService.isAuthenticated()) {
+      this.contacts$ = this.contactService.get().pipe(shareReplay(1));
+    }
+
   }
 
   sendOrderInfo() {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, shareReplay } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
 import { WaybillService } from '../../shared/waybill.service';
@@ -9,6 +9,8 @@ import { OrderInfo } from '../../shared/models/order-info.model';
 import { Waybill } from '../../shared/models/waybill.model';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
+import { ContactsService } from '../../shared/contacts.service';
+import { Contacts } from '../../shared/models/contacts';
 
 @Component({
   selector: 'flu-waybill-new',
@@ -21,12 +23,15 @@ export class WaybillNewComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
 
-  constructor(private waybillService: WaybillService,
+  contacts$: Observable<Contacts>;
+
+  constructor(private waybillService: WaybillService, private contactsService: ContactsService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.orderFormComponent.setValue(new OrderInfo());
+    this.contacts$ = this.contactsService.get().pipe(shareReplay(1))
   }
 
   create() {

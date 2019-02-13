@@ -21,6 +21,9 @@ const main = async () => {
   const notify = require('./routes/notify.route');
   app.use('/api/notify', notify);
 
+  const contacts = require('./routes/contacts.route');
+  app.use('/api/contacts', contacts);
+
   /** Start server **/
   const port = process.argv[2] || 9000;
 
