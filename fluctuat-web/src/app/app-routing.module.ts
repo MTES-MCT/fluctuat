@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'connexion', component: LoginComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'inscription', component: SignUpComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'acces-lettre-de-voiture', component: WaybillAccessComponent},
-  { path: 'lettre-de-voiture/new', component: WaybillNewComponent },
+  { path: 'lettre-de-voiture/new', component: WaybillNewComponent, canActivate: [ AuthGuard ] },
   { path: 'lettre-de-voiture/:id/detail', component: WaybillDetailComponent },
   { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
   { path: 'lettre-de-voiture/:id/chargement', component: WaybillLoadingComponent },
