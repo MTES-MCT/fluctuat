@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - '10'
+cache:
+  yarn: true
+
+jobs:
+  include:
+    - stage: test
+      script: cd fluctuat-api && yarn && yarn test
+    - script: cd fluctuat-web && yarn && yarn test
