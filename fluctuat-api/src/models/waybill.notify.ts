@@ -1,4 +1,5 @@
 export class WaybillNotify {
+  waybillId: string;
   cellphone: string;
-  waybillId: string
+  email: string;
 }

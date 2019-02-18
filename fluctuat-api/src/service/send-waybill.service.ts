@@ -118,10 +118,30 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
 };
 
 const sendWaybillNotification = (notifyData: WaybillNotify, baseUrl: string) => {
-  const sms = `La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.` +
-    ` ${baseUrl}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
+  const accessLink = `${baseUrl}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
 
-  return smsService.sendSms(notifyData.cellphone, sms)
+  let sendActions = [];
+
+  if (notifyData.email) {
+    let email: EmailData = {
+      to: [ { name: '', email: notifyData.email } ],
+      subject: `⛴️ Lien d'accès à la lettre de voiture ${notifyData.waybillId}`,
+      body: {
+        html: `<p>Bonjour,</p>
+                <p>La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.</p>
+                <a href="${accessLink}">Cliquez sur ce lien pour y accéder</a>
+                <p>Fluctuat</p>`
+      }
+    };
+    sendActions.push(emailService.sendEmail(email));
+  }
+
+  if (notifyData.cellphone) {
+    const sms = `La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat. ${accessLink}`;
+    sendActions.push(smsService.sendSms(notifyData.cellphone, sms))
+  }
+
+  return Promise.all(sendActions);
 };
 
 export {

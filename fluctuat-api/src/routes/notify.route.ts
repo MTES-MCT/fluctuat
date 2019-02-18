@@ -11,7 +11,6 @@ router.post('/waybill', (req, res) => {
   // todo check if waybill exists
 
   sendWaybillNotification(notifyData, req.headers.origin as string)
-    .then(() => console.log('sms sent'))
     .then(() => res.sendStatus(204))
     .catch((error) => {
       console.error(error);
