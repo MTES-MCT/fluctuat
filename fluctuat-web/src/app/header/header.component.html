@@ -12,7 +12,7 @@
 
 
     <div class="navbar-item">
-      <button routerLink="/acces-lettre-de-voiture" class="button is-white is-medium">Consulter une Lettre de Voiture</button>
+      <button routerLink="/acces-lettre-de-voiture" class="button is-white is-medium">Consulter une lettre de voiture</button>
     </div>
 
     <div class="navbar-item" *ngIf="authenticated$ | async">
@@ -23,7 +23,7 @@
       <button (click)="logout()" class="button is-white is-medium">Déconnexion</button>
     </div>
     <div class="navbar-item" *ngIf="!(authenticated$ | async)">
-      <button routerLink="/inscription" class="button is-white is-medium">Creer une compte</button>
+      <button routerLink="/inscription" class="button is-white is-medium">Créer une compte</button>
     </div>
     <div class="navbar-item" *ngIf="!(authenticated$ | async)">
       <button routerLink="/connexion" class="button is-white is-medium">Connexion</button>
