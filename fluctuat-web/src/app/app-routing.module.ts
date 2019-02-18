@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'connexion', component: LoginComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'inscription', component: SignUpComponent, canActivate: [ AlreadyLoggedGuard ] },
-  { path: 'acces-lettre-de-voiture', component: WaybillAccessComponent},
+  { path: 'acces-lettre-de-voiture', component: WaybillAccessComponent },
   { path: 'lettre-de-voiture/new', component: WaybillNewComponent, canActivate: [ AuthGuard ] },
   { path: 'lettre-de-voiture/:id/detail', component: WaybillDetailComponent },
   { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
@@ -27,7 +27,8 @@ const routes: Routes = [
   { path: 'lettre-de-voiture/:id/confirmation-chargement', component: WaybillLoadValidationComponent },
   { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
   { path: 'lettre-de-voiture/:id/confirmation-dechargement', component: WaybillUnloadValidationComponent },
-  { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [ AuthGuard ] },
+  { path: '**', redirectTo: '/' }
 
 ];
 
