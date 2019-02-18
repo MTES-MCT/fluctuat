@@ -21,7 +21,7 @@ export class WaybillAccessComponent implements OnInit {
 
   send() {
     this.waybillService.get(this.waybillId).subscribe(() => {
-      this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
+      this.router.navigate(['lettre-de-voiture', this.waybillId.toUpperCase(), 'detail'])
     }, error => {
       this.errorMsg = error.status === 404 ? error.error : GENERIC_ERROR_MSG
     })
