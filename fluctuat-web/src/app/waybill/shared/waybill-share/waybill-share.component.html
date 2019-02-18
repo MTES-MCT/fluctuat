@@ -3,25 +3,42 @@
 
   <div class="modal-card">
 
-
     <header class="modal-card-head">
       <p class="modal-card-title">
-        Envoyez la lettre de voiture nº {{waybillId}} par SMS
+        Envoyer la lettre de voiture nº {{waybillNotify.waybillId}}
       </p>
       <button class="delete" aria-label="close" (click)="closeModal()"></button>
     </header>
 
-    <form class="modal-card-body" #smsForm="ngForm">
+    <form class="modal-card-body" #shareForm="ngForm">
 
-      <div class="field" *ngIf="!sent">
-        <div class="control">
-          <label class="label">Téléphone</label>
-          <input class="input is-medium" name="phone" [(ngModel)]="phoneValue" #phone="ngModel"
-                 pattern="^0[6-7](?:[\s]*\d{2}){4}$" required
-                 [ngClass]="{'is-danger': hasError(phone)}">
+      <ng-container *ngIf="!sent">
+        <p class="is-size-5" style="margin-bottom: 0.75rem">
+          <span class="icon"> <i class="fas fa-info"></i></span>
+          Vous pouvez envoyer l'accès par SMS et/ou par email
+        </p>
+
+        <div class="field">
+          <div class="control">
+            <label class="label">SMS</label>
+            <input class="input is-medium" name="phone" [(ngModel)]="waybillNotify.cellphone" #phone="ngModel"
+                   pattern="^0[6-7](?:[\s]*\d{2}){4}$"
+                   [ngClass]="{'is-danger': hasError(phone)}">
+          </div>
+          <p *ngIf="hasError(phone)" class="help is-danger">Le numéro de portable n'est pas au format 06 01 02 03 04</p>
         </div>
-        <p *ngIf="hasError(phone)" class="help is-danger">Le numéro de portable n'est pas au format 06 01 02 03 04</p>
-      </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="label">Email</label>
+            <input class="input is-medium" type="email" name="email" [(ngModel)]="waybillNotify.email" #email="ngModel"
+                   email
+                   [ngClass]="{'is-danger': hasError(email)}">
+          </div>
+          <p *ngIf="hasError(email)" class="help is-danger">L'email n'est pas valide</p>
+        </div>
+
+      </ng-container>
 
       <flu-error [errorMsg]="result.errorMsg"></flu-error>
 
@@ -31,7 +48,7 @@
             <span class="icon is-large is-vcentered"> <i class="fas fa-3x fa-check-circle"></i></span>
           </div>
           <div class="column">
-            SMS envoyé au {{phoneValue}} avec succès
+            L'accès à la lettre de voiture a été envoyé avec succès
           </div>
         </div>
       </flu-success>
@@ -41,7 +58,8 @@
 
     <footer class="modal-card-foot">
       <div class="buttons">
-        <button *ngIf="!sent" class="button is-link" (click)="send()" [disabled]="smsForm.invalid || result.pending">
+        <button *ngIf="!sent" class="button is-link" (click)="send()"
+                [disabled]="isInvalidForm(shareForm) || result.pending">
           Envoyer
         </button>
         <button *ngIf="sent" class="button" (click)="closeModal()">Fermer</button>

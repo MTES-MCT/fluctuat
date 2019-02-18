@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { NotifyService } from '../notify.service';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
+import { WaybillNotify } from '../models/waybill-notify.model';
 
 @Component({
   selector: 'flu-waybill-share',
@@ -13,8 +14,6 @@ import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 export class WaybillShareComponent {
 
   active: boolean;
-
-  phoneValue: string;
 
   result: ResultHelper = new ResultHelper();
 
@@ -30,7 +29,7 @@ export class WaybillShareComponent {
   }
 
   @Input()
-  waybillId: string;
+  waybillNotify: WaybillNotify;
 
   @Output()
   showChange = new EventEmitter();
@@ -39,23 +38,29 @@ export class WaybillShareComponent {
     return formValue.invalid && (formValue.dirty || formValue.touched)
   }
 
-  closeModal() {
-    this.show = false;
+  /** form is valid if almost one field is set up and form are valid */
+  isInvalidForm(form) {
+    return form.invalid || !form.value.phone && !form.value.email;
+  }
+
+  @HostListener('click', [ '$event.target' ])
+  closeModal(element) {
+    if (!element || element.className === 'modal-background') {
+      this.show = false;
+    }
   }
 
   send() {
     this.result.waiting();
 
-    this.notifyService.sendNotification({ waybillId: this.waybillId, cellphone: this.phoneValue }).pipe(
+    this.notifyService.sendNotification(this.waybillNotify).pipe(
       catchError((errorResponse) => {
         console.log(errorResponse);
         return throwError(GENERIC_ERROR_MSG);
       }))
       .subscribe(() => {
-        console.log('send sms', this.phoneValue);
         this.sent = true;
         this.result.success();
       }, error => this.result.error(error))
   }
-
 }

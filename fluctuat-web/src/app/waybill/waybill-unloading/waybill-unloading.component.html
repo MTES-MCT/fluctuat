@@ -60,7 +60,7 @@
     <div class="level"></div>
 
     <div class="buttons">
-      <button class="button" (click)="openShareModal()">Envoyer par sms</button>
+      <button class="button" (click)="openShareModal()">Envoyer la lettre de voiture</button>
 
       <button class="button is-link" (click)="sendUnloadInfo()"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
@@ -76,4 +76,4 @@
 
 </flu-hero-container>
 
-<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillId]="waybillId"></flu-waybill-share>
+<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillNotify]="{waybillId: waybillId}"></flu-waybill-share>

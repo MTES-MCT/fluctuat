@@ -51,7 +51,7 @@
 
     <!--Action Options -->
     <div class="buttons">
-      <button class="button" *ngIf="!waybill.documentUrl" (click)="openShareModal()">Envoyer par sms</button>
+      <button class="button" *ngIf="!waybill.documentUrl" (click)="openShareModal()">Envoyer la lettre de voiture</button>
       <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
     </div>
 
@@ -63,4 +63,4 @@
 
 </flu-hero-container>
 
-<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillId]="waybillId"></flu-waybill-share>
+<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillNotify]="{waybillId: waybillId}"></flu-waybill-share>
