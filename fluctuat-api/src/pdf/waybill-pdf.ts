@@ -1,4 +1,6 @@
 import { Waybill } from '../models/waybill';
+import { UnloadInfo } from '../models/unload-info';
+import { LoadManager } from '../models/load-manager';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
@@ -38,50 +40,11 @@ export function getDocDefinition(waybill: Waybill) {
       { text: 'Commentaires', style: 'title3' },
       loadInfo.comments,
       '\n',
-      {
-        columns: [
-          {
-            width: '50%',
-            text: chainText('Envoyé ', format(loadInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
-              ' par ', loadInfo.loadManager.name),
-          },
-          {
-            width: '50%',
-            text: chainText('Confirmé par ', order.transporter.name, format(loadInfo.validatedAt,
-              '[ le] D MMMM YYYY', { locale: fr })),
-          }
-        ]
-      },
+      ...printLoadValidationBlock(loadInfo, order.transporter.name),
       '\n',
-      { text: 'Déchargement', style: 'title2' },
-
-      chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
-        'est le responsable du déchargement.'),
+      ...printUnloadBlock(unloadInfo),
       '\n',
-      chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
-        bold(unloadInfo.unloadEndDate), '.'),
-      '\n',
-      chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
-      '\n',
-      { text: 'Commentaires', style: 'title3' },
-      unloadInfo.comments,
-      '\n',
-      {
-        columns: [
-          {
-            width: '50%',
-            text: chainText('Envoyé ', format(unloadInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
-              ' par ', unloadInfo.unloadManager.name),
-          },
-          {
-            width: '50%',
-            text: chainText('Confirmé par ', order.transporter.name, format(unloadInfo.validatedAt,
-              '[ le] D MMMM YYYY', { locale: fr })),
-          }
-        ]
-      },
-
-
+      ...printUnLoadValidationBlock(unloadInfo, order.transporter.name)
     ],
     styles: {
       title: {
@@ -107,6 +70,75 @@ export function getDocDefinition(waybill: Waybill) {
   }
 }
 
+const printUnloadBlock = (unloadInfo: UnloadInfo) => {
+  // if the information is incomplete print empty block
+  if (!unloadInfo.validatedAt) {
+    return []
+  }
+
+  return [
+    { text: 'Déchargement', style: 'title2' },
+
+    chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
+      'est le responsable du déchargement.'),
+    '\n',
+    chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
+      bold(unloadInfo.unloadEndDate), '.'),
+    '\n',
+    chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
+    '\n',
+    { text: 'Commentaires', style: 'title3' },
+    unloadInfo.comments
+  ]
+};
+
+const printUnLoadValidationBlock = (validationInfo: { sentAt, unloadManager: LoadManager, validatedAt }, transporterName) => {
+  // if the information is incomplete print an empty block
+  if (!validationInfo.validatedAt) {
+    return []
+  }
+
+  return [
+    {
+      columns: [
+        {
+          width: '50%',
+          text: chainText('Envoyé ', format(validationInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
+            ' par ', validationInfo.unloadManager.name),
+        },
+        {
+          width: '50%',
+          text: chainText('Confirmé par ', transporterName, ' ', format(validationInfo.validatedAt,
+            '[le] D MMMM YYYY', { locale: fr })),
+        }
+      ]
+    }
+  ]
+};
+// TODO: very similar to printUnload... remove duplication
+const printLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
+  // if the information is incomplete print an empty block
+  if (!validationInfo.validatedAt) {
+    return []
+  }
+
+  return [
+    {
+      columns: [
+        {
+          width: '50%',
+          text: chainText('Envoyé ', format(validationInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
+            ' par ', validationInfo.loadManager.name),
+        },
+        {
+          width: '50%',
+          text: chainText('Confirmé par ', transporterName, ' ', format(validationInfo.validatedAt,
+            '[le] D MMMM YYYY', { locale: fr })),
+        }
+      ]
+    }
+  ]
+};
 
 const bold = (text: string) => ({ text: text, style: 'bold' });
-const chainText = (...parts) => ({ text: [...parts] });
+const chainText = (...parts) => ({ text: [ ...parts ] });
