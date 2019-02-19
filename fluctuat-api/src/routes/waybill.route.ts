@@ -4,8 +4,7 @@ import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
-import { generatePdf } from '../pdf/generate-pdf';
-import { getDocDefinition } from '../pdf/waybill-pdf';
+import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import {
   sendWaybill,
   sendWaybillLoaded,
@@ -70,7 +69,7 @@ router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req, res) => {
   const baseUrl = getBaseUrl(req);
 
   try {
-    const pdf = await generatePdf(getDocDefinition(waybill, baseUrl));
+    const pdf = await generateWaybillPdf(waybill, baseUrl);
 
     res.setHeader('Content-Type', 'application/pdf');
     res.send(pdf);

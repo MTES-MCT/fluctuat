@@ -1,10 +1,9 @@
-import { getDocDefinition } from '../pdf/waybill-pdf';
-import { generatePdf } from '../pdf/generate-pdf';
 import { EmailService } from '../email/email.service';
 import { Waybill } from '../models/waybill';
 import { EmailData } from '../email/email-data';
 import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
+import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 
 const config = require('../../.data/config.json');
 let emailConfig = config.email;
@@ -28,7 +27,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return generatePdf(getDocDefinition(waybill, baseUrl))
+  return generateWaybillPdf(waybill, baseUrl)
     .then((buffer: any) => {
       return {
         name: `${waybill.code}.pdf`,
@@ -59,7 +58,7 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return generatePdf(getDocDefinition(waybill, baseUrl))
+  return generateWaybillPdf(waybill, baseUrl)
     .then((buffer: any) => {
       return {
         name: `${waybill.code}-chargement.pdf`,
