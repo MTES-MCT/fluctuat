@@ -37,13 +37,12 @@ export function getDocDefinition(waybill: Waybill) {
       '\n',
       chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
       '\n',
-      { text: 'Commentaires', style: 'title3' },
-      loadInfo.comments,
-      '\n',
+      printCommentBlock(loadInfo.comments),
+      '\n\n',
       ...printLoadValidationBlock(loadInfo, order.transporter.name),
       '\n',
       ...printUnloadBlock(unloadInfo),
-      '\n',
+      '\n\n',
       ...printUnLoadValidationBlock(unloadInfo, order.transporter.name)
     ],
     styles: {
@@ -51,17 +50,18 @@ export function getDocDefinition(waybill: Waybill) {
         fontSize: 18,
         alignment: 'center',
         bold: true,
-        marginBottom: 15
+        marginBottom: 25
       },
       title2: {
-        fontSize: 16,
+        fontSize: 15,
         bold: true,
         marginBottom: 15
       },
-      title3: {
-        fontSize: 14,
-        bold: true,
-        marginBottom: 15
+      cell: {
+        margin: [ 2, 8 ]
+      },
+      cellHeader: {
+        margin: [ 2, 8, 2, 0 ]
       }
     }
   }
@@ -84,8 +84,7 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
     '\n',
     chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
     '\n',
-    { text: 'Commentaires', style: 'title3' },
-    unloadInfo.comments
+    printCommentBlock(unloadInfo.comments),
   ]
 };
 
@@ -135,6 +134,18 @@ const printLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadMan
       ]
     }
   ]
+};
+
+const printCommentBlock = (comments) => {
+  return {
+    table: {
+      widths: [ '*' ],
+      body: [
+        [ { text: 'Commentaires', border: [ true, true, true, false ], bold: true, style: 'cellHeader' } ],
+        [ { text: comments, border: [ true, false, true, true ], style: 'cell' } ]
+      ]
+    }
+  }
 };
 
 const bold = (text: string) => ({ text: text, bold: true });
