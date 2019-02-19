@@ -5,7 +5,7 @@ import { LoadManager } from '../models/load-manager';
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
 
-export function getDocDefinition(waybill: Waybill) {
+export function getDocDefinition(waybill: Waybill, baseUrl: string) {
   const order = waybill.order;
   const loadInfo = waybill.loadInfo;
   const unloadInfo = waybill.unloadInfo;
@@ -44,6 +44,13 @@ export function getDocDefinition(waybill: Waybill) {
       ...printUnloadBlock(unloadInfo),
       '\n\n',
       ...printUnLoadValidationBlock(unloadInfo, order.transporter.name)
+    ],
+    footer: [
+      {
+        text: `Cette lettre de voiture est accesible sur ${baseUrl}`,
+        link: `${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}`,
+        alignment: 'center'
+      }
     ],
     styles: {
       title: {

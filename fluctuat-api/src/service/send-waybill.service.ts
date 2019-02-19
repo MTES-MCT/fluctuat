@@ -13,7 +13,7 @@ let emailService = new EmailService(emailConfig.user, emailConfig.pass, config.d
 let smsConfig = config.sms;
 const smsService = new SmsService(smsConfig.token, config.debug);
 
-const sendWaybill = (waybill: Waybill) => {
+const sendWaybill = (waybill: Waybill, baseUrl: string) => {
   let email: EmailData = {
     to: [
       waybill.order.customer,
@@ -28,7 +28,7 @@ const sendWaybill = (waybill: Waybill) => {
     }
   };
 
-  return generatePdf(getDocDefinition(waybill))
+  return generatePdf(getDocDefinition(waybill, baseUrl))
     .then((buffer: any) => {
       return {
         name: `${waybill.code}.pdf`,
@@ -59,7 +59,7 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return generatePdf(getDocDefinition(waybill))
+  return generatePdf(getDocDefinition(waybill, baseUrl))
     .then((buffer: any) => {
       return {
         name: `${waybill.code}-chargement.pdf`,
