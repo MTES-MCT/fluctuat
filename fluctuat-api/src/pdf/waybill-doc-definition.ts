@@ -1,6 +1,7 @@
 import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { LoadManager } from '../models/load-manager';
+import { logo } from './logo';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
@@ -11,12 +12,17 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
   const unloadInfo = waybill.unloadInfo;
   return {
     content: [
-      { text: `Lettre de voiture nº ${waybill.code}`, style: 'title' },
-
+      {
+        columns: [
+          { width: 110, image: logo, },
+          { width: '*', text: `\nLettre de voiture nº ${waybill.code}`, style: 'title', }
+        ],
+        style: 'level'
+      },
+      '\n',
       chainText('Donneur d\'ordre : ', bold(order.customer.name)),
       chainText('Expéditeur : ', bold(order.sender.name)),
       chainText('Destinataire : ', bold(order.receiver.name)),
-      '\n',
       chainText('Le bateau ', bold(order.ship.name), ', matricule ', bold(order.ship.regNumber),
         ' est conduit par ', bold(order.transporter.name), '.'),
       '\n',
@@ -31,10 +37,8 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
 
       chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
         'est le responsable du chargement.'),
-      '\n',
       chainText('Le chargement a commencé le ', bold(loadInfo.loadStartDate), ' et fini le ',
         bold(loadInfo.loadEndDate), '.'),
-      '\n',
       chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
       '\n',
       printCommentBlock(loadInfo.comments),
@@ -47,22 +51,33 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
     ],
     footer: [
       {
-        text: `Cette lettre de voiture est accesible sur ${baseUrl}`,
+        text: chainText(`Cette lettre de voiture est générée par le service numérique de l'état `, bold('Fluctuat')),
+        alignment: 'center',
+        style: [ 'level', 'footer' ]
+      },
+      {
+        text: `Consultable sur ${baseUrl}`,
         link: `${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}`,
-        alignment: 'center'
+        alignment: 'center',
+        style: [ 'footer' ]
       }
     ],
     styles: {
       title: {
-        fontSize: 18,
-        alignment: 'center',
+        fontSize: 16,
         bold: true,
-        marginBottom: 25
+        alignment: 'center'
       },
       title2: {
         fontSize: 15,
         bold: true,
         marginBottom: 15
+      },
+      footer: {
+        fontSize: 12
+      },
+      level: {
+        marginBottom: 5
       },
       cell: {
         margin: [ 2, 8 ]
@@ -85,10 +100,8 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
 
     chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
       'est le responsable du déchargement.'),
-    '\n',
     chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
       bold(unloadInfo.unloadEndDate), '.'),
-    '\n',
     chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
     '\n',
     printCommentBlock(unloadInfo.comments),
@@ -156,4 +169,4 @@ const printCommentBlock = (comments) => {
 };
 
 const bold = (text: string) => ({ text: text, bold: true });
-const chainText = (...parts) => ({ text: [ ...parts ] });
+const chainText = (...parts) => ({ text: [ ...parts ], style: 'level' });
