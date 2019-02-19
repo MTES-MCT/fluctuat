@@ -62,9 +62,6 @@ export function getDocDefinition(waybill: Waybill) {
         fontSize: 14,
         bold: true,
         marginBottom: 15
-      },
-      bold: {
-        bold: true
       }
     }
   }
@@ -140,5 +137,5 @@ const printLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadMan
   ]
 };
 
-const bold = (text: string) => ({ text: text, style: 'bold' });
+const bold = (text: string) => ({ text: text, bold: true });
 const chainText = (...parts) => ({ text: [ ...parts ] });
