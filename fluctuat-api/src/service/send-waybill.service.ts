@@ -1,10 +1,9 @@
-import { getDocDefinition } from '../pdf/waybill-pdf';
-import { generatePdf } from '../pdf/generate-pdf';
 import { EmailService } from '../email/email.service';
 import { Waybill } from '../models/waybill';
 import { EmailData } from '../email/email-data';
 import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
+import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 
 const config = require('../../.data/config.json');
 let emailConfig = config.email;
@@ -13,7 +12,7 @@ let emailService = new EmailService(emailConfig.user, emailConfig.pass, config.d
 let smsConfig = config.sms;
 const smsService = new SmsService(smsConfig.token, config.debug);
 
-const sendWaybill = (waybill: Waybill) => {
+const sendWaybill = (waybill: Waybill, baseUrl: string) => {
   let email: EmailData = {
     to: [
       waybill.order.customer,
@@ -28,10 +27,10 @@ const sendWaybill = (waybill: Waybill) => {
     }
   };
 
-  return generatePdf(getDocDefinition(waybill))
+  return generateWaybillPdf(waybill, baseUrl)
     .then((buffer: any) => {
       return {
-        name: `${waybill.code}.pdf`,
+        name: `lettre-de-voiture-${waybill.code}.pdf`,
         content: Buffer.from(buffer).toString('base64')
       };
     })
@@ -59,10 +58,10 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return generatePdf(getDocDefinition(waybill))
+  return generateWaybillPdf(waybill, baseUrl)
     .then((buffer: any) => {
       return {
-        name: `${waybill.code}-chargement.pdf`,
+        name: `lettre-de-voiture-${waybill.code}-chargement.pdf`,
         content: Buffer.from(buffer).toString('base64')
       };
     })

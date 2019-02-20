@@ -4,8 +4,7 @@ import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
-import { generatePdf } from '../pdf/generate-pdf';
-import { getDocDefinition } from '../pdf/waybill-pdf';
+import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import {
   sendWaybill,
   sendWaybillLoaded,
@@ -15,6 +14,7 @@ import {
 import { fetchWaybill } from './fetch-waybill.middleware';
 
 const randomstring = require('randomstring');
+const url = require('url');
 
 const router = Router();
 
@@ -28,6 +28,13 @@ const generateCode = async () => {
   // if code exist retry;
   let waybill = await waybillStorage.get(code);
   return waybill ? generateCode() : code;
+};
+
+const getBaseUrl = (req) => {
+  return url.format({
+    protocol: req.protocol,
+    host: req.header('host')
+  });
 };
 
 router.post('/', verifyJWT, async (req, res) => {
@@ -52,14 +59,17 @@ router.get('/me', verifyJWT, async (req, res) => {
 });
 
 router.get('/:id', fetchWaybill, (req, res) => {
+
   return res.json(req['waybill']);
 });
 
 router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
+  const baseUrl = getBaseUrl(req);
+
   try {
-    const pdf = await generatePdf(getDocDefinition(waybill));
+    const pdf = await generateWaybillPdf(waybill, baseUrl);
 
     res.setHeader('Content-Type', 'application/pdf');
     res.send(pdf);
@@ -160,7 +170,7 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req, res) => {
     await waybillStorage.put(waybill);
 
     // send waybill by email
-    sendWaybill(waybill)
+    sendWaybill(waybill, getBaseUrl(req))
       .then(() => console.log('waybill sent'))
       .catch(console.error);
   }
