@@ -6,6 +6,10 @@ cache:
 
 jobs:
   include:
-    - stage: test
-      script: cd fluctuat-api && yarn && yarn test
-    - script: cd fluctuat-web && yarn && yarn test
+    - stage: build
+      script:
+        - cd fluctuat-api && yarn && yarn test
+        - yarn build
+    - script:
+        - cd fluctuat-web && yarn && yarn test
+        - yarn build --prod
