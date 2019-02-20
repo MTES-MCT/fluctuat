@@ -24,7 +24,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
       chainText('Expéditeur : ', bold(order.sender.name)),
       chainText('Destinataire : ', bold(order.receiver.name)),
       chainText('Le bateau ', bold(order.ship.name), ', matricule ', bold(order.ship.regNumber),
-        ' est conduit par ', bold(order.transporter.name), '.'),
+        ', est conduit par ', bold(order.transporter.name), '.'),
       '\n',
       chainText('Il vous est expédié un tonnage de ',
         bold(loadInfo.merchandiseWeight), ' tonnes de ',
