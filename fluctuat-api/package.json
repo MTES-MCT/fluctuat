@@ -8,6 +8,7 @@
     "test": "jest",
     "start": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "start:prod": "pm2 start dist/server.js",
+    "restart:prod": "pm2 restart dist/server.js",
     "postinstall": "node init-config.js"
   },
   "author": "",
