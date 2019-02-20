@@ -44,7 +44,7 @@ export class WaybillShareComponent {
   }
 
   @HostListener('click', [ '$event.target' ])
-  closeModal(element) {
+  closeModal(element?) {
     if (!element || element.className === 'modal-background') {
       this.show = false;
     }
