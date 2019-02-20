@@ -30,7 +30,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
   return generateWaybillPdf(waybill, baseUrl)
     .then((buffer: any) => {
       return {
-        name: `${waybill.code}.pdf`,
+        name: `lettre-de-voiture-${waybill.code}.pdf`,
         content: Buffer.from(buffer).toString('base64')
       };
     })
@@ -61,7 +61,7 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
   return generateWaybillPdf(waybill, baseUrl)
     .then((buffer: any) => {
       return {
-        name: `${waybill.code}-chargement.pdf`,
+        name: `lettre-de-voiture-${waybill.code}-chargement.pdf`,
         content: Buffer.from(buffer).toString('base64')
       };
     })
