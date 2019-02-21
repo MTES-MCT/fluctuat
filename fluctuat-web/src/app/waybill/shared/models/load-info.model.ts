@@ -9,7 +9,7 @@ export class LoadInfo {
   merchandiseWeight: string;
   merchandisePrice: string;
   startDate: string;
-  loadEndDate: string;
+  endDate: string;
   comments: string;
   loadManager: LoadManager = new LoadManager();
 

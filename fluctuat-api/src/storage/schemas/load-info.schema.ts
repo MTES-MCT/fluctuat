@@ -9,7 +9,7 @@ export const LoadInfoSchema: Schema = new Schema({
   merchandiseWeight: String,
   merchandisePrice: String,
   startDate: String,
-  loadEndDate: String,
+  endDate: String,
   comments: String,
   loadManager: LoadManagerSchema,
 

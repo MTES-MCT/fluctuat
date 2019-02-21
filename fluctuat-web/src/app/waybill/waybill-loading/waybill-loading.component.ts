@@ -47,7 +47,7 @@ export class WaybillLoadingComponent implements OnInit {
       merchandiseWeight: [loadInfo.merchandiseWeight],
       merchandisePrice: [loadInfo.merchandisePrice],
       startDate: [loadInfo.startDate],
-      loadEndDate: [loadInfo.loadEndDate],
+      endDate: [loadInfo.endDate],
       comments: [loadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [loadInfo.loadManager.name],
