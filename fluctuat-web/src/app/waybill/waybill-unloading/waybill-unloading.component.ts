@@ -38,7 +38,7 @@ export class WaybillUnloadingComponent implements OnInit {
   private fillForm(unloadInfo: UnloadInfo) {
     this.unloadInfoForm = this.formBuilder.group({
       startDate: [unloadInfo.startDate],
-      unloadEndDate: [unloadInfo.unloadEndDate],
+      endDate: [unloadInfo.endDate],
       merchandiseWeight: [unloadInfo.merchandiseWeight],
       comments: [unloadInfo.comments],
       loadManager: this.formBuilder.group({
