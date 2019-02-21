@@ -10,16 +10,16 @@
         <div class="field">
           <div class="control">
             <label class="label">Date de début du déchargement</label>
-            <input class="input is-medium" formControlName="unloadStartDate" fluDatetimePicker
-                   [(date)]="unloadInfoForm.value.unloadStartDate">
+            <input class="input is-medium" formControlName="startDate" fluDatetimePicker
+                   [(date)]="unloadInfoForm.value.startDate">
           </div>
         </div>
 
         <div class="field">
           <div class="control">
             <label class="label">Date de fin du déchargement</label>
-            <input class="input is-medium" formControlName="unloadEndDate" fluDatetimePicker
-                   [(date)]="unloadInfoForm.value.unloadEndDate">
+            <input class="input is-medium" formControlName="endDate" fluDatetimePicker
+                   [(date)]="unloadInfoForm.value.endDate">
           </div>
         </div>
 
@@ -39,7 +39,7 @@
     <div class="level"></div>
 
     <div class="card">
-      <div class="card-content" formGroupName="unloadManager">
+      <div class="card-content" formGroupName="loadManager">
         <p class="title">Responsable du déchargement</p>
 
         <flu-form-field>

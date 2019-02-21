@@ -8,8 +8,8 @@ export const LoadInfoSchema: Schema = new Schema({
   merchandiseType: String,
   merchandiseWeight: String,
   merchandisePrice: String,
-  loadStartDate: String,
-  loadEndDate: String,
+  startDate: String,
+  endDate: String,
   comments: String,
   loadManager: LoadManagerSchema,
 

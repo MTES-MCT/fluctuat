@@ -37,8 +37,8 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
 
       chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
         'est le responsable du chargement.'),
-      chainText('Le chargement a commencé le ', bold(loadInfo.loadStartDate), ' et fini le ',
-        bold(loadInfo.loadEndDate), '.'),
+      chainText('Le chargement a commencé le ', bold(loadInfo.startDate), ' et fini le ',
+        bold(loadInfo.endDate), '.'),
       chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
       '\n',
       printCommentBlock(loadInfo.comments),
@@ -98,17 +98,17 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
   return [
     { text: 'Déchargement', style: 'title2' },
 
-    chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
+    chainText(bold(unloadInfo.loadManager.name), ' (', unloadInfo.loadManager.jobFunction, ') ',
       'est le responsable du déchargement.'),
-    chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
-      bold(unloadInfo.unloadEndDate), '.'),
+    chainText('Le déchargement a commencé le ', bold(unloadInfo.startDate), ' et fini le ',
+      bold(unloadInfo.endDate), '.'),
     chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
     '\n',
     printCommentBlock(unloadInfo.comments),
   ]
 };
 
-const printUnLoadValidationBlock = (validationInfo: { sentAt, unloadManager: LoadManager, validatedAt }, transporterName) => {
+const printUnLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
   // if the information is incomplete print an empty block
   if (!validationInfo.validatedAt) {
     return []
@@ -120,7 +120,7 @@ const printUnLoadValidationBlock = (validationInfo: { sentAt, unloadManager: Loa
         {
           width: '50%',
           text: chainText('Envoyé ', format(validationInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
-            ' par ', validationInfo.unloadManager.name),
+            ' par ', validationInfo.loadManager.name),
         },
         {
           width: '50%',

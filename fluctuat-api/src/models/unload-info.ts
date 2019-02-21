@@ -2,11 +2,11 @@ import { LoadManager } from './load-manager';
 
 export class UnloadInfo {
 
-  unloadStartDate: string;
-  unloadEndDate: string;
+  startDate: string;
+  endDate: string;
   merchandiseWeight: string;
   comments: string;
-  unloadManager: LoadManager = new LoadManager();
+  loadManager: LoadManager = new LoadManager();
 
   sentAt: Date;
   validatedAt: Date;
