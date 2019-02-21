@@ -6,7 +6,7 @@ export const UnloadInfoSchema: Schema = new Schema({
   unloadEndDate: String,
   merchandiseWeight: String,
   comments: String,
-  unloadManager: LoadManagerSchema,
+  loadManager: LoadManagerSchema,
 
   sentAt: Date,
   validatedAt: Date

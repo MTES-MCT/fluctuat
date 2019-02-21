@@ -98,7 +98,7 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
   return [
     { text: 'Déchargement', style: 'title2' },
 
-    chainText(bold(unloadInfo.unloadManager.name), ' (', unloadInfo.unloadManager.jobFunction, ') ',
+    chainText(bold(unloadInfo.loadManager.name), ' (', unloadInfo.loadManager.jobFunction, ') ',
       'est le responsable du déchargement.'),
     chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
       bold(unloadInfo.unloadEndDate), '.'),
@@ -108,7 +108,7 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
   ]
 };
 
-const printUnLoadValidationBlock = (validationInfo: { sentAt, unloadManager: LoadManager, validatedAt }, transporterName) => {
+const printUnLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
   // if the information is incomplete print an empty block
   if (!validationInfo.validatedAt) {
     return []
@@ -120,7 +120,7 @@ const printUnLoadValidationBlock = (validationInfo: { sentAt, unloadManager: Loa
         {
           width: '50%',
           text: chainText('Envoyé ', format(validationInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
-            ' par ', validationInfo.unloadManager.name),
+            ' par ', validationInfo.loadManager.name),
         },
         {
           width: '50%',

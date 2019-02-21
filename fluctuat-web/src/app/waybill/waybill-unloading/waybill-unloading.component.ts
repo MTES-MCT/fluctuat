@@ -41,9 +41,9 @@ export class WaybillUnloadingComponent implements OnInit {
       unloadEndDate: [unloadInfo.unloadEndDate],
       merchandiseWeight: [unloadInfo.merchandiseWeight],
       comments: [unloadInfo.comments],
-      unloadManager: this.formBuilder.group({
-        name: [unloadInfo.unloadManager.name],
-        jobFunction: [unloadInfo.unloadManager.jobFunction]
+      loadManager: this.formBuilder.group({
+        name: [unloadInfo.loadManager.name],
+        jobFunction: [unloadInfo.loadManager.jobFunction]
       })
     })
   }

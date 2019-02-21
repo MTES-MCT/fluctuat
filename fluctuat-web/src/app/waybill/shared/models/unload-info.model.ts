@@ -6,7 +6,7 @@ export class UnloadInfo {
   unloadEndDate: string;
   merchandiseWeight: string;
   comments: string;
-  unloadManager: LoadManager = new LoadManager();
+  loadManager: LoadManager = new LoadManager();
 
   sentAt: Date;
   validatedAt: Date;
