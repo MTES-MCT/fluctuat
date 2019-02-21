@@ -2,6 +2,7 @@ import { Waybill } from '../models/waybill';
 import { UnloadInfo } from '../models/unload-info';
 import { LoadManager } from '../models/load-manager';
 import { logo } from './logo';
+import { LoadInfo } from '../models/load-info';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
@@ -33,21 +34,13 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         bold(loadInfo.origin), ' et que le transporteur déclare avoir reçu et s\'engage à transporter au ',
         bold(loadInfo.destination), '.'),
       '\n',
-      { text: 'Chargement', style: 'title2' },
-
-      chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
-        'est le responsable du chargement.'),
-      chainText('Le chargement a commencé le ', bold(loadInfo.startDate), ' et fini le ',
-        bold(loadInfo.endDate), '.'),
-      chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
-      '\n',
-      printCommentBlock(loadInfo.comments),
+      ...printLoadBlock(loadInfo),
       '\n\n',
-      ...printLoadValidationBlock(loadInfo, order.transporter.name),
+      ...printValidationBlock(loadInfo, order.transporter.name),
       '\n',
       ...printUnloadBlock(unloadInfo),
       '\n\n',
-      ...printUnLoadValidationBlock(unloadInfo, order.transporter.name)
+      ...printValidationBlock(unloadInfo, order.transporter.name)
     ],
     footer: [
       {
@@ -89,6 +82,20 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
   }
 }
 
+const printLoadBlock = (loadInfo: LoadInfo) => {
+  return [
+    { text: 'Chargement', style: 'title2' },
+
+    chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
+      'est le responsable du chargement.'),
+    chainText('Le chargement a commencé le ', bold(loadInfo.startDate), ' et fini le ',
+      bold(loadInfo.endDate), '.'),
+    chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
+    '\n',
+    printCommentBlock(loadInfo.comments),
+  ]
+};
+
 const printUnloadBlock = (unloadInfo: UnloadInfo) => {
   // if the information is incomplete print empty block
   if (!unloadInfo.validatedAt) {
@@ -108,31 +115,7 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
   ]
 };
 
-const printUnLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
-  // if the information is incomplete print an empty block
-  if (!validationInfo.validatedAt) {
-    return []
-  }
-
-  return [
-    {
-      columns: [
-        {
-          width: '50%',
-          text: chainText('Envoyé ', format(validationInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
-            ' par ', validationInfo.loadManager.name),
-        },
-        {
-          width: '50%',
-          text: chainText('Confirmé par ', transporterName, ' ', format(validationInfo.validatedAt,
-            '[le] D MMMM YYYY', { locale: fr })),
-        }
-      ]
-    }
-  ]
-};
-// TODO: very similar to printUnload... remove duplication
-const printLoadValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
+const printValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
   // if the information is incomplete print an empty block
   if (!validationInfo.validatedAt) {
     return []
