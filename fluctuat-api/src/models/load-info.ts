@@ -8,7 +8,7 @@ export class LoadInfo {
   merchandiseType: string;
   merchandiseWeight: string;
   merchandisePrice: string;
-  loadStartDate: string;
+  startDate: string;
   loadEndDate: string;
   comments: string;
   loadManager: LoadManager = new LoadManager();

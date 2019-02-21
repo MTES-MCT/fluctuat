@@ -37,7 +37,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
 
       chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
         'est le responsable du chargement.'),
-      chainText('Le chargement a commencé le ', bold(loadInfo.loadStartDate), ' et fini le ',
+      chainText('Le chargement a commencé le ', bold(loadInfo.startDate), ' et fini le ',
         bold(loadInfo.loadEndDate), '.'),
       chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
       '\n',
