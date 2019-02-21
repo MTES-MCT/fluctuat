@@ -100,7 +100,7 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
 
     chainText(bold(unloadInfo.loadManager.name), ' (', unloadInfo.loadManager.jobFunction, ') ',
       'est le responsable du déchargement.'),
-    chainText('Le déchargement a commencé le ', bold(unloadInfo.unloadStartDate), ' et fini le ',
+    chainText('Le déchargement a commencé le ', bold(unloadInfo.startDate), ' et fini le ',
       bold(unloadInfo.unloadEndDate), '.'),
     chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
     '\n',

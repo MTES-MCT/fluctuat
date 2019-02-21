@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 import { LoadManagerSchema } from './load-manager.schema';
 
 export const UnloadInfoSchema: Schema = new Schema({
-  unloadStartDate: String,
+  startDate: String,
   unloadEndDate: String,
   merchandiseWeight: String,
   comments: String,
