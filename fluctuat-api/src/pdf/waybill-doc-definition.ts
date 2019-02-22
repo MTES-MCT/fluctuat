@@ -49,8 +49,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         style: [ 'level', 'footer' ]
       },
       {
-        text: `Consultable sur ${baseUrl}`,
-        link: `${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}`,
+        text: `Consultable sur notre plataforme`,
         alignment: 'center',
         style: [ 'footer' ]
       }
