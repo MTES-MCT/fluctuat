@@ -30,7 +30,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
       chainText('Il vous est expédié un tonnage de ',
         bold(loadInfo.merchandiseWeight), ' tonnes de ',
         bold(loadInfo.merchandiseType), ' d\'une valeur déclarée de ',
-        bold(loadInfo.merchandisePrice + ' €'), ' par tonne, qui a été chargé au ',
+        bold((loadInfo.merchandisePrice || '/') + ' €'), ' par tonne, qui a été chargé au ',
         bold(loadInfo.origin), ' et que le transporteur déclare avoir reçu et s\'engage à transporter au ',
         bold(loadInfo.destination), '.'),
       '\n',
