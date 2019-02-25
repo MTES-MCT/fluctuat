@@ -14,7 +14,8 @@ import {
 import { fetchWaybill } from './fetch-waybill.middleware';
 
 const randomstring = require('randomstring');
-const url = require('url');
+const config = require('../../.data/config.json');
+const host = config.host;
 
 const router = Router();
 
@@ -28,13 +29,6 @@ const generateCode = async () => {
   // if code exist retry;
   let waybill = await waybillStorage.get(code);
   return waybill ? generateCode() : code;
-};
-
-const getBaseUrl = (req) => {
-  return url.format({
-    protocol: req.protocol,
-    host: req.header('host')
-  });
 };
 
 router.post('/', verifyJWT, async (req, res) => {
@@ -66,10 +60,8 @@ router.get('/:id', fetchWaybill, (req, res) => {
 router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
-  const baseUrl = getBaseUrl(req);
-
   try {
-    const pdf = await generateWaybillPdf(waybill, baseUrl);
+    const pdf = await generateWaybillPdf(waybill, host);
 
     res.setHeader('Content-Type', 'application/pdf');
     res.send(pdf);
@@ -103,7 +95,7 @@ router.put('/:id/load-info', fetchWaybill, async (req, res) => {
   await waybillStorage.put(waybill);
 
   // send validation email
-  sendWaybillLoadValidation(waybill, req.headers.origin as string)
+  sendWaybillLoadValidation(waybill, host)
     .then(() => console.log('load validation sent'))
     .catch(console.error);
 
@@ -127,7 +119,7 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req, res) => {
   }
 
   // send waybill loaded email
-  sendWaybillLoaded(waybill, req.headers.origin as string)
+  sendWaybillLoaded(waybill, host)
     .then(() => console.log('waybill loaded email sent'))
     .catch(console.error);
 
@@ -150,7 +142,7 @@ router.put('/:id/unload-info', fetchWaybill, async (req, res) => {
   await waybillStorage.put(waybill);
 
   // send validation email
-  sendWaybillUnloadValidation(waybill, req.headers.origin as string)
+  sendWaybillUnloadValidation(waybill, host)
     .then(() => console.log('unload validation sent'))
     .catch(console.error);
 
@@ -170,7 +162,7 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req, res) => {
     await waybillStorage.put(waybill);
 
     // send waybill by email
-    sendWaybill(waybill, getBaseUrl(req))
+    sendWaybill(waybill, host)
       .then(() => console.log('waybill sent'))
       .catch(console.error);
   }
