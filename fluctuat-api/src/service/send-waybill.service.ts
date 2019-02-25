@@ -6,10 +6,10 @@ import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 
 const config = require('../../.data/config.json');
-let emailConfig = config.email;
-let emailService = new EmailService(emailConfig.user, emailConfig.pass, config.debug);
+const emailConfig = config.email;
+const emailService = new EmailService(emailConfig.user, emailConfig.pass, config.debug);
 
-let smsConfig = config.sms;
+const smsConfig = config.sms;
 const smsService = new SmsService(smsConfig.token, config.debug);
 
 const sendWaybill = (waybill: Waybill, baseUrl: string) => {
@@ -18,7 +18,8 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
       waybill.order.customer,
       waybill.order.receiver,
       waybill.order.transporter,
-      waybill.order.sender
+      waybill.order.sender,
+      { name: '', email: waybill.owner },
     ],
     subject: `⛴️ Lettre de voiture ${waybill.code}`,
     body: {
@@ -44,7 +45,8 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
       waybill.order.customer,
       waybill.order.receiver,
       waybill.order.transporter,
-      waybill.order.sender
+      waybill.order.sender,
+      { name: '', email: waybill.owner },
     ],
     subject: `⚓  Chargement confirmé -️ Lettre de voiture nº ${waybill.code}`,
     body: {
