@@ -8,6 +8,7 @@ import { WaybillService } from '../shared/waybill.service';
 import { UnloadInfo } from '../shared/models/unload-info.model';
 import { ResultHelper } from '../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
+import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
   selector: 'flu-waybill-unloading',
@@ -39,7 +40,7 @@ export class WaybillUnloadingComponent implements OnInit {
     this.unloadInfoForm = this.formBuilder.group({
       startDate: [unloadInfo.startDate],
       endDate: [unloadInfo.endDate],
-      merchandiseWeight: [unloadInfo.merchandiseWeight],
+      merchandiseWeight: [unloadInfo.merchandiseWeight, FluValidators.quantity],
       comments: [unloadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [unloadInfo.loadManager.name],
@@ -49,6 +50,10 @@ export class WaybillUnloadingComponent implements OnInit {
   }
 
   sendUnloadInfo() {
+    if (this.unloadInfoForm.invalid) {
+      return this.result.error('Veuillez vérifier votre saisie');
+    }
+
     this.result.waiting();
 
     this.waybillService.sendUnloadInfo(this.waybillId, this.unloadInfoForm.value).pipe(
@@ -65,5 +70,9 @@ export class WaybillUnloadingComponent implements OnInit {
 
   openShareModal() {
     this.showShareModal = true;
+  }
+
+  hasError(formValue) {
+    return formValue.invalid && (formValue.dirty || formValue.touched)
   }
 }

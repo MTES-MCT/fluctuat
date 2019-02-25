@@ -23,10 +23,16 @@
           </div>
         </div>
 
-        <flu-form-field>
+        <div class="field">
+          <div class="control">
           <label class="label">Tonnage déchargé</label>
-          <input class="input is-medium" formControlName="merchandiseWeight">
-        </flu-form-field>
+          <input class="input is-medium" formControlName="merchandiseWeight"
+                 [ngClass]="{'is-danger': hasError(unloadInfoForm.controls.merchandiseWeight)}">
+          </div>
+          <p *ngIf="hasError(unloadInfoForm.controls.merchandiseWeight)" class="help is-danger">
+            Le tonnage saisie n'est pas un nombre valide
+          </p>
+        </div>
 
         <flu-form-field>
           <label class="label">Commentaires</label>

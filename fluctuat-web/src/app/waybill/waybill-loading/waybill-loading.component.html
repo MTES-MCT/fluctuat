@@ -35,15 +35,27 @@
           <input class="input is-medium" formControlName="merchandiseType">
         </flu-form-field>
 
-        <flu-form-field>
-          <label class="label">Tonnage</label>
-          <input class="input is-medium" formControlName="merchandiseWeight">
-        </flu-form-field>
+        <div class="field">
+          <div class="control">
+            <label class="label">Tonnage</label>
+            <input class="input is-medium" formControlName="merchandiseWeight"
+                   [ngClass]="{'is-danger': hasError(loadInfoForm.controls.merchandiseWeight)}">
+          </div>
+          <p *ngIf="hasError(loadInfoForm.controls.merchandiseWeight)" class="help is-danger">
+            Le tonnage saisie n'est pas un nombre valide
+          </p>
+        </div>
 
-        <flu-form-field>
-          <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
-          <input class="input is-medium" formControlName="merchandisePrice">
-        </flu-form-field>
+        <div class="field">
+          <div class="control">
+            <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
+            <input class="input is-medium" formControlName="merchandisePrice"
+                   [ngClass]="{'is-danger': hasError(loadInfoForm.controls.merchandisePrice)}">
+          </div>
+          <p *ngIf="hasError(loadInfoForm.controls.merchandisePrice)" class="help is-danger">
+            La valeur saisie n'est pas un nombre valide
+          </p>
+        </div>
 
         <div class="field">
           <div class="control">

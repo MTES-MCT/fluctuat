@@ -9,6 +9,7 @@ import { WaybillService } from '../shared/waybill.service';
 import { LoadInfo } from '../shared/models/load-info.model';
 import { PortList } from './ports-list';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
+import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
   selector: 'flu-waybill-loading',
@@ -44,8 +45,8 @@ export class WaybillLoadingComponent implements OnInit {
       destination: [loadInfo.destination],
       arrivalDate: [loadInfo.arrivalDate],
       merchandiseType: [loadInfo.merchandiseType],
-      merchandiseWeight: [loadInfo.merchandiseWeight],
-      merchandisePrice: [loadInfo.merchandisePrice],
+      merchandiseWeight: [loadInfo.merchandiseWeight, FluValidators.quantity],
+      merchandisePrice: [loadInfo.merchandisePrice, FluValidators.quantity],
       startDate: [loadInfo.startDate],
       endDate: [loadInfo.endDate],
       comments: [loadInfo.comments],
@@ -57,6 +58,10 @@ export class WaybillLoadingComponent implements OnInit {
   }
 
   sendLoadInfo() {
+    if (this.loadInfoForm.invalid) {
+      return this.result.error('Veuillez vérifier votre saisie');
+    }
+
     this.result.waiting();
 
     this.waybillService.sendLoadInfo(this.waybillId, this.loadInfoForm.value).pipe(
@@ -78,5 +83,9 @@ export class WaybillLoadingComponent implements OnInit {
 
   openShareModal() {
     this.showShareModal = true;
+  }
+
+  hasError(formValue) {
+    return formValue.invalid && (formValue.dirty || formValue.touched)
   }
 }
