@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 import { Person } from '../../../shared/models/person.model';
-import { isFrenchCellphone } from '../../../../core/is-french-cellphone';
 import { Contacts } from '../../../shared/models/contacts';
+import { FluValidators } from '../../../../core/form-validators/flu-validators';
 
 @Component({
   selector: 'flu-waybill-order-form',
@@ -40,16 +40,12 @@ export class WaybillOrderFormComponent {
     return this.fromBuilder.group({
       name: [person.name],
       email: [person.email, Validators.email],
-      cellphone: [person.cellphone, this.validatePhone]
+      cellphone: [person.cellphone, FluValidators.frenchPhone]
     })
   }
 
   getValue() {
     return this.orderForm.value;
-  }
-
-  validatePhone(control: AbstractControl) {
-    return !control.value || isFrenchCellphone(control.value) ? null : { 'invalidPhone': control.value }
   }
 
   hasError(formValue) {
