@@ -1,3 +1,8 @@
+<a class="button is-text" *ngIf="waybill.documentUrl" [href]="waybill.documentUrl" target="_blank">
+  <span class="icon"><i class="fa fa-download"></i></span>
+  <span>Télécharger au format pdf</span>
+</a>
+
 <!--Action Options -->
 <button class="button" *ngIf="isNotLoadStarted(waybill)"
         [routerLink]="['/lettre-de-voiture', waybill.code, 'commande']">
@@ -9,21 +14,17 @@
   Démarrer le chargement...
 </button>
 
-<button class="button is-link" *ngIf="isNotLoadFinished(waybill)"
+<button class="button" *ngIf="isNotLoadFinished(waybill)"
         [routerLink]="['/lettre-de-voiture', waybill.code, 'chargement']">
   Modifier le chargement
 </button>
 
 <button class="button is-link" *ngIf="isNotUnloadStarted(waybill)"
         [routerLink]="['/lettre-de-voiture', waybill.code, 'dechargement']">
-  Démarrer le déchargement
+  Démarrer le déchargement...
 </button>
 
-<button class="button is-link" *ngIf="isNotUnloadFinished(waybill)"
+<button class="button" *ngIf="isNotUnloadFinished(waybill)"
         [routerLink]="['/lettre-de-voiture', waybill.code, 'dechargement']">
   Modifier le déchargement
 </button>
-
-<a class="button is-text" *ngIf="waybill.documentUrl" [href]="waybill.documentUrl" target="_blank">
-  Télécharger au format pdf
-</a>

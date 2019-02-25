@@ -113,6 +113,9 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req, res) => {
 
   const loadInfo = waybill.loadInfo;
 
+  // add the link to pdf document
+  waybill.documentUrl = `/api/waybill/${waybill.code}/lettre-de-voiture.pdf`;
+
   if (!loadInfo.validatedAt) {
     loadInfo.validatedAt = new Date();
     await waybillStorage.put(waybill);
@@ -153,9 +156,6 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
   const unloadInfo = waybill.unloadInfo;
-
-  // add the link to pdf document
-  waybill.documentUrl = `/api/waybill/${waybill.code}/lettre-de-voiture.pdf`;
 
   if (!unloadInfo.validatedAt) {
     unloadInfo.validatedAt = new Date();
