@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -52,6 +52,7 @@ export class WaybillLoadingComponent implements OnInit {
       comments: [loadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [loadInfo.loadManager.name],
+        email: [loadInfo.loadManager.email, Validators.email],
         jobFunction: [loadInfo.loadManager.jobFunction]
       })
     })
