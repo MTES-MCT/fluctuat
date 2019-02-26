@@ -16,7 +16,7 @@ export class WaybillOrderFormComponent {
   @Input()
   contacts: Contacts;
 
-  constructor(private fromBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder) {
   }
 
   setValue(order: OrderInfo) {
@@ -24,12 +24,12 @@ export class WaybillOrderFormComponent {
   }
 
   fillForm(orderInfo: OrderInfo) {
-    this.orderForm = this.fromBuilder.group({
+    this.orderForm = this.formBuilder.group({
       customer: this.fillPersonForm(orderInfo.customer),
       sender: this.fillPersonForm(orderInfo.sender),
       receiver: this.fillPersonForm(orderInfo.receiver),
       transporter: this.fillPersonForm(orderInfo.transporter),
-      ship: this.fromBuilder.group({
+      ship: this.formBuilder.group({
         name: [orderInfo.ship.name],
         regNumber: [orderInfo.ship.regNumber]
       })
@@ -37,7 +37,7 @@ export class WaybillOrderFormComponent {
   }
 
   fillPersonForm(person: Person) {
-    return this.fromBuilder.group({
+    return this.formBuilder.group({
       name: [person.name],
       email: [person.email, Validators.email],
       cellphone: [person.cellphone, FluValidators.frenchPhone]
