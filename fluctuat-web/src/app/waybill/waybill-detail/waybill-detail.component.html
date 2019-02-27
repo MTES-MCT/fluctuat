@@ -6,6 +6,17 @@
 
     <flu-waybill-order-info [order]="waybill.order"></flu-waybill-order-info>
 
+    <ng-container *ngIf="!waybill.loadInfo.sentAt">
+      <div class="level"></div>
+
+      <p *ngIf="waybill.loadInfo.merchandiseType">Marchandise : <strong>{{waybill.loadInfo.merchandiseType}}</strong>
+        d'une valeur déclarée de <strong>{{waybill.loadInfo.merchandisePrice || '/'}} €</strong>
+        par tonne.</p>
+      <p *ngIf="waybill.loadInfo.origin">Chargement au <strong>{{waybill.loadInfo.origin}}</strong> ({{waybill.loadInfo.loadManager.email}})</p>
+      <p *ngIf="waybill.loadInfo.destination">Déchargement au <strong>{{waybill.loadInfo.destination}}</strong> ({{waybill.unloadInfo.loadManager.email}})</p>
+
+    </ng-container>
+
     <!--Load Info-->
     <ng-container *ngIf="waybill.loadInfo.sentAt">
       <div class="level"></div>
