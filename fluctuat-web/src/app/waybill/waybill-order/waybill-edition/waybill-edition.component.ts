@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, map, shareReplay } from 'rxjs/operators';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { WaybillService } from '../../shared/waybill.service';
@@ -10,6 +10,7 @@ import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 import { ContactsService } from '../../shared/contacts.service';
 import { Contacts } from '../../shared/models/contacts';
 import { AuthService } from '../../../core/auth/auth.service';
+import { Waybill } from '../../shared/models/waybill.model';
 
 @Component({
   selector: 'flu-waybill-edition',
@@ -26,6 +27,8 @@ export class WaybillEditionComponent implements OnInit {
 
   contacts$: Observable<Contacts>;
 
+  waybill$: Observable<Waybill>;
+
   constructor(private waybillService: WaybillService, private contactService: ContactsService,
               private route: ActivatedRoute, private router: Router, private authService: AuthService) {
   }
@@ -33,8 +36,11 @@ export class WaybillEditionComponent implements OnInit {
   ngOnInit() {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
-    this.waybillService.get(this.waybillId)
-      .subscribe((waybill) => this.orderFormComponent.setValue(waybill));
+    this.waybill$ = this.waybillService.get(this.waybillId).pipe(shareReplay(1));
+
+    this.waybill$.subscribe((waybill) => {
+      return this.orderFormComponent.setValue(waybill);
+    });
 
     if (this.authService.isAuthenticated()) {
       this.contacts$ = this.contactService.get().pipe(shareReplay(1));
@@ -58,6 +64,14 @@ export class WaybillEditionComponent implements OnInit {
       this.result.success();
       this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
     }, (err) => this.result.error(err))
+  }
+
+  isNotLoadStarted(waybill: Waybill) {
+    return !waybill.loadInfo.sentAt;
+  }
+
+  isLoadStarted(waybill: Waybill) {
+    return !!waybill.loadInfo.sentAt;
   }
 
 }

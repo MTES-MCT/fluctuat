@@ -1,4 +1,4 @@
-<form *ngIf="waybillForm; else loading" [formGroup]="waybillForm">
+<form *ngIf="waybillForm" [formGroup]="waybillForm">
 
   <div formGroupName="order">
   <div class="card">
@@ -233,7 +233,3 @@
   </div>
 
 </form>
-
-<ng-template #loading>
-  <flu-loading></flu-loading>
-</ng-template>
