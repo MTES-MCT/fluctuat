@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import * as waybillStorage from '../storage/waybill-storage'
-import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
-import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import {
