@@ -53,8 +53,7 @@ router.get('/me', verifyJWT, async (req, res) => {
 });
 
 router.get('/:id', fetchWaybill, (req, res) => {
-
-  return res.json(req['waybill']);
+  res.json(req['waybill']);
 });
 
 router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req, res) => {
