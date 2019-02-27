@@ -33,8 +33,8 @@ export class WaybillEditionComponent implements OnInit {
   ngOnInit() {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
-    this.waybillService.getOrderInfo(this.waybillId)
-      .subscribe((orderInfo) => this.orderFormComponent.setValue(orderInfo));
+    this.waybillService.get(this.waybillId)
+      .subscribe((waybill) => this.orderFormComponent.setValue(waybill));
 
     if (this.authService.isAuthenticated()) {
       this.contacts$ = this.contactService.get().pipe(shareReplay(1));
@@ -43,19 +43,19 @@ export class WaybillEditionComponent implements OnInit {
   }
 
   sendOrderInfo() {
-    if (this.orderFormComponent.orderForm.invalid) {
+    if (this.orderFormComponent.waybillForm.invalid) {
       return this.result.error('Veuillez vérifier votre saisie');
     }
 
     this.result.waiting();
 
-    this.waybillService.sendOrderInfo(this.waybillId, this.orderFormComponent.getValue()).pipe(
+    this.waybillService.update(this.waybillId, this.orderFormComponent.getValue()).pipe(
       catchError((error) => {
         console.error(error);
         return throwError(GENERIC_ERROR_MSG);
       })
     ).subscribe(() => {
-      this.result.success()
+      this.result.success();
       this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
     }, (err) => this.result.error(err))
   }

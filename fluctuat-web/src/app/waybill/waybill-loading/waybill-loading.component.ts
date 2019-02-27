@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 import { ResultHelper } from '../../core/result-helper';
 import { WaybillService } from '../shared/waybill.service';
 import { LoadInfo } from '../shared/models/load-info.model';
-import { PortList } from './ports-list';
+import { PortList } from '../shared/ports-list';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 import { FluValidators } from '../../core/form-validators/flu-validators';
 

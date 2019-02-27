@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OrderInfo } from '../../../shared/models/order-info.model';
 import { Person } from '../../../shared/models/person.model';
 import { Contacts } from '../../../shared/models/contacts';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
+import { Waybill } from '../../../shared/models/waybill.model';
+import { PortList } from '../../../shared/ports-list';
 
 @Component({
   selector: 'flu-waybill-order-form',
@@ -11,27 +12,46 @@ import { FluValidators } from '../../../../core/form-validators/flu-validators';
 })
 export class WaybillOrderFormComponent {
 
-  orderForm: FormGroup;
+  waybillForm: FormGroup;
 
   @Input()
   contacts: Contacts;
 
+  readonly ports = PortList;
+
   constructor(private formBuilder: FormBuilder) {
   }
 
-  setValue(order: OrderInfo) {
-    this.fillForm(order);
+  setValue(waybill: Waybill) {
+    this.fillForm(waybill);
   }
 
-  fillForm(orderInfo: OrderInfo) {
-    this.orderForm = this.formBuilder.group({
-      customer: this.fillPersonForm(orderInfo.customer),
-      sender: this.fillPersonForm(orderInfo.sender),
-      receiver: this.fillPersonForm(orderInfo.receiver),
-      transporter: this.fillPersonForm(orderInfo.transporter),
-      ship: this.formBuilder.group({
-        name: [orderInfo.ship.name],
-        regNumber: [orderInfo.ship.regNumber]
+  fillForm(waybill: Waybill) {
+    this.waybillForm = this.formBuilder.group({
+      order: this.formBuilder.group({
+        customer: this.fillPersonForm(waybill.order.customer),
+        sender: this.fillPersonForm(waybill.order.sender),
+        receiver: this.fillPersonForm(waybill.order.receiver),
+        transporter: this.fillPersonForm(waybill.order.transporter),
+        ship: this.formBuilder.group({
+          name: [waybill.order.ship.name],
+          regNumber: [waybill.order.ship.regNumber]
+        })
+      }),
+      loadInfo: this.formBuilder.group({
+        origin: [waybill.loadInfo.origin],
+        destination: [waybill.loadInfo.destination],
+        arrivalDate: [waybill.loadInfo.arrivalDate],
+        merchandiseType: [waybill.loadInfo.merchandiseType],
+        merchandisePrice: [waybill.loadInfo.merchandisePrice, FluValidators.quantity],
+        loadManager: this.formBuilder.group({
+          email: [waybill.loadInfo.loadManager.email, Validators.email]
+        })
+      }),
+      unloadInfo: this.formBuilder.group({
+        loadManager: this.formBuilder.group({
+          email: [waybill.unloadInfo.loadManager.email, Validators.email]
+        })
       })
     })
   }
@@ -44,8 +64,8 @@ export class WaybillOrderFormComponent {
     })
   }
 
-  getValue() {
-    return this.orderForm.value;
+  getValue(): Waybill {
+    return this.waybillForm.value;
   }
 
   hasError(formValue) {
