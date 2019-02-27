@@ -32,7 +32,8 @@ const initValue = JSON.stringify({
     'dbName': '',
     'cluster': ''
   },
-  'jwtSecret': ''
+  'jwtSecret': '',
+  'host': ''
 }, null, 2);
 
 checkDataFile('./.data/config.json', initValue);
