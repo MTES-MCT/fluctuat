@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Waybill } from './models/waybill.model';
 import { LoadInfo } from './models/load-info.model';
-import { OrderInfo } from './models/order-info.model';
 import { UnloadInfo } from './models/unload-info.model';
 
 @Injectable()
@@ -20,12 +19,8 @@ export class WaybillService {
     return this.http.get<Waybill>(`/api/waybill/${code}`);
   }
 
-  sendOrderInfo(code: string, orderInfo: OrderInfo) {
-    return this.http.put(`/api/waybill/${code}/order-info`, orderInfo);
-  }
-
-  getOrderInfo(code: string): Observable<OrderInfo> {
-    return this.http.get<OrderInfo>(`/api/waybill/${code}/order-info`);
+  update(code: string, waybill: Waybill) {
+    return this.http.put(`/api/waybill/${code}`, waybill);
   }
 
   sendLoadInfo(code: string, loadInfo: LoadInfo) {

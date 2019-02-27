@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import * as waybillStorage from '../storage/waybill-storage'
-import { LoadInfo } from '../models/load-info';
 import { Waybill } from '../models/waybill';
-import { UnloadInfo } from '../models/unload-info';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import {
@@ -36,8 +34,6 @@ router.post('/', verifyJWT, async (req, res) => {
 
   waybill.code = await generateCode();
   waybill.owner = req['user'].email;
-  waybill.loadInfo = new LoadInfo();
-  waybill.unloadInfo = new UnloadInfo();
 
   await waybillStorage.put(waybill);
 
@@ -69,18 +65,21 @@ router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req, res) => {
   }
 });
 
-router.get('/:id/order-info', fetchWaybill, (req, res) => {
+router.put('/:id', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
-  return res.json(waybill.order);
-});
+  if (waybill.loadInfo.sentAt) {
+    res.status(400).send('Waybill can not be modified after load' );
+    return
+  }
 
-router.put('/:id/order-info', fetchWaybill, (req, res) => {
-  const waybill: Waybill = req['waybill'];
+  const waybillUpdated: Waybill = req.body;
 
-  waybill.order = req.body;
+  waybill.order = waybillUpdated.order;
+  waybill.loadInfo = waybillUpdated.loadInfo;
+  waybill.unloadInfo = waybillUpdated.unloadInfo;
 
-  waybillStorage.put(waybill);
+  await waybillStorage.put(waybill);
 
   res.status(204).end();
 });

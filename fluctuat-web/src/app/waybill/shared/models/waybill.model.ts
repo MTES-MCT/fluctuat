@@ -5,9 +5,9 @@ import { UnloadInfo } from './unload-info.model';
 export class Waybill {
 
   code: string;
-  order: OrderInfo;
-  loadInfo: LoadInfo;
-  unloadInfo: UnloadInfo;
+  order: OrderInfo = new OrderInfo();
+  loadInfo: LoadInfo = new LoadInfo();
+  unloadInfo: UnloadInfo = new UnloadInfo();
   documentUrl: string;
 
 }

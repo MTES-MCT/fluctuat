@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -44,6 +44,7 @@ export class WaybillUnloadingComponent implements OnInit {
       comments: [unloadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [unloadInfo.loadManager.name],
+        email: [unloadInfo.loadManager.email, Validators.email],
         jobFunction: [unloadInfo.loadManager.jobFunction]
       })
     })

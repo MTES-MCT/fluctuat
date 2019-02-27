@@ -5,7 +5,6 @@ import { Observable, throwError } from 'rxjs';
 
 import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
 import { WaybillService } from '../../shared/waybill.service';
-import { OrderInfo } from '../../shared/models/order-info.model';
 import { Waybill } from '../../shared/models/waybill.model';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
@@ -30,18 +29,17 @@ export class WaybillNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderFormComponent.setValue(new OrderInfo());
+    this.orderFormComponent.setValue(new Waybill());
     this.contacts$ = this.contactsService.get().pipe(shareReplay(1))
   }
 
   create() {
-    if (this.orderFormComponent.orderForm.invalid) {
-      return this.result.error("Veuillez vérifier votre saisie");
+    if (this.orderFormComponent.waybillForm.invalid) {
+      return this.result.error('Veuillez vérifier votre saisie');
     }
 
     this.result.waiting();
-    const waybill = new Waybill();
-    waybill.order = this.orderFormComponent.getValue();
+    const waybill = this.orderFormComponent.getValue();
 
     this.waybillService.create(waybill).pipe(
       catchError((error) => {
