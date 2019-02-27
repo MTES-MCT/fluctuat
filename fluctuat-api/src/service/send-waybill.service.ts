@@ -23,8 +23,14 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
     ],
     subject: `⛴️ Lettre de voiture ${waybill.code}`,
     body: {
-      text: 'Veuillez trouver ci-joint votre lettre de voiture.',
-      html: '<h3>Veuillez trouver ci-joint votre lettre de voiture</h3><br><p>Fluctuat</p>'
+      text: '',
+      html: `<p>Bonjour,</p>
+             <p>Le déchargement a été confirmé par le transporteur</p>
+             <p>Vous pouvez consulter les informations en cliquant sur
+             <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
+             <h3>Veuillez trouver ci-joint votre lettre de voiture</h3>
+             <br>
+             <p>Fluctuat</p>`
     }
   };
 
@@ -56,6 +62,7 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
              <p>Vous pouvez consulter les informations en cliquant sur
              <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
              <h3>Veuillez trouver ci-joint votre lettre de voiture du chargement.</h3>
+             <br>
              <p>Fluctuat</p>`
     }
   };
