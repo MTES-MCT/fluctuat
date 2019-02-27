@@ -42,9 +42,11 @@ describe('WaybillOptions component tests', () => {
     component.waybill = waybill;
     fixture.detectChanges();
 
-    const elem = fixture.nativeElement.querySelector('a');
+    const elemText = fixture.nativeElement.querySelectorAll('span')[1];
 
-    expect(elem.innerHTML.trim()).toBe('Télécharger au format pdf');
+    expect(elemText.innerHTML.trim()).toBe('Télécharger au format pdf');
+
+    const elem = fixture.nativeElement.querySelector('a');
     expect(elem.href).toBe(waybill.documentUrl)
   })
 
