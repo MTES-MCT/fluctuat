@@ -59,7 +59,8 @@ export class WaybillUnloadingComponent implements OnInit {
     this.waybillService.sendUnloadInfo(this.waybillId, this.unloadInfoForm.value).pipe(
       catchError((error) => {
           console.error(error);
-          return throwError(GENERIC_ERROR_MSG)
+          let errMsg = error.status === 400 ? error.error : GENERIC_ERROR_MSG;
+          return throwError(errMsg)
         }
       ))
       .subscribe(() => {

@@ -67,7 +67,8 @@ export class WaybillLoadingComponent implements OnInit {
     this.waybillService.sendLoadInfo(this.waybillId, this.loadInfoForm.value).pipe(
       catchError((error) => {
           console.error(error);
-          return throwError(GENERIC_ERROR_MSG)
+          let errMsg = error.status === 400 ? error.error : GENERIC_ERROR_MSG;
+          return throwError(errMsg)
         }
       ))
       .subscribe(() => {

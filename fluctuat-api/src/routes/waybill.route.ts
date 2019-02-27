@@ -88,6 +88,12 @@ router.put('/:id/order-info', fetchWaybill, (req, res) => {
 router.put('/:id/load-info', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
+  // if already validated bad request
+  if (waybill.loadInfo.validatedAt) {
+    return res.status(400)
+      .send(`Le transporteur a confirmé le chargement. La modification n'est plus possible.`)
+  }
+
   waybill.loadInfo = req.body;
   waybill.loadInfo.sentAt = new Date();
 
@@ -137,6 +143,12 @@ router.get('/:id/unload-info', fetchWaybill, (req, res) => {
 
 router.put('/:id/unload-info', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
+
+  // if already validated bad request
+  if (waybill.unloadInfo.validatedAt) {
+    return res.status(400)
+      .send(`Le transporteur a confirmé le déchargement. La modification n'est plus possible.`)
+  }
 
   waybill.unloadInfo = req.body;
   waybill.unloadInfo.sentAt = new Date();
