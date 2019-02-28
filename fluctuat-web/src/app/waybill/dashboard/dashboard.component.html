@@ -17,13 +17,13 @@
         <div class="columns">
           <div class="column is-narrow">
             <span class="icon"><i class="fa fa-water"></i></span>
-            {{waybill.order.sender.name}}
+            {{waybill.order.sender.name || 'non renseigné'}}
             <span class="icon"><i class="fa fa-arrow-right"></i></span>
-            {{waybill.order.receiver.name}}
+            {{waybill.order.receiver.name || 'non renseigné'}}
           </div>
           <div class="column is-narrow">
             <span class="icon"><i class="fa fa-ship"></i></span>
-            {{waybill.order.ship.name}}
+            {{waybill.order.ship.name || 'non renseigné'}}
           </div>
         </div>
 
