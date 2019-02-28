@@ -69,7 +69,7 @@ router.put('/:id', fetchWaybill, async (req, res) => {
   const waybill: Waybill = req['waybill'];
 
   if (waybill.loadInfo.sentAt) {
-    res.status(400).send('Waybill can not be modified after load' );
+    res.status(400).send(`Le chargement a démarré. La modification n'est plus possible`);
     return
   }
 
