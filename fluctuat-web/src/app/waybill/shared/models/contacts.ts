@@ -10,4 +10,6 @@ export class Contacts {
   transporterCellphones;
   shipNames;
   shipRegNumbers;
+  loadManagerEmails;
+  unloadManagerEmails;
 }

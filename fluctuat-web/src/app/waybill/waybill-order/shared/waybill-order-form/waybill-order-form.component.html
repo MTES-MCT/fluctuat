@@ -178,8 +178,12 @@
         <div class="field">
           <div class="control">
 
+            <datalist id="flu-load-emails">
+              <option *ngFor="let item of contacts?.loadManagerEmails" [value]="item">
+            </datalist>
+
             <label class="label">Email de contact du lieu de chargement</label>
-            <input class="input is-medium" formControlName="loadManagerEmail" type="email"
+            <input class="input is-medium" formControlName="loadManagerEmail" type="email" list="flu-load-emails"
                    [ngClass]="{'is-danger': hasError(waybillForm.get('originInfo').controls.loadManagerEmail)}">
           </div>
           <p *ngIf="hasError(waybillForm.get('originInfo').controls.loadManagerEmail)" class="help is-danger">
@@ -204,8 +208,12 @@
         <div class="field">
           <div class="control">
 
+            <datalist id="flu-unload-emails">
+              <option *ngFor="let item of contacts?.unloadManagerEmails" [value]="item">
+            </datalist>
+
             <label class="label">Email de contact du lieu de déchargement</label>
-            <input class="input is-medium" formControlName="loadManagerEmail" type="email"
+            <input class="input is-medium" formControlName="loadManagerEmail" type="email" list="flu-unload-emails"
                    [ngClass]="{'is-danger': hasError(waybillForm.get('destinationInfo').controls.loadManagerEmail)}">
           </div>
           <p *ngIf="hasError(waybillForm.get('destinationInfo').controls.loadManagerEmail)" class="help is-danger">

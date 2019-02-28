@@ -39,7 +39,9 @@ const findContacts = (owner: string) => {
         transporterEmails: { $addToSet: '$order.transporter.email' },
         transporterCellphones: { $addToSet: '$order.transporter.cellphone' },
         shipNames: { $addToSet: '$order.ship.name' },
-        shipRegNumbers: { $addToSet: '$order.ship.regNumber' }
+        shipRegNumbers: { $addToSet: '$order.ship.regNumber' },
+        loadManagerEmails: { $addToSet: '$loadInfo.loadManager.email' },
+        unloadManagerEmails: { $addToSet: '$unloadInfo.loadManager.email' }
       }
     },
     {
@@ -55,6 +57,8 @@ const findContacts = (owner: string) => {
         transporterCellphones: $filterNullAndEmpty('$transporterCellphones'),
         shipNames: $filterNullAndEmpty('$shipNames'),
         shipRegNumbers: $filterNullAndEmpty('$shipRegNumbers'),
+        loadManagerEmails: $filterNullAndEmpty('$loadManagerEmails'),
+        unloadManagerEmails: $filterNullAndEmpty('$unloadManagerEmails')
       }
     }
   ])
