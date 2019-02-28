@@ -5,6 +5,7 @@ import { Contacts } from '../../../shared/models/contacts';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
 import { Waybill } from '../../../shared/models/waybill.model';
 import { PortList } from '../../../shared/ports-list';
+import { WaybillOrderFormValue } from './waybill-order-form-value';
 
 @Component({
   selector: 'flu-waybill-order-form',
@@ -38,21 +39,19 @@ export class WaybillOrderFormComponent {
           regNumber: [waybill.order.ship.regNumber]
         })
       }),
-      loadInfo: this.formBuilder.group({
+      originInfo: this.formBuilder.group({
         origin: [waybill.loadInfo.origin],
+        loadManagerEmail: [waybill.loadInfo.loadManager.email, Validators.email],
+      }),
+      destinationInfo: this.formBuilder.group({
         destination: [waybill.loadInfo.destination],
         arrivalDate: [waybill.loadInfo.arrivalDate],
+        loadManagerEmail: [waybill.unloadInfo.loadManager.email, Validators.email]
+      }),
+      merchandiseInfo: this.formBuilder.group({
         merchandiseType: [waybill.loadInfo.merchandiseType],
         merchandisePrice: [waybill.loadInfo.merchandisePrice, FluValidators.quantity],
-        loadManager: this.formBuilder.group({
-          email: [waybill.loadInfo.loadManager.email, Validators.email]
-        })
       }),
-      unloadInfo: this.formBuilder.group({
-        loadManager: this.formBuilder.group({
-          email: [waybill.unloadInfo.loadManager.email, Validators.email]
-        })
-      })
     })
   }
 
@@ -65,7 +64,23 @@ export class WaybillOrderFormComponent {
   }
 
   getValue(): Waybill {
-    return this.waybillForm.value;
+    const formValue: WaybillOrderFormValue = this.waybillForm.value;
+
+    const waybill = new Waybill();
+    waybill.order = formValue.order;
+
+    const loadInfo = waybill.loadInfo;
+    loadInfo.origin = formValue.originInfo.origin;
+    loadInfo.destination = formValue.destinationInfo.destination;
+    loadInfo.arrivalDate = formValue.destinationInfo.arrivalDate;
+    loadInfo.merchandiseType = formValue.merchandiseInfo.merchandiseType;
+    loadInfo.merchandisePrice = formValue.merchandiseInfo.merchandisePrice;
+    loadInfo.loadManager.email = formValue.originInfo.loadManagerEmail;
+
+    const unloadInfo = waybill.unloadInfo;
+    unloadInfo.loadManager.email = formValue.destinationInfo.loadManagerEmail;
+
+    return waybill;
   }
 
   hasError(formValue) {
