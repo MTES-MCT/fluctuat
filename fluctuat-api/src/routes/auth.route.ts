@@ -27,6 +27,8 @@ router.post('/login', async (req, res) => {
 
   let token = generateToken(user);
 
+  console.log(`User ${user.email} has been login`);
+
   return res.json({ token: token });
 });
 
@@ -50,6 +52,7 @@ router.post('/sign-up', async (req, res) => {
   try {
     await userStorage.put(user);
     const token = generateToken(user);
+    console.log(`user ${user.email} creates new account`);
     res.status(201).json({ token: token });
   } catch (error) {
     console.error(error);

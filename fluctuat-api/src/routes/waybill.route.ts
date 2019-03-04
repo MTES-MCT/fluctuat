@@ -37,6 +37,8 @@ router.post('/', verifyJWT, async (req: UserRequest, res) => {
 
   await waybillStorage.put(waybill);
 
+  console.log(`${req.user.email} creates waybill ${waybill.code}`);
+
   res.status(201).json(waybill);
 });
 
@@ -44,6 +46,8 @@ router.get('/me', verifyJWT, async (req: UserRequest, res) => {
   const userEmail: string = req.user.email;
 
   const waybills = await waybillStorage.findByEmail(userEmail);
+
+  console.log(`${req.user.email} get waybills`);
 
   res.json(waybills);
 });
