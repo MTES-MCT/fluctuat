@@ -1,8 +1,12 @@
 import { get } from '../storage/waybill-storage'
+import { Request } from 'express';
+import { Waybill } from '../models/waybill';
 
-export const fetchWaybill = async (req, res, next) => {
+export type WaybillRequest = Request & { waybill: Waybill }
+
+export const fetchWaybill = async (req: WaybillRequest, res, next) => {
   const id = req.params.id;
-  const waybill = await get(id.toUpperCase()); // case insensitive
+  const waybill: Waybill = await get(id.toUpperCase()); // case insensitive
 
   if (!waybill) {
     return res.status(404).send(`La lettre de voiture "${id}" n'existe pas.`);

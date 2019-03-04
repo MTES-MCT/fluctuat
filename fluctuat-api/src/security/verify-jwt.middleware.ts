@@ -1,6 +1,10 @@
 import { getTokenFromHeaders, tokenDecode } from './security-utils';
+import { Request } from 'express';
+import { User } from '../models/user';
 
-export const verifyJWT = (req, res, next) => {
+export type UserRequest = Request & { user: User }
+
+export const verifyJWT = (req: UserRequest, res, next) => {
   let token = getTokenFromHeaders(req);
 
   try {
