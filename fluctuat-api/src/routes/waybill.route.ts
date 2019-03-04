@@ -159,6 +159,12 @@ router.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) =>
       .send(`Le transporteur a confirmé le déchargement. La modification n'est plus possible.`)
   }
 
+  // if loadInfo is not validated bad request
+  if (!waybill.loadInfo.validatedAt) {
+    return res.status(400)
+      .send(`Le déchargement ne peux pas commencar avant la confirmation du chargement.`)
+  }
+
   waybill.unloadInfo = req.body;
   waybill.unloadInfo.sentAt = new Date();
 
