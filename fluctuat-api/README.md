@@ -1,6 +1,6 @@
 # fluctuat-api
 
-# Prerequites
+# Prerequisites
 
    bcrypt requires g++ (included in build-essential ubuntu package ubuntu)
 
@@ -18,7 +18,7 @@ After install set up the config vars at `.data/config.json`
 
 ## Run in dev mode
 
-Start the server with a live reload deamon
+Start the server with a live reload daemon
 
     yarn start
 
