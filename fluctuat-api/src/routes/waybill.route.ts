@@ -121,6 +121,11 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest,
 
   const loadInfo = waybill.loadInfo;
 
+  // if not loadInfo sent return bad request
+  if (!loadInfo.sentAt) {
+    return res.status(400).send(`Le chargement n'a pas été encore commencé`)
+  }
+
   // if already validated return loadInfo
   if (loadInfo.validatedAt) {
     return res.json(loadInfo)
