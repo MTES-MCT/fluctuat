@@ -22,9 +22,9 @@
 
             <label class="label">Email de contact</label>
             <input class="input is-medium" formControlName="email" type="email" list="flu-customer-email"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('order.customer').controls.email)}">
+                   [ngClass]="{'is-danger': waybillForm.get('order.customer.email').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('order.customer').controls.email)" class="help is-danger">
+          <p *ngIf="waybillForm.get('order.customer.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
 
@@ -52,9 +52,9 @@
             </datalist>
             <label class="label">Email de contact</label>
             <input class="input is-medium" formControlName="email" type="email" list="flu-sender-email"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('order.sender').controls.email)}">
+                   [ngClass]="{'is-danger': waybillForm.get('order.sender.email').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('order.sender').controls.email)" class="help is-danger">
+          <p *ngIf="waybillForm.get('order.sender.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
 
@@ -82,9 +82,9 @@
             </datalist>
             <label class="label">Email de contact</label>
             <input class="input is-medium" formControlName="email" type="email" list="flu-receiver-emails"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('order.receiver').controls.email)}">
+                   [ngClass]="{'is-danger': waybillForm.get('order.receiver.email').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('order.receiver').controls.email)" class="help is-danger">
+          <p *ngIf="waybillForm.get('order.receiver.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
 
@@ -112,9 +112,9 @@
             </datalist>
             <label class="label">Email de contact</label>
             <input class="input is-medium" formControlName="email" type="email" list="flu-transporter-emails"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('order.transporter').controls.email)}">
+                   [ngClass]="{'is-danger': waybillForm.get('order.transporter.email').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('order.transporter').controls.email)" class="help is-danger">
+          <p *ngIf="waybillForm.get('order.transporter.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
 
@@ -125,10 +125,10 @@
             </datalist>
             <label class="label">Téléphone portable</label>
             <input class="input is-medium" formControlName="cellphone" list="flu-transporter-cellphones"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('order.transporter').controls.cellphone)}">
+                   [ngClass]="{'is-danger': waybillForm.get('order.transporter.cellphone').invalid}">
           </div>
         </div>
-        <p *ngIf="hasError(waybillForm.get('order.transporter').controls.cellphone)" class="help is-danger">
+        <p *ngIf="waybillForm.get('order.transporter.cellphone').invalid" class="help is-danger">
           Le numéro de portable n'est pas au format 06 01 02 03 04</p>
       </div>
     </div>
@@ -184,9 +184,9 @@
 
             <label class="label">Email de contact du lieu de chargement</label>
             <input class="input is-medium" formControlName="loadManagerEmail" type="email" list="flu-load-emails"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('originInfo').controls.loadManagerEmail)}">
+                   [ngClass]="{'is-danger': waybillForm.get('originInfo.loadManagerEmail').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('originInfo').controls.loadManagerEmail)" class="help is-danger">
+          <p *ngIf="waybillForm.get('originInfo.loadManagerEmail').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
       </ng-container>
@@ -214,9 +214,9 @@
 
             <label class="label">Email de contact du lieu de déchargement</label>
             <input class="input is-medium" formControlName="loadManagerEmail" type="email" list="flu-unload-emails"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('destinationInfo').controls.loadManagerEmail)}">
+                   [ngClass]="{'is-danger': waybillForm.get('destinationInfo.loadManagerEmail').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('destinationInfo').controls.loadManagerEmail)" class="help is-danger">
+          <p *ngIf="waybillForm.get('destinationInfo.loadManagerEmail').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
       </ng-container>
@@ -232,9 +232,9 @@
           <div class="control">
             <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
             <input class="input is-medium" formControlName="merchandisePrice"
-                   [ngClass]="{'is-danger': hasError(waybillForm.get('merchandiseInfo').controls.merchandisePrice)}">
+                   [ngClass]="{'is-danger': waybillForm.get('merchandiseInfo.merchandisePrice').invalid}">
           </div>
-          <p *ngIf="hasError(waybillForm.get('merchandiseInfo').controls.merchandisePrice)" class="help is-danger">
+          <p *ngIf="waybillForm.get('merchandiseInfo.merchandisePrice').invalid" class="help is-danger">
             La valeur saisie n'est pas un nombre valide
           </p>
         </div>

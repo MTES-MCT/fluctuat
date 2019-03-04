@@ -38,9 +38,9 @@
           <div class="control">
             <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
             <input class="input is-medium" formControlName="merchandisePrice"
-                   [ngClass]="{'is-danger': hasError(loadInfoForm.controls.merchandisePrice)}">
+                   [ngClass]="{'is-danger': loadInfoForm.get('merchandisePrice').invalid}">
           </div>
-          <p *ngIf="hasError(loadInfoForm.controls.merchandisePrice)" class="help is-danger">
+          <p *ngIf="loadInfoForm.get('merchandisePrice').invalid" class="help is-danger">
             La valeur saisie n'est pas un nombre valide
           </p>
         </div>
@@ -49,9 +49,9 @@
           <div class="control">
             <label class="label">Tonnage</label>
             <input class="input is-medium" formControlName="merchandiseWeight"
-                   [ngClass]="{'is-danger': hasError(loadInfoForm.controls.merchandiseWeight)}">
+                   [ngClass]="{'is-danger': loadInfoForm.get('merchandiseWeight').invalid}">
           </div>
-          <p *ngIf="hasError(loadInfoForm.controls.merchandiseWeight)" class="help is-danger">
+          <p *ngIf="loadInfoForm.get('merchandiseWeight').invalid" class="help is-danger">
             Le tonnage saisie n'est pas un nombre valide
           </p>
         </div>
@@ -100,9 +100,9 @@
 
             <label class="label">Email de contact</label>
             <input class="input is-medium" formControlName="email" type="email"
-                   [ngClass]="{'is-danger': hasError(loadInfoForm.get('loadManager').controls.email)}">
+                   [ngClass]="{'is-danger': loadInfoForm.get('loadManager.email').invalid}">
           </div>
-          <p *ngIf="hasError(loadInfoForm.get('loadManager').controls.email)" class="help is-danger">
+          <p *ngIf="loadInfoForm.get('loadManager.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
 

@@ -24,10 +24,6 @@ export class WaybillOrderFormComponent {
   }
 
   setValue(waybill: Waybill) {
-    this.fillForm(waybill);
-  }
-
-  fillForm(waybill: Waybill) {
     this.waybillForm = this.formBuilder.group({
       order: this.formBuilder.group({
         customer: this.fillPersonForm(waybill.order.customer),
@@ -81,10 +77,6 @@ export class WaybillOrderFormComponent {
     unloadInfo.loadManager.email = formValue.destinationInfo.loadManagerEmail;
 
     return waybill;
-  }
-
-  hasError(formValue) {
-    return formValue.invalid && (formValue.dirty || formValue.touched)
   }
 
 }

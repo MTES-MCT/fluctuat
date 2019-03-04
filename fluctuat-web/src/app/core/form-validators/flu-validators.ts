@@ -5,10 +5,10 @@ import { isFrenchCellphone } from './is-french-cellphone';
 export class FluValidators {
 
   static quantity = (control: AbstractControl) => {
-    return !control.value || isQuantity(control.value) ? null : { 'invalidQuantity': control.value }
+    return !control.value || isQuantity(control.value) ? null : { 'quantity': true}
   };
 
   static frenchPhone = (control: AbstractControl) => {
-    return !control.value || isFrenchCellphone(control.value) ? null : { 'invalidPhone': control.value }
+    return !control.value || isFrenchCellphone(control.value) ? null : { 'frenchPhone': true }
   }
 }

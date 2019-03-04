@@ -86,8 +86,4 @@ export class WaybillLoadingComponent implements OnInit {
   openShareModal() {
     this.showShareModal = true;
   }
-
-  hasError(formValue) {
-    return formValue.invalid && (formValue.dirty || formValue.touched)
-  }
 }
