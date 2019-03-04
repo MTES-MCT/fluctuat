@@ -11,7 +11,19 @@ const get = (code) => WaybillDao.findOne({ code });
 
 const put = (waybill: Waybill) => new WaybillDao(waybill).save();
 
-const findByEmail = (owner: string) => WaybillDao.find({ owner });
+const findByEmail = (email: string) => {
+  return WaybillDao.find({
+    $or: [
+      { owner: email },
+      { 'order.customer.email': email},
+      { 'order.sender.email': email},
+      { 'order.receiver.email': email},
+      { 'order.transporter.email': email},
+      { 'loadInfo.loadManager.email': email},
+      { 'unloadInfo.loadManager.email': email},
+    ]
+  });
+};
 
 const findContacts = (owner: string) => {
   const $filterNullAndEmpty = (field) => {
