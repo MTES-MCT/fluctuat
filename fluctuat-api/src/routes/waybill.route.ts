@@ -121,13 +121,15 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest,
 
   const loadInfo = waybill.loadInfo;
 
+  // if already validated return loadInfo
+  if (loadInfo.validatedAt) {
+    return res.json(loadInfo)
+  }
+
   // add the link to pdf document
   waybill.documentUrl = `/api/waybill/${waybill.code}/lettre-de-voiture.pdf`;
-
-  if (!loadInfo.validatedAt) {
-    loadInfo.validatedAt = new Date();
-    await waybillStorage.put(waybill);
-  }
+  loadInfo.validatedAt = new Date();
+  await waybillStorage.put(waybill);
 
   // send waybill loaded email
   sendWaybillLoaded(waybill, host)
@@ -170,15 +172,18 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillReques
 
   const unloadInfo = waybill.unloadInfo;
 
-  if (!unloadInfo.validatedAt) {
-    unloadInfo.validatedAt = new Date();
-    await waybillStorage.put(waybill);
-
-    // send waybill by email
-    sendWaybill(waybill, host)
-      .then(() => console.log('waybill sent'))
-      .catch(console.error);
+  //if already validated return unloadInfo
+  if (unloadInfo.validatedAt) {
+    return res.json(unloadInfo);
   }
+
+  unloadInfo.validatedAt = new Date();
+  await waybillStorage.put(waybill);
+
+  // send waybill by email
+  sendWaybill(waybill, host)
+    .then(() => console.log('waybill sent'))
+    .catch(console.error);
 
   res.json(unloadInfo);
 });
