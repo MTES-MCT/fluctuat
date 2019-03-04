@@ -183,6 +183,11 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillReques
 
   const unloadInfo = waybill.unloadInfo;
 
+  // if not loadInfo sent return bad request
+  if (!unloadInfo.sentAt) {
+    return res.status(400).send(`Le déchargement n'a pas été encore commencé`)
+  }
+
   //if already validated return unloadInfo
   if (unloadInfo.validatedAt) {
     return res.json(unloadInfo);
