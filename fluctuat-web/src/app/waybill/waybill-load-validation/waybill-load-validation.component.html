@@ -21,7 +21,7 @@
     <div class="buttons" *ngIf="!waybill.loadInfo.validatedAt">
       <button class="button is-link" (click)="validateLoadInfo(waybill)"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
-        Confirmer le chargement...
+        Confirmer le chargement
       </button>
     </div>
 
