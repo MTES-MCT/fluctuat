@@ -22,16 +22,17 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
       waybill.unloadInfo.loadManager,
       { name: '', email: waybill.owner },
     ],
-    subject: `⛴️ Lettre de voiture ${waybill.code}`,
+    subject: `⛴️ Lettre de voiture ${waybill.code} - déchargement confirmé`,
     body: {
       text: '',
       html: `<p>Bonjour,</p>
-             <p>Le déchargement a été confirmé par le transporteur</p>
+             <p>La lettre de voiture nº {{waybill.code}} a été confirmé par le transporteur.</p>
              <p>Vous pouvez consulter les informations en cliquant sur
              <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
              <h3>Veuillez trouver ci-joint votre lettre de voiture</h3>
              <br>
-             <p>Fluctuat</p>`
+             <p>Cordialement,</p>
+             <p>L'équipe de Fluctu@t</p>`
     }
   };
 
@@ -54,18 +55,28 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
       waybill.order.transporter,
       waybill.order.sender,
       waybill.loadInfo.loadManager,
+      waybill.unloadInfo.loadManager,
       { name: '', email: waybill.owner },
     ],
-    subject: `⚓  Chargement confirmé -️ Lettre de voiture nº ${waybill.code}`,
+    subject: `⚓  Lettre de voiture nº ${waybill.code} - chargement confirmé️ `,
     body: {
       text: '',
       html: `<p>Bonjour,</p>
-             <p>Le chargement a été confirmé par le transporteur.</p>
-             <p>Vous pouvez consulter les informations en cliquant sur
+             <p>La lettre de voiture nº ${waybill.code} a été confirmé par le transporteur.</p>
+             <p><strong>Information relative au voyage :</strong></p>
+             <ul>
+              <li>Donneur d'ordre : ${waybill.order.customer.name}</li>
+              <li>Expéditeur : ${waybill.order.sender.name}</li>
+              <li>Destinataire : ${waybill.order.receiver.name}</li>
+              <li>Transporteur : ${waybill.order.transporter.name}</li>
+              <li>Nature de la marchandise : ${waybill.loadInfo.merchandiseType}</li>
+             </ul>
+             <p>Pour consulter les informations ou <strong>commencer le déchargement</strong>, cliquez sur
              <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
-             <h3>Veuillez trouver ci-joint votre lettre de voiture du chargement.</h3>
+             <p>Veuillez trouver ci-joint la lettre de voiture du chargement.</p>
              <br>
-             <p>Fluctuat</p>`
+             <p>Cordialement,</p>
+             <p>L'équipe de Fluctu@t</p>`
     }
   };
 
@@ -91,7 +102,9 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
              <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.code} ont été enregistreés,
               veuillez les confirmer dès maintenant.</p>
              <a href="${confirmationLink}">Cliquez sur ce lien pour accéder à votre lettre de voiture</a>
-             <p>Fluctuat</p>`
+             <br>
+             <p>Cordialement,</p>
+             <p>L'équipe de Fluctu@t</p>`
     }
   };
 
@@ -115,7 +128,9 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
              <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.code} ont été enregistreés,
               veuillez les confirmer dès maintenant.</p>
              <a href="${confirmationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
-             <p>Fluctuat</p>`
+             <br>
+             <p>Cordialement,</p>
+             <p>L'équipe de Fluctu@t</p>`
     }
   };
 
