@@ -127,20 +127,30 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
   ]);
 };
 
-const sendWaybillNotification = (notifyData: WaybillNotify, baseUrl: string) => {
+const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, baseUrl: string) => {
   const accessLink = `${baseUrl}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
 
   let sendActions = [];
 
   if (notifyData.email) {
     let email: EmailData = {
-      to: [ { name: '', email: notifyData.email } ],
+      to: [{ name: '', email: notifyData.email }],
       subject: `⛴️ Lien d'accès à la lettre de voiture ${notifyData.waybillId}`,
       body: {
         html: `<p>Bonjour,</p>
-                <p>La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.</p>
-                <a href="${accessLink}">Cliquez sur ce lien pour y accéder</a>
-                <p>Fluctuat</p>`
+               <p>La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.</p>
+               <p><strong>Information relative au voyage :</strong></p>
+               <ul>
+                 <li>Donneur d'ordre : ${waybill.order.customer.name}</li>
+                 <li>Expéditeur : ${waybill.order.sender.name}</li>
+                 <li>Destinataire : ${waybill.order.receiver.name}</li>
+                 <li>Transporteur : ${waybill.order.transporter.name}</li>
+                 <li>Nature de la marchandise : ${waybill.loadInfo.merchandiseType}</li>
+               </ul>
+               <a href="${accessLink}">Cliquez sur ce lien pour y accéder</a>
+               <br>
+               <p>Cordialement,</p>
+               <p>L'équipe de Fluctu@t</p>`
       }
     };
     sendActions.push(emailService.sendEmail(email));
