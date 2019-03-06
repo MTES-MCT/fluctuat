@@ -1,5 +1,6 @@
 import { EmailData } from './email-data';
 import * as mailjet from 'node-mailjet';
+import { HasEmail } from '../models/has-email.interface';
 
 const DEFAULT_FROM = {
   email: 'elias.boukamza@beta.gouv.fr',
@@ -20,11 +21,8 @@ export class EmailService {
     const request: any = {
       Messages: [
         {
-          From: {
-            Email: DEFAULT_FROM.email,
-            Name: DEFAULT_FROM.name
-          },
-          To: data.to.map(item => ({ Email: item.email, Name: item.name })),
+          From: { Email: DEFAULT_FROM.email, Name: DEFAULT_FROM.name },
+          To: EmailService.getValidReceivers(data.to),
           Subject: data.subject,
           TextPart: data.body.text,
           HTMLPart: data.body.html
@@ -42,5 +40,13 @@ export class EmailService {
 
     return this.mailjetService.post('send')
       .request(request);
+  }
+
+  static getValidReceivers(emails) {
+    return emails
+    // filter empty emails
+      .filter(item => !!item.email)
+      // map to mailjet model
+      .map(item => ({ Email: item.email, Name: item.name || '' }));
   }
 }
