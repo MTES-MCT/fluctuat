@@ -2,17 +2,12 @@ import { EmailData } from './email-data';
 import * as mailjet from 'node-mailjet';
 import { HasEmail } from '../models/has-email.interface';
 
-const DEFAULT_FROM = {
-  email: 'elias.boukamza@beta.gouv.fr',
-  name: 'Fluctuat Info'
-};
-
 export class EmailService {
 
   mailjetService;
 
-  constructor(user: string, password: string, debug = false) {
-    console.log('init email service. debug', debug);
+  constructor(user: string, password: string, debug = false, private sender: HasEmail) {
+    console.log(`Init email service: send from ${sender.email} with debug: ${debug}`);
     this.mailjetService = mailjet.connect(user, password, { version: 'v3.1', perform_api_call: !debug })
   }
 
@@ -21,7 +16,7 @@ export class EmailService {
     const request: any = {
       Messages: [
         {
-          From: { Email: DEFAULT_FROM.email, Name: DEFAULT_FROM.name },
+          From: { Name: this.sender.name, Email: this.sender.email},
           To: EmailService.getValidReceivers(data.to),
           Subject: data.subject,
           TextPart: data.body.text,

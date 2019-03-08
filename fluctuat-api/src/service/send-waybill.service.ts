@@ -7,7 +7,7 @@ import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 
 const config = require('../../.data/config.json');
 const emailConfig = config.email;
-const emailService = new EmailService(emailConfig.user, emailConfig.pass, config.debug);
+const emailService = new EmailService(emailConfig.user, emailConfig.pass, config.debug, emailConfig.sender);
 
 const smsConfig = config.sms;
 const smsService = new SmsService(smsConfig.token, config.debug);

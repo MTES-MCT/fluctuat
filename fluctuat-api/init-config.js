@@ -21,7 +21,11 @@ const initValue = JSON.stringify({
   'debug': true,
   'email': {
     'user': '',
-    'pass': ''
+    'pass': '',
+    'sender': {
+      'name': '',
+      'email': ''
+    }
   },
   'sms': {
     'token': ''
