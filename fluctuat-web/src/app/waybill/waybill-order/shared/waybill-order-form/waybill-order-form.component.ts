@@ -29,6 +29,11 @@ export class WaybillOrderFormComponent {
         customer: this.fillPersonForm(waybill.order.customer),
         sender: this.fillPersonForm(waybill.order.sender),
         receiver: this.fillPersonForm(waybill.order.receiver),
+        middleman: this.formBuilder.group({
+          name: [waybill.order.middleman.name],
+          email: [waybill.order.middleman.email, Validators.email],
+          isBroker: [waybill.order.middleman.isBroker]
+        }),
         transporter: this.fillPersonForm(waybill.order.transporter),
         ship: this.formBuilder.group({
           name: [waybill.order.ship.name],

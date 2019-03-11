@@ -5,6 +5,8 @@ export class Contacts {
   senderEmails;
   receiverNames;
   receiverEmails;
+  middlemanNames;
+  middlemanEmails;
   transporterNames;
   transporterEmails;
   transporterCellphones;

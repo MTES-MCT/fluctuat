@@ -1,6 +1,10 @@
 <p>Donneur d'ordre: <strong>{{order.customer.name}}</strong> ({{order.customer.email}})</p>
 <p>Expéditeur : <strong>{{order.sender.name}}</strong> ({{order.sender.email}})</p>
 <p>Destinataire : <strong>{{order.receiver.name}}</strong> ({{order.receiver.email}})</p>
+<p *ngIf="order.middleman?.name">
+  Affréteur : <strong>{{order.middleman.name}}</strong> ({{order.middleman.email}}), en sa qualité de
+  <strong>{{ order.middleman.isBroker ? 'courtier' : 'commissionaire' }}</strong>
+</p>
 
 <p>Le bateau <strong class="is-uppercase">{{order.ship.name}}</strong>,
   matricule <strong>{{order.ship.regNumber}}</strong> est conduit par <strong>{{order.transporter.name}}</strong>

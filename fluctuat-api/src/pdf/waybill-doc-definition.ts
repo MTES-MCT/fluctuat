@@ -3,6 +3,7 @@ import { UnloadInfo } from '../models/unload-info';
 import { LoadManager } from '../models/load-manager';
 import { logo } from './logo';
 import { LoadInfo } from '../models/load-info';
+import { Middleman } from '../models/middleman';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
@@ -24,6 +25,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
       chainText('Donneur d\'ordre : ', bold(order.customer.name)),
       chainText('Expéditeur : ', bold(order.sender.name)),
       chainText('Destinataire : ', bold(order.receiver.name)),
+      ...printMiddleMan(order.middleman),
       chainText('Le bateau ', bold(order.ship.name), ', matricule ', bold(order.ship.regNumber),
         ', est conduit par ', bold(order.transporter.name), '.'),
       '\n',
@@ -81,6 +83,15 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
     }
   }
 }
+
+const printMiddleMan = (middleman: Middleman) => {
+  if (!middleman || !middleman.name) {
+    return []
+  }
+
+  return [chainText('Affréteur : ', bold(middleman.name),
+    ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))]
+};
 
 const printLoadBlock = (loadInfo: LoadInfo) => {
   return [

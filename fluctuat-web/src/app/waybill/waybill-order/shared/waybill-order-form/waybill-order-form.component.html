@@ -91,6 +91,44 @@
       </div>
     </div>
 
+    <div class="card">
+      <div class="card-content" formGroupName="middleman">
+        <p class="title">Affréteur</p>
+
+        <flu-form-field>
+          <datalist id="flu-middleman-names">
+            <option *ngFor="let item of contacts?.middlemanNames" [value]="item">
+          </datalist>
+          <label class="label">Nom ou raison sociale</label>
+          <input class="input is-medium" formControlName="name" list="flu-middleman-names">
+        </flu-form-field>
+
+        <div class="field">
+          <div class="control">
+            <datalist id="flu-middleman-emails">
+              <option *ngFor="let item of contacts?.middlemanEmails" [value]="item">
+            </datalist>
+            <label class="label">Email de contact</label>
+            <input class="input is-medium" formControlName="email" type="email" list="flu-middleman-emails"
+                   [ngClass]="{'is-danger': waybillForm.get('order.middleman.email').invalid}">
+          </div>
+          <p *ngIf="waybillForm.get('order.middleman.email').invalid" class="help is-danger">
+            L'email n'est pas valide</p>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="label">Qualité</label>
+            <input class="is-checkradio is-dark" formControlName="isBroker" id="isBrokerTrue" type="radio" [value]="true">
+            <label for="isBrokerTrue">Courtier</label>
+            <input class="is-checkradio is-dark" formControlName="isBroker" id="isBrokerFalse" type="radio" [value]="false">
+            <label for="isBrokerFalse">Commissionnaire</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <div class="level"></div>
 
     <div class="card">
