@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Waybill } from './models/waybill.model';
 import { LoadInfo } from './models/load-info.model';
 import { UnloadInfo } from './models/unload-info.model';
+import { OrderInfo } from './models/order-info.model';
 
 @Injectable()
 export class WaybillService {
@@ -19,8 +20,8 @@ export class WaybillService {
     return this.http.get<Waybill>(`/api/waybill/${code}`);
   }
 
-  update(code: string, waybill: Waybill) {
-    return this.http.put(`/api/waybill/${code}`, waybill);
+  updateOrderInfo(code: string, orderInfo: OrderInfo) {
+    return this.http.put(`/api/waybill/${code}/order-info`, orderInfo);
   }
 
   sendLoadInfo(code: string, loadInfo: LoadInfo) {

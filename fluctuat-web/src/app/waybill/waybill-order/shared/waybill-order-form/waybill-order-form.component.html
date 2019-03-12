@@ -1,199 +1,201 @@
-<form *ngIf="waybillForm" [formGroup]="waybillForm">
+<form *ngIf="orderForm" [formGroup]="orderForm">
 
-  <div formGroupName="order">
-    <div class="card">
-      <div class="card-content" formGroupName="customer">
-        <p class="title">Donneur d'ordre</p>
+  <div class="card">
+    <div class="card-content" formGroupName="customer">
+      <p class="title">Donneur d'ordre</p>
 
-        <flu-form-field>
-          <datalist id="flu-customer-name">
-            <option *ngFor="let item of contacts?.customerNames" [value]="item">
+      <flu-form-field>
+        <datalist id="flu-customer-name">
+          <option *ngFor="let item of contacts?.customerNames" [value]="item">
+        </datalist>
+
+        <label class="label">Nom ou raison sociale</label>
+        <input class="input is-medium" formControlName="name" list="flu-customer-name">
+      </flu-form-field>
+
+      <div class="field">
+        <div class="control">
+          <datalist id="flu-customer-email">
+            <option *ngFor="let item of contacts?.customerEmails" [value]="item">
           </datalist>
 
-          <label class="label">Nom ou raison sociale</label>
-          <input class="input is-medium" formControlName="name" list="flu-customer-name">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <datalist id="flu-customer-email">
-              <option *ngFor="let item of contacts?.customerEmails" [value]="item">
-            </datalist>
-
-            <label class="label">Email de contact</label>
-            <input class="input is-medium" formControlName="email" type="email" list="flu-customer-email"
-                   [ngClass]="{'is-danger': waybillForm.get('order.customer.email').invalid}">
-          </div>
-          <p *ngIf="waybillForm.get('order.customer.email').invalid" class="help is-danger">
-            L'email n'est pas valide</p>
+          <label class="label">Email de contact</label>
+          <input class="input is-medium" formControlName="email" type="email" list="flu-customer-email"
+                 [ngClass]="{'is-danger': orderForm.get('customer.email').invalid}">
         </div>
-
+        <p *ngIf="orderForm.get('customer.email').invalid" class="help is-danger">
+          L'email n'est pas valide</p>
       </div>
+
     </div>
+  </div>
 
-    <div class="level"></div>
+  <div class="level"></div>
 
-    <div class="card">
-      <div class="card-content" formGroupName="sender">
-        <p class="title">Expéditeur</p>
+  <div class="card">
+    <div class="card-content" formGroupName="sender">
+      <p class="title">Expéditeur</p>
 
-        <flu-form-field>
-          <datalist id="flu-sender-name">
-            <option *ngFor="let item of contacts?.senderNames" [value]="item">
+      <flu-form-field>
+        <datalist id="flu-sender-name">
+          <option *ngFor="let item of contacts?.senderNames" [value]="item">
+        </datalist>
+        <label class="label">Nom ou raison sociale</label>
+        <input class="input is-medium" formControlName="name" list="flu-sender-name">
+      </flu-form-field>
+
+      <div class="field">
+        <div class="control">
+          <datalist id="flu-sender-email">
+            <option *ngFor="let item of contacts?.senderEmails" [value]="item">
           </datalist>
-          <label class="label">Nom ou raison sociale</label>
-          <input class="input is-medium" formControlName="name" list="flu-sender-name">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <datalist id="flu-sender-email">
-              <option *ngFor="let item of contacts?.senderEmails" [value]="item">
-            </datalist>
-            <label class="label">Email de contact</label>
-            <input class="input is-medium" formControlName="email" type="email" list="flu-sender-email"
-                   [ngClass]="{'is-danger': waybillForm.get('order.sender.email').invalid}">
-          </div>
-          <p *ngIf="waybillForm.get('order.sender.email').invalid" class="help is-danger">
-            L'email n'est pas valide</p>
+          <label class="label">Email de contact</label>
+          <input class="input is-medium" formControlName="email" type="email" list="flu-sender-email"
+                 [ngClass]="{'is-danger': orderForm.get('sender.email').invalid}">
         </div>
-
+        <p *ngIf="orderForm.get('sender.email').invalid" class="help is-danger">
+          L'email n'est pas valide</p>
       </div>
+
     </div>
+  </div>
 
-    <div class="level"></div>
+  <div class="level"></div>
 
-    <div class="card">
-      <div class="card-content" formGroupName="receiver">
-        <p class="title">Destinataire</p>
+  <div class="card">
+    <div class="card-content" formGroupName="receiver">
+      <p class="title">Destinataire</p>
 
-        <flu-form-field>
-          <datalist id="flu-receiver-names">
-            <option *ngFor="let item of contacts?.receiverNames" [value]="item">
+      <flu-form-field>
+        <datalist id="flu-receiver-names">
+          <option *ngFor="let item of contacts?.receiverNames" [value]="item">
+        </datalist>
+        <label class="label">Nom ou raison sociale</label>
+        <input class="input is-medium" formControlName="name" list="flu-receiver-names">
+      </flu-form-field>
+
+      <div class="field">
+        <div class="control">
+          <datalist id="flu-receiver-emails">
+            <option *ngFor="let item of contacts?.receiverEmails" [value]="item">
           </datalist>
-          <label class="label">Nom ou raison sociale</label>
-          <input class="input is-medium" formControlName="name" list="flu-receiver-names">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <datalist id="flu-receiver-emails">
-              <option *ngFor="let item of contacts?.receiverEmails" [value]="item">
-            </datalist>
-            <label class="label">Email de contact</label>
-            <input class="input is-medium" formControlName="email" type="email" list="flu-receiver-emails"
-                   [ngClass]="{'is-danger': waybillForm.get('order.receiver.email').invalid}">
-          </div>
-          <p *ngIf="waybillForm.get('order.receiver.email').invalid" class="help is-danger">
-            L'email n'est pas valide</p>
+          <label class="label">Email de contact</label>
+          <input class="input is-medium" formControlName="email" type="email" list="flu-receiver-emails"
+                 [ngClass]="{'is-danger': orderForm.get('receiver.email').invalid}">
         </div>
-
+        <p *ngIf="orderForm.get('receiver.email').invalid" class="help is-danger">
+          L'email n'est pas valide</p>
       </div>
+
     </div>
+  </div>
 
-    <div class="card">
-      <div class="card-content" formGroupName="middleman">
-        <p class="title">Affréteur</p>
+  <div class="level"></div>
 
-        <flu-form-field>
-          <datalist id="flu-middleman-names">
-            <option *ngFor="let item of contacts?.middlemanNames" [value]="item">
+  <div class="card">
+    <div class="card-content" formGroupName="middleman">
+      <p class="title">Affréteur</p>
+
+      <flu-form-field>
+        <datalist id="flu-middleman-names">
+          <option *ngFor="let item of contacts?.middlemanNames" [value]="item">
+        </datalist>
+        <label class="label">Nom ou raison sociale</label>
+        <input class="input is-medium" formControlName="name" list="flu-middleman-names">
+      </flu-form-field>
+
+      <div class="field">
+        <div class="control">
+          <datalist id="flu-middleman-emails">
+            <option *ngFor="let item of contacts?.middlemanEmails" [value]="item">
           </datalist>
-          <label class="label">Nom ou raison sociale</label>
-          <input class="input is-medium" formControlName="name" list="flu-middleman-names">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <datalist id="flu-middleman-emails">
-              <option *ngFor="let item of contacts?.middlemanEmails" [value]="item">
-            </datalist>
-            <label class="label">Email de contact</label>
-            <input class="input is-medium" formControlName="email" type="email" list="flu-middleman-emails"
-                   [ngClass]="{'is-danger': waybillForm.get('order.middleman.email').invalid}">
-          </div>
-          <p *ngIf="waybillForm.get('order.middleman.email').invalid" class="help is-danger">
-            L'email n'est pas valide</p>
+          <label class="label">Email de contact</label>
+          <input class="input is-medium" formControlName="email" type="email" list="flu-middleman-emails"
+                 [ngClass]="{'is-danger': orderForm.get('middleman.email').invalid}">
         </div>
-
-        <div class="field">
-          <div class="control">
-            <label class="label">Qualité</label>
-            <input class="is-checkradio is-dark" formControlName="isBroker" id="isBrokerTrue" type="radio" [value]="true">
-            <label for="isBrokerTrue">Courtier</label>
-            <input class="is-checkradio is-dark" formControlName="isBroker" id="isBrokerFalse" type="radio" [value]="false">
-            <label for="isBrokerFalse">Commissionnaire</label>
-          </div>
-        </div>
-
+        <p *ngIf="orderForm.get('middleman.email').invalid" class="help is-danger">
+          L'email n'est pas valide</p>
       </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="label">Qualité</label>
+          <input class="is-checkradio is-dark" formControlName="isBroker" id="isBrokerTrue" type="radio"
+                 [value]="true">
+          <label for="isBrokerTrue">Courtier</label>
+          <input class="is-checkradio is-dark" formControlName="isBroker" id="isBrokerFalse" type="radio"
+                 [value]="false">
+          <label for="isBrokerFalse">Commissionnaire</label>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <div class="level"></div>
+  <div class="level"></div>
 
-    <div class="card">
-      <div class="card-content" formGroupName="transporter">
-        <p class="title">Transporteur</p>
+  <div class="card">
+    <div class="card-content" formGroupName="transporter">
+      <p class="title">Transporteur</p>
 
-        <flu-form-field>
-          <datalist id="flu-transporter-names">
-            <option *ngFor="let item of contacts?.transporterNames" [value]="item">
+      <flu-form-field>
+        <datalist id="flu-transporter-names">
+          <option *ngFor="let item of contacts?.transporterNames" [value]="item">
+        </datalist>
+        <label class="label">Nom</label>
+        <input class="input is-medium" formControlName="name" list="flu-transporter-names">
+      </flu-form-field>
+
+      <div class="field">
+        <div class="control">
+          <datalist id="flu-transporter-emails">
+            <option *ngFor="let item of contacts?.transporterEmails" [value]="item">
           </datalist>
-          <label class="label">Nom</label>
-          <input class="input is-medium" formControlName="name" list="flu-transporter-names">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <datalist id="flu-transporter-emails">
-              <option *ngFor="let item of contacts?.transporterEmails" [value]="item">
-            </datalist>
-            <label class="label">Email de contact</label>
-            <input class="input is-medium" formControlName="email" type="email" list="flu-transporter-emails"
-                   [ngClass]="{'is-danger': waybillForm.get('order.transporter.email').invalid}">
-          </div>
-          <p *ngIf="waybillForm.get('order.transporter.email').invalid" class="help is-danger">
-            L'email n'est pas valide</p>
+          <label class="label">Email de contact</label>
+          <input class="input is-medium" formControlName="email" type="email" list="flu-transporter-emails"
+                 [ngClass]="{'is-danger': orderForm.get('transporter.email').invalid}">
         </div>
-
-        <div class="field">
-          <div class="control">
-            <datalist id="flu-transporter-cellphones">
-              <option *ngFor="let item of contacts?.transporterCellphones" [value]="item">
-            </datalist>
-            <label class="label">Téléphone portable</label>
-            <input class="input is-medium" formControlName="cellphone" list="flu-transporter-cellphones"
-                   [ngClass]="{'is-danger': waybillForm.get('order.transporter.cellphone').invalid}">
-          </div>
-        </div>
-        <p *ngIf="waybillForm.get('order.transporter.cellphone').invalid" class="help is-danger">
-          Le numéro de portable n'est pas au format 06 01 02 03 04</p>
+        <p *ngIf="orderForm.get('transporter.email').invalid" class="help is-danger">
+          L'email n'est pas valide</p>
       </div>
+
+      <div class="field">
+        <div class="control">
+          <datalist id="flu-transporter-cellphones">
+            <option *ngFor="let item of contacts?.transporterCellphones" [value]="item">
+          </datalist>
+          <label class="label">Téléphone portable</label>
+          <input class="input is-medium" formControlName="cellphone" list="flu-transporter-cellphones"
+                 [ngClass]="{'is-danger': orderForm.get('transporter.cellphone').invalid}">
+        </div>
+      </div>
+      <p *ngIf="orderForm.get('transporter.cellphone').invalid" class="help is-danger">
+        Le numéro de portable n'est pas au format 06 01 02 03 04</p>
     </div>
+  </div>
 
-    <div class="level"></div>
+  <div class="level"></div>
 
-    <div class="card">
-      <div class="card-content" formGroupName="ship">
-        <p class="title">Bateau</p>
+  <div class="card">
+    <div class="card-content" formGroupName="ship">
+      <p class="title">Bateau</p>
 
-        <flu-form-field>
-          <datalist id="flu-ship-names">
-            <option *ngFor="let item of contacts?.shipNames" [value]="item">
-          </datalist>
-          <label class="label">Devise</label>
-          <input class="input is-medium" formControlName="name" list="flu-ship-names">
-        </flu-form-field>
+      <flu-form-field>
+        <datalist id="flu-ship-names">
+          <option *ngFor="let item of contacts?.shipNames" [value]="item">
+        </datalist>
+        <label class="label">Devise</label>
+        <input class="input is-medium" formControlName="name" list="flu-ship-names">
+      </flu-form-field>
 
-        <flu-form-field>
-          <datalist id="flu-ship-reg-numbers">
-            <option *ngFor="let item of contacts?.shipRegNumbers" [value]="item">
-          </datalist>
-          <label class="label">Matricule</label>
-          <input class="input is-medium" formControlName="regNumber" list="flu-ship-reg-numbers">
-        </flu-form-field>
+      <flu-form-field>
+        <datalist id="flu-ship-reg-numbers">
+          <option *ngFor="let item of contacts?.shipRegNumbers" [value]="item">
+        </datalist>
+        <label class="label">Matricule</label>
+        <input class="input is-medium" formControlName="regNumber" list="flu-ship-reg-numbers">
+      </flu-form-field>
 
-      </div>
     </div>
   </div>
 
@@ -210,8 +212,16 @@
 
         <flu-form-field>
           <label class="label">Lieu départ</label>
-          <input class="input is-medium" formControlName="origin" list="ports">
+          <input class="input is-medium" formControlName="port" list="ports">
         </flu-form-field>
+
+        <div class="field">
+          <div class="control">
+            <label class="label">Date prévu du chargement</label>
+            <input class="input is-medium" formControlName="expectedDate" fluDatePicker
+                   [(date)]="orderForm.value.originInfo.expectedDate">
+          </div>
+        </div>
 
         <div class="field">
           <div class="control">
@@ -221,10 +231,10 @@
             </datalist>
 
             <label class="label">Email de contact du lieu de chargement</label>
-            <input class="input is-medium" formControlName="loadManagerEmail" type="email" list="flu-load-emails"
-                   [ngClass]="{'is-danger': waybillForm.get('originInfo.loadManagerEmail').invalid}">
+            <input class="input is-medium" formControlName="email" type="email" list="flu-load-emails"
+                   [ngClass]="{'is-danger': orderForm.get('originInfo.email').invalid}">
           </div>
-          <p *ngIf="waybillForm.get('originInfo.loadManagerEmail').invalid" class="help is-danger">
+          <p *ngIf="orderForm.get('originInfo.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
       </ng-container>
@@ -232,14 +242,14 @@
       <ng-container formGroupName="destinationInfo">
         <flu-form-field>
           <label class="label">Lieu d'arrivée</label>
-          <input class="input is-medium" formControlName="destination" list="ports">
+          <input class="input is-medium" formControlName="port" list="ports">
         </flu-form-field>
 
         <div class="field">
           <div class="control">
-            <label class="label">Date d'arrivée prévue</label>
-            <input class="input is-medium" formControlName="arrivalDate" fluDatetimePicker
-                   [(date)]="waybillForm.value.destinationInfo.arrivalDate">
+            <label class="label">Date prévu du déchargement</label>
+            <input class="input is-medium" formControlName="expectedDate" fluDatePicker
+                   [(date)]="orderForm.value.destinationInfo.expectedDate">
           </div>
         </div>
 
@@ -251,28 +261,39 @@
             </datalist>
 
             <label class="label">Email de contact du lieu de déchargement</label>
-            <input class="input is-medium" formControlName="loadManagerEmail" type="email" list="flu-unload-emails"
-                   [ngClass]="{'is-danger': waybillForm.get('destinationInfo.loadManagerEmail').invalid}">
+            <input class="input is-medium" formControlName="email" type="email" list="flu-unload-emails"
+                   [ngClass]="{'is-danger': orderForm.get('destinationInfo.email').invalid}">
           </div>
-          <p *ngIf="waybillForm.get('destinationInfo.loadManagerEmail').invalid" class="help is-danger">
+          <p *ngIf="orderForm.get('destinationInfo.email').invalid" class="help is-danger">
             L'email n'est pas valide</p>
         </div>
       </ng-container>
 
-      <ng-container formGroupName="merchandiseInfo">
+      <ng-container formGroupName="merchandise">
 
         <flu-form-field>
           <label class="label">Nature de la marchandise</label>
-          <input class="input is-medium" formControlName="merchandiseType">
+          <input class="input is-medium" formControlName="nature">
         </flu-form-field>
 
         <div class="field">
           <div class="control">
-            <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
-            <input class="input is-medium" formControlName="merchandisePrice"
-                   [ngClass]="{'is-danger': waybillForm.get('merchandiseInfo.merchandisePrice').invalid}">
+            <label class="label">Tonnage prévu</label>
+            <input class="input is-medium" formControlName="weight"
+                   [ngClass]="{'is-danger': orderForm.get('merchandise.weight').invalid}">
           </div>
-          <p *ngIf="waybillForm.get('merchandiseInfo.merchandisePrice').invalid" class="help is-danger">
+          <p *ngIf="orderForm.get('merchandise.weight').invalid" class="help is-danger">
+            La valeur saisie n'est pas un nombre valide
+          </p>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
+            <input class="input is-medium" formControlName="price"
+                   [ngClass]="{'is-danger': orderForm.get('merchandise.price').invalid}">
+          </div>
+          <p *ngIf="orderForm.get('merchandise.price').invalid" class="help is-danger">
             La valeur saisie n'est pas un nombre valide
           </p>
         </div>
