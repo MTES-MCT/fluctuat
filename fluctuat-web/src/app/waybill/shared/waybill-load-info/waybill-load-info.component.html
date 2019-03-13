@@ -1,18 +1,12 @@
-<p> Il vous est expédié un tonnage de <strong>{{loadInfo.merchandiseWeight}}</strong> tonnes de
-  <strong>{{loadInfo.merchandiseType}}</strong>
-  d'une valeur déclarée de <strong>{{loadInfo.merchandisePrice || '/'}} €</strong>
-  par tonne, qui a été chargé au <strong>{{loadInfo.origin}}</strong> et que le transporteur déclare avoir
-  reçu et s'engage à transporter au <strong>{{loadInfo.destination}}</strong>.</p>
-
 <h3>Chargement</h3>
 
-<p><strong class="is-uppercase">{{loadInfo.loadManager.name}}</strong> ({{loadInfo.loadManager.jobFunction}}) est le responsable du chargement.</p>
-<p>Le chargement a commencé le <strong>{{loadInfo.startDate}}</strong>
-  et fini le <strong>{{loadInfo.endDate}}</strong>.</p>
+<p>Le transporteur déclare avoir reçu <strong>{{waybill.loadInfo.merchandiseWeight}}</strong> tonnes de
+  <strong>{{waybill.order.merchandise.nature}}</strong> au <strong>{{waybill.order.originInfo.port}}</strong>.</p>
 
-<p>Tonnage chargé: <strong>{{loadInfo.merchandiseWeight}}</strong> tonnes.</p>
+<p>Le chargement, commencé le <strong>{{waybill.loadInfo.startDate}}</strong>
+  s'est terminé le <strong>{{waybill.loadInfo.endDate}}</strong>.</p>
 
-<ng-container *ngIf="loadInfo.comments">
+<ng-container *ngIf="waybill.loadInfo.comments">
   <h4>Commentaires</h4>
-  <p>{{loadInfo.comments}}</p>
+  <p>{{waybill.loadInfo.comments}}</p>
 </ng-container>

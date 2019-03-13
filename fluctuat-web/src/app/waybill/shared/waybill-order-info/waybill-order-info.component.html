@@ -10,3 +10,17 @@
   matricule <strong>{{order.ship.regNumber}}</strong> est conduit par <strong>{{order.transporter.name}}</strong>
   ({{order.transporter.email}} {{order.transporter.cellphone}}).
 </p>
+
+<h3>Informations préalables au voyage</h3>
+
+<p>
+  Il est prévu d’expédier un tonnage de <strong>{{order.merchandise.weight}}</strong> tonnes
+  de <strong>{{order.merchandise.nature}}</strong>
+  <ng-container *ngIf="order.merchandise.price; else notprice">
+    d'une valeur déclarée de <strong>{{order.merchandise.price}} €</strong> par tonne
+  </ng-container>
+  <ng-template #notprice> (sans valeur déclarée)</ng-template>
+  que le transporteur s’engage à transporter depuis le <strong>{{order.originInfo.port}}</strong>,
+  le <strong>{{order.originInfo.expectedDate}}</strong>,
+  jusqu’au <strong>{{order.destinationInfo.port}}</strong>, le <strong>{{order.destinationInfo.expectedDate}}</strong>
+</p>

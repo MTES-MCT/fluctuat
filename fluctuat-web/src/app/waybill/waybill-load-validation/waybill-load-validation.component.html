@@ -8,7 +8,7 @@
 
     <div class="level"></div>
 
-    <flu-waybill-load-info [loadInfo]="waybill.loadInfo"></flu-waybill-load-info>
+    <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
 
     <flu-success *ngIf="waybill.loadInfo.validatedAt">
       Chargement confirmé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
