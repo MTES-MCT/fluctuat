@@ -61,17 +61,6 @@
           <input class="input is-medium" formControlName="jobFunction">
         </flu-form-field>
 
-        <div class="field">
-          <div class="control">
-
-            <label class="label">Email de contact</label>
-            <input class="input is-medium" formControlName="email" type="email"
-                   [ngClass]="{'is-danger': loadInfoForm.get('loadManager.email').invalid}">
-          </div>
-          <p *ngIf="loadInfoForm.get('loadManager.email').invalid" class="help is-danger">
-            L'email n'est pas valide</p>
-        </div>
-
       </div>
     </div>
 

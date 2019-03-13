@@ -44,7 +44,6 @@ export class WaybillUnloadingComponent implements OnInit {
       comments: [unloadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [unloadInfo.loadManager.name],
-        email: [unloadInfo.loadManager.email, Validators.email],
         jobFunction: [unloadInfo.loadManager.jobFunction]
       })
     })

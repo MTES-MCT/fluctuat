@@ -47,7 +47,6 @@ export class WaybillLoadingComponent implements OnInit {
       comments: [loadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [loadInfo.loadManager.name],
-        email: [loadInfo.loadManager.email, Validators.email],
         jobFunction: [loadInfo.loadManager.jobFunction]
       })
     })

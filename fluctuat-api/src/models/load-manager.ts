@@ -1,5 +1,4 @@
-import { Person } from './person';
-
-export class LoadManager extends Person {
+export class LoadManager {
+  name: string;
   jobFunction: string
 }
