@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UnloadInfo } from '../models/unload-info.model';
+import { Waybill } from '../models/waybill.model';
 
 @Component({
   selector: 'flu-waybill-unload-info',
@@ -8,6 +8,6 @@ import { UnloadInfo } from '../models/unload-info.model';
 export class WaybillUnloadInfoComponent {
 
   @Input()
-  unloadInfo: UnloadInfo
+  waybill: Waybill
 
 }

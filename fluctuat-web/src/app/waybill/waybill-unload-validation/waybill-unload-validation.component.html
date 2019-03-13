@@ -12,7 +12,7 @@
 
     <div class="level"></div>
 
-    <flu-waybill-unload-info [unloadInfo]="waybill.unloadInfo"></flu-waybill-unload-info>
+    <flu-waybill-unload-info [waybill]="waybill"></flu-waybill-unload-info>
 
     <flu-success *ngIf="waybill.unloadInfo.validatedAt">
       Déchargement confirmé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}
