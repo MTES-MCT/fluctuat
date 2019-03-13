@@ -4,6 +4,7 @@
 
   <ng-container *ngIf="waybill$ | async as waybill; else loading">
 
+    <!--Order Info-->
     <flu-waybill-order-info [order]="waybill.order"></flu-waybill-order-info>
 
     <ng-container *ngIf="!waybill.loadInfo.sentAt">
@@ -46,7 +47,9 @@
 
     <!--Action Options -->
     <div class="buttons">
-      <button class="button" *ngIf="!waybill.unloadInfo.validatedAt" (click)="openShareModal()">Envoyer la lettre de voiture</button>
+      <button class="button" *ngIf="!waybill.unloadInfo.validatedAt" (click)="openShareModal()">
+        Envoyer la lettre de voiture
+      </button>
       <flu-waybill-options [waybill]="waybill"></flu-waybill-options>
     </div>
 

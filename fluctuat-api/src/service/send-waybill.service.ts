@@ -153,7 +153,7 @@ const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, ba
       subject: `⛴️ Lien d'accès à la lettre de voiture ${notifyData.waybillId}`,
       body: {
         html: `<p>Bonjour,</p>
-               <p>La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat.</p>
+               <p>La Lettre de voiture nº ${notifyData.waybillId} est disponible sur fluctuat.</p>
                <p><strong>Information relative au voyage :</strong></p>
                <ul>
                  <li>Donneur d'ordre : ${waybill.order.customer.name}</li>

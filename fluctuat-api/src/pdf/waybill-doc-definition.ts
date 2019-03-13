@@ -44,7 +44,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
     ],
     footer: [
       {
-        text: chainText(`Cette lettre de voiture est générée par le service numérique de l'état `, bold('Fluctuat')),
+        text: chainText(`Cette lettre de voiture est générée par le service numérique de l'État `, bold('Fluctuat')),
         alignment: 'center',
         style: [ 'level', 'footer' ]
       },
