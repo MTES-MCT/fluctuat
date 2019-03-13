@@ -19,8 +19,8 @@ const findByEmail = (email: string) => {
       { 'order.sender.email': email},
       { 'order.receiver.email': email},
       { 'order.transporter.email': email},
-      { 'loadInfo.loadManager.email': email},
-      { 'unloadInfo.loadManager.email': email},
+      { 'order.originInfo.email': email},
+      { 'order.destinationInfo.email': email},
     ]
   });
 };
@@ -54,8 +54,8 @@ const findContacts = (owner: string) => {
         transporterCellphones: { $addToSet: '$order.transporter.cellphone' },
         shipNames: { $addToSet: '$order.ship.name' },
         shipRegNumbers: { $addToSet: '$order.ship.regNumber' },
-        loadManagerEmails: { $addToSet: '$loadInfo.loadManager.email' },
-        unloadManagerEmails: { $addToSet: '$unloadInfo.loadManager.email' }
+        loadManagerEmails: { $addToSet: '$order.originInfo.email' },
+        unloadManagerEmails: { $addToSet: '$order.destinationInfo.email' }
       }
     },
     {

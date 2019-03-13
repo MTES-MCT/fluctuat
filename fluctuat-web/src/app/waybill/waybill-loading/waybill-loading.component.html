@@ -11,51 +11,6 @@
       <div class="card-content">
         <p class="title">Chargement</p>
 
-        <flu-form-field>
-          <label class="label">Lieu départ</label>
-          <input class="input is-medium" formControlName="origin" list="ports">
-        </flu-form-field>
-
-        <flu-form-field>
-          <label class="label">Lieu d'arrivée</label>
-          <input class="input is-medium" formControlName="destination" list="ports">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <label class="label">Date d'arrivée prévue</label>
-            <input class="input is-medium" formControlName="arrivalDate" fluDatetimePicker
-                   [(date)]="loadInfoForm.value.arrivalDate">
-          </div>
-        </div>
-
-        <flu-form-field>
-          <label class="label">Nature de la marchandise</label>
-          <input class="input is-medium" formControlName="merchandiseType">
-        </flu-form-field>
-
-        <div class="field">
-          <div class="control">
-            <label class="label">Valeur déclarée de la marchandise (euros par tonne)</label>
-            <input class="input is-medium" formControlName="merchandisePrice"
-                   [ngClass]="{'is-danger': loadInfoForm.get('merchandisePrice').invalid}">
-          </div>
-          <p *ngIf="loadInfoForm.get('merchandisePrice').invalid" class="help is-danger">
-            La valeur saisie n'est pas un nombre valide
-          </p>
-        </div>
-
-        <div class="field">
-          <div class="control">
-            <label class="label">Tonnage</label>
-            <input class="input is-medium" formControlName="merchandiseWeight"
-                   [ngClass]="{'is-danger': loadInfoForm.get('merchandiseWeight').invalid}">
-          </div>
-          <p *ngIf="loadInfoForm.get('merchandiseWeight').invalid" class="help is-danger">
-            Le tonnage saisie n'est pas un nombre valide
-          </p>
-        </div>
-
         <div class="field">
           <div class="control">
             <label class="label">Date de début du chargement</label>
@@ -70,6 +25,17 @@
             <input class="input is-medium" formControlName="endDate" fluDatetimePicker
                    [(date)]="loadInfoForm.value.endDate">
           </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="label">Tonnage chargé</label>
+            <input class="input is-medium" formControlName="merchandiseWeight"
+                   [ngClass]="{'is-danger': loadInfoForm.get('merchandiseWeight').invalid}">
+          </div>
+          <p *ngIf="loadInfoForm.get('merchandiseWeight').invalid" class="help is-danger">
+            Le tonnage saisie n'est pas un nombre valide
+          </p>
         </div>
 
         <flu-form-field>

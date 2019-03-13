@@ -1,5 +1,4 @@
 import { Waybill } from '../models/waybill';
-import { UnloadInfo } from '../models/unload-info';
 import { LoadManager } from '../models/load-manager';
 import { logo } from './logo';
 import { LoadInfo } from '../models/load-info';
@@ -119,7 +118,7 @@ const printLoadBlock = (loadInfo: LoadInfo, order: OrderInfo) => {
   ]
 };
 
-const printUnloadBlock = (unloadInfo: UnloadInfo, order: OrderInfo) => {
+const printUnloadBlock = (unloadInfo: LoadInfo, order: OrderInfo) => {
   // if the information is incomplete print empty block
   if (!unloadInfo.validatedAt) {
     return []

@@ -19,7 +19,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
       waybill.order.receiver,
       waybill.order.transporter,
       waybill.order.sender,
-      waybill.unloadInfo.loadManager,
+      { name: '', email: waybill.order.destinationInfo.email },
       { name: '', email: waybill.owner },
     ],
     subject: `⛴️ Lettre de voiture ${waybill.code} - déchargement confirmé`,
@@ -54,8 +54,8 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
       waybill.order.receiver,
       waybill.order.transporter,
       waybill.order.sender,
-      waybill.loadInfo.loadManager,
-      waybill.unloadInfo.loadManager,
+      { name: '', email: waybill.order.originInfo.email},
+      { name: '', email: waybill.order.destinationInfo.email },
       { name: '', email: waybill.owner },
     ],
     subject: `⚓  Lettre de voiture nº ${waybill.code} - chargement confirmé️ `,
@@ -69,7 +69,10 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
               <li>Expéditeur : ${waybill.order.sender.name}</li>
               <li>Destinataire : ${waybill.order.receiver.name}</li>
               <li>Transporteur : ${waybill.order.transporter.name}</li>
-              <li>Nature de la marchandise : ${waybill.loadInfo.merchandiseType}</li>
+              <li>Affréteur : ${waybill.order.middleman.name}</li>
+              <li>Nature de la marchandise : ${waybill.order.merchandise.nature}</li>
+              <li>Tonnage chargé : ${waybill.loadInfo.merchandiseWeight}</li>
+              <li>Date prévue du déchargement : ${waybill.order.destinationInfo.expectedDate}</li>
              </ul>
              <p>Pour consulter les informations ou <strong>commencer le déchargement</strong>, cliquez sur
              <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
@@ -160,7 +163,11 @@ const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, ba
                  <li>Expéditeur : ${waybill.order.sender.name}</li>
                  <li>Destinataire : ${waybill.order.receiver.name}</li>
                  <li>Transporteur : ${waybill.order.transporter.name}</li>
-                 <li>Nature de la marchandise : ${waybill.loadInfo.merchandiseType}</li>
+                 <li>Affréteur : ${waybill.order.middleman.name}</li>
+                 <li>Nature de la marchandise : ${waybill.order.merchandise.nature}</li>
+                 <li>Tonnage prévu : ${waybill.order.merchandise.weight}</li>
+                 <li>Date prévue du chargement : ${waybill.order.originInfo.expectedDate}</li>
+                 <li>Date prévue du déchargement : ${waybill.order.destinationInfo.expectedDate}</li>
                </ul>
                <a href="${accessLink}">Cliquez sur ce lien pour y accéder</a>
                <br>

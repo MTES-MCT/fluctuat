@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { WaybillOptionsComponent } from './waybill-options.component';
 import { LoadInfo } from '../models/load-info.model';
-import { UnloadInfo } from '../models/unload-info.model';
 
 @Component({
   template: '<flu-waybill-options [waybill]=waybill></flu-waybill-options>'
@@ -55,6 +54,6 @@ describe('WaybillOptions component tests', () => {
 const createWaybill = () => {
   const waybill = new Waybill();
   waybill.loadInfo = new LoadInfo();
-  waybill.unloadInfo = new UnloadInfo();
+  waybill.unloadInfo = new LoadInfo();
   return waybill;
 };

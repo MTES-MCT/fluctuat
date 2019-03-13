@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Waybill } from './models/waybill.model';
 import { LoadInfo } from './models/load-info.model';
-import { UnloadInfo } from './models/unload-info.model';
 import { OrderInfo } from './models/order-info.model';
 
 @Injectable()
@@ -36,16 +35,16 @@ export class WaybillService {
     return this.http.post<LoadInfo>(`/api/waybill/${code}/load-info/validate`, null);
   }
 
-  sendUnloadInfo(code: string, unloadInfo: UnloadInfo) {
+  sendUnloadInfo(code: string, unloadInfo: LoadInfo) {
     return this.http.put(`/api/waybill/${code}/unload-info`, unloadInfo);
   }
 
-  getUnloadInfo(code: string): Observable<UnloadInfo> {
-    return this.http.get<UnloadInfo>(`/api/waybill/${code}/unload-info`)
+  getUnloadInfo(code: string): Observable<LoadInfo> {
+    return this.http.get<LoadInfo>(`/api/waybill/${code}/unload-info`)
   }
 
-  validateUnloadInfo(code: string): Observable<UnloadInfo> {
-    return this.http.post<UnloadInfo>(`/api/waybill/${code}/unload-info/validate`, null);
+  validateUnloadInfo(code: string): Observable<LoadInfo> {
+    return this.http.post<LoadInfo>(`/api/waybill/${code}/unload-info/validate`, null);
   }
 
   getAllMe() {

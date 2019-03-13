@@ -1,7 +1,6 @@
 import { Schema } from 'mongoose';
 import { OrderInfoSchema } from './order-info.schema';
 import { LoadInfoSchema } from './load-info.schema';
-import { UnloadInfoSchema } from './unload-info.schema';
 
 export const WaybillSchema: Schema = new Schema({
   code: String,
@@ -9,7 +8,7 @@ export const WaybillSchema: Schema = new Schema({
 
   order: OrderInfoSchema,
   loadInfo: LoadInfoSchema,
-  unloadInfo: UnloadInfoSchema,
+  unloadInfo: LoadInfoSchema,
 
   documentUrl: String
 });

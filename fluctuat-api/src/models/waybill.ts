@@ -1,6 +1,5 @@
 import { OrderInfo } from './order-info';
 import { LoadInfo } from './load-info';
-import { UnloadInfo } from './unload-info';
 
 export class Waybill {
   code: string;
@@ -8,7 +7,7 @@ export class Waybill {
 
   order: OrderInfo;
   loadInfo: LoadInfo;
-  unloadInfo: UnloadInfo;
+  unloadInfo: LoadInfo;
 
   documentUrl: string;
 }
