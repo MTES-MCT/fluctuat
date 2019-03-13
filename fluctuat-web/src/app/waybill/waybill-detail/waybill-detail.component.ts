@@ -28,22 +28,6 @@ export class WaybillDetailComponent implements OnInit {
 
   }
 
-  isNotLoadFinished(waybill: Waybill) {
-    return waybill.loadInfo.sentAt && !waybill.loadInfo.validatedAt;
-  }
-
-  isLoadFinished(waybill: Waybill) {
-    return waybill.loadInfo.validatedAt
-  }
-
-  isNotUnloadFinished(waybill: Waybill) {
-    return waybill.unloadInfo.sentAt && !waybill.unloadInfo.validatedAt
-  }
-
-  isUnloadFinished(waybill: Waybill) {
-    return waybill.unloadInfo.validatedAt
-  }
-
   openShareModal() {
     this.showShareModal = true;
   }

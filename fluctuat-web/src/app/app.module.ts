@@ -32,7 +32,7 @@ import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.
 import { WaybillShareComponent } from './waybill/shared/waybill-share/waybill-share.component';
 import { NotifyService } from './waybill/shared/notify.service';
 import { ContactsService } from './waybill/shared/contacts.service';
-
+import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-status-notification.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { ContactsService } from './waybill/shared/contacts.service';
     WaybillOrderInfoComponent,
     WaybillOrderFormComponent,
     WaybillDetailComponent,
+    LoadStatusNotificationComponent,
     WaybillUnloadingComponent,
     WaybillLoadValidationComponent,
     WaybillLoadInfoComponent,

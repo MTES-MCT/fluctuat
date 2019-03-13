@@ -1,0 +1,19 @@
+<div class="columns notification is-marginless">
+  <div class="column">
+    <span class="is-capitalized">{{ stepName() }}</span> validé le
+    <strong class="is-inline-block">{{ loadInfo.sentAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}</strong>
+    par <strong class="is-inline-block is-uppercase">{{ loadInfo.loadManager.name }}</strong>
+    en sa qualité de <strong class="is-inline-block">{{ loadInfo.loadManager.jobFunction }}</strong>
+  </div>
+  <div class="column">
+    <ng-container *ngIf="isNotLoadFinished(); else loadFinished">
+      Le {{ stepName() }} n'a pas été encore confirmé par le transporteur
+    </ng-container>
+
+    <ng-template #loadFinished>
+      <span class="is-capitalized">{{ stepName() }}</span> confirmé par le transporteur le
+      <strong>{{ loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}</strong>
+    </ng-template>
+
+  </div>
+</div>
