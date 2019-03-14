@@ -30,10 +30,13 @@ export class WaybillOrderFormComponent {
       middleman: this.formBuilder.group({
         name: [order.middleman.name],
         email: [order.middleman.email, Validators.email],
-        cellphone: [order.middleman.cellphone],
         isBroker: [order.middleman.isBroker]
       }),
-      transporter: this.fillPersonForm(order.transporter),
+      transporter: this.formBuilder.group({
+        name: [order.transporter.name],
+        email: [order.transporter.email, Validators.email],
+        cellphone: [order.transporter.cellphone, FluValidators.frenchPhone]
+      }),
       ship: this.formBuilder.group({
         name: [order.ship.name],
         regNumber: [order.ship.regNumber]
@@ -59,8 +62,7 @@ export class WaybillOrderFormComponent {
   fillPersonForm(person: Person) {
     return this.formBuilder.group({
       name: [person.name],
-      email: [person.email, Validators.email],
-      cellphone: [person.cellphone, FluValidators.frenchPhone]
+      email: [person.email, Validators.email]
     })
   }
 
