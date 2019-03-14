@@ -14,13 +14,16 @@
 <h3>Informations préalables au voyage</h3>
 
 <p>
-  Il est prévu d’expédier un tonnage de <strong>{{order.merchandise.weight}}</strong> tonnes
+  Il est prévu d’expédier un tonnage
+  <ng-container *ngIf="order.merchandise.weight else notweight">de <strong>{{order.merchandise.weight}}</strong> tonnes</ng-container>
+  <ng-template #notweight><span class="has-text-weight-bold">à determiner</span></ng-template>
   de <strong>{{order.merchandise.nature}}</strong>
   <ng-container *ngIf="order.merchandise.price; else notprice">
     d'une valeur déclarée de <strong>{{order.merchandise.price}} €</strong> par tonne
   </ng-container>
   <ng-template #notprice> (sans valeur déclarée)</ng-template>
-  que le transporteur s’engage à transporter depuis le <strong>{{order.originInfo.port}}</strong>,
-  le <strong>{{order.originInfo.expectedDate}}</strong>,
-  jusqu’au <strong>{{order.destinationInfo.port}}</strong>, le <strong>{{order.destinationInfo.expectedDate}}</strong>
+  que le transporteur s’engage à transporter depuis le <strong>{{order.originInfo.port}}</strong>
+  <ng-container *ngIf="order.originInfo.expectedDate">, le <strong>{{order.originInfo.expectedDate}}</strong>,</ng-container>
+  jusqu’au <strong>{{order.destinationInfo.port}}</strong>
+  <ng-container *ngIf="order.destinationInfo.expectedDate">, le <strong>{{order.destinationInfo.expectedDate}}</strong></ng-container>.
 </p>
