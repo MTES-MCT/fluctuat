@@ -26,7 +26,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
       { name: '', email: waybill.order.destinationInfo.email },
       { name: '', email: waybill.owner },
     ],
-    subject: `⛴️ Lettre de voiture ${waybill.code} - déchargement confirmé`,
+    subject: `⚓ Lettre de voiture ${waybill.code} - déchargement confirmé`,
     body: {
       text: '',
       html: `<p>Bonjour,</p>
