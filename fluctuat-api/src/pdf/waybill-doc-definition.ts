@@ -91,6 +91,10 @@ const printOrderInfo = (order: OrderInfo) => {
       ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))]
   };
 
+  const printDate = (date, suffix='') => date ? [', le ', bold(order.originInfo.expectedDate), suffix] : [];
+
+  const printWeight = (weight) => weight ? ['de ', bold(order.merchandise.weight), ' tonnes']: ['à determiner'];
+
   return [
     chainText('Donneur d\'ordre : ', bold(order.customer.name)),
     chainText('Expéditeur : ', bold(order.sender.name)),
@@ -102,10 +106,10 @@ const printOrderInfo = (order: OrderInfo) => {
     { text: 'Informations préalables au voyage', style: 'title2' },
     {
       text: [
-        'Il est prévu d’expédier un tonnage de ', bold(order.merchandise.weight), ' tonnes de ',
+        'Il est prévu d’expédier un tonnage ', ...printWeight(order.merchandise.weight), ' de ',
         bold(order.merchandise.nature), ...priceText, ` que le transporteur s’engage à transporter depuis le `,
-        bold(order.originInfo.port), ', le ', bold(order.originInfo.expectedDate),
-        ', jusqu\'au ', bold(order.destinationInfo.port), ', le ', bold(order.destinationInfo.expectedDate), '.'
+        bold(order.originInfo.port), ...printDate(order.originInfo.expectedDate, ','),
+        ' jusqu\'au ', bold(order.destinationInfo.port), ...printDate(order.destinationInfo.expectedDate), '.'
       ], style: 'level'
     }
   ]
