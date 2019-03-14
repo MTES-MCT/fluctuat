@@ -4,6 +4,8 @@ import { EmailData } from '../email/email-data';
 import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
+import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
+import { waybillNotificationEmailBody } from './waybill-notification-email-body';
 
 const config = require('../../.data/config.json');
 const emailConfig = config.email;
@@ -13,6 +15,8 @@ const smsConfig = config.sms;
 const smsService = new SmsService(smsConfig.token, config.debug);
 
 const sendWaybill = (waybill: Waybill, baseUrl: string) => {
+  const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
+
   let email: EmailData = {
     to: [
       waybill.order.customer,
@@ -28,7 +32,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
       html: `<p>Bonjour,</p>
              <p>La lettre de voiture nº ${waybill.code} a été confirmé par le transporteur.</p>
              <p>Vous pouvez consulter les informations en cliquant sur
-             <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
+             <a href="${accessLink}">ce lien</a></p>
              <h3>Veuillez trouver ci-joint votre lettre de voiture</h3>
              <br>
              <p>Cordialement,</p>
@@ -47,6 +51,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
 };
 
 const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
+  const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
 
   let email: EmailData = {
     to: [
@@ -54,32 +59,14 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
       waybill.order.receiver,
       waybill.order.transporter,
       waybill.order.sender,
-      { name: '', email: waybill.order.originInfo.email},
+      { name: '', email: waybill.order.originInfo.email },
       { name: '', email: waybill.order.destinationInfo.email },
       { name: '', email: waybill.owner },
     ],
     subject: `⚓  Lettre de voiture nº ${waybill.code} - chargement confirmé️ `,
     body: {
       text: '',
-      html: `<p>Bonjour,</p>
-             <p>La lettre de voiture nº ${waybill.code} a été confirmé par le transporteur.</p>
-             <p><strong>Information relative au voyage :</strong></p>
-             <ul>
-              <li>Donneur d'ordre : ${waybill.order.customer.name}</li>
-              <li>Expéditeur : ${waybill.order.sender.name}</li>
-              <li>Destinataire : ${waybill.order.receiver.name}</li>
-              <li>Transporteur : ${waybill.order.transporter.name}</li>
-              <li>Affréteur : ${waybill.order.middleman.name}</li>
-              <li>Nature de la marchandise : ${waybill.order.merchandise.nature}</li>
-              <li>Tonnage chargé : ${waybill.loadInfo.merchandiseWeight}</li>
-              <li>Date prévue du déchargement : ${waybill.order.destinationInfo.expectedDate}</li>
-             </ul>
-             <p>Pour consulter les informations ou <strong>commencer le déchargement</strong>, cliquez sur
-             <a href="${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}">ce lien</a></p>
-             <p>Veuillez trouver ci-joint la lettre de voiture du chargement.</p>
-             <br>
-             <p>Cordialement,</p>
-             <p>L'équipe de Fluctu@t</p>`
+      html: waybillLoadedEmailBody(waybill, accessLink)
     }
   };
 
@@ -146,7 +133,7 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
 };
 
 const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, baseUrl: string) => {
-  const accessLink = `${baseUrl}/acces-lettre-de-voiture?id=${notifyData.waybillId}`;
+  const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
 
   let sendActions = [];
 
@@ -155,24 +142,7 @@ const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, ba
       to: [{ name: '', email: notifyData.email }],
       subject: `⛴️ Lien d'accès à la lettre de voiture ${notifyData.waybillId}`,
       body: {
-        html: `<p>Bonjour,</p>
-               <p>La Lettre de voiture nº ${notifyData.waybillId} est disponible sur fluctuat.</p>
-               <p><strong>Information relative au voyage :</strong></p>
-               <ul>
-                 <li>Donneur d'ordre : ${waybill.order.customer.name}</li>
-                 <li>Expéditeur : ${waybill.order.sender.name}</li>
-                 <li>Destinataire : ${waybill.order.receiver.name}</li>
-                 <li>Transporteur : ${waybill.order.transporter.name}</li>
-                 <li>Affréteur : ${waybill.order.middleman.name}</li>
-                 <li>Nature de la marchandise : ${waybill.order.merchandise.nature}</li>
-                 <li>Tonnage prévu : ${waybill.order.merchandise.weight}</li>
-                 <li>Date prévue du chargement : ${waybill.order.originInfo.expectedDate}</li>
-                 <li>Date prévue du déchargement : ${waybill.order.destinationInfo.expectedDate}</li>
-               </ul>
-               <a href="${accessLink}">Cliquez sur ce lien pour y accéder</a>
-               <br>
-               <p>Cordialement,</p>
-               <p>L'équipe de Fluctu@t</p>`
+        html: waybillNotificationEmailBody(waybill, accessLink)
       }
     };
     sendActions.push(emailService.sendEmail(email));
@@ -186,6 +156,8 @@ const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, ba
   return Promise.all(sendActions);
 };
 
+const getWaybillAccessLink = (baseUrl, waybillId) => `${baseUrl}/acces-lettre-de-voiture?id=${waybillId}`;
+
 export {
   sendWaybill,
   sendWaybillLoaded,
@@ -193,4 +165,3 @@ export {
   sendWaybillUnloadValidation,
   sendWaybillNotification
 }
-
