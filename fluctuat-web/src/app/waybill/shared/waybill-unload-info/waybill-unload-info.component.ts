@@ -3,7 +3,8 @@ import { Waybill } from '../models/waybill.model';
 
 @Component({
   selector: 'flu-waybill-unload-info',
-  templateUrl: './waybill-unload-info.component.html'
+  templateUrl: './waybill-unload-info.component.html',
+  styles: ['strong { text-transform: uppercase }']
 })
 export class WaybillUnloadInfoComponent {
 

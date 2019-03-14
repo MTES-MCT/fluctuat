@@ -21,9 +21,12 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         ],
         style: 'level'
       },
+      '\n',
       ...printOrderInfo(order),
+      '\n',
       ...printLoadBlock(loadInfo, order),
       ...printValidationBlock(loadInfo),
+      '\n',
       ...printUnloadBlock(unloadInfo, order),
       ...printValidationBlock(unloadInfo)
     ],
@@ -53,11 +56,11 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         marginTop: 10
       },
       small: {
-        fontSize: 10,
+        fontSize: 11,
         marginTop: 4
       },
       footer: {
-        fontSize: 10
+        fontSize: 11
       },
       level: {
         marginBottom: 5
@@ -72,20 +75,21 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
   }
 }
 
-const printMiddleMan = (middleman: Middleman) => {
-  if (!middleman || !middleman.name) {
-    return []
-  }
-
-  return [chainText('Affréteur : ', bold(middleman.name),
-    ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))]
-};
-
 const printOrderInfo = (order: OrderInfo) => {
 
   const priceText = order.merchandise.price ?
-    [' d\'une valeur déclarée de ', bold((order.merchandise.price || '/') + ' €'), ' par tonne'] :
+    [` d'une valeur déclarée de `, bold(order.merchandise.price + ' €'), ' par tonne'] :
     [' (sans valeur déclarée)'];
+
+  const printMiddleMan = (middleman: Middleman) => {
+    if (!middleman || !middleman.name) {
+      return []
+    }
+
+    return [
+      chainText('Affréteur : ', bold(middleman.name),
+      ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))]
+  };
 
   return [
     chainText('Donneur d\'ordre : ', bold(order.customer.name)),
@@ -94,6 +98,7 @@ const printOrderInfo = (order: OrderInfo) => {
     ...printMiddleMan(order.middleman),
     chainText('Le bateau ', bold(order.ship.name), ', matricule ', bold(order.ship.regNumber),
       ', est conduit par ', bold(order.transporter.name), '.'),
+    '\n',
     { text: 'Informations préalables au voyage', style: 'title2' },
     {
       text: [
