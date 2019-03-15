@@ -23,7 +23,7 @@
       <button (click)="logout()" class="button is-white is-medium">Déconnexion</button>
     </div>
     <div class="navbar-item" *ngIf="!(authenticated$ | async)">
-      <button routerLink="/inscription" class="button is-white is-medium">Créer une compte</button>
+      <button routerLink="/inscription" class="button is-white is-medium">Créer un compte</button>
     </div>
     <div class="navbar-item" *ngIf="!(authenticated$ | async)">
       <button routerLink="/connexion" class="button is-white is-medium">Connexion</button>
