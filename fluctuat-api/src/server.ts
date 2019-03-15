@@ -10,7 +10,8 @@ const main = async () => {
   await mongoClient();
 
   app.use(bodyParser.json());
-  app.use(logger('dev'));
+  app.use(logger(':remote-addr - :method :url :status :response-time ms - :res[content-length]'));
+  app.set('trust proxy', 'loopback');
 
   const auth = require('./routes/auth.route');
   app.use('/api/auth', auth);
