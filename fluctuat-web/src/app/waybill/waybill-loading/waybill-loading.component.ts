@@ -41,18 +41,12 @@ export class WaybillLoadingComponent implements OnInit {
 
   fillForm(loadInfo: LoadInfo) {
     this.loadInfoForm = this.formBuilder.group({
-      origin: [loadInfo.origin],
-      destination: [loadInfo.destination],
-      arrivalDate: [loadInfo.arrivalDate],
-      merchandiseType: [loadInfo.merchandiseType],
-      merchandiseWeight: [loadInfo.merchandiseWeight, FluValidators.quantity],
-      merchandisePrice: [loadInfo.merchandisePrice, FluValidators.quantity],
       startDate: [loadInfo.startDate],
       endDate: [loadInfo.endDate],
+      merchandiseWeight: [loadInfo.merchandiseWeight, FluValidators.quantity],
       comments: [loadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [loadInfo.loadManager.name],
-        email: [loadInfo.loadManager.email, Validators.email],
         jobFunction: [loadInfo.loadManager.jobFunction]
       })
     })

@@ -10,6 +10,7 @@ import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 import { ContactsService } from '../../shared/contacts.service';
 import { Contacts } from '../../shared/models/contacts';
+import { OrderInfo } from '../../shared/models/order-info.model';
 
 @Component({
   selector: 'flu-waybill-new',
@@ -29,17 +30,18 @@ export class WaybillNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderFormComponent.setValue(new Waybill());
+    this.orderFormComponent.setValue(new OrderInfo());
     this.contacts$ = this.contactsService.get().pipe(shareReplay(1))
   }
 
   create() {
-    if (this.orderFormComponent.waybillForm.invalid) {
+    if (this.orderFormComponent.orderForm.invalid) {
       return this.result.error('Veuillez vérifier votre saisie');
     }
 
     this.result.waiting();
-    const waybill = this.orderFormComponent.getValue();
+    const waybill = new Waybill();
+    waybill.order = this.orderFormComponent.getValue();
 
     this.waybillService.create(waybill).pipe(
       catchError((error) => {

@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person } from '../../../shared/models/person.model';
 import { Contacts } from '../../../shared/models/contacts';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
-import { Waybill } from '../../../shared/models/waybill.model';
 import { PortList } from '../../../shared/ports-list';
-import { WaybillOrderFormValue } from './waybill-order-form-value';
+import { OrderInfo } from '../../../shared/models/order-info.model';
 
 @Component({
   selector: 'flu-waybill-order-form',
@@ -13,7 +12,7 @@ import { WaybillOrderFormValue } from './waybill-order-form-value';
 })
 export class WaybillOrderFormComponent {
 
-  waybillForm: FormGroup;
+  orderForm: FormGroup;
 
   @Input()
   contacts: Contacts;
@@ -23,60 +22,52 @@ export class WaybillOrderFormComponent {
   constructor(private formBuilder: FormBuilder) {
   }
 
-  setValue(waybill: Waybill) {
-    this.waybillForm = this.formBuilder.group({
-      order: this.formBuilder.group({
-        customer: this.fillPersonForm(waybill.order.customer),
-        sender: this.fillPersonForm(waybill.order.sender),
-        receiver: this.fillPersonForm(waybill.order.receiver),
-        transporter: this.fillPersonForm(waybill.order.transporter),
-        ship: this.formBuilder.group({
-          name: [waybill.order.ship.name],
-          regNumber: [waybill.order.ship.regNumber]
-        })
+  setValue(order: OrderInfo) {
+    this.orderForm = this.formBuilder.group({
+      customer: this.fillPersonForm(order.customer),
+      sender: this.fillPersonForm(order.sender),
+      receiver: this.fillPersonForm(order.receiver),
+      middleman: this.formBuilder.group({
+        name: [order.middleman.name],
+        email: [order.middleman.email, Validators.email],
+        isBroker: [order.middleman.isBroker]
+      }),
+      transporter: this.formBuilder.group({
+        name: [order.transporter.name],
+        email: [order.transporter.email, Validators.email],
+        cellphone: [order.transporter.cellphone, FluValidators.frenchPhone]
+      }),
+      ship: this.formBuilder.group({
+        name: [order.ship.name],
+        regNumber: [order.ship.regNumber]
       }),
       originInfo: this.formBuilder.group({
-        origin: [waybill.loadInfo.origin],
-        loadManagerEmail: [waybill.loadInfo.loadManager.email, Validators.email],
+        port: [order.originInfo.port],
+        expectedDate: [order.originInfo.expectedDate],
+        email: [order.originInfo.email, Validators.email],
       }),
       destinationInfo: this.formBuilder.group({
-        destination: [waybill.loadInfo.destination],
-        arrivalDate: [waybill.loadInfo.arrivalDate],
-        loadManagerEmail: [waybill.unloadInfo.loadManager.email, Validators.email]
+        port: [order.destinationInfo.port],
+        expectedDate: [order.destinationInfo.expectedDate],
+        email: [order.destinationInfo.email, Validators.email]
       }),
-      merchandiseInfo: this.formBuilder.group({
-        merchandiseType: [waybill.loadInfo.merchandiseType],
-        merchandisePrice: [waybill.loadInfo.merchandisePrice, FluValidators.quantity],
-      }),
+      merchandise: this.formBuilder.group({
+        nature: [order.merchandise.nature],
+        weight: [order.merchandise.weight, FluValidators.quantity],
+        price: [order.merchandise.price, FluValidators.quantity]
+      })
     })
   }
 
   fillPersonForm(person: Person) {
     return this.formBuilder.group({
       name: [person.name],
-      email: [person.email, Validators.email],
-      cellphone: [person.cellphone, FluValidators.frenchPhone]
+      email: [person.email, Validators.email]
     })
   }
 
-  getValue(): Waybill {
-    const formValue: WaybillOrderFormValue = this.waybillForm.value;
-
-    const waybill = new Waybill();
-    waybill.order = formValue.order;
-
-    const loadInfo = waybill.loadInfo;
-    loadInfo.origin = formValue.originInfo.origin;
-    loadInfo.destination = formValue.destinationInfo.destination;
-    loadInfo.arrivalDate = formValue.destinationInfo.arrivalDate;
-    loadInfo.merchandiseType = formValue.merchandiseInfo.merchandiseType;
-    loadInfo.merchandisePrice = formValue.merchandiseInfo.merchandisePrice;
-    loadInfo.loadManager.email = formValue.originInfo.loadManagerEmail;
-
-    const unloadInfo = waybill.unloadInfo;
-    unloadInfo.loadManager.email = formValue.destinationInfo.loadManagerEmail;
-
-    return waybill;
+  getValue(): OrderInfo {
+    return this.orderForm.value;
   }
 
 }

@@ -3,7 +3,7 @@
     <span class="is-capitalized">{{ stepName() }}</span> validé le
     <strong class="is-inline-block">{{ loadInfo.sentAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}</strong>
     par <strong class="is-inline-block is-uppercase">{{ loadInfo.loadManager.name }}</strong>
-    en sa qualité de <strong class="is-inline-block">{{ loadInfo.loadManager.jobFunction }}</strong>
+    en sa qualité de <strong class="is-inline-block is-uppercase">{{ loadInfo.loadManager.jobFunction }}</strong>
   </div>
   <div class="column">
     <ng-container *ngIf="isNotLoadFinished(); else loadFinished">

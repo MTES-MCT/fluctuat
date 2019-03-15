@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { WaybillService } from '../shared/waybill.service';
-import { UnloadInfo } from '../shared/models/unload-info.model';
+import { LoadInfo } from '../shared/models/load-info.model';
 import { ResultHelper } from '../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 import { FluValidators } from '../../core/form-validators/flu-validators';
@@ -36,7 +36,7 @@ export class WaybillUnloadingComponent implements OnInit {
   }
 
 
-  private fillForm(unloadInfo: UnloadInfo) {
+  private fillForm(unloadInfo: LoadInfo) {
     this.unloadInfoForm = this.formBuilder.group({
       startDate: [unloadInfo.startDate],
       endDate: [unloadInfo.endDate],
@@ -44,7 +44,6 @@ export class WaybillUnloadingComponent implements OnInit {
       comments: [unloadInfo.comments],
       loadManager: this.formBuilder.group({
         name: [unloadInfo.loadManager.name],
-        email: [unloadInfo.loadManager.email, Validators.email],
         jobFunction: [unloadInfo.loadManager.jobFunction]
       })
     })

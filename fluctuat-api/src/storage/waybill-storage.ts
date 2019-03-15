@@ -19,8 +19,8 @@ const findByEmail = (email: string) => {
       { 'order.sender.email': email},
       { 'order.receiver.email': email},
       { 'order.transporter.email': email},
-      { 'loadInfo.loadManager.email': email},
-      { 'unloadInfo.loadManager.email': email},
+      { 'order.originInfo.email': email},
+      { 'order.destinationInfo.email': email},
     ]
   });
 };
@@ -47,13 +47,15 @@ const findContacts = (owner: string) => {
         senderEmails: { $addToSet: '$order.sender.email' },
         receiverNames: { $addToSet: '$order.receiver.name' },
         receiverEmails: { $addToSet: '$order.receiver.email' },
+        middlemanNames: { $addToSet: '$order.middleman.name'},
+        middlemanEmails: { $addToSet: '$order.middleman.email'},
         transporterNames: { $addToSet: '$order.transporter.name' },
         transporterEmails: { $addToSet: '$order.transporter.email' },
         transporterCellphones: { $addToSet: '$order.transporter.cellphone' },
         shipNames: { $addToSet: '$order.ship.name' },
         shipRegNumbers: { $addToSet: '$order.ship.regNumber' },
-        loadManagerEmails: { $addToSet: '$loadInfo.loadManager.email' },
-        unloadManagerEmails: { $addToSet: '$unloadInfo.loadManager.email' }
+        loadManagerEmails: { $addToSet: '$order.originInfo.email' },
+        unloadManagerEmails: { $addToSet: '$order.destinationInfo.email' }
       }
     },
     {
@@ -64,6 +66,8 @@ const findContacts = (owner: string) => {
         senderEmails: $filterNullAndEmpty('$senderEmails'),
         receiverNames: $filterNullAndEmpty('$receiverNames'),
         receiverEmails: $filterNullAndEmpty('$receiverEmails'),
+        middlemanNames: $filterNullAndEmpty('$middlemanNames'),
+        middlemanEmails: $filterNullAndEmpty('$middlemanEmails'),
         transporterNames: $filterNullAndEmpty('$transporterNames'),
         transporterEmails: $filterNullAndEmpty('$transporterEmails'),
         transporterCellphones: $filterNullAndEmpty('$transporterCellphones'),

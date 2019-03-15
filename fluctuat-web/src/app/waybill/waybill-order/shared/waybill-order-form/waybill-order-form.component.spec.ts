@@ -3,8 +3,9 @@ import { WaybillOrderFormComponent } from './waybill-order-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from '../../../../shared/form-field.component';
 import { DatetimePickerDirective } from '../../../../shared/datetime-picker.directive';
-import { Waybill } from '../../../shared/models/waybill.model';
-import { Person } from '../../../../../../../fluctuat-api/src/models/person';
+import { OrderInfo } from '../../../shared/models/order-info.model';
+import { DatePickerDirective } from '../../../../shared/date-picker.directive';
+import { Person } from '../../../shared/models/person.model';
 
 describe('WaybillOrderFormComponent', () => {
   let component: WaybillOrderFormComponent;
@@ -15,7 +16,8 @@ describe('WaybillOrderFormComponent', () => {
       declarations: [
         WaybillOrderFormComponent,
         FormFieldComponent,
-        DatetimePickerDirective
+        DatetimePickerDirective,
+        DatePickerDirective
       ],
       imports: [ReactiveFormsModule]
     })
@@ -32,38 +34,27 @@ describe('WaybillOrderFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should map correctly between waybill and form', () => {
+  it('should map correctly between waybill order and form', () => {
 
-    let waybillInput = new Waybill();
-
-    let order = waybillInput.order;
+    const order = new OrderInfo();
     order.customer = buildPerson('customer name', 'customer@test');
     order.sender = buildPerson('sender name', 'sender@test');
     order.receiver = buildPerson('receiver name', 'receiver@test');
-    order.transporter = buildPerson('transporter name', 'trasporter@test', '123456');
+    order.middleman = { name: 'a broker', email: 'broker@test', isBroker: true };
+    order.transporter = { name: 'transporter name', email: 'trasporter@test', cellphone: '123456' };
     order.ship = { name: 'shipname', regNumber: 'FR 123' };
+    order.merchandise = { nature: 'ble', price: '2', weight: '42' };
+    order.originInfo = { port: 'origin port', expectedDate: '12/12/2020', email: 'load@test' };
+    order.destinationInfo = { port: 'destination port', expectedDate: '12/12/2020', email: 'unload@test' };
 
-    let loadInfo = waybillInput.loadInfo;
-    loadInfo.loadManager.email = 'load@test';
-    loadInfo.origin = 'origin port';
-    loadInfo.destination = 'destinantion port';
-    loadInfo.arrivalDate = 'arrival date';
-    loadInfo.merchandiseType = 'merchandise type';
-    loadInfo.merchandisePrice = '12';
+    component.setValue(order);
 
-    waybillInput.unloadInfo.loadManager.email = 'unload@test';
-    component.setValue(waybillInput);
+    let orderOutput = component.getValue();
 
-    let waybillOutput = component.getValue();
-
-    expect(waybillOutput).toEqual(waybillInput)
+    expect(orderOutput).toEqual(order)
   });
 });
 
-const buildPerson = (name, email, cellphone = null) => {
-  let person = new Person();
-  person.name = name;
-  person.email = email;
-  person.cellphone = cellphone;
-  return person;
+const buildPerson = (name, email) => {
+  return Person.fromObj({ name: name, email: email });
 };

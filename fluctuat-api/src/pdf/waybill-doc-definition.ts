@@ -1,8 +1,9 @@
 import { Waybill } from '../models/waybill';
-import { UnloadInfo } from '../models/unload-info';
 import { LoadManager } from '../models/load-manager';
 import { logo } from './logo';
 import { LoadInfo } from '../models/load-info';
+import { Middleman } from '../models/middleman';
+import { OrderInfo } from '../models/order-info';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
@@ -21,38 +22,25 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         style: 'level'
       },
       '\n',
-      chainText('Donneur d\'ordre : ', bold(order.customer.name)),
-      chainText('Expéditeur : ', bold(order.sender.name)),
-      chainText('Destinataire : ', bold(order.receiver.name)),
-      chainText('Le bateau ', bold(order.ship.name), ', matricule ', bold(order.ship.regNumber),
-        ', est conduit par ', bold(order.transporter.name), '.'),
+      ...printOrderInfo(order),
       '\n',
-      chainText('Il vous est expédié un tonnage de ',
-        bold(loadInfo.merchandiseWeight), ' tonnes de ',
-        bold(loadInfo.merchandiseType), ' d\'une valeur déclarée de ',
-        bold((loadInfo.merchandisePrice || '/') + ' €'), ' par tonne, qui a été chargé au ',
-        bold(loadInfo.origin), ' et que le transporteur déclare avoir reçu et s\'engage à transporter au ',
-        bold(loadInfo.destination), '.'),
+      ...printLoadBlock(loadInfo, order),
+      ...printValidationBlock(loadInfo),
       '\n',
-      ...printLoadBlock(loadInfo),
-      '\n\n',
-      ...printValidationBlock(loadInfo, order.transporter.name),
-      '\n',
-      ...printUnloadBlock(unloadInfo),
-      '\n\n',
-      ...printValidationBlock(unloadInfo, order.transporter.name)
+      ...printUnloadBlock(unloadInfo, order),
+      ...printValidationBlock(unloadInfo)
     ],
     footer: [
       {
-        text: chainText(`Cette lettre de voiture est générée par le service numérique de l'État `, bold('Fluctuat')),
+        text: `Cette lettre de voiture est générée par le service numérique de l'État Fluctu@t`,
         alignment: 'center',
-        style: [ 'level', 'footer' ]
+        style: ['level', 'footer']
       },
       {
         text: `Consultable sur ${baseUrl}`,
         link: `${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}`,
         alignment: 'center',
-        style: [ 'footer' ]
+        style: ['footer']
       }
     ],
     styles: {
@@ -64,10 +52,15 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
       title2: {
         fontSize: 15,
         bold: true,
-        marginBottom: 15
+        marginBottom: 10,
+        marginTop: 10
+      },
+      small: {
+        fontSize: 11,
+        marginTop: 4
       },
       footer: {
-        fontSize: 12
+        fontSize: 11
       },
       level: {
         marginBottom: 5
@@ -76,27 +69,65 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         margin: [ 2, 8 ]
       },
       cellHeader: {
-        margin: [ 2, 8, 2, 0 ]
+        margin: [2, 8, 2, 0]
       }
     }
   }
 }
 
-const printLoadBlock = (loadInfo: LoadInfo) => {
+const printOrderInfo = (order: OrderInfo) => {
+
+  const priceText = order.merchandise.price ?
+    [` d'une valeur déclarée de `, bold(order.merchandise.price + ' €'), ' par tonne'] :
+    [' (sans valeur déclarée)'];
+
+  const printMiddleMan = (middleman: Middleman) => {
+    if (!middleman || !middleman.name) {
+      return []
+    }
+
+    return [
+      chainText('Affréteur : ', bold(middleman.name),
+      ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))]
+  };
+
+  const printDate = (date, suffix='') => date ? [', le ', bold(order.originInfo.expectedDate), suffix] : [];
+
+  const printWeight = (weight) => weight ? ['de ', bold(order.merchandise.weight), ' tonnes']: ['à determiner'];
+
+  return [
+    chainText('Donneur d\'ordre : ', bold(order.customer.name)),
+    chainText('Expéditeur : ', bold(order.sender.name)),
+    chainText('Destinataire : ', bold(order.receiver.name)),
+    ...printMiddleMan(order.middleman),
+    chainText('Le bateau ', bold(order.ship.name), ', matricule ', bold(order.ship.regNumber),
+      ', est conduit par ', bold(order.transporter.name), '.'),
+    '\n',
+    { text: 'Informations préalables au voyage', style: 'title2' },
+    {
+      text: [
+        'Il est prévu d’expédier un tonnage ', ...printWeight(order.merchandise.weight), ' de ',
+        bold(order.merchandise.nature), ...priceText, ` que le transporteur s’engage à transporter depuis le `,
+        bold(order.originInfo.port), ...printDate(order.originInfo.expectedDate, ','),
+        ' jusqu\'au ', bold(order.destinationInfo.port), ...printDate(order.destinationInfo.expectedDate), '.'
+      ], style: 'level'
+    }
+  ]
+};
+
+const printLoadBlock = (loadInfo: LoadInfo, order: OrderInfo) => {
   return [
     { text: 'Chargement', style: 'title2' },
-
-    chainText(bold(loadInfo.loadManager.name), ' (', loadInfo.loadManager.jobFunction, ') ',
-      'est le responsable du chargement.'),
-    chainText('Le chargement a commencé le ', bold(loadInfo.startDate), ' et fini le ',
+    chainText('Le transporteur déclare avoir reçu ', bold(loadInfo.merchandiseWeight), ' tonnes de ',
+      bold(order.merchandise.nature), ' au ', bold(order.originInfo.port), '.'),
+    chainText('Le chargement, commencé le ', bold(loadInfo.startDate), ' s\'est terminé le ',
       bold(loadInfo.endDate), '.'),
-    chainText('Tonnage chargé : ', bold(loadInfo.merchandiseWeight), ' tonnes.'),
     '\n',
     printCommentBlock(loadInfo.comments),
   ]
 };
 
-const printUnloadBlock = (unloadInfo: UnloadInfo) => {
+const printUnloadBlock = (unloadInfo: LoadInfo, order: OrderInfo) => {
   // if the information is incomplete print empty block
   if (!unloadInfo.validatedAt) {
     return []
@@ -104,37 +135,32 @@ const printUnloadBlock = (unloadInfo: UnloadInfo) => {
 
   return [
     { text: 'Déchargement', style: 'title2' },
-
-    chainText(bold(unloadInfo.loadManager.name), ' (', unloadInfo.loadManager.jobFunction, ') ',
-      'est le responsable du déchargement.'),
-    chainText('Le déchargement a commencé le ', bold(unloadInfo.startDate), ' et fini le ',
+    chainText('Le transporteur déclare avoir remis ', bold(unloadInfo.merchandiseWeight), ' tonnes de ',
+      bold(order.merchandise.nature), ' au ', bold(order.destinationInfo.port), '.'),
+    chainText('Le déchargement, commencé le ', bold(unloadInfo.startDate), ' s\'est terminé le ',
       bold(unloadInfo.endDate), '.'),
-    chainText('Tonnage déchargé : ', bold(unloadInfo.merchandiseWeight), ' tonnes.'),
     '\n',
     printCommentBlock(unloadInfo.comments),
   ]
 };
 
-const printValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager, validatedAt }, transporterName) => {
+const printValidationBlock = (validationInfo: { validatedAt, sentAt, loadManager: LoadManager }) => {
   // if the information is incomplete print an empty block
   if (!validationInfo.validatedAt) {
     return []
   }
 
+  const frenchFullDate = (date) => format(date, 'D MMMM YYYY [à] H[h] mm', { locale: fr });
+
   return [
     {
-      columns: [
-        {
-          width: '50%',
-          text: chainText('Envoyé ', format(validationInfo.sentAt, '[le] D MMMM YYYY', { locale: fr }),
-            ' par ', validationInfo.loadManager.name),
-        },
-        {
-          width: '50%',
-          text: chainText('Confirmé par ', transporterName, ' ', format(validationInfo.validatedAt,
-            '[le] D MMMM YYYY', { locale: fr })),
-        }
-      ]
+      text: ['Validé le ', frenchFullDate(validationInfo.sentAt), ' par ', bold(validationInfo.loadManager.name),
+        ' en sa qualité de ', bold(validationInfo.loadManager.jobFunction)],
+      style: 'small'
+    },
+    {
+      text: ['Confirmé par le transporteur le ', frenchFullDate(validationInfo.validatedAt)],
+      style: 'small'
     }
   ]
 };
@@ -142,14 +168,14 @@ const printValidationBlock = (validationInfo: { sentAt, loadManager: LoadManager
 const printCommentBlock = (comments) => {
   return {
     table: {
-      widths: [ '*' ],
+      widths: ['*'],
       body: [
-        [ { text: 'Commentaires', border: [ true, true, true, false ], bold: true, style: 'cellHeader' } ],
-        [ { text: comments, border: [ true, false, true, true ], style: 'cell' } ]
+        [{ text: 'Commentaires', border: [true, true, true, false], bold: true, style: 'cellHeader' }],
+        [{ text: comments, border: [true, false, true, true], style: 'cell' }]
       ]
     }
   }
 };
 
-const bold = (text: string) => ({ text: text, bold: true });
-const chainText = (...parts) => ({ text: [ ...parts ], style: 'level' });
+const bold = (text: string) => ({ text: text ? text.toUpperCase() : '', bold: true });
+const chainText = (...parts) => ({ text: [...parts], style: 'level' });

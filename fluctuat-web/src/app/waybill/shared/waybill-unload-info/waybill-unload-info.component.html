@@ -1,14 +1,13 @@
 <h3>Déchargement</h3>
 
-<p><strong class="is-uppercase">{{unloadInfo.loadManager.name}}</strong> ({{unloadInfo.loadManager.jobFunction}}) est le responsable du déchargement.</p>
+<p>Le transporteur déclare avoir remis <strong>{{waybill.unloadInfo.merchandiseWeight}}</strong> tonnes de
+  <strong>{{waybill.order.merchandise.nature}}</strong> au <strong>{{waybill.order.destinationInfo.port}}</strong>.</p>
 
-<p>Le déchargement a commencé le <strong>{{unloadInfo.startDate}} </strong>
-  et fini le <strong>{{unloadInfo.endDate}}. </strong>
+<p>Le déchargement, commencé le <strong>{{waybill.unloadInfo.startDate}}</strong>
+  s'est terminé le <strong>{{waybill.loadInfo.endDate}}.</strong>
 </p>
 
-<p>Tonnage déchargé : <strong>{{unloadInfo.merchandiseWeight}}</strong> tonnes.</p>
-
-<ng-container *ngIf="unloadInfo.comments">
+<ng-container *ngIf="waybill.unloadInfo.comments">
   <h4>Commentaires</h4>
-  <p>{{unloadInfo.comments}}</p>
+  <p>{{waybill.unloadInfo.comments}}</p>
 </ng-container>

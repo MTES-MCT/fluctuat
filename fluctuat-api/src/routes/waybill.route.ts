@@ -69,7 +69,7 @@ router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: WaybillReques
   }
 });
 
-router.put('/:id', fetchWaybill, async (req: WaybillRequest, res) => {
+router.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   if (waybill.loadInfo.sentAt) {
@@ -77,11 +77,8 @@ router.put('/:id', fetchWaybill, async (req: WaybillRequest, res) => {
     return
   }
 
-  const waybillUpdated: Waybill = req.body;
-
-  waybill.order = waybillUpdated.order;
-  waybill.loadInfo = waybillUpdated.loadInfo;
-  waybill.unloadInfo = waybillUpdated.unloadInfo;
+  waybill.order = req.body;
+  // TODO add sent date
 
   await waybillStorage.put(waybill);
 

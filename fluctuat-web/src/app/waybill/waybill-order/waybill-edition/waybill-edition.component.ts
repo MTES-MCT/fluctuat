@@ -39,7 +39,7 @@ export class WaybillEditionComponent implements OnInit {
     this.waybill$ = this.waybillService.get(this.waybillId).pipe(shareReplay(1));
 
     this.waybill$.subscribe((waybill) => {
-      return this.orderFormComponent.setValue(waybill);
+      return this.orderFormComponent.setValue(waybill.order);
     });
 
     if (this.authService.isAuthenticated()) {
@@ -49,13 +49,13 @@ export class WaybillEditionComponent implements OnInit {
   }
 
   sendOrderInfo() {
-    if (this.orderFormComponent.waybillForm.invalid) {
+    if (this.orderFormComponent.orderForm.invalid) {
       return this.result.error('Veuillez vérifier votre saisie');
     }
 
     this.result.waiting();
 
-    this.waybillService.update(this.waybillId, this.orderFormComponent.getValue()).pipe(
+    this.waybillService.updateOrderInfo(this.waybillId, this.orderFormComponent.getValue()).pipe(
       catchError((error) => {
         console.error(error);
         return throwError(GENERIC_ERROR_MSG);

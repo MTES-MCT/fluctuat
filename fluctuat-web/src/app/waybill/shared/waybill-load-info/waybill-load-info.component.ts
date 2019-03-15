@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { LoadInfo } from '../models/load-info.model';
+import { Waybill } from '../models/waybill.model';
 
 @Component({
   selector: 'flu-waybill-load-info',
-  templateUrl: './waybill-load-info.component.html'
+  templateUrl: './waybill-load-info.component.html',
+  styles: ['strong { text-transform: uppercase }']
 })
 export class WaybillLoadInfoComponent {
 
   @Input()
-  loadInfo: LoadInfo
+  waybill: Waybill
 
 }

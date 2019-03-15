@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { LoadInfo } from '../shared/models/load-info.model';
-import { UnloadInfo } from '../shared/models/unload-info.model';
 
 @Component({
   selector: 'flu-load-status-notification',
@@ -9,7 +8,7 @@ import { UnloadInfo } from '../shared/models/unload-info.model';
 export class LoadStatusNotificationComponent {
 
   @Input()
-  loadInfo: LoadInfo | UnloadInfo;
+  loadInfo: LoadInfo;
 
   @Input()
   step: 'LOAD' | 'UNLOAD';

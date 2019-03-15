@@ -4,6 +4,7 @@ const configMongo = require('../../.data/config.json').mongodb;
 
 const mongoClient = () => {
   console.log('Connecting to DB...');
+  console.log(`Using db name ${configMongo.dbName}`);
   return connect(`mongodb+srv://${configMongo.cluster}/?retryWrites=true`,
     {
       useNewUrlParser: true,
