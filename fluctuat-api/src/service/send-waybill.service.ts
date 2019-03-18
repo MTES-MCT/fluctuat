@@ -91,7 +91,7 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
     subject: `⚓ Chargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
       html: `<p>Bonjour ${transporter.name},</p>
-             <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.code} ont été enregistreés,
+             <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.code} ont été enregistrées,
               veuillez les confirmer dès maintenant.</p>
              <a href="${confirmationLink}">Cliquez sur ce lien pour accéder à votre lettre de voiture</a>
              <br>
@@ -117,7 +117,7 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
     subject: `⚓ Déchargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
       html: `<p>Bonjour ${transporter.name},</p>
-             <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.code} ont été enregistreés,
+             <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.code} ont été enregistrées,
               veuillez les confirmer dès maintenant.</p>
              <a href="${confirmationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
              <br>
