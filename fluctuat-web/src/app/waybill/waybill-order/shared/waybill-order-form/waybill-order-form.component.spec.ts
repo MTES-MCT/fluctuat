@@ -53,8 +53,21 @@ describe('WaybillOrderFormComponent', () => {
 
     expect(orderOutput).toEqual(order)
   });
+
+  it('should autocomplete form group if name match', () => {
+    const existingCustomers = [
+      buildPerson('another customer', 'other@test'),
+      buildPerson('customer name', 'customer@test')
+    ];
+    const customer = existingCustomers[1];
+    const formGroup = component.fillPersonForm(buildPerson(customer.name));
+
+    component.autocompleteByName(formGroup, existingCustomers);
+
+    expect(formGroup.value).toEqual(customer);
+  })
 });
 
-const buildPerson = (name, email) => {
+const buildPerson = (name, email?) => {
   return Person.fromObj({ name: name, email: email });
 };

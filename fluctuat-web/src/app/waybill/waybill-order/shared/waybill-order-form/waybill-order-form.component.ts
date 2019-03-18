@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person } from '../../../shared/models/person.model';
 import { Contacts } from '../../../shared/models/contacts';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
@@ -70,4 +70,12 @@ export class WaybillOrderFormComponent {
     return this.orderForm.value;
   }
 
+
+  autocompleteByName(control: AbstractControl, values: any[] = []) {
+    const name = control.get('name').value;
+    let matchValue = values.find(item => item.name === name);
+    if (matchValue) {
+      control.setValue(matchValue);
+    }
+  }
 }

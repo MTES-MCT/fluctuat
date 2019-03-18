@@ -14,4 +14,10 @@ export class Contacts {
   shipRegNumbers;
   loadManagerEmails;
   unloadManagerEmails;
+  customers;
+  senders;
+  receivers;
+  middlemen;
+  transporters;
+  ships;
 }

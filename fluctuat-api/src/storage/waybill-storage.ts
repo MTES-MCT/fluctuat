@@ -38,6 +38,13 @@ const findContacts = (owner: string) => {
 
   return WaybillDao.aggregate([
     { $match: { owner: owner } },
+    // TODO remvove projection after migration
+    { $project: { 'order.customer._id': false } },
+    { $project: { 'order.sender._id': false } },
+    { $project: { 'order.receiver._id': false } },
+    { $project: { 'order.middleman._id': false } },
+    { $project: { 'order.ship._id': false } },
+    { $project: { 'order.transporter._id': false } },
     {
       $group: {
         _id: '$owner',
@@ -55,7 +62,13 @@ const findContacts = (owner: string) => {
         shipNames: { $addToSet: '$order.ship.name' },
         shipRegNumbers: { $addToSet: '$order.ship.regNumber' },
         loadManagerEmails: { $addToSet: '$order.originInfo.email' },
-        unloadManagerEmails: { $addToSet: '$order.destinationInfo.email' }
+        unloadManagerEmails: { $addToSet: '$order.destinationInfo.email' },
+        customers: { $addToSet: '$order.customer' },
+        senders: { $addToSet: '$order.sender' },
+        receivers: { $addToSet: '$order.receiver' },
+        middlemen: { $addToSet: '$order.middleman' },
+        transporters: { $addToSet: '$order.transporter' },
+        ships: { $addToSet: '$order.ship' },
       }
     },
     {

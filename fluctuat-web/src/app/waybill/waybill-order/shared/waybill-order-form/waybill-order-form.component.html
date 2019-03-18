@@ -10,7 +10,8 @@
         </datalist>
 
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name" list="flu-customer-name">
+        <input class="input is-medium" formControlName="name" list="flu-customer-name"
+               (blur)="autocompleteByName(orderForm.get('customer'), contacts?.customers)">
       </flu-form-field>
 
       <div class="field">
@@ -41,7 +42,8 @@
           <option *ngFor="let item of contacts?.senderNames" [value]="item">
         </datalist>
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name" list="flu-sender-name">
+        <input class="input is-medium" formControlName="name" list="flu-sender-name"
+               (blur)="autocompleteByName(orderForm.get('sender'), contacts?.senders)">
       </flu-form-field>
 
       <div class="field">
@@ -71,7 +73,8 @@
           <option *ngFor="let item of contacts?.receiverNames" [value]="item">
         </datalist>
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name" list="flu-receiver-names">
+        <input class="input is-medium" formControlName="name" list="flu-receiver-names"
+               (blur)="autocompleteByName(orderForm.get('receiver'), contacts?.receivers)">
       </flu-form-field>
 
       <div class="field">
@@ -101,7 +104,8 @@
           <option *ngFor="let item of contacts?.middlemanNames" [value]="item">
         </datalist>
         <label class="label">Nom ou raison sociale</label>
-        <input class="input is-medium" formControlName="name" list="flu-middleman-names">
+        <input class="input is-medium" formControlName="name" list="flu-middleman-names"
+               (blur)="autocompleteByName(orderForm.get('middleman'), contacts?.middlemen)">
       </flu-form-field>
 
       <div class="field">
@@ -143,7 +147,8 @@
           <option *ngFor="let item of contacts?.transporterNames" [value]="item">
         </datalist>
         <label class="label">Nom</label>
-        <input class="input is-medium" formControlName="name" list="flu-transporter-names">
+        <input class="input is-medium" formControlName="name" list="flu-transporter-names"
+               (blur)="autocompleteByName(orderForm.get('transporter'), contacts?.transporters)">
       </flu-form-field>
 
       <div class="field">
@@ -185,7 +190,8 @@
           <option *ngFor="let item of contacts?.shipNames" [value]="item">
         </datalist>
         <label class="label">Devise</label>
-        <input class="input is-medium" formControlName="name" list="flu-ship-names">
+        <input class="input is-medium" formControlName="name" list="flu-ship-names"
+               (blur)="autocompleteByName(orderForm.get('ship'), contacts?.ships)">
       </flu-form-field>
 
       <flu-form-field>
