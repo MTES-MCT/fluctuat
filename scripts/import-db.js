@@ -5,5 +5,5 @@ const uri = `mongodb+srv://${configMongo.user}:${configMongo.password}@${configM
 
 // upsert replaces existing documents in the database with matching documents from the import file
 
-execSync(`mongoimport --uri ${uri} --collection waybills --mode upsert --file ../fluctuat-api/.data/waybills.json`);
-execSync(`mongoimport --uri ${uri} --collection users  --mode upsert --file ../fluctuat-api/.data/users.json`);
+execSync(`mongoimport --uri ${uri} --collection waybills --mode upsert --jsonArray --file ../fluctuat-api/.data/waybills.json`);
+execSync(`mongoimport --uri ${uri} --collection users  --mode upsert --jsonArray --file ../fluctuat-api/.data/users.json`);
