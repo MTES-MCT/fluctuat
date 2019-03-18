@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET  = require('../../.data/config.json').jwtSecret;
+const JWT_SECRET = require('../../.data/config.json').jwtSecret;
 
 /** Generate hash for a given password */
 export const generateHash = (password) => bcrypt.hashSync(password, 10);
@@ -9,7 +9,7 @@ export const generateHash = (password) => bcrypt.hashSync(password, 10);
 /** @return if the given password match with hash*/
 export const isPasswordMatch = (password, hash) => bcrypt.compareSync(password, hash);
 
-export const generateToken = (user) => jwt.sign({email: user.email}, JWT_SECRET);
+export const generateToken = (user) => jwt.sign({ email: user.email, admin: user.admin }, JWT_SECRET);
 
 export const tokenDecode = (token) => jwt.verify(token, JWT_SECRET);
 

@@ -50,4 +50,8 @@ export class WaybillService {
   getAllMe() {
     return this.http.get<Waybill[]>('/api/waybill/me');
   }
+
+  getAll() {
+    return this.http.get<Waybill[]>('/api/waybill');
+  }
 }

@@ -14,6 +14,7 @@ import { WaybillLoadValidationComponent } from './waybill/waybill-load-validatio
 import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
 import { WaybillDetailComponent } from './waybill/waybill-detail/waybill-detail.component';
 import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
+import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
   { path: 'lettre-de-voiture/:id/confirmation-dechargement', component: WaybillUnloadValidationComponent },
   { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [ AuthGuard ] },
+  { path: 'suivi-lettres-de-voiture', component: DashboardAdminComponent, canActivate: [ AuthGuard ] },
   { path: '**', redirectTo: '/' }
 
 ];

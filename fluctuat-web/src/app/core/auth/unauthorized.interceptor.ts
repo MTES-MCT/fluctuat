@@ -18,7 +18,10 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.router.navigateByUrl('/connexion')
+        } else if (error.status === 403) {
+          this.router.navigateByUrl('/mes-lettres-de-voiture')
         }
+
         throw error
       }));
   }

@@ -46,6 +46,7 @@ router.post('/sign-up', async (req, res) => {
 
   let user = {
     email: credentials.email,
+    admin: false,
     hash: generateHash(credentials.password)
   };
 
