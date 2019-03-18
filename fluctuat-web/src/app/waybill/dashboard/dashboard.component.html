@@ -35,6 +35,14 @@
             {{waybill.order.ship.name || 'non renseigné'}}
           </div>
         </div>
+        <div class="columns">
+          <div class="column is-narrow">
+            <span class="icon"><i class="far fa-calendar-alt"></i></span>
+            {{waybill.loadInfo.endDate ? waybill.loadInfo.endDate : waybill.order.originInfo.expectedDate || 'non renseignée'}}
+            <span class="icon"><i class="fa fa-arrow-right"></i></span>
+            {{waybill.unloadInfo.endDate ? waybill.unloadInfo.endDate : waybill.order.destinationInfo.expectedDate || 'non renseignée'}}
+          </div>
+        </div>
 
         <p>{{getStatus(waybill)}}</p>
 
