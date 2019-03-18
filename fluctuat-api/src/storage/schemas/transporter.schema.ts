@@ -4,4 +4,4 @@ export const TransporterSchema: Schema = new Schema({
   name: String,
   email: String,
   cellphone: String
-});
+}, { _id: false });

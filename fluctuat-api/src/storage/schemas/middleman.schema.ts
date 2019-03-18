@@ -4,4 +4,4 @@ export const MiddlemanShema = new Schema({
   name: String,
   email: String,
   isBroker: Boolean
-});
+}, { _id: false });

@@ -15,12 +15,12 @@ const findByEmail = (email: string) => {
   return WaybillDao.find({
     $or: [
       { owner: email },
-      { 'order.customer.email': email},
-      { 'order.sender.email': email},
-      { 'order.receiver.email': email},
-      { 'order.transporter.email': email},
-      { 'order.originInfo.email': email},
-      { 'order.destinationInfo.email': email},
+      { 'order.customer.email': email },
+      { 'order.sender.email': email },
+      { 'order.receiver.email': email },
+      { 'order.transporter.email': email },
+      { 'order.originInfo.email': email },
+      { 'order.destinationInfo.email': email },
     ]
   });
 };
@@ -54,8 +54,8 @@ const findContacts = (owner: string) => {
         senderEmails: { $addToSet: '$order.sender.email' },
         receiverNames: { $addToSet: '$order.receiver.name' },
         receiverEmails: { $addToSet: '$order.receiver.email' },
-        middlemanNames: { $addToSet: '$order.middleman.name'},
-        middlemanEmails: { $addToSet: '$order.middleman.email'},
+        middlemanNames: { $addToSet: '$order.middleman.name' },
+        middlemanEmails: { $addToSet: '$order.middleman.email' },
         transporterNames: { $addToSet: '$order.transporter.name' },
         transporterEmails: { $addToSet: '$order.transporter.email' },
         transporterCellphones: { $addToSet: '$order.transporter.cellphone' },
