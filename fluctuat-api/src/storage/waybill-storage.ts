@@ -39,13 +39,6 @@ const findContacts = (owner: string) => {
 
   return WaybillDao.aggregate([
     { $match: { owner: owner } },
-    // TODO remvove projection after migration
-    { $project: { 'order.customer._id': false } },
-    { $project: { 'order.sender._id': false } },
-    { $project: { 'order.receiver._id': false } },
-    { $project: { 'order.middleman._id': false } },
-    { $project: { 'order.ship._id': false } },
-    { $project: { 'order.transporter._id': false } },
     {
       $group: {
         _id: '$owner',
