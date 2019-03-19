@@ -18,6 +18,7 @@ const findByEmail = (email: string) => {
       { 'order.customer.email': email },
       { 'order.sender.email': email },
       { 'order.receiver.email': email },
+      { 'order.middleman.email': email },
       { 'order.transporter.email': email },
       { 'order.originInfo.email': email },
       { 'order.destinationInfo.email': email },
