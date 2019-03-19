@@ -9,6 +9,7 @@ import { WhenEnterPressedDirective } from './when-enter-pressed.directive';
 import { ErrorComponent } from './error.component';
 import { SuccessComponent } from './success.component';
 import { FormFieldComponent } from './form-field.component';
+import { HeroContainerComponent } from './hero-container.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormFieldComponent } from './form-field.component';
     LoadingComponent,
     ErrorComponent,
     SuccessComponent,
-    FormFieldComponent
+    FormFieldComponent,
+    HeroContainerComponent
   ],
   exports: [
     DatePickerDirective,
@@ -29,7 +31,9 @@ import { FormFieldComponent } from './form-field.component';
     LoadingComponent,
     ErrorComponent,
     SuccessComponent,
-    FormFieldComponent
+    FormFieldComponent,
+    HeroContainerComponent
+
   ],
   imports: [
     CommonModule
