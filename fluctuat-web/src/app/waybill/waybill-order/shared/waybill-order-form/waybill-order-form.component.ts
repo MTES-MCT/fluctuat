@@ -74,7 +74,7 @@ export class WaybillOrderFormComponent {
   autocompleteByName(control: AbstractControl, values: any[] = []) {
     const name = control.get('name').value;
     let matchValue = values.find(item => item.name === name);
-    if (matchValue) {
+    if (matchValue && name) {
       control.setValue(matchValue);
     }
   }
