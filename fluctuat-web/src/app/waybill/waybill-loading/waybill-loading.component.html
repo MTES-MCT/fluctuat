@@ -69,7 +69,10 @@
     <div class="level"></div>
 
     <div class="buttons">
-      <button class="button" (click)="openShareModal()">Envoyer la lettre de voiture</button>
+
+      <button class="button" [routerLink]="['/lettre-de-voiture', waybillId, 'detail']">
+        Annuler
+      </button>
 
       <button class="button is-link" (click)="sendLoadInfo()"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
@@ -82,7 +85,5 @@
   <ng-template #loading>
     <flu-loading></flu-loading>
   </ng-template>
-
-  <flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillNotify]="{waybillId: waybillId}"></flu-waybill-share>
 
 </flu-hero-container>
