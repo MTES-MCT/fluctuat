@@ -1,33 +1,47 @@
 <nav class="navbar" aria-label="main navigation">
+
   <div class="navbar-brand">
     <div class="navbar-item">
-      <img src="/assets/marianne.png" />
+      <img src="/assets/marianne.png"/>
     </div>
     <a class="navbar-item is-size-5" routerLink="/">
       Fluctu@t
     </a>
+
+    <a (click)="toggleMenu()" role="button" class="navbar-burger burger" [ngClass]="{'is-active': active}"
+       aria-label="menu" aria-expanded="false" data-target="navbarItems">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
 
-  <div class="navbar-end">
+  <div class="navbar-menu is-active" id="navbarItems" [ngClass]="{'is-active': active}">
 
+    <div class="navbar-end">
 
-    <div class="navbar-item">
-      <button routerLink="/acces-lettre-de-voiture" class="button is-white is-medium">Consulter une lettre de voiture</button>
-    </div>
+      <div class="navbar-item">
+        <a routerLink="/acces-lettre-de-voiture" class="button is-white is-medium">
+          Consulter une lettre de voiture
+        </a>
+      </div>
 
-    <div class="navbar-item" *ngIf="authenticated$ | async">
-      <button routerLink="/mes-lettres-de-voiture" class="button is-white is-medium">Mes lettres de voiture</button>
-    </div>
+      <div class="navbar-item" *ngIf="authenticated$ | async">
+        <a routerLink="/mes-lettres-de-voiture" class="button is-white is-medium">Mes lettres de voiture</a>
+      </div>
 
-    <div class="navbar-item" *ngIf="authenticated$ | async">
-      <button (click)="logout()" class="button is-white is-medium">Déconnexion</button>
-    </div>
-    <div class="navbar-item" *ngIf="!(authenticated$ | async)">
-      <button routerLink="/inscription" class="button is-white is-medium">Créer un compte</button>
-    </div>
-    <div class="navbar-item" *ngIf="!(authenticated$ | async)">
-      <button routerLink="/connexion" class="button is-white is-medium">Connexion</button>
-    </div>
+      <div class="navbar-item" *ngIf="authenticated$ | async">
+        <a (click)="logout()" class="button is-white is-medium">Déconnexion</a>
+      </div>
 
+      <div class="navbar-item" *ngIf="!(authenticated$ | async)">
+        <button routerLink="/inscription" class="button is-white is-medium">Créer un compte</button>
+      </div>
+
+      <div class="navbar-item" *ngIf="!(authenticated$ | async)">
+        <button routerLink="/connexion" class="button is-white is-medium">Connexion</button>
+      </div>
+
+    </div>
   </div>
 </nav>
