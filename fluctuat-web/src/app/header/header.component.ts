@@ -1,22 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth/auth.service';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'flu-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   authenticated$: Observable<boolean>;
 
+  active = false;
+
   constructor(private authService: AuthService, private router: Router) {
-    this.authenticated$ = authService.authenticated();
+  }
+
+  ngOnInit() {
+    this.authenticated$ = this.authService.authenticated();
+    this.router.events.subscribe((event) => {
+      // close menu if navigation changes
+      if (event instanceof NavigationEnd) {
+        this.active = false;
+      }
+    })
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate([ '' ])
+    this.router.navigate([''])
   }
+
+  toggleMenu() {
+    this.active = !this.active;
+  }
+
 }

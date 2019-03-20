@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { Waybill } from '../shared/models/waybill.model';
 import { WaybillService } from '../shared/waybill.service';
-
+import { StatusOption } from './status-option.enum';
 
 @Component({
   selector: 'flu-dashboard',
@@ -12,14 +12,38 @@ import { WaybillService } from '../shared/waybill.service';
 export class DashboardComponent implements OnInit {
 
   waybills$: Observable<Waybill[]>;
+  filteredWaybills$: Observable<Waybill[]>;
 
-  constructor(private waybillService: WaybillService) {
+  statusFilter = StatusOption.ALL;
+
+  public readonly STATUS_OPTION = StatusOption;
+
+  constructor(public waybillService: WaybillService) {
   }
 
   ngOnInit() {
     this.waybills$ = this.waybillService.getAllMe().pipe(
       shareReplay(1)
     );
+
+    this.refreshFilteredWaybills()
+  }
+
+  refreshFilteredWaybills() {
+    const getStatusFilter = (option: StatusOption) => {
+      switch (option) {
+        case StatusOption.ALL:
+          return () => true;
+        case StatusOption.END:
+          return (waybill) => !!waybill.unloadInfo.validatedAt;
+        case StatusOption.IN_PROGRESS:
+          return (waybill) => !waybill.unloadInfo.validatedAt;
+      }
+    };
+
+    this.filteredWaybills$ = this.waybills$.pipe(
+      map((waybills) => waybills.filter(getStatusFilter(this.statusFilter)))
+    )
   }
 
   getStatus(waybill: Waybill) {

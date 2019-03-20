@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -24,8 +24,6 @@ export class WaybillLoadingComponent implements OnInit {
   waybillId: string;
 
   readonly ports = PortList;
-
-  showShareModal = false;
 
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
               private route: ActivatedRoute, private router: Router) {
@@ -71,13 +69,5 @@ export class WaybillLoadingComponent implements OnInit {
         this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
 
       }, (err => this.result.error(err)));
-
-    console.log(this.loadInfoForm.value);
-    console.log('send load info');
-    this.result.success();
-  }
-
-  openShareModal() {
-    this.showShareModal = true;
   }
 }

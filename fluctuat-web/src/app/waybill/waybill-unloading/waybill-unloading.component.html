@@ -25,9 +25,9 @@
 
         <div class="field">
           <div class="control">
-          <label class="label">Tonnage déchargé</label>
-          <input class="input is-medium" formControlName="merchandiseWeight"
-                 [ngClass]="{'is-danger': unloadInfoForm.get('merchandiseWeight').invalid}">
+            <label class="label">Tonnage déchargé</label>
+            <input class="input is-medium" formControlName="merchandiseWeight"
+                   [ngClass]="{'is-danger': unloadInfoForm.get('merchandiseWeight').invalid}">
           </div>
           <p *ngIf="unloadInfoForm.get('merchandiseWeight').invalid" class="help is-danger">
             Le tonnage saisie n'est pas un nombre valide
@@ -66,7 +66,9 @@
     <div class="level"></div>
 
     <div class="buttons">
-      <button class="button" (click)="openShareModal()">Envoyer la lettre de voiture</button>
+      <button class="button" [routerLink]="['/lettre-de-voiture', waybillId, 'detail']">
+        Annuler
+      </button>
 
       <button class="button is-link" (click)="sendUnloadInfo()"
               [disabled]="result.pending" [ngClass]="{'is-loading': result.pending}">
@@ -81,5 +83,3 @@
   </ng-template>
 
 </flu-hero-container>
-
-<flu-waybill-share *ngIf="showShareModal" [(show)]="showShareModal" [waybillNotify]="{waybillId: waybillId}"></flu-waybill-share>

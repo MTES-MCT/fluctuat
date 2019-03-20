@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -67,9 +67,5 @@ export class WaybillUnloadingComponent implements OnInit {
         this.result.success();
         this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
       }, (err => this.result.error(err)));
-  }
-
-  openShareModal() {
-    this.showShareModal = true;
   }
 }

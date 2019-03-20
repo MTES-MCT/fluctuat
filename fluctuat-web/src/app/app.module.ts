@@ -38,7 +38,6 @@ import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-s
   declarations: [
     AppComponent,
     HeaderComponent,
-    HeroContainerComponent,
     HomeComponent,
     SignUpComponent,
     LoginComponent,
