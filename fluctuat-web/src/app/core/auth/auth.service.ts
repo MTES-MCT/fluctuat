@@ -49,4 +49,8 @@ export class AuthService {
   /** Subscribe to be notified when authentication value changes (login and logout) */
   authenticated = (): Observable<boolean> => this.isAuthenticated$.asObservable();
 
+  changePassword(newPassword: string, token: string) {
+    return this.http.post('/api/auth/change-password', {newPassword, token})
+  }
+
 }
