@@ -16,12 +16,14 @@ import { WaybillDetailComponent } from './waybill/waybill-detail/waybill-detail.
 import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'connexion', component: LoginComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'inscription', component: SignUpComponent, canActivate: [ AlreadyLoggedGuard ] },
   { path: 'changement-mot-de-passe', component: ChangePasswordComponent},
+  { path: 'mot-de-passe-oublie', component: RecoverPasswordComponent },
   { path: 'acces-lettre-de-voiture', component: WaybillAccessComponent },
   { path: 'lettre-de-voiture/new', component: WaybillNewComponent, canActivate: [ AuthGuard ] },
   { path: 'lettre-de-voiture/:id/detail', component: WaybillDetailComponent },

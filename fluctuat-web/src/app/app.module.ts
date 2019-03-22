@@ -35,6 +35,7 @@ import { ContactsService } from './waybill/shared/contacts.service';
 import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-status-notification.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     WaybillOptionsComponent,
     WaybillAccessComponent,
     WaybillShareComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     AppRoutingModule,

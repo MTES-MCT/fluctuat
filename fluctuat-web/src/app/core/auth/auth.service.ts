@@ -50,7 +50,11 @@ export class AuthService {
   authenticated = (): Observable<boolean> => this.isAuthenticated$.asObservable();
 
   changePassword(newPassword: string, token: string) {
-    return this.http.post('/api/auth/change-password', {newPassword, token})
+    return this.http.post('/api/auth/change-password', { newPassword, token })
+  }
+
+  recoverPassword(email: string) {
+    return this.http.post('/api/auth/recover-password', { email })
   }
 
 }

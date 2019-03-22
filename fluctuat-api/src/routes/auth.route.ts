@@ -96,7 +96,7 @@ router.post('/recover-password', async (req, res) => {
   user.recoverPasswordAt = tokenDecode(token).iat;
   user.save();
 
-  res.sendStatus(200)
+  res.sendStatus(204)
 
 });
 
