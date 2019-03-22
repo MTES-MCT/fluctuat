@@ -2,13 +2,22 @@ import { EmailData } from './email-data';
 import * as mailjet from 'node-mailjet';
 import { HasEmail } from '../models/has-email.interface';
 
+const config = require('../../.data/config.json');
+const emailConfig = config.email;
+
 export class EmailService {
 
   mailjetService;
 
-  constructor(user: string, password: string, debug = false, private sender: HasEmail) {
+  static emailService = new EmailService(emailConfig.user, emailConfig.pass, emailConfig.sender, config.debug);
+
+  private constructor(user: string, password: string, private sender: HasEmail, debug = false) {
     console.log(`Init email service: send from ${sender.email} with debug: ${debug}`);
     this.mailjetService = mailjet.connect(user, password, { version: 'v3.1', perform_api_call: !debug })
+  }
+
+  static getInstance(): EmailService {
+    return this.emailService;
   }
 
   sendEmail(data: EmailData, pdf?: { name: string, content: string }) {
@@ -16,7 +25,7 @@ export class EmailService {
     const request: any = {
       Messages: [
         {
-          From: { Name: this.sender.name, Email: this.sender.email},
+          From: { Name: this.sender.name, Email: this.sender.email },
           To: EmailService.getValidReceivers(data.to),
           Subject: data.subject,
           TextPart: data.body.text,

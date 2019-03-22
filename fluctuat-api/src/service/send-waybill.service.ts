@@ -7,12 +7,8 @@ import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
 import { waybillNotificationEmailBody } from './waybill-notification-email-body';
 
-const config = require('../../.data/config.json');
-const emailConfig = config.email;
-const emailService = new EmailService(emailConfig.user, emailConfig.pass, config.debug, emailConfig.sender);
-
-const smsConfig = config.sms;
-const smsService = new SmsService(smsConfig.token, config.debug);
+const emailService = EmailService.getInstance();
+const smsService = SmsService.getInstance();
 
 const sendWaybill = (waybill: Waybill, baseUrl: string) => {
   const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
