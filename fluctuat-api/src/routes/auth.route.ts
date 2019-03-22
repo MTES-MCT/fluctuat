@@ -8,8 +8,13 @@ import {
   tokenDecode
 } from '../security/security-utils';
 import { UserCredentials } from '../models/user-credentials';
+import { EmailService } from '../email/email.service';
+import { EmailData } from '../email/email-data';
 
 const router = Router();
+const emailService = EmailService.getInstance();
+const config = require('../../.data/config.json');
+const host = config.host;
 
 const getUserFromCredentials = async (credentials: UserCredentials) => {
   const user = await userStorage.get(credentials.email);
@@ -83,8 +88,9 @@ router.post('/recover-password', async (req, res) => {
 
   const token = generateToken(recoverPayload, { expiresIn: '15m' });
 
-  //TODO send email
-  console.log(token);
+  await emailService.sendEmail(recoverPasswordEmail(email, token));
+
+  console.log(`${email} request password recovery`);
 
   // save ait in user to check it at change password request
   user.recoverPasswordAt = tokenDecode(token).iat;
@@ -123,5 +129,21 @@ router.post('/change-password', async (req, res) => {
   res.sendStatus(204)
 
 });
+
+const recoverPasswordEmail = (email, token): EmailData => {
+  return {
+    to: [{ name: '', email: email }],
+    subject: 'Réinitialisation du mot de passe',
+    body: {
+      html: `<p>Bonjour</p>,
+            <p>Vous avez demandé une réinitialisation de mot de passe, il suffit de cliquer sur le lien ci-dessous afin de le modifier.</p>
+            <p><a href="${host}/edit-password/?token=${token}">Changer mon mot de passe</a></p>
+            <br>
+            <p>Si vous n'êtes pas à l'origine de cette demande, n'hésitez pas à nous contacter. Il vous suffit de répondre à cet email.</p>
+            <p>Cordialement,</p>
+            <p>L'équipe de Fluctu@t</p>`
+    }
+  }
+};
 
 module.exports = router;
