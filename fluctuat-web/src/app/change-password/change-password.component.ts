@@ -20,14 +20,14 @@ export class ChangePasswordComponent implements OnInit {
   result: ResultHelper = new ResultHelper();
   successMsg;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, formBuilder: FormBuilder) {
-    this.changePasswordForm = formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: [FluValidators.passwordMismatch] })
+  constructor(private route: ActivatedRoute, private authService: AuthService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
+    this.changePasswordForm = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, { validators: [FluValidators.passwordMismatch] })
     this.token = this.route.snapshot.queryParams['token'];
   }
 
