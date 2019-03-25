@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
     return res.status(401).send('Erreur de connexion. Merci de vérifier les informations saisies.');
   }
 
-  let token = generateToken({ email: user.email, admin: user.admin });
+  let token = generateToken({ email: user.email, admin: user.admin }, {expiresIn: '1d'});
 
   console.log(`User ${user.email} has been login`);
 
