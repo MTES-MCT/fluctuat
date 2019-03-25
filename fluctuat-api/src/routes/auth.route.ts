@@ -88,14 +88,13 @@ router.post('/sign-up', async (req, res) => {
 
 const welcomeEmail = (user, token): EmailData => {
   const changePasswordLink = `${host}/changement-mot-de-passe/?token=${token}`;
-  console.debug(changePasswordLink);
 
   return {
     to: [{ name: user.name, email: user.email }],
-    subject: 'Votre compte sur Fluctuat a été crée',
+    subject: 'Votre compte sur Fluctu@t a été crée',
     body: {
-      html: `<p>Bienvenue sur Flucu@at</p>,
-            <p>Votre compte à été crée. Pour l'activer vous devez choisir votre mot de passe et vous connecter.</p>
+      html: `<p>Bienvenue sur Fluctu@t,</p>
+            <p>Votre compte a été crée. Pour l'activer vous devez choisir votre mot de passe et vous connecter.</p>
             <p>Suivez ce lien pour finir l'activation de votre compte.</p>
             <p><a href="${changePasswordLink}">Activer mon compte</a></p>
             <br>
@@ -134,8 +133,10 @@ router.post('/recover-password', async (req, res) => {
 });
 
 router.post('/change-password', async (req, res) => {
+  const INVALID_TOKEN_MSG = 'Demande de changement du mot de passe invalide';
+
   if (!req.body || !req.body.token || !req.body.newPassword) {
-    return res.status(400).send('Demande de changement invalide');
+    return res.status(400).send(INVALID_TOKEN_MSG);
   }
 
   let payload;
@@ -145,7 +146,7 @@ router.post('/change-password', async (req, res) => {
     payload = tokenDecode(token, { audience: 'change-password' });
   } catch (error) {
     console.log(error.name, error.message);
-    const errMsg = error.name === 'TokenExpiredError' ? 'La demande de changement a exipirée' : 'Demande de changement invalide';
+    const errMsg = error.name === 'TokenExpiredError' ? 'La demande de changement a exipirée' : INVALID_TOKEN_MSG;
     return res.status(400).send(errMsg);
   }
 
@@ -153,7 +154,7 @@ router.post('/change-password', async (req, res) => {
 
   // The iat and resetPasswordAt do not match if the password is already changed or another recover has been requested.
   if (user.changePasswordAt !== payload.iat) {
-    return res.status(400).send('Demande de changement invalide')
+    return res.status(400).send(INVALID_TOKEN_MSG)
   }
 
   user.hash = generateHash(req.body.newPassword);
@@ -169,14 +170,13 @@ router.post('/change-password', async (req, res) => {
 
 const recoverPasswordEmail = (email, token): EmailData => {
   const changePasswordLink = `${host}/changement-mot-de-passe/?token=${token}`;
-  console.debug(changePasswordLink);
 
   return {
     to: [{ name: '', email: email }],
     subject: 'Réinitialisation du mot de passe',
     body: {
-      html: `<p>Bonjour</p>,
-            <p>Vous avez demandé une réinitialisation de mot de passe, il suffit de cliquer sur le lien ci-dessous afin de le modifier.</p>
+      html: `<p>Bonjour,</p>
+            <p>Vous avez demandé une réinitialisation du mot de passe, il suffit de cliquer sur le lien ci-dessous afin de le modifier.</p>
             <p><a href="${changePasswordLink}">Changer mon mot de passe</a></p>
             <br>
             <p>Si vous n'êtes pas à l'origine de cette demande, n'hésitez pas à nous contacter. Il vous suffit de répondre à cet email.</p>
