@@ -11,6 +11,10 @@ const get = (code) => WaybillDao.findOne({ code });
 
 const put = (waybill: Waybill) => new WaybillDao(waybill).save();
 
+const getAll = () => {
+  return WaybillDao.find();
+};
+
 const findByEmail = (email: string) => {
   return WaybillDao.find({
     $or: [
@@ -100,4 +104,4 @@ const findContacts = (owner: string) => {
     })
 };
 
-export { get, put, findByEmail, findContacts }
+export { get, put, findByEmail, findContacts, getAll }

@@ -10,5 +10,9 @@ export class FluValidators {
 
   static frenchPhone = (control: AbstractControl) => {
     return !control.value || isFrenchCellphone(control.value) ? null : { 'frenchPhone': true }
+  };
+
+  static passwordMismatch = (control: AbstractControl) => {
+    return control.get('password').value === control.get('confirmPassword').value ? null : {'passwordMismatch': true}
   }
 }

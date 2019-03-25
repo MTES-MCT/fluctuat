@@ -23,11 +23,23 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link" (click)="login()" [disabled]="loginForm.invalid || result.pending">Se connecter</button>
+        <button class="button is-link" (click)="login()" [disabled]="loginForm.invalid || result.pending">
+          Se connecter
+        </button>
       </div>
       <div class="control">
-        <button class="button is-white" routerLink="/inscription">Créer un compte</button>
+        <button class="button is-white has-text-link" routerLink="/mot-de-passe-oublie">Mot de passe oublié ?</button>
       </div>
+    </div>
+
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <span style="margin-right: 0.75rem">Pas encore inscrit ?</span>
+          <button class="button is-white has-text-link" routerLink="/inscription">Créer un compte</button>
+        </div>
+      </div>
+
     </div>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>

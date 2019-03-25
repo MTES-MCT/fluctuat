@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { UserCredentials } from './user-credentials.model';
+import { UserAccount } from './user-account.model';
 
 @Injectable()
 export class AuthService {
@@ -14,9 +15,8 @@ export class AuthService {
     this.isAuthenticated(); // init value
   }
 
-  signUp(userCredentials: UserCredentials) {
-    return this.http.post('/api/auth/sign-up', userCredentials)
-      .pipe(tap(this.saveToken))
+  signUp(account: UserAccount) {
+    return this.http.post('/api/auth/sign-up', account)
   }
 
   login(userCredentials: UserCredentials) {
@@ -48,5 +48,13 @@ export class AuthService {
 
   /** Subscribe to be notified when authentication value changes (login and logout) */
   authenticated = (): Observable<boolean> => this.isAuthenticated$.asObservable();
+
+  changePassword(newPassword: string, token: string) {
+    return this.http.post('/api/auth/change-password', { newPassword, token })
+  }
+
+  recoverPassword(email: string) {
+    return this.http.post('/api/auth/recover-password', { email })
+  }
 
 }

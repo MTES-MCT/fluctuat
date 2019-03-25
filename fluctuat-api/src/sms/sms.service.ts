@@ -1,7 +1,12 @@
 import * as mailjet from 'node-mailjet';
 
+const config = require('../../.data/config.json');
+const smsConfig = config.sms;
+
 export class SmsService {
   mailjetService;
+
+  static smsService = new SmsService(smsConfig.token, config.debug);
 
   constructor(apiToken: string, debug = false) {
     console.log('init sms service debug:', debug);
@@ -11,6 +16,10 @@ export class SmsService {
       version: 'v4',
       perform_api_call: !debug
     })
+  }
+
+  static getInstance(): SmsService {
+    return this.smsService;
   }
 
   sendSms(cellphone: string, text: string) {
