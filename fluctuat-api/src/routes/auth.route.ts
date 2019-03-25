@@ -71,12 +71,11 @@ router.post('/sign-up', async (req, res) => {
 
     const token = generateToken(recoverPayload, { expiresIn: '2d' });
 
-    // TODO send email
-    console.log(token);
-
     // save ait in user to check it at change password request
-    user.recoverPasswordAt = tokenDecode(token).iat;
+    user.changePasswordAt = tokenDecode(token).iat;
     await userStorage.put(user);
+
+    await emailService.sendEmail(welcomeEmail(user, token));
 
     console.log(`${user.email} creates account`);
     res.sendStatus(204);
@@ -86,6 +85,25 @@ router.post('/sign-up', async (req, res) => {
   }
 
 });
+
+const welcomeEmail = (user, token): EmailData => {
+  const changePasswordLink = `${host}/changement-mot-de-passe/?token=${token}`;
+  console.debug(changePasswordLink);
+
+  return {
+    to: [{ name: user.name, email: user.email }],
+    subject: 'Votre compte sur Fluctuat a été crée',
+    body: {
+      html: `<p>Bienvenue sur Flucu@at</p>,
+            <p>Votre compte à été crée. Pour l'activer vous devez choisir votre mot de passe et vous connecter.</p>
+            <p>Suivez ce lien pour finir l'activation de votre compte.</p>
+            <p><a href="${changePasswordLink}">Activer mon compte</a></p>
+            <br>
+            <p>Cordialement,</p>
+            <p>L'équipe de Fluctu@t</p>`
+    }
+  }
+};
 
 router.post('/recover-password', async (req, res) => {
   let email = req.body.email;
@@ -108,7 +126,7 @@ router.post('/recover-password', async (req, res) => {
   console.log(`${email} request password recovery`);
 
   // save ait in user to check it at change password request
-  user.recoverPasswordAt = tokenDecode(token).iat;
+  user.changePasswordAt = tokenDecode(token).iat;
   user.save();
 
   res.sendStatus(204)
@@ -134,12 +152,12 @@ router.post('/change-password', async (req, res) => {
   const user = await userStorage.get(payload.sub);
 
   // The iat and resetPasswordAt do not match if the password is already changed or another recover has been requested.
-  if (user.recoverPasswordAt !== payload.iat) {
+  if (user.changePasswordAt !== payload.iat) {
     return res.status(400).send('Demande de changement invalide')
   }
 
   user.hash = generateHash(req.body.newPassword);
-  user.recoverPasswordAt = undefined; // remove value for avoid to change password again
+  user.changePasswordAt = undefined; // remove value for avoid to replay token
 
   await user.save();
 

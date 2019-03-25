@@ -5,5 +5,5 @@ export class User {
 
   hash?: string;
   admin: boolean;
-  recoverPasswordAt?: number
+  changePasswordAt?: number
 }

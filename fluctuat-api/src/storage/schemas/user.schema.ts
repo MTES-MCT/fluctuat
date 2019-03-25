@@ -6,5 +6,5 @@ export const UserSchema: Schema = new Schema({
   type: String,
   hash: String,
   admin: Boolean,
-  recoverPasswordAt: Number
+  changePasswordAt: Number
 });

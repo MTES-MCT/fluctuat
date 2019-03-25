@@ -27,7 +27,8 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-    }, { validators: [FluValidators.passwordMismatch] })
+    }, { validators: [FluValidators.passwordMismatch] });
+
     this.token = this.route.snapshot.queryParams['token'];
   }
 
@@ -38,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
       .pipe(catchError((errorResponse) => throwError(errorResponse.error)))
       .subscribe(() => {
         this.result.success();
-        this.successMsg = 'Le nouveau mot de passe a bien été enregistré.';
+        this.successMsg = 'Mot de passe enregistré avec succès.';
       }, error => this.result.error(error));
   }
 
