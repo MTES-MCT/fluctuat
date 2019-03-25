@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { UserCredentials } from './user-credentials.model';
+import { UserAccount } from './user-account.model';
 
 @Injectable()
 export class AuthService {
@@ -14,9 +15,8 @@ export class AuthService {
     this.isAuthenticated(); // init value
   }
 
-  signUp(userCredentials: UserCredentials) {
-    return this.http.post('/api/auth/sign-up', userCredentials)
-      .pipe(tap(this.saveToken))
+  signUp(account: UserAccount) {
+    return this.http.post('/api/auth/sign-up', account)
   }
 
   login(userCredentials: UserCredentials) {

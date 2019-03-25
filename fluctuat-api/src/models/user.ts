@@ -1,6 +1,9 @@
 export class User {
+  name: string;
   email: string;
-  hash: string;
+  type: string;
+
+  hash?: string;
   admin: boolean;
   recoverPasswordAt?: number
 }

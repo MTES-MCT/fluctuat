@@ -12,7 +12,7 @@ import { throwError } from 'rxjs';
 export class RecoverPasswordComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
-  successMsg;
+  successMsg: string;
 
   recoverPasswordForm: FormGroup;
 

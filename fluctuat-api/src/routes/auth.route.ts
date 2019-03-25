@@ -10,6 +10,7 @@ import {
 import { UserCredentials } from '../models/user-credentials';
 import { EmailService } from '../email/email.service';
 import { EmailData } from '../email/email-data';
+import { User } from '../models/user';
 
 const router = Router();
 const emailService = EmailService.getInstance();
@@ -43,28 +44,42 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/sign-up', async (req, res) => {
-  let credentials = req.body;
 
-  if (!credentials || !credentials.email || !credentials.password) {
-    return res.status(400).send(`Invalid request`)
+  let account = req.body;
+
+  if (!account || !account.email || !account.name || !account.type) {
+    return res.status(400).send(`Inscription erronée. Veuillez vérifier la saisie.`)
   }
 
-  const isExistingUser = await userStorage.get(credentials.email);
+  const isExistingUser = await userStorage.get(account.email);
   if (isExistingUser) {
-    return res.status(400).send(`Le compte ${credentials.email} existe déjà dans notre système.`)
+    return res.status(400).send(`Le compte ${account.email} existe déjà dans notre système.`)
   }
-
-  let user = {
-    email: credentials.email,
-    admin: false,
-    hash: generateHash(credentials.password)
-  };
 
   try {
+    let user: User = {
+      email: account.email,
+      name: account.name,
+      type: account.type,
+      admin: false,
+    };
+
+    let recoverPayload = {
+      sub: user.email,
+      aud: 'change-password'
+    };
+
+    const token = generateToken(recoverPayload, { expiresIn: '2d' });
+
+    // TODO send email
+    console.log(token);
+
+    // save ait in user to check it at change password request
+    user.recoverPasswordAt = tokenDecode(token).iat;
     await userStorage.put(user);
-    const token = generateToken({ email: user.email, admin: user.admin });
-    console.log(`user ${user.email} creates new account`);
-    res.status(201).json({ token: token });
+
+    console.log(`${user.email} creates account`);
+    res.sendStatus(204);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -101,7 +116,7 @@ router.post('/recover-password', async (req, res) => {
 });
 
 router.post('/change-password', async (req, res) => {
-  if(!req.body || !req.body.token || !req.body.newPassword) {
+  if (!req.body || !req.body.token || !req.body.newPassword) {
     return res.status(400).send('Demande de changement invalide');
   }
 

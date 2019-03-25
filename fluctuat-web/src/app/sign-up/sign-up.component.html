@@ -1,29 +1,53 @@
 <flu-hero-container>
   <h2 class="title">Inscription</h2>
-  <form style="max-width: 400px" #signUpForm="ngForm">
+  <form style="max-width: 400px" [formGroup]="accountForm">
+
+    <div class="field">
+      <div class="control">
+        <label class="label">Nom ou raison sociale</label>
+        <input class="input is-medium" formControlName="name" autocomplete="name">
+      </div>
+    </div>
 
     <div class="field">
       <div class="control">
         <label class="label">Email</label>
-        <input class="input is-medium" type="email" name="email" [(ngModel)]="userCredentials.email"
-               autocomplete="email" email required>
+        <input class="input is-medium" type="email" formControlName="email" autocomplete="email"
+               [ngClass]="{'is-danger': showError(accountForm.get('email'))}">
       </div>
+      <p *ngIf="showError(accountForm.get('email'))" class="help is-danger">
+        L'email n'est pas valide
+      </p>
     </div>
+
     <div class="field">
       <div class="control">
-        <label class="label">Password</label>
-        <input class="input is-medium" type="password" name="password" [(ngModel)]="userCredentials.password" required>
+        <label class="label">Vous êtes ?</label>
+
+        <div class="select is-medium is-fullwidth">
+          <select formControlName="type">
+            <option value="MIDDLEMAN">Affreteur</option>
+            <option value="LOADER">Chargeur</option>
+            <option value="TRANSPORTER">Transporteur</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-grouped" style="margin-top: 1.5rem" *ngIf="!successMsg">
       <div class="control">
-        <button class="button is-link" (click)="signUp()" [disabled]="signUpForm.invalid || result.pending">S'inscrire</button>
+        <button class="button is-link" (click)="signUp()" [disabled]="accountForm.invalid || result.pending">
+          S'inscrire
+        </button>
       </div>
       <div class="control">
         <button class="button is-white has-text-link" routerLink="/connexion">Déjà un compte ?</button>
       </div>
     </div>
+
+    <flu-success *ngIf="successMsg">
+      <p>{{successMsg}} </p>
+    </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>
   </form>
