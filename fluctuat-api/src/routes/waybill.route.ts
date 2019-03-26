@@ -44,8 +44,6 @@ router.post('/', verifyJWT, async (req: UserRequest, res) => {
 
 
 router.get('/', verifyJWT, async (req: UserRequest, res) => {
-  const userEmail: string = req.user.email;
-
   if (!req.user.admin) {
     return res.status(403).send('Not allowed');
   }

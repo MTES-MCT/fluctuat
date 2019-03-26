@@ -94,8 +94,8 @@ const welcomeEmail = (user, token): EmailData => {
     subject: 'Votre compte sur Fluctu@t a été crée',
     body: {
       html: `<p>Bienvenue sur Fluctu@t,</p>
-            <p>Votre compte a été crée. Pour l'activer vous devez choisir votre mot de passe et vous connecter.</p>
-            <p>Suivez ce lien pour finir l'activation de votre compte.</p>
+            <p>Votre compte a été crée, pour l'activer vous devez choisir votre mot de passe et vous connecter.</p>
+            <p>Suivez ce lien pour finir l'activation de votre compte :</p>
             <p><a href="${changePasswordLink}">Activer mon compte</a></p>
             <br>
             <p>Cordialement,</p>
