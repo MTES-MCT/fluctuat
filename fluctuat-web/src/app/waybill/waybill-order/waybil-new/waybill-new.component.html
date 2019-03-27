@@ -9,6 +9,11 @@
   <div class="level"></div>
 
   <div class="buttons">
+
+    <button class="button" routerLink="/mes-lettres-de-voiture">
+      Annuler
+    </button>
+
     <button class="button is-link" (click)="create()" [disabled]="result.pending"
             [ngClass]="{'is-loading': result.pending}">
       Créer

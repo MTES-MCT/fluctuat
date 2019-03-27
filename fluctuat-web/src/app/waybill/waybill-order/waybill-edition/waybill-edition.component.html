@@ -11,6 +11,11 @@
   <ng-container *ngIf="waybill$ | async as waybill; else loading">
 
     <div class="buttons" *ngIf="isNotLoadStarted(waybill)">
+
+      <button class="button" [routerLink]="['/lettre-de-voiture', waybillId, 'detail']">
+        Annuler
+      </button>
+
       <button class="button is-link" (click)="sendOrderInfo()" [disabled]="result.pending"
               [ngClass]="{'is-loading': result.pending}">
         Modifier
