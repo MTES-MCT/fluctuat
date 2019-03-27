@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -11,16 +11,21 @@ import { ResultHelper } from '../core/result-helper';
   selector: 'flu-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
 
   showMsgRedirect: boolean;
+  redirectUrl: string;
 
   userCredentials: UserCredentials = new UserCredentials();
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
-    this.showMsgRedirect = this.route.snapshot.queryParams['redirectTo'];
+  }
+
+  ngOnInit() {
+    this.showMsgRedirect = !!this.route.snapshot.queryParams['redirectTo'];
+    this.redirectUrl = this.route.snapshot.queryParams['redirectTo'] || '/mes-lettres-de-voiture';
   }
 
   login() {
@@ -32,11 +37,8 @@ export class LoginComponent {
       }))
       .subscribe(() => {
         this.result.success();
-        const paramRedirect = this.route.snapshot.queryParams['redirectTo'];
 
-        const redirectUrl = paramRedirect ? paramRedirect : '/mes-lettres-de-voiture';
-
-        this.router.navigateByUrl(redirectUrl)
+        this.router.navigateByUrl(this.redirectUrl)
 
       }, error => this.result.error(error));
   }
