@@ -5,6 +5,7 @@ import {
   generateHash,
   generateToken,
   isPasswordMatch,
+  setTokenCookie,
   tokenDecode
 } from '../security/security-utils';
 import { UserCredentials } from '../models/user-credentials';
@@ -36,7 +37,8 @@ router.post('/login', async (req, res) => {
     return res.status(401).send('Erreur de connexion. Merci de vérifier les informations saisies.');
   }
 
-  let token = generateToken({ email: user.email, admin: user.admin }, {expiresIn: '1d'});
+  let token = generateToken({ email: user.email, admin: user.admin }, { expiresIn: 2592000 });
+  setTokenCookie(res, token, 2592000);
 
   console.log(`User ${user.email} has been login`);
 

@@ -2,6 +2,7 @@ import { mongoClient } from './storage/mongo-client';
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const app = express();
 
@@ -10,6 +11,7 @@ const main = async () => {
   await mongoClient();
 
   app.use(bodyParser.json());
+  app.use(cookieParser());
   app.use(logger(':remote-addr - :method :url :status :response-time ms - :res[content-length]'));
   app.set('trust proxy', 'loopback');
 

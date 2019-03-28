@@ -13,7 +13,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './core/auth/auth.service';
 import { LoginComponent } from './login/login.component';
 import { UnauthorizedInterceptor } from './core/auth/unauthorized.interceptor';
-import { AuthRequestInterceptor } from './core/auth/auth-request.interceptor';
 import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
 import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
 import { WaybillOrderFormComponent } from './waybill/waybill-order/shared/waybill-order-form/waybill-order-form.component';
@@ -81,12 +80,6 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
       multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthRequestInterceptor,
-      multi: true,
-      deps: [AuthService]
     }
   ],
   bootstrap: [AppComponent]
