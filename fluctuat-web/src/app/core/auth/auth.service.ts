@@ -21,29 +21,30 @@ export class AuthService {
 
   login(userCredentials: UserCredentials) {
     return this.http.post('/api/auth/login', userCredentials)
-      .pipe(tap(this.saveToken))
+      .pipe(tap(this.saveUser))
   }
 
-  saveToken = (result: { token: string }) => sessionStorage.setItem('access_token', result.token);
+  saveUser = (result: { user: UserAccount }) => sessionStorage.setItem('user', JSON.stringify(result.user));
 
-  getToken = () => sessionStorage.getItem('access_token');
+  getUser = () => sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : undefined;
 
   logout() {
-    this.removeToken();
+    this.removeUser();
     this.isAuthenticated(); // ensure refresh subject value
+    return this.http.post('/api/auth/logout', null)
   }
 
-  private removeToken = () => sessionStorage.removeItem('access_token');
+  private removeUser = () => sessionStorage.removeItem('user');
 
   /** @return if the user are authenticated and emit a new value if changes */
   // TODO consider consume only authenticated observable
   isAuthenticated(): boolean {
 
-    const hasToken = !!sessionStorage.getItem('access_token');
-    if (this.isAuthenticated$.value !== hasToken) {
-      this.isAuthenticated$.next(hasToken);
+    const hasUser = !!sessionStorage.getItem('user');
+    if (this.isAuthenticated$.value !== hasUser) {
+      this.isAuthenticated$.next(hasUser);
     }
-    return hasToken
+    return hasUser
   };
 
   /** Subscribe to be notified when authentication value changes (login and logout) */

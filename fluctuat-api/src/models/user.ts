@@ -2,8 +2,8 @@ export class User {
   name: string;
   email: string;
   type: string;
+  admin: boolean;
 
   hash?: string;
-  admin: boolean;
   changePasswordAt?: number
 }

@@ -18,7 +18,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          this.authService.logout(); // invalidate token if exists
+          // invalidate session
+          this.authService.logout().subscribe(() => console.log('logout user because invalid session'));
           // TODO notify user session expired
           this.router.navigateByUrl('/connexion')
         } else if (error.status === 403) {

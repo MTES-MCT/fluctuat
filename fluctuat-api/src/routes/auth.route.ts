@@ -12,6 +12,7 @@ import { UserCredentials } from '../models/user-credentials';
 import { EmailService } from '../email/email.service';
 import { EmailData } from '../email/email-data';
 import { User } from '../models/user';
+import { UserData } from '../models/user-data';
 
 const router = Router();
 const emailService = EmailService.getInstance();
@@ -42,7 +43,13 @@ router.post('/login', async (req, res) => {
 
   console.log(`User ${user.email} has been login`);
 
-  return res.json({ token: token });
+  return res.json({ user: UserData.fromUser(user) });
+});
+
+router.post('/logout', (req, res) => {
+  setTokenCookie(res, '0', 0); // expires token cookies
+
+  return res.sendStatus(204);
 });
 
 router.post('/sign-up', async (req, res) => {
