@@ -12,7 +12,8 @@ export class AuthService {
   private isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
-    this.isAuthenticated(); // init value
+    const logged = !!localStorage.getItem('loggedIn');
+    this.isAuthenticated$.next(logged); // init value from storage
   }
 
   signUp(account: UserAccount) {
@@ -21,30 +22,30 @@ export class AuthService {
 
   login(userCredentials: UserCredentials) {
     return this.http.post('/api/auth/login', userCredentials)
-      .pipe(tap(this.saveUser))
+      .pipe(tap((userData) => this.userLoggedIn(userData)))
   }
 
-  saveUser = (result: { user: UserAccount }) => sessionStorage.setItem('user', JSON.stringify(result.user));
+  private userLoggedIn = (user) => {
+    localStorage.setItem('loggedIn', 'true');
+    localStorage.setItem('user', JSON.stringify(user));
+    this.isAuthenticated$.next(true);
+  };
 
-  getUser = () => sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : undefined;
+  getUser = () => localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
 
   logout() {
-    this.removeUser();
-    this.isAuthenticated(); // ensure refresh subject value
     return this.http.post('/api/auth/logout', null)
+      .pipe(tap(() => this.userLoggedOut()))
   }
 
-  private removeUser = () => sessionStorage.removeItem('user');
+  userLoggedOut() {
+    localStorage.removeItem('loggedIn');
+    this.isAuthenticated$.next(false);
+  }
 
-  /** @return if the user are authenticated and emit a new value if changes */
-  // TODO consider consume only authenticated observable
+  /** @return if the user are authenticated */
   isAuthenticated(): boolean {
-
-    const hasUser = !!sessionStorage.getItem('user');
-    if (this.isAuthenticated$.value !== hasUser) {
-      this.isAuthenticated$.next(hasUser);
-    }
-    return hasUser
+    return this.isAuthenticated$.value;
   };
 
   /** Subscribe to be notified when authentication value changes (login and logout) */

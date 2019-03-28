@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
 
   console.log(`User ${user.email} has been login`);
 
-  return res.json({ user: UserData.fromUser(user) });
+  return res.json(UserData.fromUser(user));
 });
 
 router.post('/logout', (req, res) => {
