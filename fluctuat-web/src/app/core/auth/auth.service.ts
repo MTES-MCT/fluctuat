@@ -31,12 +31,14 @@ export class AuthService {
     this.isAuthenticated$.next(true);
   };
 
-  getUser = () => localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
+  getUser = (): UserAccount => localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
 
   logout() {
     return this.http.post('/api/auth/logout', null)
       .pipe(tap(() => this.userLoggedOut()))
   }
+
+  removeUser = () => localStorage.removeItem('user');
 
   userLoggedOut() {
     localStorage.removeItem('loggedIn');

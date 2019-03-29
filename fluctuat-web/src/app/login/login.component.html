@@ -1,13 +1,14 @@
 <flu-hero-container>
-  <h2 class="title">Connexion</h2>
+  <h2 class="title" *ngIf="!userName"> Connexion</h2>
+
+  <div class="content" *ngIf="userName">
+    <h3 class="subtitle">Bonjour {{userName}}, </h3>
+    <p>Merci de vous reconnecter sur la plateforme.</p>
+  </div>
 
   <form style="max-width: 400px" #loginForm="ngForm">
 
-    <div class="level" *ngIf="showMsgRedirect">
-      <div class="level-item notification is-link">Merci de vous reconnecter sur la plateforme.</div>
-    </div>
-
-    <div class="field">
+    <div class="field" [hidden]="userName">
       <div class="control">
         <label class="label">Email</label>
         <input class="input is-medium" type="email" name="email" [(ngModel)]="userCredentials.email"
@@ -16,7 +17,7 @@
     </div>
     <div class="field">
       <div class="control">
-        <label class="label">Password</label>
+        <label class="label">Mot de passe</label>
         <input class="input is-medium" type="password" name="password" [(ngModel)]="userCredentials.password" required>
       </div>
     </div>
@@ -32,11 +33,15 @@
       </div>
     </div>
 
-    <div class="level">
+    <div class="level" >
       <div class="level-left">
-        <div class="level-item">
+        <div class="level-item" *ngIf="!userName">
           <span style="margin-right: 0.75rem">Pas encore inscrit ?</span>
           <button class="button is-white has-text-link" routerLink="/inscription">Créer un compte</button>
+        </div>
+
+        <div class="level-item" *ngIf="userName">
+          <a (click)="changeUser()"> (utiliser un compte different)</a>
         </div>
       </div>
 

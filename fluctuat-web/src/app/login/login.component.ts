@@ -15,32 +15,42 @@ export class LoginComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
 
-  showMsgRedirect: boolean;
   redirectUrl: string;
 
   userCredentials: UserCredentials = new UserCredentials();
+  userName: string;
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.showMsgRedirect = !!this.route.snapshot.queryParams['redirectTo'];
+    const user = this.authService.getUser();
+
+    if (user) {
+      this.userCredentials.email = user.email;
+      this.userName = user.name;
+    }
+
     this.redirectUrl = this.route.snapshot.queryParams['redirectTo'] || '/mes-lettres-de-voiture';
   }
 
   login() {
     this.result.waiting();
 
-    this.authService.login(this.userCredentials).pipe(
-      catchError((errorResponse) => {
-        return throwError(errorResponse.error);
-      }))
+    this.authService.login(this.userCredentials)
+      .pipe(catchError((errorResponse) => throwError(errorResponse.error)))
       .subscribe(() => {
         this.result.success();
 
         this.router.navigateByUrl(this.redirectUrl)
 
       }, error => this.result.error(error));
+  }
+
+  changeUser() {
+    this.authService.removeUser();
+    this.userName = '';
+    this.userCredentials.email = '';
   }
 
 }
