@@ -10,10 +10,8 @@ import {
   sendWaybillUnloadValidation
 } from '../service/send-waybill.service'
 import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
-import { getBaseUrl } from '../service/config.service';
 
 const randomstring = require('randomstring');
-const host = getBaseUrl();
 
 const router = Router();
 
@@ -73,7 +71,7 @@ router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: WaybillReques
   const waybill: Waybill = req.waybill;
 
   try {
-    const pdf = await generateWaybillPdf(waybill, host);
+    const pdf = await generateWaybillPdf(waybill);
 
     res.setHeader('Content-Type', 'application/pdf');
     res.send(pdf);
@@ -113,7 +111,7 @@ router.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res) => {
   await waybillStorage.put(waybill);
 
   // send validation email
-  sendWaybillLoadValidation(waybill, host)
+  sendWaybillLoadValidation(waybill)
     .then(() => console.log('load validation sent'))
     .catch(console.error);
 
@@ -147,7 +145,7 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest,
   await waybillStorage.put(waybill);
 
   // send waybill loaded email
-  sendWaybillLoaded(waybill, host)
+  sendWaybillLoaded(waybill)
     .then(() => console.log('waybill loaded email sent'))
     .catch(console.error);
 
@@ -181,7 +179,7 @@ router.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) =>
   await waybillStorage.put(waybill);
 
   // send validation email
-  sendWaybillUnloadValidation(waybill, host)
+  sendWaybillUnloadValidation(waybill)
     .then(() => console.log('unload validation sent'))
     .catch(console.error);
 
@@ -207,7 +205,7 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillReques
   await waybillStorage.put(waybill);
 
   // send waybill by email
-  sendWaybill(waybill, host)
+  sendWaybill(waybill)
     .then(() => console.log('waybill sent'))
     .catch(console.error);
 

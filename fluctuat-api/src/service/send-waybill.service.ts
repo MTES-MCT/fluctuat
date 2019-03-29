@@ -6,12 +6,14 @@ import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
 import { waybillNotificationEmailBody } from './waybill-notification-email-body';
+import { getBaseUrl } from './config.service';
 
 const emailService = EmailService.getInstance();
 const smsService = SmsService.getInstance();
+const baseUrl = getBaseUrl();
 
-const sendWaybill = (waybill: Waybill, baseUrl: string) => {
-  const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
+const sendWaybill = (waybill: Waybill) => {
+  const accessLink = getWaybillAccessLink(waybill.code);
 
   let email: EmailData = {
     to: [
@@ -37,7 +39,7 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return generateWaybillPdf(waybill, baseUrl)
+  return generateWaybillPdf(waybill)
     .then((buffer: any) => {
       return {
         name: `lettre-de-voiture-${waybill.code}.pdf`,
@@ -47,8 +49,8 @@ const sendWaybill = (waybill: Waybill, baseUrl: string) => {
     .then(pdf => emailService.sendEmail(email, pdf))
 };
 
-const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
-  const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
+const sendWaybillLoaded = (waybill: Waybill) => {
+  const accessLink = getWaybillAccessLink(waybill.code);
 
   let email: EmailData = {
     to: [
@@ -68,7 +70,7 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
     }
   };
 
-  return generateWaybillPdf(waybill, baseUrl)
+  return generateWaybillPdf(waybill)
     .then((buffer: any) => {
       return {
         name: `lettre-de-voiture-${waybill.code}-chargement.pdf`,
@@ -78,7 +80,7 @@ const sendWaybillLoaded = (waybill: Waybill, baseUrl: string) => {
     .then(pdf => emailService.sendEmail(email, pdf));
 };
 
-const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
+const sendWaybillLoadValidation = (waybill: Waybill) => {
   let transporter = waybill.order.transporter;
   let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-chargement`;
 
@@ -104,7 +106,7 @@ const sendWaybillLoadValidation = (waybill: Waybill, baseUrl: string) => {
   ]);
 };
 
-const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
+const sendWaybillUnloadValidation = (waybill: Waybill) => {
   let transporter = waybill.order.transporter;
   let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-dechargement`;
 
@@ -130,8 +132,8 @@ const sendWaybillUnloadValidation = (waybill: Waybill, baseUrl: string) => {
   ]);
 };
 
-const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, baseUrl: string) => {
-  const accessLink = getWaybillAccessLink(baseUrl, waybill.code);
+const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill) => {
+  const accessLink = getWaybillAccessLink(waybill.code);
 
   let sendActions = [];
 
@@ -154,7 +156,7 @@ const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill, ba
   return Promise.all(sendActions);
 };
 
-const getWaybillAccessLink = (baseUrl, waybillId) => `${baseUrl}/acces-lettre-de-voiture?id=${waybillId}`;
+const getWaybillAccessLink = (waybillId) => `${baseUrl}/acces-lettre-de-voiture?id=${waybillId}`;
 
 export {
   sendWaybill,

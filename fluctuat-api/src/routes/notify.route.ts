@@ -18,7 +18,7 @@ router.post('/waybill', async (req, res) => {
   }
 
   try {
-    await sendWaybillNotification(notifyData, waybill, host);
+    await sendWaybillNotification(notifyData, waybill);
     res.sendStatus(204)
   } catch (error) {
     console.error(error);

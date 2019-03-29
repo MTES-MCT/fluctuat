@@ -4,11 +4,15 @@ import { logo } from './logo';
 import { LoadInfo } from '../models/load-info';
 import { Middleman } from '../models/middleman';
 import { OrderInfo } from '../models/order-info';
+import { getBaseUrl, getConfig } from '../service/config.service';
 
 const { format } = require('date-fns');
 const fr = require('date-fns/locale/fr');
 
-export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
+const host = getConfig().host;
+const baseUrl = getBaseUrl();
+
+export function waybillDocDefinition(waybill: Waybill) {
   const order = waybill.order;
   const loadInfo = waybill.loadInfo;
   const unloadInfo = waybill.unloadInfo;
@@ -37,7 +41,7 @@ export function waybillDocDefinition(waybill: Waybill, baseUrl: string) {
         style: ['level', 'footer']
       },
       {
-        text: `Consultable sur ${baseUrl}`,
+        text: `Consultable sur ${host}`,
         link: `${baseUrl}/acces-lettre-de-voiture?id=${waybill.code}`,
         alignment: 'center',
         style: ['footer']
