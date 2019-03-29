@@ -1,6 +1,7 @@
 import * as mailjet from 'node-mailjet';
+import { getConfig } from '../service/config.service';
 
-const config = require('../../.data/config.json');
+const config = getConfig();
 const smsConfig = config.sms;
 
 export class SmsService {

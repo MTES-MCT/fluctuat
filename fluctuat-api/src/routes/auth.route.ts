@@ -13,11 +13,12 @@ import { EmailService } from '../email/email.service';
 import { EmailData } from '../email/email-data';
 import { User } from '../models/user';
 import { UserData } from '../models/user-data';
+import { getBaseUrl } from '../service/config.service';
 
 const router = Router();
 const emailService = EmailService.getInstance();
-const config = require('../../.data/config.json');
-const host = config.host;
+
+const host = getBaseUrl();
 
 const getUserFromCredentials = async (credentials: UserCredentials) => {
   const user = await userStorage.get(credentials.email);

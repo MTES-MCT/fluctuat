@@ -3,11 +3,10 @@ import { WaybillNotify } from '../models/waybill.notify';
 import { sendWaybillNotification } from '../service/send-waybill.service';
 import { Waybill } from '../models/waybill';
 import { get } from '../storage/waybill-storage';
+import { getBaseUrl } from '../service/config.service';
 
 const router = Router();
-
-const config = require('../../.data/config.json');
-const host = config.host;
+const host = getBaseUrl();
 
 router.post('/waybill', async (req, res) => {
   let notifyData: WaybillNotify = req.body;

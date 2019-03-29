@@ -10,10 +10,10 @@ import {
   sendWaybillUnloadValidation
 } from '../service/send-waybill.service'
 import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
+import { getBaseUrl } from '../service/config.service';
 
 const randomstring = require('randomstring');
-const config = require('../../.data/config.json');
-const host = config.host;
+const host = getBaseUrl();
 
 const router = Router();
 

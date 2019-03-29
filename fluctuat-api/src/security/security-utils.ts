@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
+import { getConfig } from '../service/config.service';
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = require('../../.data/config.json').jwtSecret;
-
-// TODO set as env var
-const secure = false;
+const config = getConfig();
+const JWT_SECRET = config.jwtSecret;
+const SECURE = config.secure;
 
 /** Generate hash for a given password */
 export const generateHash = (password) => bcrypt.hashSync(password, 10);
@@ -33,7 +33,7 @@ export const getTokenFromCookie = (req: Request) => {
 export const setTokenCookie = (res: Response, token: string, maxAge = 0) => {
   res.cookie('sid', token, {
     httpOnly: true,
-    secure: secure,
+    secure: SECURE,
     sameSite: 'Strict',
     path: '/api',
     maxAge: maxAge * 1000

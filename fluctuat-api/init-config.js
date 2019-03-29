@@ -37,7 +37,8 @@ const initValue = JSON.stringify({
     'cluster': ''
   },
   'jwtSecret': '',
-  'host': ''
+  'host': '',
+  'secure': false
 }, null, 2);
 
 checkDataFile('./.data/config.json', initValue);

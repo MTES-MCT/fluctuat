@@ -1,8 +1,9 @@
 import { EmailData } from './email-data';
 import * as mailjet from 'node-mailjet';
 import { HasEmail } from '../models/has-email.interface';
+import { getConfig } from '../service/config.service';
 
-const config = require('../../.data/config.json');
+const config = getConfig();
 const emailConfig = config.email;
 
 export class EmailService {

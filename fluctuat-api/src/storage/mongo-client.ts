@@ -1,6 +1,7 @@
 import { connect } from 'mongoose';
+import { getConfig } from '../service/config.service';
 
-const configMongo = require('../../.data/config.json').mongodb;
+const configMongo = getConfig().mongodb;
 
 const mongoClient = () => {
   console.log('Connecting to DB...');
