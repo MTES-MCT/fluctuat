@@ -62,8 +62,8 @@ export class WaybillEditionComponent implements OnInit {
       })
     ).subscribe(() => {
       this.result.success();
-      this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
-    }, (err) => this.result.error(err))
+      this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail']);
+    }, (err) => this.result.error(err));
   }
 
   isNotLoadStarted(waybill: Waybill) {

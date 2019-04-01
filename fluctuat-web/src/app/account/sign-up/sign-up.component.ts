@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       type: ['', Validators.required]
-    })
+    });
   }
 
 
@@ -35,18 +35,18 @@ export class SignUpComponent implements OnInit {
 
     this.authService.signUp(this.accountForm.value).pipe(
       catchError((errorResponse) => {
-        const errorMsg = errorResponse.code === 400 ? errorResponse.error: GENERIC_ERROR_MSG;
+        const errorMsg = errorResponse.code === 400 ? errorResponse.error : GENERIC_ERROR_MSG;
         return throwError(errorMsg);
       }))
       .subscribe(() => {
         this.result.success();
         this.successMsg = `Votre compte a bien été enregistré.
-         Vous allez recevoir un email contenant les instructions pour son activation.`
+         Vous allez recevoir un email contenant les instructions pour son activation.`;
       }, error => this.result.error(error));
 
   }
 
   showError(control: AbstractControl) {
-    return control && control.invalid && (control.dirty || control.touched)
+    return control && control.invalid && (control.dirty || control.touched);
   }
 }

@@ -17,25 +17,26 @@ export class AuthService {
   }
 
   signUp(account: UserAccount) {
-    return this.http.post('/api/auth/sign-up', account)
+    return this.http.post('/api/auth/sign-up', account);
   }
 
   login(userCredentials: UserCredentials) {
     return this.http.post('/api/auth/login', userCredentials)
-      .pipe(tap((userData) => this.userLoggedIn(userData)))
+      .pipe(tap((userData) => this.userLoggedIn(userData)));
   }
 
-  private userLoggedIn = (user) => {
+  private userLoggedIn(user) {
     localStorage.setItem('loggedIn', 'true');
     localStorage.setItem('user', JSON.stringify(user));
     this.isAuthenticated$.next(true);
-  };
+  }
 
-  getUser = (): UserAccount => localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
+  getUser = (): UserAccount =>
+    localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined
 
   logout() {
     return this.http.post('/api/auth/logout', null)
-      .pipe(tap(() => this.userLoggedOut()))
+      .pipe(tap(() => this.userLoggedOut()));
   }
 
   removeUser = () => localStorage.removeItem('user');
@@ -48,17 +49,17 @@ export class AuthService {
   /** @return if the user are authenticated */
   isAuthenticated(): boolean {
     return this.isAuthenticated$.value;
-  };
+  }
 
   /** Subscribe to be notified when authentication value changes (login and logout) */
   authenticated = (): Observable<boolean> => this.isAuthenticated$.asObservable();
 
   changePassword(newPassword: string, token: string) {
-    return this.http.post('/api/auth/change-password', { newPassword, token })
+    return this.http.post('/api/auth/change-password', { newPassword, token });
   }
 
   recoverPassword(email: string) {
-    return this.http.post('/api/auth/recover-password', { email })
+    return this.http.post('/api/auth/recover-password', { email });
   }
 
 }

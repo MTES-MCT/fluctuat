@@ -18,14 +18,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.canActivate(next, state);
   }
 
-
   checkAuthentication(url: string): boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     }
 
     this.router.navigate([ 'connexion' ], { queryParams: { redirectTo: url } }); // TODO replace by navigateUrl ?
-    console.info('Redirect because not logged');
     return false;
   }
 }

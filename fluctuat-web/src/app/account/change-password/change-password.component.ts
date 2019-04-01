@@ -46,6 +46,6 @@ export class ChangePasswordComponent implements OnInit {
 
 
   showError(control: AbstractControl) {
-    return control && control.invalid && (control.dirty || control.touched)
+    return control && control.invalid && (control.dirty || control.touched);
   }
 }

@@ -1,11 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { WaybillOrderFormComponent } from './waybill-order-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { WaybillOrderFormComponent } from './waybill-order-form.component';
 import { FormFieldComponent } from '../../../../shared/form-field.component';
 import { DatetimePickerDirective } from '../../../../shared/datetime-picker.directive';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 import { DatePickerDirective } from '../../../../shared/date-picker.directive';
-import { Person } from '../../../shared/models/person.model';
+import { buildPerson } from '../../../../../test.utils';
 
 describe('WaybillOrderFormComponent', () => {
   let component: WaybillOrderFormComponent;
@@ -20,15 +21,12 @@ describe('WaybillOrderFormComponent', () => {
         DatePickerDirective
       ],
       imports: [ReactiveFormsModule]
-    })
-      .compileComponents();
-  }));
+    });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(WaybillOrderFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -49,9 +47,9 @@ describe('WaybillOrderFormComponent', () => {
 
     component.setValue(order);
 
-    let orderOutput = component.getValue();
+    const orderOutput = component.getValue();
 
-    expect(orderOutput).toEqual(order)
+    expect(orderOutput).toEqual(order);
   });
 
   it('should autocomplete form group if name match', () => {
@@ -77,9 +75,6 @@ describe('WaybillOrderFormComponent', () => {
     component.autocompleteByName(formGroup, existingCustomers);
 
     expect(formGroup.value.email).toEqual('email@test');
-  })
-});
+  });
 
-const buildPerson = (name, email?) => {
-  return Person.fromObj({ name: name, email: email });
-};
+});

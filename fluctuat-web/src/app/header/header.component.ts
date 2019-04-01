@@ -23,12 +23,12 @@ export class HeaderComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.active = false;
       }
-    })
+    });
   }
 
   logout() {
-    this.authService.logout().subscribe(() => console.log('user logout'));
-    this.router.navigate([''])
+    this.authService.logout()
+      .subscribe(() => this.router.navigate(['']));
   }
 
   toggleMenu() {

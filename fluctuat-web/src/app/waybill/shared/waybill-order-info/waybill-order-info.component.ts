@@ -9,6 +9,6 @@ import { OrderInfo } from '../models/order-info.model';
 export class WaybillOrderInfoComponent {
 
   @Input()
-  order: OrderInfo
+  order: OrderInfo;
 
 }

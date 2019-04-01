@@ -35,7 +35,7 @@ export class WaybillShareComponent {
   showChange = new EventEmitter();
 
   hasError(formValue) {
-    return formValue.invalid && (formValue.dirty || formValue.touched)
+    return formValue.invalid && (formValue.dirty || formValue.touched);
   }
 
   /** form is valid if almost one field is set up and form are valid */
@@ -43,7 +43,7 @@ export class WaybillShareComponent {
     return form.invalid || !form.value.phone && !form.value.email;
   }
 
-  @HostListener('click', [ '$event.target' ])
+  @HostListener('click', ['$event.target'])
   closeModal(element?) {
     if (!element || element.className === 'modal-background') {
       this.show = false;
@@ -53,14 +53,11 @@ export class WaybillShareComponent {
   send() {
     this.result.waiting();
 
-    this.notifyService.sendNotification(this.waybillNotify).pipe(
-      catchError((errorResponse) => {
-        console.log(errorResponse);
-        return throwError(GENERIC_ERROR_MSG);
-      }))
+    this.notifyService.sendNotification(this.waybillNotify)
+      .pipe(catchError(() => throwError(GENERIC_ERROR_MSG)))
       .subscribe(() => {
         this.sent = true;
         this.result.success();
-      }, error => this.result.error(error))
+      }, error => this.result.error(error));
   }
 }

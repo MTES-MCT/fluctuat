@@ -24,7 +24,7 @@ export class WaybillDetailComponent implements OnInit {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.waybill$ = this.waybillService.get(this.waybillId)
-      .pipe(shareReplay(1))
+      .pipe(shareReplay(1));
 
   }
 

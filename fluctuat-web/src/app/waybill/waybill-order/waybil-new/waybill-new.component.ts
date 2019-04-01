@@ -31,7 +31,7 @@ export class WaybillNewComponent implements OnInit {
 
   ngOnInit() {
     this.orderFormComponent.setValue(new OrderInfo());
-    this.contacts$ = this.contactsService.get().pipe(shareReplay(1))
+    this.contacts$ = this.contactsService.get().pipe(shareReplay(1));
   }
 
   create() {
@@ -48,11 +48,10 @@ export class WaybillNewComponent implements OnInit {
         console.error(error);
         return throwError(GENERIC_ERROR_MSG);
       })
-    ).subscribe((waybill: Waybill) => {
-      console.log(waybill);
+    ).subscribe((result: Waybill) => {
       this.result.success();
-      this.router.navigate(['lettre-de-voiture', waybill.code, 'detail'])
-    }, (err) => this.result.error(err))
+      this.router.navigate(['lettre-de-voiture', result.code, 'detail']);
+    }, (err) => this.result.error(err));
   }
 
 }

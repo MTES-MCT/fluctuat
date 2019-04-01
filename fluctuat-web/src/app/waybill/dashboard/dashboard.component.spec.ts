@@ -47,11 +47,11 @@ describe('DashboardComponent', () => {
 
     const shownWaybills = fixture.debugElement.queryAll(By.css('.card'));
 
-    expect(shownWaybills).toHaveLength(2)
+    expect(shownWaybills).toHaveLength(2);
   });
 
   it('show waybill in progress', () => {
-    let waybillEnded = new Waybill();
+    const waybillEnded = new Waybill();
     waybillEnded.unloadInfo.validatedAt = new Date();
     const waybills = [new Waybill(), new Waybill(), waybillEnded];
     jest.spyOn(component.waybillService, 'getAllMe').mockReturnValue(of(waybills));
@@ -60,11 +60,11 @@ describe('DashboardComponent', () => {
 
     const shownWaybills = fixture.debugElement.queryAll(By.css('.card'));
 
-    expect(shownWaybills).toHaveLength(2)
+    expect(shownWaybills).toHaveLength(2);
   });
 
   it('show waybill completed', () => {
-    let waybillEnded = new Waybill();
+    const waybillEnded = new Waybill();
     waybillEnded.unloadInfo.validatedAt = new Date();
     const waybills = [new Waybill(), new Waybill(), waybillEnded];
     jest.spyOn(component.waybillService, 'getAllMe').mockReturnValue(of(waybills));
@@ -73,7 +73,7 @@ describe('DashboardComponent', () => {
 
     const shownWaybills = fixture.debugElement.queryAll(By.css('.card'));
 
-    expect(shownWaybills).toHaveLength(1)
-  })
+    expect(shownWaybills).toHaveLength(1);
+  });
 
 });

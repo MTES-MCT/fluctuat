@@ -9,6 +9,6 @@ export class NotifyService {
   }
 
   sendNotification(notifyWaybill: WaybillNotify) {
-    return this.http.post('/api/notify/waybill', notifyWaybill)
+    return this.http.post('/api/notify/waybill', notifyWaybill);
   }
 }

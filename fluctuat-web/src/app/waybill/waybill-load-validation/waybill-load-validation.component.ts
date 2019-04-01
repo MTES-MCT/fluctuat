@@ -25,19 +25,17 @@ export class WaybillLoadValidationComponent implements OnInit {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.waybill$ = this.waybillService.get(this.waybillId)
-      .pipe(shareReplay(1))
+      .pipe(shareReplay(1));
   }
 
   validateLoadInfo(waybill: Waybill) {
     this.result.waiting();
 
-    this.waybillService.validateLoadInfo(this.waybillId).pipe(
-      tap((loadInfo) => waybill.loadInfo = loadInfo), // update loadInfo
-      catchError((error) => {
-          console.error(error);
-          return throwError(GENERIC_ERROR_MSG)
-        }
-      ))
+    this.waybillService.validateLoadInfo(this.waybillId)
+      .pipe(
+        tap((loadInfo) => waybill.loadInfo = loadInfo), // update loadInfo
+        catchError(() => throwError(GENERIC_ERROR_MSG))
+      )
       .subscribe(() => this.result.success(), (err => this.result.error(err)));
   }
 

@@ -20,12 +20,12 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           // TODO notify user session expired
           this.authService.userLoggedOut(); // app logout
-          this.router.navigateByUrl('/connexion')
+          this.router.navigateByUrl('/connexion');
         } else if (error.status === 403) {
-          this.router.navigateByUrl('/mes-lettres-de-voiture')
+          this.router.navigateByUrl('/mes-lettres-de-voiture');
         }
 
-        throw error
+        throw error;
       }));
   }
 

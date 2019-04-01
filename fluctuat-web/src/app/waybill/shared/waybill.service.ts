@@ -12,7 +12,7 @@ export class WaybillService {
   }
 
   create(waybill: Waybill): Observable<Waybill> {
-    return this.http.post<Waybill>('/api/waybill', waybill)
+    return this.http.post<Waybill>('/api/waybill', waybill);
   }
 
   get(code: string): Observable<Waybill> {
@@ -40,7 +40,7 @@ export class WaybillService {
   }
 
   getUnloadInfo(code: string): Observable<LoadInfo> {
-    return this.http.get<LoadInfo>(`/api/waybill/${code}/unload-info`)
+    return this.http.get<LoadInfo>(`/api/waybill/${code}/unload-info`);
   }
 
   validateUnloadInfo(code: string): Observable<LoadInfo> {

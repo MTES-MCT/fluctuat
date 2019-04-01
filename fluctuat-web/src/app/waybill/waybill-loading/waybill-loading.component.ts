@@ -34,7 +34,7 @@ export class WaybillLoadingComponent implements OnInit {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.waybillService.getLoadInfo(this.waybillId)
-      .subscribe((loadInfo) => this.fillForm(loadInfo))
+      .subscribe((loadInfo) => this.fillForm(loadInfo));
   }
 
   fillForm(loadInfo: LoadInfo) {
@@ -47,7 +47,7 @@ export class WaybillLoadingComponent implements OnInit {
         name: [loadInfo.loadManager.name],
         jobFunction: [loadInfo.loadManager.jobFunction]
       })
-    })
+    });
   }
 
   sendLoadInfo() {
@@ -59,14 +59,13 @@ export class WaybillLoadingComponent implements OnInit {
 
     this.waybillService.sendLoadInfo(this.waybillId, this.loadInfoForm.value).pipe(
       catchError((error) => {
-          console.error(error);
-          let errMsg = error.status === 400 ? error.error : GENERIC_ERROR_MSG;
-          return throwError(errMsg)
+          const errMsg = error.status === 400 ? error.error : GENERIC_ERROR_MSG;
+          return throwError(errMsg);
         }
       ))
       .subscribe(() => {
         this.result.success();
-        this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
+        this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail']);
 
       }, (err => this.result.error(err)));
   }

@@ -14,7 +14,7 @@ export class LoadStatusNotificationComponent {
   step: 'LOAD' | 'UNLOAD';
 
   stepName() {
-    return this.step === 'LOAD' ? 'chargement' : 'déchargement'
+    return this.step === 'LOAD' ? 'chargement' : 'déchargement';
   }
 
   isNotLoadFinished() {

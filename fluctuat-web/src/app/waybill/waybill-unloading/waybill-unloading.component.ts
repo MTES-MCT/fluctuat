@@ -30,7 +30,7 @@ export class WaybillUnloadingComponent implements OnInit {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.waybillService.getUnloadInfo(this.waybillId)
-      .subscribe((unloadInfo) => this.fillForm(unloadInfo))
+      .subscribe((unloadInfo) => this.fillForm(unloadInfo));
   }
 
 
@@ -44,7 +44,7 @@ export class WaybillUnloadingComponent implements OnInit {
         name: [unloadInfo.loadManager.name],
         jobFunction: [unloadInfo.loadManager.jobFunction]
       })
-    })
+    });
   }
 
   sendUnloadInfo() {
@@ -56,14 +56,13 @@ export class WaybillUnloadingComponent implements OnInit {
 
     this.waybillService.sendUnloadInfo(this.waybillId, this.unloadInfoForm.value).pipe(
       catchError((error) => {
-          console.error(error);
-          let errMsg = error.status === 400 ? error.error : GENERIC_ERROR_MSG;
-          return throwError(errMsg)
+          const errMsg = error.status === 400 ? error.error : GENERIC_ERROR_MSG;
+          return throwError(errMsg);
         }
       ))
       .subscribe(() => {
         this.result.success();
-        this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail'])
+        this.router.navigate(['lettre-de-voiture', this.waybillId, 'detail']);
       }, (err => this.result.error(err)));
   }
 }

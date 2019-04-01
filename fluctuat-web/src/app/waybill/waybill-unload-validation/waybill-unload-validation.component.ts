@@ -25,19 +25,17 @@ export class WaybillUnloadValidationComponent implements OnInit {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
     this.waybill$ = this.waybillService.get(this.waybillId)
-      .pipe(shareReplay(1))
+      .pipe(shareReplay(1));
   }
 
   validateUnloadInfo(waybill: Waybill) {
     this.result.waiting();
 
-    this.waybillService.validateUnloadInfo(this.waybillId).pipe(
-      tap((unloadInfo) => waybill.unloadInfo = unloadInfo), // update unloadInfo
-      catchError((error) => {
-          console.error(error);
-          return throwError(GENERIC_ERROR_MSG)
-        }
-      ))
+    this.waybillService.validateUnloadInfo(this.waybillId)
+      .pipe(
+        tap((unloadInfo) => waybill.unloadInfo = unloadInfo), // update unloadInfo
+        catchError(() => throwError(GENERIC_ERROR_MSG))
+      )
       .subscribe(() => this.result.success(), (err => this.result.error(err)));
   }
 

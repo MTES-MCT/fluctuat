@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
       shareReplay(1)
     );
 
-    this.refreshFilteredWaybills()
+    this.refreshFilteredWaybills();
   }
 
   refreshFilteredWaybills() {
@@ -43,26 +43,26 @@ export class DashboardComponent implements OnInit {
 
     this.filteredWaybills$ = this.waybills$.pipe(
       map((waybills) => waybills.filter(getStatusFilter(this.statusFilter)))
-    )
+    );
   }
 
   getStatus(waybill: Waybill) {
     if (waybill.unloadInfo.validatedAt) {
-      return 'Fini'
+      return 'Fini';
     }
 
     if (waybill.unloadInfo.sentAt) {
-      return 'Déchargement en cours'
+      return 'Déchargement en cours';
     }
 
     if (waybill.loadInfo.validatedAt) {
-      return 'Chargément confirmé'
+      return 'Chargément confirmé';
     }
 
     if (waybill.loadInfo.sentAt) {
-      return 'Chargement en cours'
+      return 'Chargement en cours';
     }
 
-    return 'Crée'
+    return 'Crée';
   }
 }

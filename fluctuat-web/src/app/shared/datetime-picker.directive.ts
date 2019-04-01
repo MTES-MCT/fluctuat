@@ -24,8 +24,8 @@ export class DatetimePickerDirective implements OnDestroy {
 
   @Input()
   set date(date: string) {
-    this.fp.setDate(date, false)
-  };
+    this.fp.setDate(date, false);
+  }
 
   @HostListener('click')
   open() {

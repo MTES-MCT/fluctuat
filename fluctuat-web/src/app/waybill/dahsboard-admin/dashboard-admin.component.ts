@@ -17,8 +17,7 @@ export class DashboardAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.waybills$ = this.waybillService.getAll().pipe(
-      shareReplay(1)
-    )
+    this.waybills$ = this.waybillService.getAll()
+      .pipe(shareReplay(1));
   }
 }

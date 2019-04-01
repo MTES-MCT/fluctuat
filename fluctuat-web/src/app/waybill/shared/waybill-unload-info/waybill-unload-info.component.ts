@@ -9,6 +9,6 @@ import { Waybill } from '../models/waybill.model';
 export class WaybillUnloadInfoComponent {
 
   @Input()
-  waybill: Waybill
+  waybill: Waybill;
 
 }

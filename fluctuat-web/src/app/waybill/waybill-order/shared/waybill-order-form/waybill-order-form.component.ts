@@ -56,14 +56,14 @@ export class WaybillOrderFormComponent {
         weight: [order.merchandise.weight, FluValidators.quantity],
         price: [order.merchandise.price, FluValidators.quantity]
       })
-    })
+    });
   }
 
   fillPersonForm(person: Person) {
     return this.formBuilder.group({
       name: [person.name],
       email: [person.email, Validators.email]
-    })
+    });
   }
 
   getValue(): OrderInfo {
@@ -71,9 +71,9 @@ export class WaybillOrderFormComponent {
   }
 
 
-  autocompleteByName(control: AbstractControl, values: any[] = []) {
+  autocompleteByName(control: AbstractControl, values = []) {
     const name = control.get('name').value;
-    let matchValue = values.find(item => item.name === name);
+    const matchValue = values.find(item => item.name === name);
     if (matchValue && name) {
       control.setValue(matchValue);
     }

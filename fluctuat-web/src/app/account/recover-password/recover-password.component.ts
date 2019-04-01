@@ -23,7 +23,7 @@ export class RecoverPasswordComponent implements OnInit {
   ngOnInit() {
     this.recoverPasswordForm = this.formBuilder.group({
       email: ['', [Validators.email, Validators.required]]
-    })
+    });
   }
 
   recoverPassword() {
@@ -38,7 +38,7 @@ export class RecoverPasswordComponent implements OnInit {
   }
 
   showError(control: AbstractControl) {
-    return control && control.invalid && (control.dirty || control.touched)
+    return control && control.invalid && (control.dirty || control.touched);
   }
 
 }

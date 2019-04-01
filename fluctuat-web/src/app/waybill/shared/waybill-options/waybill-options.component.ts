@@ -19,15 +19,15 @@ export class WaybillOptionsComponent {
   }
 
   isLoadFinished(waybill: Waybill) {
-    return waybill.loadInfo.validatedAt
+    return waybill.loadInfo.validatedAt;
   }
 
   isNotUnloadStarted(waybill: Waybill) {
-    return this.isLoadFinished(waybill) && !waybill.unloadInfo.sentAt
+    return this.isLoadFinished(waybill) && !waybill.unloadInfo.sentAt;
   }
 
   isNotUnloadFinished(waybill: Waybill) {
-    return waybill.unloadInfo.sentAt && !waybill.unloadInfo.validatedAt
+    return waybill.unloadInfo.sentAt && !waybill.unloadInfo.validatedAt;
   }
 
 }

@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to fluctuat-form-poc!');
+    expect(page.getTitleText()).toEqual('La lettre de voiture fluviale dématérialisée');
   });
 });
