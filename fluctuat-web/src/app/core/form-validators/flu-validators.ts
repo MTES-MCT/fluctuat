@@ -1,6 +1,7 @@
 import { AbstractControl } from '@angular/forms';
 import { isQuantity } from './is-quantity';
 import { isFrenchCellphone } from './is-french-cellphone';
+import { hasDomain } from './has-domain';
 
 export class FluValidators {
 
@@ -12,4 +13,7 @@ export class FluValidators {
 
   static passwordMismatch = (control: AbstractControl) =>
     control.get('password').value === control.get('confirmPassword').value ? null : { 'passwordMismatch': true }
+
+  static withDomain = (control: AbstractControl) =>
+    !control.value || hasDomain(control.value) ? null : { 'withDomain': true }
 }

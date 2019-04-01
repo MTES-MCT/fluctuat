@@ -29,12 +29,12 @@ export class WaybillOrderFormComponent {
       receiver: this.fillPersonForm(order.receiver),
       middleman: this.formBuilder.group({
         name: [order.middleman.name],
-        email: [order.middleman.email, Validators.email],
+        email: [order.middleman.email, [Validators.email,  FluValidators.withDomain]],
         isBroker: [order.middleman.isBroker]
       }),
       transporter: this.formBuilder.group({
         name: [order.transporter.name],
-        email: [order.transporter.email, Validators.email],
+        email: [order.transporter.email, [Validators.email, FluValidators.withDomain]],
         cellphone: [order.transporter.cellphone, FluValidators.frenchPhone]
       }),
       ship: this.formBuilder.group({
@@ -44,12 +44,12 @@ export class WaybillOrderFormComponent {
       originInfo: this.formBuilder.group({
         port: [order.originInfo.port],
         expectedDate: [order.originInfo.expectedDate],
-        email: [order.originInfo.email, Validators.email],
+        email: [order.originInfo.email, [Validators.email, FluValidators.withDomain]],
       }),
       destinationInfo: this.formBuilder.group({
         port: [order.destinationInfo.port],
         expectedDate: [order.destinationInfo.expectedDate],
-        email: [order.destinationInfo.email, Validators.email]
+        email: [order.destinationInfo.email, [Validators.email, FluValidators.withDomain]]
       }),
       merchandise: this.formBuilder.group({
         nature: [order.merchandise.nature],
@@ -62,7 +62,7 @@ export class WaybillOrderFormComponent {
   fillPersonForm(person: Person) {
     return this.formBuilder.group({
       name: [person.name],
-      email: [person.email, Validators.email]
+      email: [person.email, [Validators.email, FluValidators.withDomain]]
     });
   }
 

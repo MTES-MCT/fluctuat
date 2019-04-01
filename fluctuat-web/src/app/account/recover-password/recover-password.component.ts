@@ -5,6 +5,7 @@ import { throwError } from 'rxjs';
 
 import { ResultHelper } from '../../core/result-helper';
 import { AuthService } from '../../core/auth/auth.service';
+import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
   selector: 'flu-recover-password',
@@ -22,7 +23,7 @@ export class RecoverPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.recoverPasswordForm = this.formBuilder.group({
-      email: ['', [Validators.email, Validators.required]]
+      email: ['', [Validators.email, FluValidators.withDomain, Validators.required]]
     });
   }
 

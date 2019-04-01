@@ -6,6 +6,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ResultHelper } from '../../core/result-helper';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
+import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
   selector: 'flu-sign-up',
@@ -24,7 +25,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
     this.accountForm = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, FluValidators.withDomain]],
       type: ['', Validators.required]
     });
   }
