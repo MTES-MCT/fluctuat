@@ -13,11 +13,18 @@ export class HeaderComponent implements OnInit {
 
   active = false;
 
+  isAdmin = false;
+
   constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
     this.authenticated$ = this.authService.authenticated();
+
+    this.authenticated$.subscribe(authenticated => {
+      this.isAdmin = authenticated && this.authService.getUser().admin;
+    });
+
     this.router.events.subscribe((event) => {
       // close menu if navigation changes
       if (event instanceof NavigationEnd) {
