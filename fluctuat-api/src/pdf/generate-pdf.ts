@@ -1,5 +1,5 @@
 // Based on https://medium.com/@kainikhil/nodejs-how-to-generate-and-properly-serve-pdf-6835737d118e
-const pdfMakePrinter = require('pdfmake/src/printer');
+import * as pdfMakePrinter from 'pdfmake/src/printer';
 
 export function generatePdf(docDefinition) {
   const fonts = {
@@ -14,7 +14,7 @@ export function generatePdf(docDefinition) {
       const printer = new pdfMakePrinter(fonts);
       const doc = printer.createPdfKitDocument(docDefinition);
 
-      let chunks = [];
+      const chunks = [];
 
       doc.on('data', (chunk) => {
         chunks.push(chunk);
@@ -27,7 +27,7 @@ export function generatePdf(docDefinition) {
       doc.end();
 
     } catch (err) {
-      reject(err)
+      reject(err);
     }
-  })
+  });
 }

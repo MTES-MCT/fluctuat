@@ -3,6 +3,5 @@ import { generatePdf } from './generate-pdf';
 import { waybillDocDefinition } from './waybill-doc-definition';
 
 export function generateWaybillPdf(waybill: Waybill) {
-  return generatePdf(waybillDocDefinition(waybill))
+  return generatePdf(waybillDocDefinition(waybill));
 }
-

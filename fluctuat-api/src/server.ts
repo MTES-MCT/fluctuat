@@ -1,9 +1,10 @@
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
+import * as express from 'express';
+import * as logger from 'morgan';
+
 import { mongoClient } from './storage/mongo-client';
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
 const app = express();
 
 const main = async () => {
@@ -27,10 +28,10 @@ const main = async () => {
   const contacts = require('./routes/contacts.route');
   app.use('/api/contacts', contacts);
 
-  /** Start server **/
+  /* Start server **/
   const port = process.argv[2] || 9000;
 
-  app.listen(port, function () {
+  app.listen(port, () => {
     console.log('Express server listening in http://localhost:%d', port);
   });
 };

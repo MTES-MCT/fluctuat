@@ -1,9 +1,10 @@
 import { Schema } from 'mongoose';
-import { PersonSchema } from './person.schema';
-import { ShipSchema } from './ship.schema';
-import { MiddlemanShema } from './middleman.schema';
-import { PortInfoSchema } from './port-info.schema';
+
 import { MerchandiseSchema } from './merchandise.schema';
+import { MiddlemanShema } from './middleman.schema';
+import { PersonSchema } from './person.schema';
+import { PortInfoSchema } from './port-info.schema';
+import { ShipSchema } from './ship.schema';
 import { TransporterSchema } from './transporter.schema';
 
 export const OrderInfoSchema: Schema = new Schema({

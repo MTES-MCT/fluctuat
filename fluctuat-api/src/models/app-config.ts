@@ -23,6 +23,5 @@ export class AppConfig {
 
   jwtSecret = '';
   host = '';
-  secure = false
+  secure = false;
 }
-

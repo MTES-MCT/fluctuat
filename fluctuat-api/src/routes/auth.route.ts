@@ -1,6 +1,10 @@
 import { Router } from 'express';
 
-import * as userStorage from '../storage/user-storage';
+import { EmailData } from '../email/email-data';
+import { EmailService } from '../email/email.service';
+import { User } from '../models/user';
+import { UserCredentials } from '../models/user-credentials';
+import { UserData } from '../models/user-data';
 import {
   generateHash,
   generateToken,
@@ -8,12 +12,8 @@ import {
   setTokenCookie,
   tokenDecode
 } from '../security/security-utils';
-import { UserCredentials } from '../models/user-credentials';
-import { EmailService } from '../email/email.service';
-import { EmailData } from '../email/email-data';
-import { User } from '../models/user';
-import { UserData } from '../models/user-data';
 import { getBaseUrl } from '../service/config.service';
+import * as userStorage from '../storage/user-storage';
 
 const router = Router();
 const emailService = EmailService.getInstance();
@@ -31,15 +31,15 @@ const getUserFromCredentials = async (credentials: UserCredentials) => {
 };
 
 router.post('/login', async (req, res) => {
-  let credentials = req.body;
+  const credentials = req.body;
 
-  let user = await getUserFromCredentials(credentials);
+  const user = await getUserFromCredentials(credentials);
 
   if (!user) {
     return res.status(401).send('Erreur de connexion. Merci de vérifier les informations saisies.');
   }
 
-  let token = generateToken({ email: user.email, admin: user.admin }, { expiresIn: 2592000 });
+  const token = generateToken({ email: user.email, admin: user.admin }, { expiresIn: 2592000 });
   setTokenCookie(res, token, 2592000);
 
   console.log(`User ${user.email} has been login`);
@@ -55,26 +55,26 @@ router.post('/logout', (req, res) => {
 
 router.post('/sign-up', async (req, res) => {
 
-  let account = req.body;
+  const account = req.body;
 
   if (!account || !account.email || !account.name || !account.type) {
-    return res.status(400).send(`Inscription erronée. Veuillez vérifier la saisie.`)
+    return res.status(400).send(`Inscription erronée. Veuillez vérifier la saisie.`);
   }
 
   const isExistingUser = await userStorage.get(account.email);
   if (isExistingUser) {
-    return res.status(400).send(`Le compte ${account.email} existe déjà dans notre système.`)
+    return res.status(400).send(`Le compte ${account.email} existe déjà dans notre système.`);
   }
 
   try {
-    let user: User = {
+    const user: User = {
       email: account.email,
       name: account.name,
       type: account.type,
       admin: false,
     };
 
-    let recoverPayload = {
+    const recoverPayload = {
       sub: user.email,
       aud: 'change-password'
     };
@@ -111,19 +111,19 @@ const welcomeEmail = (user, token): EmailData => {
             <p>Cordialement,</p>
             <p>L'équipe de Fluctu@t</p>`
     }
-  }
+  };
 };
 
 router.post('/recover-password', async (req, res) => {
-  let email = req.body.email;
+  const email = req.body.email;
 
   const user = await userStorage.get(email);
 
   if (!user) {
-    return res.status(400).send(`Le compte  ${email} n'existe pas dans notre système.`)
+    return res.status(400).send(`Le compte  ${email} n'existe pas dans notre système.`);
   }
 
-  let recoverPayload = {
+  const recoverPayload = {
     sub: user.email,
     aud: 'change-password'
   };
@@ -138,7 +138,7 @@ router.post('/recover-password', async (req, res) => {
   user.changePasswordAt = tokenDecode(token).iat;
   user.save();
 
-  res.sendStatus(204)
+  res.sendStatus(204);
 
 });
 
@@ -164,7 +164,7 @@ router.post('/change-password', async (req, res) => {
 
   // The iat and resetPasswordAt do not match if the password is already changed or another recover has been requested.
   if (user.changePasswordAt !== payload.iat) {
-    return res.status(400).send(INVALID_TOKEN_MSG)
+    return res.status(400).send(INVALID_TOKEN_MSG);
   }
 
   user.hash = generateHash(req.body.newPassword);
@@ -174,7 +174,7 @@ router.post('/change-password', async (req, res) => {
 
   console.log(`user ${user.email} changes password successfully`);
 
-  res.sendStatus(204)
+  res.sendStatus(204);
 
 });
 
@@ -182,7 +182,7 @@ const recoverPasswordEmail = (email, token): EmailData => {
   const changePasswordLink = `${host}/changement-mot-de-passe/?token=${token}`;
 
   return {
-    to: [{ name: '', email: email }],
+    to: [{ name: '', email }],
     subject: 'Réinitialisation du mot de passe',
     body: {
       html: `<p>Bonjour,</p>
@@ -193,7 +193,7 @@ const recoverPasswordEmail = (email, token): EmailData => {
             <p>Cordialement,</p>
             <p>L'équipe de Fluctu@t</p>`
     }
-  }
+  };
 };
 
 module.exports = router;

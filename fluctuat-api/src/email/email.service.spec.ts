@@ -14,7 +14,7 @@ describe('getReceivers', () => {
     expect(EmailService.getValidReceivers(emails)).toEqual([
       { Email: 'stuart@fluctuat.beta.gouv.fr', Name: 'stuart mill' },
       { Email: 'jevons@fluctuat.beta.gouv.fr', Name: '' }
-    ])
+    ]);
   });
 
 });

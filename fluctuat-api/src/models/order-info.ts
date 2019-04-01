@@ -1,8 +1,8 @@
-import { Person } from './person';
-import { Ship } from './ship';
-import { Middleman } from './middleman';
-import { PortInfo } from './port-info';
 import { Merchandise } from './merchandise';
+import { Middleman } from './middleman';
+import { Person } from './person';
+import { PortInfo } from './port-info';
+import { Ship } from './ship';
 import { Transporter } from './transporter';
 
 export class OrderInfo {
@@ -14,5 +14,5 @@ export class OrderInfo {
   ship: Ship;
   originInfo: PortInfo;
   destinationInfo: PortInfo;
-  merchandise: Merchandise
+  merchandise: Merchandise;
 }

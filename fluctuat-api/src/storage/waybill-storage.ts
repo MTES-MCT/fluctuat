@@ -1,5 +1,5 @@
-import { Waybill } from '../models/waybill';
 import { Document, model, Model } from 'mongoose';
+import { Waybill } from '../models/waybill';
 import { WaybillSchema } from './schemas/waybill.schema';
 
 interface WaybillDocument extends Waybill, Document {
@@ -38,11 +38,11 @@ const findContacts = (owner: string) => {
         as: 'item',
         cond: { $and: [{ $ne: ['$$item', null] }, { $ne: ['$$item', ''] }] }
       }
-    }
+    };
   };
 
   return WaybillDao.aggregate([
-    { $match: { owner: owner } },
+    { $match: { owner } },
     {
       $group: {
         _id: '$owner',
@@ -66,7 +66,7 @@ const findContacts = (owner: string) => {
         receivers: { $addToSet: '$order.receiver' },
         middlemen: { $addToSet: '$order.middleman' },
         transporters: { $addToSet: '$order.transporter' },
-        ships: { $addToSet: '$order.ship' },
+        ships: { $addToSet: '$order.ship' }
       }
     },
     {
@@ -90,18 +90,18 @@ const findContacts = (owner: string) => {
     }
   ])
     .then(result => {
-      let contacts = result[0];
+      const contacts = result[0];
       if (!contacts) {
         return;
       }
       // sort values for each key
       Object.values(contacts).forEach(arr => {
         if (Array.isArray(arr)) {
-          arr.sort()
+          arr.sort();
         }
       });
       return contacts;
-    })
+    });
 };
 
-export { get, put, findByEmail, findContacts, getAll }
+export { get, put, findByEmail, findContacts, getAll };

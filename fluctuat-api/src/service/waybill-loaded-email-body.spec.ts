@@ -1,5 +1,5 @@
-import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
 import { Waybill } from '../models/waybill';
+import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
 
 test('Waybill loaded email body', () => {
   const waybill = Waybill.fromObj({
@@ -7,7 +7,7 @@ test('Waybill loaded email body', () => {
       customer: { name: 'a customer', email: 'customer@test' },
       sender: { name: 'a sender', email: 'sender@test' },
       receiver: { name: 'a receiver', email: 'receiver@test' },
-      middleman: { name: 'a middleman', email: 'middleman@test'},
+      middleman: { name: 'a middleman', email: 'middleman@test' },
       transporter: { name: 'a transporter', email: 'transporter@test' },
       ship: { name: 'a big ship', regNumber: 'FR 123' },
       originInfo: { port: 'Quai du Pecq', expectedDate: '12/03/2019' },
@@ -46,5 +46,5 @@ test('Waybill loaded email body', () => {
       <p>Veuillez trouver ci-joint la lettre de voiture du chargement.</p>
       <br>
       <p>Cordialement,</p>
-      <p>L'équipe de Fluctu@t</p>`)
+      <p>L'équipe de Fluctu@t</p>`);
 });

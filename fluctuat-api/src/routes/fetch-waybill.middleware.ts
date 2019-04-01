@@ -1,8 +1,8 @@
-import { get } from '../storage/waybill-storage'
 import { Request } from 'express';
 import { Waybill } from '../models/waybill';
+import { get } from '../storage/waybill-storage';
 
-export type WaybillRequest = Request & { waybill: Waybill }
+export type WaybillRequest = Request & { waybill: Waybill };
 
 export const fetchWaybill = async (req: WaybillRequest, res, next) => {
   const id = req.params.id;

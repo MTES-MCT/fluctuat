@@ -1,8 +1,10 @@
-import { OrderInfo } from './order-info';
 import { LoadInfo } from './load-info';
+import { OrderInfo } from './order-info';
 
 export class Waybill {
+
   code: string;
+
   owner: string;
 
   order: OrderInfo = new OrderInfo();

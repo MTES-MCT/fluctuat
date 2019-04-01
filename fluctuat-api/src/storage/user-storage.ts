@@ -1,5 +1,5 @@
-import { User } from '../models/user';
 import { Document, model, Model } from 'mongoose';
+import { User } from '../models/user';
 import { UserSchema } from './schemas/user.schema';
 
 interface UserDocument extends User, Document {
@@ -11,4 +11,4 @@ const get = (email) => UserDao.findOne({ email });
 
 const put = (user: User) => new UserDao(user).save();
 
-export { get, put }
+export { get, put };

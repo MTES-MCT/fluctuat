@@ -1,17 +1,16 @@
 import { Router } from 'express';
-import * as waybillStorage from '../storage/waybill-storage'
+import * as randomstring from 'randomstring';
 import { Waybill } from '../models/waybill';
-import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
+import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
 import {
   sendWaybill,
   sendWaybillLoaded,
   sendWaybillLoadValidation,
   sendWaybillUnloadValidation
-} from '../service/send-waybill.service'
+} from '../service/send-waybill.service';
+import * as waybillStorage from '../storage/waybill-storage';
 import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
-
-const randomstring = require('randomstring');
 
 const router = Router();
 
@@ -23,12 +22,12 @@ const generateCode = async () => {
     capitalization: 'uppercase'
   });
   // if code exist retry;
-  let waybill = await waybillStorage.get(code);
+  const waybill = await waybillStorage.get(code);
   return waybill ? generateCode() : code;
 };
 
 router.post('/', verifyJWT, async (req: UserRequest, res) => {
-  let waybill: Waybill = req.body;
+  const waybill: Waybill = req.body;
 
   waybill.code = await generateCode();
   waybill.owner = req.user.email;
@@ -39,7 +38,6 @@ router.post('/', verifyJWT, async (req: UserRequest, res) => {
 
   res.status(201).json(waybill);
 });
-
 
 router.get('/', verifyJWT, async (req: UserRequest, res) => {
   if (!req.user.admin) {
@@ -85,7 +83,7 @@ router.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, res) => 
 
   if (waybill.loadInfo.sentAt) {
     res.status(400).send(`Le chargement a démarré. La modification n'est plus possible`);
-    return
+    return;
   }
 
   waybill.order = req.body;
@@ -102,7 +100,7 @@ router.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res) => {
   // if already validated bad request
   if (waybill.loadInfo.validatedAt) {
     return res.status(400)
-      .send(`Le transporteur a confirmé le chargement. La modification n'est plus possible.`)
+      .send(`Le transporteur a confirmé le chargement. La modification n'est plus possible.`);
   }
 
   waybill.loadInfo = req.body;
@@ -131,12 +129,12 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest,
 
   // if not loadInfo sent return bad request
   if (!loadInfo.sentAt) {
-    return res.status(400).send(`Le chargement n'a pas été encore commencé`)
+    return res.status(400).send(`Le chargement n'a pas été encore commencé`);
   }
 
   // if already validated return loadInfo
   if (loadInfo.validatedAt) {
-    return res.json(loadInfo)
+    return res.json(loadInfo);
   }
 
   // add the link to pdf document
@@ -164,13 +162,13 @@ router.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) =>
   // if already validated bad request
   if (waybill.unloadInfo.validatedAt) {
     return res.status(400)
-      .send(`Le transporteur a confirmé le déchargement. La modification n'est plus possible.`)
+      .send(`Le transporteur a confirmé le déchargement. La modification n'est plus possible.`);
   }
 
   // if loadInfo is not validated bad request
   if (!waybill.loadInfo.validatedAt) {
     return res.status(400)
-      .send(`Le déchargement ne peux pas commencar avant la confirmation du chargement.`)
+      .send(`Le déchargement ne peux pas commencar avant la confirmation du chargement.`);
   }
 
   waybill.unloadInfo = req.body;
@@ -193,10 +191,10 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillReques
 
   // if not loadInfo sent return bad request
   if (!unloadInfo.sentAt) {
-    return res.status(400).send(`Le déchargement n'a pas été encore commencé`)
+    return res.status(400).send(`Le déchargement n'a pas été encore commencé`);
   }
 
-  //if already validated return unloadInfo
+  // if already validated return unloadInfo
   if (unloadInfo.validatedAt) {
     return res.json(unloadInfo);
   }

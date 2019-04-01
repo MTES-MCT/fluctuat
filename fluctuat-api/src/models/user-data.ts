@@ -13,6 +13,6 @@ export class UserData {
       email: user.email,
       type: user.type,
       admin: user.admin
-    }
+    };
   }
 }

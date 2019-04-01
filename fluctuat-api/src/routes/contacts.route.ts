@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import * as waybillStorage from '../storage/waybill-storage'
-import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
 import { Contacts } from '../models/contacts';
+import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
+import * as waybillStorage from '../storage/waybill-storage';
 
 const router = Router();
 

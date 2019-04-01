@@ -5,9 +5,9 @@ const config = getConfig();
 const smsConfig = config.sms;
 
 export class SmsService {
-  mailjetService;
-
   static smsService = new SmsService(smsConfig.token, config.debug);
+
+  mailjetService;
 
   constructor(apiToken: string, debug = false) {
     console.log('init sms service debug:', debug);
@@ -16,7 +16,7 @@ export class SmsService {
       url: 'api.mailjet.com',
       version: 'v4',
       perform_api_call: !debug
-    })
+    });
   }
 
   static getInstance(): SmsService {
@@ -37,14 +37,14 @@ export class SmsService {
 
     console.log('sending sms', smsData);
     return this.mailjetService.post('sms-send')
-      .request(smsData)
+      .request(smsData);
   }
 
   convert(cellphone) {
-    return '+33'.concat( //add french prefix
+    return '+33'.concat( // add french prefix
       cellphone.replace(/\s/g, '') // remove spaces
         .substring(1)// remove first 0
-    )
+    );
   }
 
 }

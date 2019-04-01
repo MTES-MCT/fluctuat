@@ -1,13 +1,13 @@
-import { Waybill } from '../models/waybill';
-import { LoadManager } from '../models/load-manager';
-import { logo } from './logo';
 import { LoadInfo } from '../models/load-info';
+import { LoadManager } from '../models/load-manager';
 import { Middleman } from '../models/middleman';
 import { OrderInfo } from '../models/order-info';
+import { Waybill } from '../models/waybill';
 import { getBaseUrl, getConfig } from '../service/config.service';
+import { logo } from './logo';
 
-const { format } = require('date-fns');
-const fr = require('date-fns/locale/fr');
+import { format } from 'date-fns';
+import * as fr from 'date-fns/locale/fr';
 
 const host = getConfig().host;
 const baseUrl = getBaseUrl();
@@ -70,13 +70,13 @@ export function waybillDocDefinition(waybill: Waybill) {
         marginBottom: 5
       },
       cell: {
-        margin: [ 2, 8 ]
+        margin: [2, 8]
       },
       cellHeader: {
         margin: [2, 8, 2, 0]
       }
     }
-  }
+  };
 }
 
 const printOrderInfo = (order: OrderInfo) => {
@@ -87,17 +87,17 @@ const printOrderInfo = (order: OrderInfo) => {
 
   const printMiddleMan = (middleman: Middleman) => {
     if (!middleman || !middleman.name) {
-      return []
+      return [];
     }
 
     return [
       chainText('Affréteur : ', bold(middleman.name),
-      ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))]
+        ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))];
   };
 
-  const printDate = (date, suffix='') => date ? [', le ', bold(order.originInfo.expectedDate), suffix] : [];
+  const printDate = (date, suffix = '') => date ? [', le ', bold(order.originInfo.expectedDate), suffix] : [];
 
-  const printWeight = (weight) => weight ? ['de ', bold(order.merchandise.weight), ' tonnes']: ['à determiner'];
+  const printWeight = (weight) => weight ? ['de ', bold(order.merchandise.weight), ' tonnes'] : ['à determiner'];
 
   return [
     chainText('Donneur d\'ordre : ', bold(order.customer.name)),
@@ -116,7 +116,7 @@ const printOrderInfo = (order: OrderInfo) => {
         ' jusqu\'au ', bold(order.destinationInfo.port), ...printDate(order.destinationInfo.expectedDate), '.'
       ], style: 'level'
     }
-  ]
+  ];
 };
 
 const printLoadBlock = (loadInfo: LoadInfo, order: OrderInfo) => {
@@ -128,13 +128,13 @@ const printLoadBlock = (loadInfo: LoadInfo, order: OrderInfo) => {
       bold(loadInfo.endDate), '.'),
     '\n',
     printCommentBlock(loadInfo.comments),
-  ]
+  ];
 };
 
 const printUnloadBlock = (unloadInfo: LoadInfo, order: OrderInfo) => {
   // if the information is incomplete print empty block
   if (!unloadInfo.validatedAt) {
-    return []
+    return [];
   }
 
   return [
@@ -145,13 +145,13 @@ const printUnloadBlock = (unloadInfo: LoadInfo, order: OrderInfo) => {
       bold(unloadInfo.endDate), '.'),
     '\n',
     printCommentBlock(unloadInfo.comments),
-  ]
+  ];
 };
 
 const printValidationBlock = (validationInfo: { validatedAt, sentAt, loadManager: LoadManager }) => {
   // if the information is incomplete print an empty block
   if (!validationInfo.validatedAt) {
-    return []
+    return [];
   }
 
   const frenchFullDate = (date) => format(date, 'D MMMM YYYY [à] H[h] mm', { locale: fr });
@@ -166,7 +166,7 @@ const printValidationBlock = (validationInfo: { validatedAt, sentAt, loadManager
       text: ['Confirmé par le transporteur le ', frenchFullDate(validationInfo.validatedAt)],
       style: 'small'
     }
-  ]
+  ];
 };
 
 const printCommentBlock = (comments) => {
@@ -178,7 +178,7 @@ const printCommentBlock = (comments) => {
         [{ text: comments, border: [true, false, true, true], style: 'cell' }]
       ]
     }
-  }
+  };
 };
 
 const bold = (text: string) => ({ text: text ? text.toUpperCase() : '', bold: true });

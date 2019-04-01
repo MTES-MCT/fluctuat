@@ -17,4 +17,4 @@ const mongoClient = () => {
     .catch(err => console.log(err));
 };
 
-export { mongoClient }
+export { mongoClient };

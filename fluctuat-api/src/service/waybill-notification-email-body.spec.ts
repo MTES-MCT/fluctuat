@@ -35,9 +35,8 @@ test('Waybill notification email body', () => {
       <a href=\"http://test.url/access/link\">Cliquez sur ce lien pour y accéder</a>
       <br>
       <p>Cordialement,</p>
-      <p>L'équipe de Fluctu@t</p>`)
+      <p>L'équipe de Fluctu@t</p>`);
 });
-
 
 test('Waybill notification email body with missing fields', () => {
   const waybill = Waybill.fromObj({
@@ -56,22 +55,5 @@ test('Waybill notification email body with missing fields', () => {
   });
 
   expect(waybillNotificationEmailBody(waybill, 'http://test.url/access/link'))
-    .toEqual(`<p>Bonjour,</p>
-      <p>La Lettre de voiture nº ZQ92PU est disponible sur fluctuat.</p>
-      <p><strong>Information relative au voyage :</strong></p>
-      <ul>
-        <li>Donneur d'ordre : a customer</li>
-        <li>Expéditeur : a sender</li>
-        <li>Destinataire : a receiver</li>
-        
-        <li>Transporteur : a transporter</li>
-        <li>Nature de la marchandise : blé</li>
-        <li>Tonnage prévu : inconnu</li>
-        <li>Date prévue du chargement : inconnue</li>
-        <li>Date prévue du déchargement : inconnue</li>
-      </ul>
-      <a href=\"http://test.url/access/link\">Cliquez sur ce lien pour y accéder</a>
-      <br>
-      <p>Cordialement,</p>
-      <p>L'équipe de Fluctu@t</p>`)
+    .not.toContain(`Affréteur`);
 });

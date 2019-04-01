@@ -1,12 +1,12 @@
+import { EmailData } from '../email/email-data';
 import { EmailService } from '../email/email.service';
 import { Waybill } from '../models/waybill';
-import { EmailData } from '../email/email-data';
-import { SmsService } from '../sms/sms.service';
 import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
+import { SmsService } from '../sms/sms.service';
+import { getBaseUrl } from './config.service';
 import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
 import { waybillNotificationEmailBody } from './waybill-notification-email-body';
-import { getBaseUrl } from './config.service';
 
 const emailService = EmailService.getInstance();
 const smsService = SmsService.getInstance();
@@ -15,7 +15,7 @@ const baseUrl = getBaseUrl();
 const sendWaybill = (waybill: Waybill) => {
   const accessLink = getWaybillAccessLink(waybill.code);
 
-  let email: EmailData = {
+  const email: EmailData = {
     to: [
       waybill.order.customer,
       waybill.order.receiver,
@@ -46,13 +46,13 @@ const sendWaybill = (waybill: Waybill) => {
         content: Buffer.from(buffer).toString('base64')
       };
     })
-    .then(pdf => emailService.sendEmail(email, pdf))
+    .then(pdf => emailService.sendEmail(email, pdf));
 };
 
 const sendWaybillLoaded = (waybill: Waybill) => {
   const accessLink = getWaybillAccessLink(waybill.code);
 
-  let email: EmailData = {
+  const email: EmailData = {
     to: [
       waybill.order.customer,
       waybill.order.receiver,
@@ -81,10 +81,10 @@ const sendWaybillLoaded = (waybill: Waybill) => {
 };
 
 const sendWaybillLoadValidation = (waybill: Waybill) => {
-  let transporter = waybill.order.transporter;
-  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-chargement`;
+  const transporter = waybill.order.transporter;
+  const confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-chargement`;
 
-  let email: EmailData = {
+  const email: EmailData = {
     to: [transporter],
     subject: `⚓ Chargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
@@ -98,7 +98,7 @@ const sendWaybillLoadValidation = (waybill: Waybill) => {
     }
   };
 
-  let sms = `Veuillez confirmer le chargement. ${confirmationLink}`;
+  const sms = `Veuillez confirmer le chargement. ${confirmationLink}`;
 
   return Promise.all([
     emailService.sendEmail(email),
@@ -107,10 +107,10 @@ const sendWaybillLoadValidation = (waybill: Waybill) => {
 };
 
 const sendWaybillUnloadValidation = (waybill: Waybill) => {
-  let transporter = waybill.order.transporter;
-  let confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-dechargement`;
+  const transporter = waybill.order.transporter;
+  const confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-dechargement`;
 
-  let email: EmailData = {
+  const email: EmailData = {
     to: [transporter],
     subject: `⚓ Déchargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
@@ -124,7 +124,7 @@ const sendWaybillUnloadValidation = (waybill: Waybill) => {
     }
   };
 
-  let sms = `Veuillez confirmer le déchargement. ${confirmationLink}`;
+  const sms = `Veuillez confirmer le déchargement. ${confirmationLink}`;
 
   return Promise.all([
     emailService.sendEmail(email),
@@ -135,10 +135,10 @@ const sendWaybillUnloadValidation = (waybill: Waybill) => {
 const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill) => {
   const accessLink = getWaybillAccessLink(waybill.code);
 
-  let sendActions = [];
+  const sendActions = [];
 
   if (notifyData.email) {
-    let email: EmailData = {
+    const email: EmailData = {
       to: [{ name: '', email: notifyData.email }],
       subject: `⛴️ Lien d'accès à la lettre de voiture ${notifyData.waybillId}`,
       body: {
@@ -150,7 +150,7 @@ const sendWaybillNotification = (notifyData: WaybillNotify, waybill: Waybill) =>
 
   if (notifyData.cellphone) {
     const sms = `La Lettre de voiture ${notifyData.waybillId} est disponible sur fluctuat. ${accessLink}`;
-    sendActions.push(smsService.sendSms(notifyData.cellphone, sms))
+    sendActions.push(smsService.sendSms(notifyData.cellphone, sms));
   }
 
   return Promise.all(sendActions);
@@ -164,4 +164,4 @@ export {
   sendWaybillLoadValidation,
   sendWaybillUnloadValidation,
   sendWaybillNotification
-}
+};

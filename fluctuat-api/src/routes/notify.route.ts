@@ -1,15 +1,13 @@
 import { Router } from 'express';
+import { Waybill } from '../models/waybill';
 import { WaybillNotify } from '../models/waybill.notify';
 import { sendWaybillNotification } from '../service/send-waybill.service';
-import { Waybill } from '../models/waybill';
 import { get } from '../storage/waybill-storage';
-import { getBaseUrl } from '../service/config.service';
 
 const router = Router();
-const host = getBaseUrl();
 
 router.post('/waybill', async (req, res) => {
-  let notifyData: WaybillNotify = req.body;
+  const notifyData: WaybillNotify = req.body;
 
   const waybill: Waybill = await get(notifyData.waybillId.toUpperCase()); // case insensitive
 
@@ -19,7 +17,7 @@ router.post('/waybill', async (req, res) => {
 
   try {
     await sendWaybillNotification(notifyData, waybill);
-    res.sendStatus(204)
+    res.sendStatus(204);
   } catch (error) {
     console.error(error);
     return res.sendStatus(500);
