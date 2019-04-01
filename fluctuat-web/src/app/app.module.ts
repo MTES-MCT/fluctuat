@@ -1,17 +1,13 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HeroContainerComponent } from './shared/hero-container.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthService } from './core/auth/auth.service';
-import { LoginComponent } from './login/login.component';
 import { UnauthorizedInterceptor } from './core/auth/unauthorized.interceptor';
 import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
 import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
@@ -33,16 +29,13 @@ import { NotifyService } from './waybill/shared/notify.service';
 import { ContactsService } from './waybill/shared/contacts.service';
 import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-status-notification.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    SignUpComponent,
-    LoginComponent,
     WaybillNewComponent,
     WaybillEditionComponent,
     WaybillLoadingComponent,
@@ -60,16 +53,13 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
     WaybillOptionsComponent,
     WaybillAccessComponent,
     WaybillShareComponent,
-    ChangePasswordComponent,
-    RecoverPasswordComponent
   ],
   imports: [
-    AppRoutingModule,
-    SharedModule,
+    AccountModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    SharedModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     AuthService,

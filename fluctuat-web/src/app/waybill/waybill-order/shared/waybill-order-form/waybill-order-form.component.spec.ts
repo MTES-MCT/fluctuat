@@ -65,7 +65,7 @@ describe('WaybillOrderFormComponent', () => {
     component.autocompleteByName(formGroup, existingCustomers);
 
     expect(formGroup.value).toEqual(customer);
-  })
+  });
 
   it('should not autocomplete if the name is not set', () => {
     const existingCustomers = [

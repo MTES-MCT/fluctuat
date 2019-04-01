@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ResultHelper } from '../core/result-helper';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../core/auth/auth.service';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FluValidators } from '../core/form-validators/flu-validators';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { AuthService } from '../../core/auth/auth.service';
+import { ResultHelper } from '../../core/result-helper';
+import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
   selector: 'flu-change-password',

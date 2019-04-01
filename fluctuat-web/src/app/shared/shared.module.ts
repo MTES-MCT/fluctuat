@@ -10,6 +10,8 @@ import { ErrorComponent } from './error.component';
 import { SuccessComponent } from './success.component';
 import { FormFieldComponent } from './form-field.component';
 import { HeroContainerComponent } from './hero-container.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,17 @@ import { HeroContainerComponent } from './hero-container.component';
     ErrorComponent,
     SuccessComponent,
     FormFieldComponent,
-    HeroContainerComponent
+    HeroContainerComponent,
+    CommonModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule {

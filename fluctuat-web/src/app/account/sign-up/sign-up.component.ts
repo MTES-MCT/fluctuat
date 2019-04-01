@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthService } from '../core/auth/auth.service';
-import { ResultHelper } from '../core/result-helper';
+import { AuthService } from '../../core/auth/auth.service';
+import { ResultHelper } from '../../core/result-helper';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GENERIC_ERROR_MSG } from '../core/generic-error';
+import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 
 @Component({
   selector: 'flu-sign-up',

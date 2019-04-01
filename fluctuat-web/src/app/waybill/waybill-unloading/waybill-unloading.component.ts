@@ -22,8 +22,6 @@ export class WaybillUnloadingComponent implements OnInit {
 
   waybillId: string;
 
-  showShareModal = false;
-
   constructor(private formBuilder: FormBuilder, private waybillService: WaybillService,
               private route: ActivatedRoute, private router: Router) {
   }

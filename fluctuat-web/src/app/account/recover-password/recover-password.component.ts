@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ResultHelper } from '../core/result-helper';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../core/auth/auth.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+
+import { ResultHelper } from '../../core/result-helper';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'flu-recover-password',

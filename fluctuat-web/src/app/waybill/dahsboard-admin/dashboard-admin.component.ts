@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 import { Waybill } from '../shared/models/waybill.model';
 import { WaybillService } from '../shared/waybill.service';
 

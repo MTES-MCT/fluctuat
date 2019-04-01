@@ -30,8 +30,4 @@ export class WaybillOptionsComponent {
     return waybill.unloadInfo.sentAt && !waybill.unloadInfo.validatedAt
   }
 
-  isUnloadFinished(waybill: Waybill) {
-    return waybill.unloadInfo.validatedAt
-  }
-
 }
