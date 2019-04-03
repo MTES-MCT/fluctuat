@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 
 const checkDataDir = (dir) => {
@@ -20,24 +22,25 @@ checkDataDir('./.data');
 const initValue = JSON.stringify({
   'debug': true,
   'email': {
-    'user': '',
-    'pass': '',
+    'user': 'ask for an user',
+    'pass': 'ask for a password',
     'sender': {
-      'name': '',
-      'email': ''
+      'name': 'Fluctuat Info',
+      'email': 'contact@fluctuat.beta.gouv.fr'
     }
   },
   'sms': {
-    'token': ''
+    'token': 'ask for a token'
   },
   'mongodb': {
     'user': '',
     'password': '',
-    'dbName': '',
-    'cluster': ''
+    'dbName': 'fluctuat-dev',
+    'cluster': 'localhost:27017',
+    'isDns': false
   },
-  'jwtSecret': '',
-  'host': '',
+  'jwtSecret': 'ch4ngeMe!!!!',
+  'host': 'localhost:4200',
   'secure': false
 }, null, 2);
 

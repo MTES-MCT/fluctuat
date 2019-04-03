@@ -4,9 +4,8 @@ import { getConfig } from '../service/config.service';
 const configMongo = getConfig().mongodb;
 
 const mongoClient = () => {
-  console.log('Connecting to DB...');
-  console.log(`Using db name ${configMongo.dbName}`);
-  return connect(`mongodb+srv://${configMongo.cluster}/?retryWrites=true`,
+  const uri = `${`mongodb${configMongo.isDns ? '+srv' : ''}://${configMongo.cluster}/?retryWrites=true`}`;
+  return connect(uri,
     {
       useNewUrlParser: true,
       user: configMongo.user,

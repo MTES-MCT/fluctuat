@@ -51,6 +51,10 @@ export class EmailService {
       }];
     }
 
+    if (config.debug) {
+      console.log('email request sent:', JSON.stringify(request, null, 2));
+    }
+
     return this.mailjetService.post('send')
       .request(request);
   }
