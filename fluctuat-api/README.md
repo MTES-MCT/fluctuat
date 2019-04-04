@@ -29,3 +29,7 @@ Before run you should to build `yarn build`
 Start the server as service with pm2
 
     yarn start:prod
+
+
+docker build --no-cache -f Dockerfile -t fluctuat-api .
+docker run --network="host" fluctuat-api
