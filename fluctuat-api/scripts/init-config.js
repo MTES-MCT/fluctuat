@@ -1,23 +1,28 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const path = require('path')
 
-const checkDataDir = (dir) => {
+const checkDirExists = (dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, 0o755);
-    console.log('Create data directory', dir);
+    console.log('Create directory', dir);
   } else {
-    console.log('Data directory OK', dir);
+    console.log('Check directory OK', dir);
   }
 };
 
-const checkDataFile = (file, initValue) => {
+const checkFileExists = (file, initValue) => {
   if (!fs.existsSync(file)) {
+    console.log('Init config file', file)
     fs.writeFileSync(file, initValue, 'utf-8');
+  } else {
+    console.log('Check file OK', file)
   }
 };
 
-checkDataDir('./.data');
+const DATA_DIR_PATH = path.join(__dirname, '../.data');
+checkDirExists(DATA_DIR_PATH);
 
 const initValue = JSON.stringify({
   'debug': true,
@@ -44,4 +49,4 @@ const initValue = JSON.stringify({
   'secure': false
 }, null, 2);
 
-checkDataFile('./.data/config.json', initValue);
+checkFileExists(DATA_DIR_PATH + '/config.json', initValue);

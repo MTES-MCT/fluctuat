@@ -9,7 +9,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "start:prod": "pm2 start ecosystem.config.js",
-    "postinstall": "node init-config.js"
+    "postinstall": "node scripts/init-config.js"
   },
   "author": "Elias Boukamza<elias.boukamza@beta.gouv.fr>",
   "license": "AGPL-3.0",
