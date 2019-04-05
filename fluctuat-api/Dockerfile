@@ -1,8 +1,8 @@
 FROM keymetrics/pm2:8-alpine
 COPY . /fluctuat-api
 
-RUN apk add build-base \
-    python
+# deps needs by bcrypt
+RUN apk add build-base python
 
 WORKDIR /fluctuat-api
 
