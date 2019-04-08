@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+/*
+Check config files are ok or create them with default values
+*/
+
 const fs = require('fs');
 const path = require('path')
 

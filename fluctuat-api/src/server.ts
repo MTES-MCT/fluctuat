@@ -37,5 +37,6 @@ const main = async () => {
 };
 
 main().catch(error => {
-  console.error('server fails to start', error);
+  console.log('server fails to start', error.message);
+  process.exit(1);
 });

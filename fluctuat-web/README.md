@@ -1,38 +1,37 @@
 # Fluctuat web
 
+Front-end of Fluctuat
+
+### Technologies
+
+ - Angular
+ - Node
+ - Nginx
+
+### Prerequisites
+
+ - NodeJS 10+
+ - Yarn
+ - Docker
+
+### Run as docker container
+
+you can run this project as docker container
+
+    # build docker image if first time of if you have made changes
+    docker build --no-cache -f Dockerfile -t fluctuat-web .
+
+    # run fluctuat-web container
+    docker run --rm --network="host" fluctuat-web
+
 ## Installation
 
-run the command
+Launch
 
     yarn
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
+### Run in dev mode
 
-## Development server
+Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`.
 
-Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-
-docker build --no-cache -f Dockerfile --target=runner -t fluctuat-web .
-
-docker run --network="host" fluctuat-web
+The app will automatically reload if you change any of the source files.

@@ -13,8 +13,7 @@ const mongoClient = () => {
       pass: configMongo.password,
       dbName: configMongo.dbName
     })
-    .then(() => console.log('MongoDB connected!'))
-    .catch(err => console.log(err));
+    .then(() => console.log('MongoDB connected!'));
 };
 
 export { mongoClient };

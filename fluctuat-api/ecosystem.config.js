@@ -9,7 +9,10 @@ module.exports = {
     {
       name: 'fluctuat-api',
       script: 'dist/server.js',
-      log_date_format: fullDate
+      log_date_format: fullDate,
+      restart_delay: 1000,
+      max_restarts: 10,
+      min_uptime: 3000
     }
   ]
-};
+}

@@ -13,8 +13,8 @@ jobs:
   include:
     - stage: build
       script:
-        - cd fluctuat-api && yarn && yarn test && yarn lint
+        - cd fluctuat-api && yarn && yarn test:ci && yarn lint
         - yarn build
     - script:
-        - cd fluctuat-web && yarn && yarn test && yarn lint
+        - cd fluctuat-web && yarn && yarn test:ci && yarn lint
         - yarn build --prod

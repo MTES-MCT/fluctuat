@@ -1,15 +1,22 @@
-FROM keymetrics/pm2:8-alpine
+FROM keymetrics/pm2:8-alpine AS builder
 COPY . /fluctuat-api
 
-RUN apk add build-base \
-    python
+# deps needs by bcrypt
+RUN apk add build-base python
 
 WORKDIR /fluctuat-api
 
 RUN  yarn && \
-     yarn test:ci && \
-     yarn lint && \
-     yarn build
+     yarn build && \
+     ## clean devDependencias
+     yarn install --production
+
+FROM keymetrics/pm2:8-alpine AS runner
+COPY . /fluctuat-api
+COPY --from=builder /fluctuat-api/node_modules /fluctuat-api/node_modules
+COPY --from=builder /fluctuat-api/dist /fluctuat-api/dist
+
+WORKDIR /fluctuat-api
 
 EXPOSE 9000
 
