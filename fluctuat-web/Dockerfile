@@ -3,8 +3,6 @@ COPY . /fluctuat-web
 WORKDIR /fluctuat-web
 
 RUN  yarn && \
-     yarn test:ci && \
-     yarn lint && \
      yarn build --prod
 
 FROM nginx:alpine as runner
