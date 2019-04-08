@@ -17,9 +17,9 @@ Ce repo contient tous les projets de Fluctu@t :
 
 Suivre le README de chacun des projets pour la installation et le lancement en mode développement.
 
-## Lancement avec docker compose
+## Lancement avec Docker Compose
 
-Seulement la prémière fois exécuter le script
+Seulement la prémière fois, exécuter le script
 
     ./flucuat-api/scripts/init-config.js
 
@@ -33,12 +33,12 @@ L'application sera disponible sur l'adresse:
 
 Utiliser la commande `docker-compose down` pour arreter l'application
 
-### Création de comptes de test
+### Création des comptes de test
 
-Créez une compte pour commencer à utiliser l'application.
+Créez un compte depuis la page http://localhost:4200/inscription pour commencer à utiliser l'application.
 
-Notez que si l'envoie de mail est desactivé (mode debug active) le contenu des emails de validation sera affiché
-dans le logs du container `fluctuat-api`
+Notez que si l'envoie de mail est désactivé (mode debug activé) vous pourrez récupérer les liens de validation en
+regardant le contenu des emails sur les logs du container `fluctuat-api`.
 
 
 ## Crédits
