@@ -1,4 +1,4 @@
-FROM keymetrics/pm2:8-alpine as builder
+FROM keymetrics/pm2:8-alpine AS builder
 COPY . /fluctuat-api
 
 # deps needs by bcrypt
@@ -11,7 +11,7 @@ RUN  yarn && \
      ## clean devDependencias
      yarn install --production
 
-FROM keymetrics/pm2:8-alpine as runner
+FROM keymetrics/pm2:8-alpine AS runner
 COPY . /fluctuat-api
 COPY --from=builder /fluctuat-api/node_modules /fluctuat-api/node_modules
 COPY --from=builder /fluctuat-api/dist /fluctuat-api/dist
