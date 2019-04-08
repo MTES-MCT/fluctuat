@@ -1,0 +1,28 @@
+version: '3'
+services:
+  fluctuat-web:
+    build:
+      context: fluctuat-web
+    restart: always
+    network_mode: host
+    ports:
+      - "4200:4200"
+  fluctuat-api:
+    build:
+      context: fluctuat-api
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./fluctuat-api/.data/:/fluctuat-api/.data
+    depends_on:
+      - mongodb
+    network_mode: host
+  mongodb:
+    image: mongo:4.0
+    restart: always
+    network_mode: host
+    ports:
+      - "27010:27010"
+    volumes:
+      - ./fluctuat-api/.data/fluctuat-db/:/data/db/

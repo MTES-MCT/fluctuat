@@ -1,8 +1,0 @@
-version: '2'
-services:
-    fluctuat-mongodb:
-        image: mongo:4.0
-        ports:
-            - "27017:27017"
-        volumes:
-            - ../.data/fluctuat-db/:/data/db/
