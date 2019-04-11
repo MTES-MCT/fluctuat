@@ -18,3 +18,7 @@ jobs:
     - script:
         - cd fluctuat-web && yarn && yarn test:ci && yarn lint
         - yarn build --prod
+    - stage: deploy
+      if: branch = master
+      script:
+        - ./scripts/deploy.sh
