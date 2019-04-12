@@ -17,4 +17,4 @@ scp -i $pem_key -pr ../fluctuat-api/dist $CI_USER@$CI_HOST:fluctuat/fluctuat-api
 ssh -i $pem_key $CI_USER@$CI_HOST "./fluctuat/scripts/install.sh"
 ssh -i $pem_key $CI_USER@$CI_HOST "./fluctuat/scripts/run.sh"
 
-#rm -f $pem_key
+rm -f $pem_key
