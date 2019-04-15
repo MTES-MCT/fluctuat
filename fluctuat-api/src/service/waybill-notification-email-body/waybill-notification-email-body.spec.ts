@@ -30,12 +30,13 @@ test('Waybill notification email body', () => {
       '  <li>Nature de la marchandise : blé</li>\n' +
       '  <li>Tonnage prévu : 1000</li>\n' +
       '  <li>Date prévue du chargement : 12/03/2019</li>\n' +
-      '  <li>Date prévue du déchargement : 14/03/2019</li>\n' +
+      '  <li>Date prévue du déchargement :\n' +
+      '  14/03/2019</li>\n' +
       '</ul>\n' +
       '<a href="http://test.url/access/link">Cliquez sur ce lien pour y accéder</a>\n' +
       '<br>\n' +
       '<p>Cordialement,</p>\n' +
-      '<p>L\'équipe de Fluctu@t</p>\n');
+      '<p>L\'équipe de Fluctu@t</p>');
 });
 
 test('Waybill notification email body with missing fields', () => {

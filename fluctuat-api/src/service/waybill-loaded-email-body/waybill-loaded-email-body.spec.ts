@@ -30,12 +30,13 @@ test('Waybill loaded email body', () => {
       '  <li>Transporteur : a transporter</li>\n' +
       '  <li>Nature de la marchandise : blé</li>\n' +
       '  <li>Tonnage chargé : 1000</li>\n' +
-      '  <li>Date prévue du déchargement : 06/03/2019</li>\n' +
+      '  <li>Date prévue du déchargement :\n ' +
+      '  06/03/2019</li>\n' +
       '</ul>\n' +
       '<p>Pour consulter les informations ou <strong>commencer le déchargement</strong>, cliquez sur\n' +
       '<a href=\"http://test.url/access/link\">ce lien</a></p>\n' +
       '<p>Veuillez trouver ci-joint la lettre de voiture du chargement.</p>\n' +
       '<br>\n' +
       '<p>Cordialement,</p>\n' +
-      '<p>L\'équipe de Fluctu@t</p>\n');
+      '<p>L\'équipe de Fluctu@t</p>');
 });

@@ -11,5 +11,5 @@ test('Waybill access link email body', () => {
       '<h3>Veuillez trouver ci-joint votre lettre de voiture</h3>\n' +
       '<br>\n' +
       '<p>Cordialement,</p>\n' +
-      '<p>L\'équipe de Fluctu@t</p>\n');
+      '<p>L\'équipe de Fluctu@t</p>');
 });

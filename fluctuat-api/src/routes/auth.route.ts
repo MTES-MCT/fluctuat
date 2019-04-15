@@ -105,17 +105,21 @@ router.post('/recover-password', async (req, res) => {
     aud: 'change-password'
   };
 
-  const token = generateToken(recoverPayload, { expiresIn: '15m' });
+  try {
+    const token = generateToken(recoverPayload, { expiresIn: '15m' });
+    await sendRecoverPasswordEmail(user, token);
 
-  await sendRecoverPasswordEmail(user, token);
+    console.log(`${email} request password recovery`);
 
-  console.log(`${email} request password recovery`);
+    // save ait in user to check it at change password request
+    user.changePasswordAt = tokenDecode(token).iat;
+    user.save();
 
-  // save ait in user to check it at change password request
-  user.changePasswordAt = tokenDecode(token).iat;
-  user.save();
-
-  res.sendStatus(204);
+    res.sendStatus(204);
+  } catch (e) {
+    console.error(e);
+    res.sendStatus(500);
+  }
 
 });
 

@@ -10,5 +10,5 @@ test('Waybill load validation email body', () => {
       '<a href="http://test.url/confirm/link">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>\n' +
       '<br>\n' +
       '<p>Cordialement,</p>\n' +
-      '<p>L\'équipe de Fluctu@t</p>\n');
+      '<p>L\'équipe de Fluctu@t</p>');
 });
