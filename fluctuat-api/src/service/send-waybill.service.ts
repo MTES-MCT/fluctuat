@@ -5,8 +5,11 @@ import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import { SmsService } from '../sms/sms.service';
 import { getBaseUrl } from './config.service';
-import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
-import { waybillNotificationEmailBody } from './waybill-notification-email-body';
+import { waybillAccessEmailBody } from './waybill-access-email-body/waybill-access-email-body';
+import { waybillLoadValidationEmailBody } from './waybill-load-validation-email-body/waybill-load-validation-email-body';
+import { waybillLoadedEmailBody } from './waybill-loaded-email-body/waybill-loaded-email-body';
+import { waybillNotificationEmailBody } from './waybill-notification-email-body/waybill-notification-email-body';
+import { waybillUnLoadValidationEmailBody } from './waybill-unload-validation-email-body/waybill-unload-validation-email-body';
 
 const emailService = EmailService.getInstance();
 const smsService = SmsService.getInstance();
@@ -28,14 +31,7 @@ const sendWaybill = (waybill: Waybill) => {
     subject: `⚓ Lettre de voiture ${waybill.code} - déchargement confirmé`,
     body: {
       text: '',
-      html: `<p>Bonjour,</p>
-             <p>La lettre de voiture nº ${waybill.code} a été confirmé par le transporteur.</p>
-             <p>Vous pouvez consulter les informations en cliquant sur
-             <a href="${accessLink}">ce lien</a></p>
-             <h3>Veuillez trouver ci-joint votre lettre de voiture</h3>
-             <br>
-             <p>Cordialement,</p>
-             <p>L'équipe de Fluctu@t</p>`
+      html: waybillAccessEmailBody(waybill.code, accessLink)
     }
   };
 
@@ -88,13 +84,7 @@ const sendWaybillLoadValidation = (waybill: Waybill) => {
     to: [transporter],
     subject: `⚓ Chargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
-      html: `<p>Bonjour ${transporter.name},</p>
-             <p>Les informations sur le chargement de la lettre de voiture nº ${waybill.code} ont été enregistrées,
-              veuillez les confirmer dès maintenant.</p>
-             <a href="${confirmationLink}">Cliquez sur ce lien pour accéder à votre lettre de voiture</a>
-             <br>
-             <p>Cordialement,</p>
-             <p>L'équipe de Fluctu@t</p>`
+      html: waybillLoadValidationEmailBody(transporter.name, waybill.code, confirmationLink)
     }
   };
 
@@ -114,13 +104,7 @@ const sendWaybillUnloadValidation = (waybill: Waybill) => {
     to: [transporter],
     subject: `⚓ Déchargement à confirmer - Lettre de voiture nº ${waybill.code}`,
     body: {
-      html: `<p>Bonjour ${transporter.name},</p>
-             <p>Les informations sur le déchargement de la lettre de voiture nº ${waybill.code} ont été enregistrées,
-              veuillez les confirmer dès maintenant.</p>
-             <a href="${confirmationLink}">Cliquer sur ce lien pour accéder à votre lettre de voiture</a>
-             <br>
-             <p>Cordialement,</p>
-             <p>L'équipe de Fluctu@t</p>`
+      html: waybillUnLoadValidationEmailBody(transporter.name, waybill.code, confirmationLink)
     }
   };
 

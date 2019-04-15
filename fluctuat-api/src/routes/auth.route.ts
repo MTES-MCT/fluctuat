@@ -1,7 +1,5 @@
 import { Router } from 'express';
 
-import { EmailData } from '../email/email-data';
-import { EmailService } from '../email/email.service';
 import { User } from '../models/user';
 import { UserCredentials } from '../models/user-credentials';
 import { UserData } from '../models/user-data';
@@ -12,13 +10,10 @@ import {
   setTokenCookie,
   tokenDecode
 } from '../security/security-utils';
-import { getBaseUrl } from '../service/config.service';
+import { sendRecoverPasswordEmail, sendWelcomeEmail } from '../service/account.service';
 import * as userStorage from '../storage/user-storage';
 
 const router = Router();
-const emailService = EmailService.getInstance();
-
-const host = getBaseUrl();
 
 const getUserFromCredentials = async (credentials: UserCredentials) => {
   const user = await userStorage.get(credentials.email);
@@ -85,7 +80,7 @@ router.post('/sign-up', async (req, res) => {
     user.changePasswordAt = tokenDecode(token).iat;
     await userStorage.put(user);
 
-    await emailService.sendEmail(welcomeEmail(user, token));
+    await sendWelcomeEmail(user, token);
 
     console.log(`${user.email} creates account`);
     res.sendStatus(204);
@@ -95,24 +90,6 @@ router.post('/sign-up', async (req, res) => {
   }
 
 });
-
-const welcomeEmail = (user, token): EmailData => {
-  const changePasswordLink = `${host}/changement-mot-de-passe/?token=${token}`;
-
-  return {
-    to: [{ name: user.name, email: user.email }],
-    subject: 'Votre compte sur Fluctu@t a été crée',
-    body: {
-      html: `<p>Bienvenue sur Fluctu@t,</p>
-            <p>Votre compte a été crée, pour l'activer vous devez choisir votre mot de passe et vous connecter.</p>
-            <p>Suivez ce lien pour finir l'activation de votre compte :</p>
-            <p><a href="${changePasswordLink}">Activer mon compte</a></p>
-            <br>
-            <p>Cordialement,</p>
-            <p>L'équipe de Fluctu@t</p>`
-    }
-  };
-};
 
 router.post('/recover-password', async (req, res) => {
   const email = req.body.email;
@@ -130,7 +107,7 @@ router.post('/recover-password', async (req, res) => {
 
   const token = generateToken(recoverPayload, { expiresIn: '15m' });
 
-  await emailService.sendEmail(recoverPasswordEmail(email, token));
+  await sendRecoverPasswordEmail(user, token);
 
   console.log(`${email} request password recovery`);
 
@@ -177,23 +154,5 @@ router.post('/change-password', async (req, res) => {
   res.sendStatus(204);
 
 });
-
-const recoverPasswordEmail = (email, token): EmailData => {
-  const changePasswordLink = `${host}/changement-mot-de-passe/?token=${token}`;
-
-  return {
-    to: [{ name: '', email }],
-    subject: 'Réinitialisation du mot de passe',
-    body: {
-      html: `<p>Bonjour,</p>
-            <p>Vous avez demandé une réinitialisation du mot de passe, il suffit de cliquer sur le lien ci-dessous afin de le modifier.</p>
-            <p><a href="${changePasswordLink}">Changer mon mot de passe</a></p>
-            <br>
-            <p>Si vous n'êtes pas à l'origine de cette demande, n'hésitez pas à nous contacter. Il vous suffit de répondre à cet email.</p>
-            <p>Cordialement,</p>
-            <p>L'équipe de Fluctu@t</p>`
-    }
-  };
-};
 
 module.exports = router;

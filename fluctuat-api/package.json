@@ -24,6 +24,7 @@
     "mongoose": "^5.4.10",
     "morgan": "^1.9.1",
     "node-mailjet": "^3.3.1",
+    "nunjucks": "^3.2.0",
     "pdfmake": "^0.1.39",
     "randomstring": "^1.1.5"
   },
