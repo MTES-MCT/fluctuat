@@ -13,5 +13,5 @@ export class Waybill {
 
   documentUrl: string;
 
-  static fromObj = (obj) => Object.assign(new Waybill(), obj);
+  static fromObj = (obj): Waybill => Object.assign(new Waybill(), obj);
 }

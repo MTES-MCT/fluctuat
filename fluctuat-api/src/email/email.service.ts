@@ -12,7 +12,7 @@ export class EmailService {
 
   mailjetService;
 
-  private constructor(user: string, password: string, private sender: HasEmail, debug = false) {
+  private constructor(user: string, password: string, private sender: HasEmail, private debug = false) {
     console.log(`Init email service: send from ${sender.email} with debug: ${debug}`);
     this.mailjetService = mailjet.connect(user, password, { version: 'v3.1', perform_api_call: !debug });
   }
@@ -51,7 +51,7 @@ export class EmailService {
       }];
     }
 
-    if (config.debug) {
+    if (this.debug) {
       console.log('email request sent:', JSON.stringify(request, null, 2));
     }
 

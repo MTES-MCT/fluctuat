@@ -48,8 +48,8 @@ after install `init-config.js` are executed and it creates `./data/config.json` 
 
 run script
 
-     # starts a local db in a docker container
-    ./scripts/start-db.js
+    # starts a local db in a docker container
+    yarn start:db
 
 open other shell and start fluctuat-api in dev mode
 

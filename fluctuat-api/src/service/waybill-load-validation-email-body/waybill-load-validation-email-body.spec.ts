@@ -2,7 +2,7 @@ import { waybillLoadValidationEmailBody } from './waybill-load-validation-email-
 
 test('Waybill load validation email body', () => {
 
-  const body = waybillLoadValidationEmailBody('Blas', 'C0D3', 'http://test.url/confirm/link')
+  const body = waybillLoadValidationEmailBody('Blas', 'C0D3', 'http://test.url/confirm/link');
   expect(body)
     .toEqual('<p>Bonjour Blas,</p>\n' +
       '<p>Les informations sur le chargement de la lettre de voiture nº C0D3 ont été enregistrées,\n' +
