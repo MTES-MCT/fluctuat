@@ -12,7 +12,7 @@ import {
 import * as waybillStorage from '../storage/waybill-storage';
 import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
 
-const router = Router();
+const waybillRoute = Router();
 
 const generateCode = async () => {
 
@@ -26,7 +26,7 @@ const generateCode = async () => {
   return waybill ? generateCode() : code;
 };
 
-router.post('/', verifyJWT, async (req: UserRequest, res) => {
+waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
   const waybill: Waybill = req.body;
 
   waybill.code = await generateCode();
@@ -39,7 +39,7 @@ router.post('/', verifyJWT, async (req: UserRequest, res) => {
   res.status(201).json(waybill);
 });
 
-router.get('/', verifyJWT, async (req: UserRequest, res) => {
+waybillRoute.get('/', verifyJWT, async (req: UserRequest, res) => {
   if (!req.user.admin) {
     return res.status(403).send('Not allowed');
   }
@@ -51,7 +51,7 @@ router.get('/', verifyJWT, async (req: UserRequest, res) => {
   res.json(waybills);
 });
 
-router.get('/me', verifyJWT, async (req: UserRequest, res) => {
+waybillRoute.get('/me', verifyJWT, async (req: UserRequest, res) => {
   const userEmail: string = req.user.email;
 
   const waybills = await waybillStorage.findByEmail(userEmail);
@@ -61,11 +61,11 @@ router.get('/me', verifyJWT, async (req: UserRequest, res) => {
   res.json(waybills);
 });
 
-router.get('/:id', fetchWaybill, (req: WaybillRequest, res) => {
+waybillRoute.get('/:id', fetchWaybill, (req: WaybillRequest, res) => {
   res.json(req.waybill);
 });
 
-router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: WaybillRequest, res) => {
+waybillRoute.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   try {
@@ -78,7 +78,7 @@ router.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: WaybillReques
   }
 });
 
-router.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, res) => {
+waybillRoute.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   if (waybill.loadInfo.sentAt) {
@@ -94,7 +94,7 @@ router.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, res) => 
   res.status(204).end();
 });
 
-router.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res) => {
+waybillRoute.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   // if already validated bad request
@@ -116,13 +116,13 @@ router.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res) => {
   res.status(204).end();
 });
 
-router.get('/:id/load-info', fetchWaybill, (req: WaybillRequest, res) => {
+waybillRoute.get('/:id/load-info', fetchWaybill, (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   return res.json(waybill.loadInfo);
 });
 
-router.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest, res) => {
+waybillRoute.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   const loadInfo = waybill.loadInfo;
@@ -150,13 +150,13 @@ router.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest,
   res.json(loadInfo);
 });
 
-router.get('/:id/unload-info', fetchWaybill, (req: WaybillRequest, res) => {
+waybillRoute.get('/:id/unload-info', fetchWaybill, (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   return res.json(waybill.unloadInfo);
 });
 
-router.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) => {
+waybillRoute.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   // if already validated bad request
@@ -184,7 +184,7 @@ router.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) =>
   res.status(204).end();
 });
 
-router.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillRequest, res) => {
+waybillRoute.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   const unloadInfo = waybill.unloadInfo;
@@ -210,4 +210,4 @@ router.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillReques
   res.json(unloadInfo);
 });
 
-module.exports = router;
+export { waybillRoute };

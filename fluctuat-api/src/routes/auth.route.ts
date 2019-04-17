@@ -13,7 +13,7 @@ import {
 import { sendRecoverPasswordEmail, sendWelcomeEmail } from '../service/account.service';
 import * as userStorage from '../storage/user-storage';
 
-const router = Router();
+const authRoute = Router();
 
 const getUserFromCredentials = async (credentials: UserCredentials) => {
   const user = await userStorage.get(credentials.email);
@@ -25,7 +25,7 @@ const getUserFromCredentials = async (credentials: UserCredentials) => {
   return user;
 };
 
-router.post('/login', async (req, res) => {
+authRoute.post('/login', async (req, res) => {
   const credentials = req.body;
 
   const user = await getUserFromCredentials(credentials);
@@ -42,13 +42,13 @@ router.post('/login', async (req, res) => {
   return res.json(UserData.fromUser(user));
 });
 
-router.post('/logout', (req, res) => {
+authRoute.post('/logout', (req, res) => {
   setTokenCookie(res, '0', 0); // expires token cookies
 
   return res.sendStatus(204);
 });
 
-router.post('/sign-up', async (req, res) => {
+authRoute.post('/sign-up', async (req, res) => {
 
   const account = req.body;
 
@@ -91,7 +91,7 @@ router.post('/sign-up', async (req, res) => {
 
 });
 
-router.post('/recover-password', async (req, res) => {
+authRoute.post('/recover-password', async (req, res) => {
   const email = req.body.email;
 
   const user = await userStorage.get(email);
@@ -123,7 +123,7 @@ router.post('/recover-password', async (req, res) => {
 
 });
 
-router.post('/change-password', async (req, res) => {
+authRoute.post('/change-password', async (req, res) => {
   const INVALID_TOKEN_MSG = 'Demande de changement du mot de passe invalide';
 
   if (!req.body || !req.body.token || !req.body.newPassword) {
@@ -159,4 +159,4 @@ router.post('/change-password', async (req, res) => {
 
 });
 
-module.exports = router;
+export { authRoute };

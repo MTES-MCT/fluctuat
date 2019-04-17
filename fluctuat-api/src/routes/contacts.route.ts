@@ -3,9 +3,9 @@ import { Contacts } from '../models/contacts';
 import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
 import * as waybillStorage from '../storage/waybill-storage';
 
-const router = Router();
+const contactsRoute = Router();
 
-router.get('/me', verifyJWT, async (req: UserRequest, res) => {
+contactsRoute.get('/me', verifyJWT, async (req: UserRequest, res) => {
   const userEmail: string = req.user.email;
 
   const contacts: Contacts = await waybillStorage.findContacts(userEmail);
@@ -13,4 +13,4 @@ router.get('/me', verifyJWT, async (req: UserRequest, res) => {
   res.json(contacts);
 });
 
-module.exports = router;
+export { contactsRoute };

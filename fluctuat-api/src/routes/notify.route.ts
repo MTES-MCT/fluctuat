@@ -4,9 +4,9 @@ import { WaybillNotify } from '../models/waybill.notify';
 import { sendWaybillNotification } from '../service/send-waybill.service';
 import { get } from '../storage/waybill-storage';
 
-const router = Router();
+const notifyRoute = Router();
 
-router.post('/waybill', async (req, res) => {
+notifyRoute.post('/waybill', async (req, res) => {
   const notifyData: WaybillNotify = req.body;
 
   const waybill: Waybill = await get(notifyData.waybillId.toUpperCase()); // case insensitive
@@ -24,4 +24,4 @@ router.post('/waybill', async (req, res) => {
   }
 });
 
-module.exports = router;
+export { notifyRoute };
