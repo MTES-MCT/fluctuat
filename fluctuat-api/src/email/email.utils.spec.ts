@@ -1,4 +1,4 @@
-import { EmailService } from './email.service';
+import { getValidReceivers } from './email.utils';
 
 describe('getReceivers', () => {
 
@@ -11,7 +11,7 @@ describe('getReceivers', () => {
       {} // empty
     ];
 
-    expect(EmailService.getValidReceivers(emails)).toEqual([
+    expect(getValidReceivers(emails)).toEqual([
       { Email: 'stuart@fluctuat.beta.gouv.fr', Name: 'stuart mill' },
       { Email: 'jevons@fluctuat.beta.gouv.fr', Name: '' }
     ]);

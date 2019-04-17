@@ -1,5 +1,6 @@
 import * as mailjet from 'node-mailjet';
 import { getConfig } from '../service/config.service';
+import { convert } from './sms.utils';
 
 const config = getConfig();
 const smsConfig = config.sms;
@@ -31,20 +32,13 @@ export class SmsService {
 
     const smsData = {
       Text: text,
-      To: this.convert(cellphone),
+      To: convert(cellphone),
       From: 'Fluctuat'
     };
 
     console.log('sending sms', smsData);
     return this.mailjetService.post('sms-send')
       .request(smsData);
-  }
-
-  convert(cellphone) {
-    return '+33'.concat( // add french prefix
-      cellphone.replace(/\s/g, '') // remove spaces
-        .substring(1)// remove first 0
-    );
   }
 
 }

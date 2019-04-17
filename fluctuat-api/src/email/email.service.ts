@@ -2,6 +2,7 @@ import * as mailjet from 'node-mailjet';
 import { HasEmail } from '../models/has-email.interface';
 import { getConfig } from '../service/config.service';
 import { EmailData } from './email-data';
+import { getValidReceivers } from './email.utils';
 
 const config = getConfig();
 const emailConfig = config.email;
@@ -21,21 +22,13 @@ export class EmailService {
     return this.emailService;
   }
 
-  static getValidReceivers(emails) {
-    return emails
-    // filter empty emails
-      .filter(item => !!item.email)
-      // map to mailjet model
-      .map(item => ({ Email: item.email, Name: item.name || '' }));
-  }
-
   sendEmail(data: EmailData, pdf?: { name: string, content: string }) {
 
     const request: any = {
       Messages: [
         {
           From: { Name: this.sender.name, Email: this.sender.email },
-          To: EmailService.getValidReceivers(data.to),
+          To: getValidReceivers(data.to),
           Subject: data.subject,
           TextPart: data.body.text,
           HTMLPart: data.body.html
