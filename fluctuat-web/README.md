@@ -7,6 +7,7 @@ Front-end of Fluctuat
  - Angular
  - Node
  - Nginx
+ - Bulma
 
 ### Prerequisites
 

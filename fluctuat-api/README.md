@@ -8,6 +8,7 @@ This project contains the backend which exposes the REST api consumed by the fro
  - Express
  - MongoDB
  - Docker
+ - PM2
 
 ### Prerequisites
 
