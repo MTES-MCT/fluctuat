@@ -1,6 +1,17 @@
+import { LoadValidation } from '../models/load-validation';
 import { Waybill } from '../models/waybill';
+import * as loadValidationStorage from '../storage/load-validation.storage';
+import * as unloadValidationStorage from '../storage/unload-validation.storage';
 import * as waybillStorage from '../storage/waybill-storage';
-import { sendWaybill, sendWaybillLoaded } from './send-waybill.service';
+import { getBaseUrl } from './config.service';
+import {
+  sendWaybill,
+  sendWaybillLoaded,
+  sendWaybillLoadValidation,
+  sendWaybillUnloadValidation
+} from './send-waybill.service';
+
+const baseUrl = getBaseUrl();
 
 const validateLoadInfo = async (waybill: Waybill) => {
   const loadInfo = waybill.loadInfo;
@@ -39,6 +50,41 @@ const validateUnloadInfo = async (waybill: Waybill) => {
     .then(() => console.log('waybill sent'))
     .catch(console.error);
 
+  return unloadInfo;
 };
 
-export { validateLoadInfo, validateUnloadInfo };
+const sendLoadValidation = async (waybill: Waybill) => {
+  const loadValidation: LoadValidation = generateLoadValidation(waybill);
+
+  // TODO handle when a link are already created
+  await loadValidationStorage.put(loadValidation);
+  const confirmationLink = `${baseUrl}/confirmation-chargement/${loadValidation.code}`;
+
+  // send load validation email
+  sendWaybillLoadValidation(waybill, confirmationLink)
+    .then(() => console.log('load validation sent'))
+    .catch(console.error);
+};
+
+const sendUnLoadValidation = async (waybill: Waybill) => {
+  const unloadValidation: LoadValidation = generateLoadValidation(waybill);
+
+  // TODO handle when a link are already created
+  await unloadValidationStorage.put(unloadValidation);
+  const confirmationLink = `${baseUrl}/confirmation-dechargement/${unloadValidation.code}`;
+
+  // send validation email
+  sendWaybillUnloadValidation(waybill, confirmationLink)
+    .then(() => console.log('unload validation sent'))
+    .catch(console.error);
+};
+
+const generateLoadValidation = (waybill: Waybill): LoadValidation => {
+  return {
+    // TODO random string + date
+    code: new Date().getTime().toString(),
+    waybillId: waybill.code
+  };
+};
+
+export { validateLoadInfo, validateUnloadInfo, sendLoadValidation, sendUnLoadValidation };

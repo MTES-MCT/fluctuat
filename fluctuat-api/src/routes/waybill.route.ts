@@ -3,12 +3,7 @@ import * as randomstring from 'randomstring';
 import { Waybill } from '../models/waybill';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
-import {
-  sendWaybill,
-  sendWaybillLoaded,
-  sendWaybillLoadValidation,
-  sendWaybillUnloadValidation
-} from '../service/send-waybill.service';
+import { sendLoadValidation, sendUnLoadValidation } from '../service/waybill-validation.service';
 import * as waybillStorage from '../storage/waybill-storage';
 import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
 
@@ -108,10 +103,7 @@ waybillRoute.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res
 
   await waybillStorage.put(waybill);
 
-  // send validation email
-  sendWaybillLoadValidation(waybill)
-    .then(() => console.log('load validation sent'))
-    .catch(console.error);
+  await sendLoadValidation(waybill);
 
   res.status(204).end();
 });
@@ -148,10 +140,7 @@ waybillRoute.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, r
 
   await waybillStorage.put(waybill);
 
-  // send validation email
-  sendWaybillUnloadValidation(waybill)
-    .then(() => console.log('unload validation sent'))
-    .catch(console.error);
+  await sendUnLoadValidation(waybill);
 
   res.status(204).end();
 });
