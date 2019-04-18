@@ -6,6 +6,7 @@ import { WaybillService } from '../shared/waybill.service';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
+import { UnloadValidationService } from '../shared/unload-validation.service';
 
 @Component({
   selector: 'flu-waybill-unload-validation',
@@ -18,20 +19,20 @@ export class WaybillUnloadValidationComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
 
-  constructor(private waybillService: WaybillService, private route: ActivatedRoute) {
+  constructor(private unloadValidationService: UnloadValidationService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
-    this.waybill$ = this.waybillService.get(this.waybillId)
+    this.waybill$ = this.unloadValidationService.get(this.waybillId)
       .pipe(shareReplay(1));
   }
 
   validateUnloadInfo(waybill: Waybill) {
     this.result.waiting();
 
-    this.waybillService.validateUnloadInfo(this.waybillId)
+    this.unloadValidationService.validateUnloadInfo(this.waybillId)
       .pipe(
         tap((unloadInfo) => waybill.unloadInfo = unloadInfo), // update unloadInfo
         catchError(() => throwError(GENERIC_ERROR_MSG))

@@ -6,6 +6,8 @@ import * as logger from 'morgan';
 import { authRoute } from './routes/auth.route';
 import { contactsRoute } from './routes/contacts.route';
 import { notifyRoute } from './routes/notify.route';
+import { waybillLoadValidationRoute } from './routes/waybill-load-validation.route';
+import { waybillUnloadValidationRoute } from './routes/waybill-unload-validation.route';
 import { waybillRoute } from './routes/waybill.route';
 import { mongoClient } from './storage/mongo-client';
 
@@ -22,6 +24,8 @@ const main = async () => {
 
   app.use('/api/auth', authRoute);
   app.use('/api/waybill', waybillRoute);
+  app.use('/api/load-validation', waybillLoadValidationRoute);
+  app.use('/api/unload-validation', waybillUnloadValidationRoute);
   app.use('/api/notify', notifyRoute);
   app.use('/api/contacts', contactsRoute);
 

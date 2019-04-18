@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { Waybill } from '../shared/models/waybill.model';
 import { ResultHelper } from '../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../core/generic-error';
+import { LoadValidationService } from '../shared/load-validation.service';
 
 @Component({
   selector: 'flu-waybill-load-validation',
@@ -18,20 +19,20 @@ export class WaybillLoadValidationComponent implements OnInit {
 
   result: ResultHelper = new ResultHelper();
 
-  constructor(private waybillService: WaybillService, private route: ActivatedRoute) {
+  constructor(private loadValidationService: LoadValidationService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.waybillId = this.route.snapshot.paramMap.get('id');
 
-    this.waybill$ = this.waybillService.get(this.waybillId)
+    this.waybill$ = this.loadValidationService.get(this.waybillId)
       .pipe(shareReplay(1));
   }
 
   validateLoadInfo(waybill: Waybill) {
     this.result.waiting();
 
-    this.waybillService.validateLoadInfo(this.waybillId)
+    this.loadValidationService.validateLoadInfo(this.waybillId)
       .pipe(
         tap((loadInfo) => waybill.loadInfo = loadInfo), // update loadInfo
         catchError(() => throwError(GENERIC_ERROR_MSG))

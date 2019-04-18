@@ -31,20 +31,12 @@ export class WaybillService {
     return this.http.get<LoadInfo>(`/api/waybill/${code}/load-info`);
   }
 
-  validateLoadInfo(code: string): Observable<LoadInfo> {
-    return this.http.post<LoadInfo>(`/api/waybill/${code}/load-info/validate`, null);
-  }
-
   sendUnloadInfo(code: string, unloadInfo: LoadInfo) {
     return this.http.put(`/api/waybill/${code}/unload-info`, unloadInfo);
   }
 
   getUnloadInfo(code: string): Observable<LoadInfo> {
     return this.http.get<LoadInfo>(`/api/waybill/${code}/unload-info`);
-  }
-
-  validateUnloadInfo(code: string): Observable<LoadInfo> {
-    return this.http.post<LoadInfo>(`/api/waybill/${code}/unload-info/validate`, null);
   }
 
   getAllMe() {

@@ -30,6 +30,8 @@ import { ContactsService } from './waybill/shared/contacts.service';
 import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-status-notification.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 import { AccountModule } from './account/account.module';
+import { LoadValidationService } from './waybill/shared/load-validation.service';
+import { UnloadValidationService } from './waybill/shared/unload-validation.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { AccountModule } from './account/account.module';
   providers: [
     AuthService,
     WaybillService,
+    LoadValidationService,
+    UnloadValidationService,
     NotifyService,
     ContactsService,
     {

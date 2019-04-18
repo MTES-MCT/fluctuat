@@ -122,34 +122,6 @@ waybillRoute.get('/:id/load-info', fetchWaybill, (req: WaybillRequest, res) => {
   return res.json(waybill.loadInfo);
 });
 
-waybillRoute.post('/:id/load-info/validate', fetchWaybill, async (req: WaybillRequest, res) => {
-  const waybill: Waybill = req.waybill;
-
-  const loadInfo = waybill.loadInfo;
-
-  // if not loadInfo sent return bad request
-  if (!loadInfo.sentAt) {
-    return res.status(400).send(`Le chargement n'a pas été encore commencé`);
-  }
-
-  // if already validated return loadInfo
-  if (loadInfo.validatedAt) {
-    return res.json(loadInfo);
-  }
-
-  // add the link to pdf document
-  waybill.documentUrl = `/api/waybill/${waybill.code}/lettre-de-voiture.pdf`;
-  loadInfo.validatedAt = new Date();
-  await waybillStorage.put(waybill);
-
-  // send waybill loaded email
-  sendWaybillLoaded(waybill)
-    .then(() => console.log('waybill loaded email sent'))
-    .catch(console.error);
-
-  res.json(loadInfo);
-});
-
 waybillRoute.get('/:id/unload-info', fetchWaybill, (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
@@ -168,7 +140,7 @@ waybillRoute.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, r
   // if loadInfo is not validated bad request
   if (!waybill.loadInfo.validatedAt) {
     return res.status(400)
-      .send(`Le déchargement ne peux pas commencar avant la confirmation du chargement.`);
+      .send(`Le déchargement ne peux pas commencer avant la confirmation du chargement.`);
   }
 
   waybill.unloadInfo = req.body;
@@ -182,32 +154,6 @@ waybillRoute.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, r
     .catch(console.error);
 
   res.status(204).end();
-});
-
-waybillRoute.post('/:id/unload-info/validate', fetchWaybill, async (req: WaybillRequest, res) => {
-  const waybill: Waybill = req.waybill;
-
-  const unloadInfo = waybill.unloadInfo;
-
-  // if not loadInfo sent return bad request
-  if (!unloadInfo.sentAt) {
-    return res.status(400).send(`Le déchargement n'a pas été encore commencé`);
-  }
-
-  // if already validated return unloadInfo
-  if (unloadInfo.validatedAt) {
-    return res.json(unloadInfo);
-  }
-
-  unloadInfo.validatedAt = new Date();
-  await waybillStorage.put(waybill);
-
-  // send waybill by email
-  sendWaybill(waybill)
-    .then(() => console.log('waybill sent'))
-    .catch(console.error);
-
-  res.json(unloadInfo);
 });
 
 export { waybillRoute };
