@@ -1,5 +1,5 @@
 import { buildValidationStorage } from './build-validation-storage';
 
-const { get, put } = buildValidationStorage('UnloadValidation');
+const { get, put, getByWaybillId } = buildValidationStorage('UnloadValidation');
 
-export { get, put };
+export { get, put, getByWaybillId };

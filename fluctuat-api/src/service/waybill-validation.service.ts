@@ -56,9 +56,8 @@ const validateUnloadInfo = async (waybill: Waybill) => {
 };
 
 const sendLoadValidation = async (waybill: Waybill) => {
-  const loadValidation: LoadValidation = generateLoadValidation(waybill);
+  const loadValidation = await loadValidationStorage.getByWaybillId(waybill.code) || generateValidation(waybill);
 
-  // TODO handle when a link are already created
   await loadValidationStorage.put(loadValidation);
   const confirmationLink = `${baseUrl}/confirmation-chargement/${loadValidation.code}`;
 
@@ -69,9 +68,8 @@ const sendLoadValidation = async (waybill: Waybill) => {
 };
 
 const sendUnLoadValidation = async (waybill: Waybill) => {
-  const unloadValidation: LoadValidation = generateLoadValidation(waybill);
+  const unloadValidation = await unloadValidationStorage.getByWaybillId(waybill.code) || generateValidation(waybill);
 
-  // TODO handle when a link are already created
   await unloadValidationStorage.put(unloadValidation);
   const confirmationLink = `${baseUrl}/confirmation-dechargement/${unloadValidation.code}`;
 
@@ -81,7 +79,7 @@ const sendUnLoadValidation = async (waybill: Waybill) => {
     .catch(console.error);
 };
 
-const generateLoadValidation = (waybill: Waybill): LoadValidation => {
+const generateValidation = (waybill: Waybill): LoadValidation => {
   const validationCode = randomstring.generate({
     length: 10,
     readable: true
