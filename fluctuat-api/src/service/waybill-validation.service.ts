@@ -1,3 +1,5 @@
+import * as randomstring from 'randomstring';
+
 import { LoadValidation } from '../models/load-validation';
 import { Waybill } from '../models/waybill';
 import * as loadValidationStorage from '../storage/load-validation.storage';
@@ -80,9 +82,12 @@ const sendUnLoadValidation = async (waybill: Waybill) => {
 };
 
 const generateLoadValidation = (waybill: Waybill): LoadValidation => {
+  const validationCode = randomstring.generate({
+    length: 10,
+    readable: true
+  });
   return {
-    // TODO random string + date
-    code: new Date().getTime().toString(),
+    code: validationCode,
     waybillId: waybill.code
   };
 };
