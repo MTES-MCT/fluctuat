@@ -32,6 +32,8 @@ import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-adm
 import { AccountModule } from './account/account.module';
 import { LoadValidationService } from './waybill/shared/load-validation.service';
 import { UnloadValidationService } from './waybill/shared/unload-validation.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundInterceptor } from './core/not-found.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { UnloadValidationService } from './waybill/shared/unload-validation.serv
     WaybillOptionsComponent,
     WaybillAccessComponent,
     WaybillShareComponent,
+    NotFoundComponent,
   ],
   imports: [
     AccountModule,
@@ -73,6 +76,11 @@ import { UnloadValidationService } from './waybill/shared/unload-validation.serv
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NotFoundInterceptor,
       multi: true
     }
   ],
