@@ -1,14 +1,5 @@
-import { Document, model, Model } from 'mongoose';
-import { LoadValidation } from '../models/load-validation';
-import { LoadValidationSchema } from './schemas/load-validation.schema';
+import { buildValidationStorage } from './validation.storage';
 
-interface UnLoadValidationDocument extends LoadValidation, Document {
-}
-
-const UnloadValidationDao: Model<UnLoadValidationDocument> = model<UnLoadValidationDocument>('UnloadValidation', LoadValidationSchema);
-
-const get = (code) => UnloadValidationDao.findOne({ code });
-
-const put = (unloadValidation: LoadValidation) => new UnloadValidationDao(unloadValidation).save();
+const { get, put } = buildValidationStorage('UnloadValidation');
 
 export { get, put };
