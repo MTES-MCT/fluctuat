@@ -1,10 +1,13 @@
 import { Response, Router } from 'express';
 import { Waybill } from '../models/waybill';
 import { validateUnloadInfo } from '../service/waybill-validation.service';
-import { fetchWaybillFromUnLoad } from './fetch-waybill-from-unload.middleware';
+import { get } from '../storage/unload-validation.storage';
+import { buildFetchWaybillForValidation } from './build-fetch-waybill-for-validation';
 import { WaybillRequest } from './fetch-waybill.middleware';
 
 const waybillUnloadValidationRoute = Router();
+
+const fetchWaybillFromUnLoad = buildFetchWaybillForValidation(get);
 
 waybillUnloadValidationRoute.get('/:id/waybill', fetchWaybillFromUnLoad, (req: WaybillRequest, res: Response) => {
   res.json(req.waybill);

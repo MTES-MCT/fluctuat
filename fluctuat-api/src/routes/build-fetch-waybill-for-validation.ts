@@ -1,9 +1,8 @@
-import { get } from '../storage/load-validation.storage';
+import { LoadValidation } from '../models/load-validation';
 import * as waybillStorage from '../storage/waybill-storage';
 import { WaybillRequest } from './fetch-waybill.middleware';
-import { LoadValidation } from '../models/load-validation';
 
-const fetchWaybillFromLoad = async (req: WaybillRequest, res, next) => {
+const buildFetchWaybillForValidation = (get: (id: string) => any) => async (req: WaybillRequest, res, next) => {
   const id = req.params.id;
 
   const validation: LoadValidation = await get(id);
@@ -16,4 +15,4 @@ const fetchWaybillFromLoad = async (req: WaybillRequest, res, next) => {
   next();
 };
 
-export { fetchWaybillFromLoad };
+export { buildFetchWaybillForValidation };

@@ -1,9 +1,12 @@
 import { Response, Router } from 'express';
 import { validateLoadInfo } from '../service/waybill-validation.service';
-import { fetchWaybillFromLoad } from './fetch-waybill-from-load.middleware';
+import { get } from '../storage/load-validation.storage';
+import { buildFetchWaybillForValidation } from './build-fetch-waybill-for-validation';
 import { WaybillRequest } from './fetch-waybill.middleware';
 
 const waybillLoadValidationRoute = Router();
+
+const fetchWaybillFromLoad = buildFetchWaybillForValidation(get);
 
 waybillLoadValidationRoute.get('/:id/waybill', fetchWaybillFromLoad, async (req: WaybillRequest, res: Response) => {
   res.json(req.waybill);
