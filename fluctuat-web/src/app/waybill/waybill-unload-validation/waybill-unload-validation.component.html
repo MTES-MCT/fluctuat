@@ -3,15 +3,15 @@
   <ng-container *ngIf="waybill$ | async as waybill; else loading">
     <h1>Lettre de voiture nº {{waybill.code}}</h1>
 
-    <flu-waybill-order-info [order]="waybill.order"></flu-waybill-order-info>
+    <flu-waybill-order-info class="box" [order]="waybill.order"></flu-waybill-order-info>
 
     <div class="level"></div>
 
-    <flu-waybill-load-info [waybill]="waybill"></flu-waybill-load-info>
+    <flu-waybill-load-info class="box" [waybill]="waybill"></flu-waybill-load-info>
 
     <div class="level"></div>
 
-    <flu-waybill-unload-info [waybill]="waybill"></flu-waybill-unload-info>
+    <flu-waybill-unload-info class="box has-background-light" [waybill]="waybill"></flu-waybill-unload-info>
 
     <flu-success *ngIf="waybill.unloadInfo.validatedAt">
       Déchargement confirmé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}
