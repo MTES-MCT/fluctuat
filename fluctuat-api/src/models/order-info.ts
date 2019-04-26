@@ -15,4 +15,6 @@ export class OrderInfo {
   originInfo: PortInfo;
   destinationInfo: PortInfo;
   merchandise: Merchandise;
+
+  sentAt: Date;
 }

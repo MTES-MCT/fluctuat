@@ -16,5 +16,7 @@ export const OrderInfoSchema: Schema = new Schema({
   ship: ShipSchema,
   originInfo: PortInfoSchema,
   destinationInfo: PortInfoSchema,
-  merchandise: MerchandiseSchema
+  merchandise: MerchandiseSchema,
+
+  sentAt: Date
 });

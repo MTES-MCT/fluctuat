@@ -1,7 +1,8 @@
 import * as randomstring from 'randomstring';
-import * as waybillStorage from '../storage/waybill-storage';
-import { Waybill } from '../models/waybill';
 import { LoadInfo } from '../models/load-info';
+import { OrderInfo } from '../models/order-info';
+import { Waybill } from '../models/waybill';
+import * as waybillStorage from '../storage/waybill-storage';
 
 const generateCode = async () => {
 
@@ -19,9 +20,16 @@ const createWaybill = async (waybill: Waybill, owner: string) => {
 
   waybill.code = await generateCode();
   waybill.owner = owner;
+  waybill.order.sentAt = new Date();
 
   return await waybillStorage.put(waybill);
+};
 
+const saveOrderInfo = async (waybill: Waybill, orderInfo: OrderInfo) => {
+  waybill.order = orderInfo;
+  waybill.order.sentAt = new Date();
+
+  return await waybillStorage.put(waybill);
 };
 
 const saveLoadInfo = async (waybill: Waybill, loadInfo: LoadInfo) => {
@@ -38,4 +46,4 @@ const saveUnloadInfo = async (waybill: Waybill, unloadInfo: LoadInfo) => {
   return await waybillStorage.put(waybill);
 };
 
-export { createWaybill, saveLoadInfo, saveUnloadInfo };
+export { createWaybill, saveOrderInfo, saveLoadInfo, saveUnloadInfo };
