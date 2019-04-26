@@ -1,9 +1,6 @@
 import { connect } from 'mongoose';
-import { getConfig } from '../service/config.service';
 
-const configMongo = getConfig().mongodb;
-
-const mongoClient = () => {
+const mongoClient = (configMongo) => {
   console.log(`Connecting to mongo db ${configMongo.dbName}...`);
   const uri = `${`mongodb${configMongo.isDns ? '+srv' : ''}://${configMongo.cluster}/?retryWrites=true`}`;
   return connect(uri,
