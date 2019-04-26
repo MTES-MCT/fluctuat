@@ -1,35 +1,20 @@
 import { Router } from 'express';
-import * as randomstring from 'randomstring';
+
 import { Waybill } from '../models/waybill';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
 import { sendLoadValidation, sendUnLoadValidation } from '../service/waybill-validation.service';
+import { createWaybill, saveLoadInfo, saveUnloadInfo } from '../service/waybill.service';
 import * as waybillStorage from '../storage/waybill-storage';
 import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
 
 const waybillRoute = Router();
 
-const generateCode = async () => {
-
-  const code = randomstring.generate({
-    length: 6,
-    readable: true,
-    capitalization: 'uppercase'
-  });
-  // if code exist retry;
-  const waybill = await waybillStorage.get(code);
-  return waybill ? generateCode() : code;
-};
-
 waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
-  const waybill: Waybill = req.body;
+  const userEmail = req.user.email;
+  const waybill: Waybill = await createWaybill(req.body, userEmail);
 
-  waybill.code = await generateCode();
-  waybill.owner = req.user.email;
-
-  await waybillStorage.put(waybill);
-
-  console.log(`${req.user.email} creates waybill ${waybill.code}`);
+  console.log(`${userEmail} creates waybill ${waybill.code}`);
 
   res.status(201).json(waybill);
 });
@@ -98,11 +83,7 @@ waybillRoute.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res
       .send(`Le transporteur a confirmé le chargement. La modification n'est plus possible.`);
   }
 
-  waybill.loadInfo = req.body;
-  waybill.loadInfo.sentAt = new Date();
-
-  await waybillStorage.put(waybill);
-
+  await saveLoadInfo(waybill, req.body);
   await sendLoadValidation(waybill);
 
   res.status(204).end();
@@ -135,11 +116,7 @@ waybillRoute.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, r
       .send(`Le déchargement ne peux pas commencer avant la confirmation du chargement.`);
   }
 
-  waybill.unloadInfo = req.body;
-  waybill.unloadInfo.sentAt = new Date();
-
-  await waybillStorage.put(waybill);
-
+  await saveUnloadInfo(waybill, req.body);
   await sendUnLoadValidation(waybill);
 
   res.status(204).end();
