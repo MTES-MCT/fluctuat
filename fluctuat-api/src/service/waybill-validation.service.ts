@@ -2,8 +2,8 @@ import * as randomstring from 'randomstring';
 
 import { LoadValidation } from '../models/load-validation';
 import { Waybill } from '../models/waybill';
-import * as loadValidationStorage from '../storage/load-validation.storage';
-import * as unloadValidationStorage from '../storage/unload-validation.storage';
+import { loadValidationStorage } from '../storage/load-validation.storage';
+import { unloadValidationStorage } from '../storage/unload-validation.storage';
 import * as waybillStorage from '../storage/waybill-storage';
 import { getBaseUrl } from './config.service';
 import {
