@@ -10,15 +10,6 @@ import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
 
 const waybillRoute = Router();
 
-waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
-  const userEmail = req.user.email;
-  const waybill: Waybill = await createWaybill(req.body, userEmail);
-
-  console.log(`${userEmail} creates waybill ${waybill.code}`);
-
-  res.status(201).json(waybill);
-});
-
 waybillRoute.get('/', verifyJWT, async (req: UserRequest, res) => {
   if (!req.user.admin) {
     return res.status(403).send('Not allowed');
@@ -58,6 +49,17 @@ waybillRoute.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: Waybill
   }
 });
 
+/* Create waybill */
+waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
+  const userEmail = req.user.email;
+  const waybill: Waybill = await createWaybill(req.body, userEmail);
+
+  console.log(`${userEmail} creates waybill ${waybill.code}`);
+
+  res.status(201).json(waybill);
+});
+
+/* modify orderInfo */
 waybillRoute.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
@@ -66,14 +68,18 @@ waybillRoute.put('/:id/order-info', fetchWaybill, async (req: WaybillRequest, re
     return;
   }
 
-  waybill.order = req.body;
-  // TODO add sent date
-
-  await waybillStorage.put(waybill);
+  await saveOrderInfo(waybill, req.body);
 
   res.status(204).end();
 });
 
+waybillRoute.get('/:id/load-info', fetchWaybill, (req: WaybillRequest, res) => {
+  const waybill: Waybill = req.waybill;
+
+  return res.json(waybill.loadInfo);
+});
+
+/* modify LoadInfo */
 waybillRoute.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
@@ -89,18 +95,13 @@ waybillRoute.put('/:id/load-info', fetchWaybill, async (req: WaybillRequest, res
   res.status(204).end();
 });
 
-waybillRoute.get('/:id/load-info', fetchWaybill, (req: WaybillRequest, res) => {
-  const waybill: Waybill = req.waybill;
-
-  return res.json(waybill.loadInfo);
-});
-
 waybillRoute.get('/:id/unload-info', fetchWaybill, (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
   return res.json(waybill.unloadInfo);
 });
 
+/* modify UnloadInfo */
 waybillRoute.put('/:id/unload-info', fetchWaybill, async (req: WaybillRequest, res) => {
   const waybill: Waybill = req.waybill;
 
