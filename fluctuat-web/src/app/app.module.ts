@@ -30,6 +30,10 @@ import { ContactsService } from './waybill/shared/contacts.service';
 import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-status-notification.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 import { AccountModule } from './account/account.module';
+import { LoadValidationService } from './waybill/shared/load-validation.service';
+import { UnloadValidationService } from './waybill/shared/unload-validation.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundInterceptor } from './core/not-found.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import { AccountModule } from './account/account.module';
     WaybillOptionsComponent,
     WaybillAccessComponent,
     WaybillShareComponent,
+    NotFoundComponent,
   ],
   imports: [
     AccountModule,
@@ -64,11 +69,18 @@ import { AccountModule } from './account/account.module';
   providers: [
     AuthService,
     WaybillService,
+    LoadValidationService,
+    UnloadValidationService,
     NotifyService,
     ContactsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NotFoundInterceptor,
       multi: true
     }
   ],

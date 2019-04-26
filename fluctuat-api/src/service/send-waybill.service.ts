@@ -76,9 +76,8 @@ const sendWaybillLoaded = (waybill: Waybill) => {
     .then(pdf => emailService.sendEmail(email, pdf));
 };
 
-const sendWaybillLoadValidation = (waybill: Waybill) => {
+const sendWaybillLoadValidation = (waybill: Waybill, confirmationLink: string) => {
   const transporter = waybill.order.transporter;
-  const confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-chargement`;
 
   const email: EmailData = {
     to: [transporter],
@@ -96,9 +95,8 @@ const sendWaybillLoadValidation = (waybill: Waybill) => {
   ]);
 };
 
-const sendWaybillUnloadValidation = (waybill: Waybill) => {
+const sendWaybillUnloadValidation = (waybill: Waybill, confirmationLink: string) => {
   const transporter = waybill.order.transporter;
-  const confirmationLink = `${baseUrl}/lettre-de-voiture/${waybill.code}/confirmation-dechargement`;
 
   const email: EmailData = {
     to: [transporter],
