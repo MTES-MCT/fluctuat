@@ -27,3 +27,7 @@
   jusqu’au <strong>{{order.destinationInfo.port}}</strong>
   <ng-container *ngIf="order.destinationInfo.expectedDate">, le <strong>{{order.destinationInfo.expectedDate}}</strong></ng-container>.
 </p>
+
+<p>
+  Informations envoyées le <span class="has-text-weight-bold">{{ order.sentAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}</span>
+</p>

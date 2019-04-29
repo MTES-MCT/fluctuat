@@ -16,6 +16,7 @@ This project contains the backend which exposes the REST api consumed by the fro
  - Yarn
  - Docker
  - g++ (required by bcrypt dependency)
+ - libcurl3 (required by mongodb-memory-server)
 
 ### Run as docker container
 

@@ -9,13 +9,15 @@ import { notifyRoute } from './routes/notify.route';
 import { waybillLoadValidationRoute } from './routes/waybill-load-validation.route';
 import { waybillUnloadValidationRoute } from './routes/waybill-unload-validation.route';
 import { waybillRoute } from './routes/waybill.route';
+import { getConfig } from './service/config.service';
 import { mongoClient } from './storage/mongo-client';
 
 const app = express();
 
 const main = async () => {
 
-  await mongoClient();
+  const configMongo = getConfig().mongodb;
+  await mongoClient(configMongo);
 
   app.use(bodyParser.json());
   app.use(cookieParser());

@@ -12,7 +12,8 @@ const get = (code) => WaybillDao.findOne({ code });
 const put = (waybill: Waybill) => new WaybillDao(waybill).save();
 
 const getAll = () => {
-  return WaybillDao.find();
+  return WaybillDao.find()
+    .sort({ 'order.sentAt': 'desc', });
 };
 
 const findByEmail = (email: string) => {
@@ -27,7 +28,8 @@ const findByEmail = (email: string) => {
       { 'order.originInfo.email': email },
       { 'order.destinationInfo.email': email },
     ]
-  });
+  })
+    .sort({ 'order.sentAt': 'desc', });
 };
 
 const findContacts = (owner: string) => {
