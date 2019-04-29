@@ -15,4 +15,6 @@ export class OrderInfo {
   originInfo: PortInfo = new PortInfo();
   destinationInfo: PortInfo = new PortInfo();
   merchandise: Merchandise = new Merchandise();
+
+  sentAt: Date;
 }
