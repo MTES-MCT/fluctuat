@@ -5,7 +5,7 @@
 
     <header class="modal-card-head">
       <p class="modal-card-title">
-        Envoyer la lettre de voiture nº {{waybillNotify.waybillId}}
+        Envoyer la lettre de voiture nº {{waybillShare.waybillId}}
       </p>
       <button class="delete" aria-label="close" (click)="closeModal()"></button>
     </header>
@@ -21,7 +21,7 @@
         <div class="field">
           <div class="control">
             <label class="label">SMS</label>
-            <input class="input is-medium" name="phone" [(ngModel)]="waybillNotify.cellphone" #phone="ngModel"
+            <input class="input is-medium" name="phone" [(ngModel)]="waybillShare.cellphone" #phone="ngModel"
                    pattern="^0[6-7](?:[\s]*\d{2}){4}$"
                    [ngClass]="{'is-danger': hasError(phone)}">
           </div>
@@ -31,7 +31,7 @@
         <div class="field">
           <div class="control">
             <label class="label">Email</label>
-            <input class="input is-medium" type="email" name="email" [(ngModel)]="waybillNotify.email" #email="ngModel"
+            <input class="input is-medium" type="email" name="email" [(ngModel)]="waybillShare.email" #email="ngModel"
                    email
                    [ngClass]="{'is-danger': hasError(email)}">
           </div>

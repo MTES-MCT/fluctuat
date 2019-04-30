@@ -7,10 +7,10 @@ import { PortList } from '../../../shared/ports-list';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 
 @Component({
-  selector: 'flu-waybill-order-form',
-  templateUrl: './waybill-order-form.component.html'
+  selector: 'flu-waybill-form-order',
+  templateUrl: './waybill-form-order.component.html'
 })
-export class WaybillOrderFormComponent {
+export class WaybillFormOrderComponent {
 
   orderForm: FormGroup;
 

@@ -9,13 +9,13 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './core/auth/auth.service';
 import { UnauthorizedInterceptor } from './core/auth/unauthorized.interceptor';
-import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
-import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
-import { WaybillOrderFormComponent } from './waybill/waybill-order/shared/waybill-order-form/waybill-order-form.component';
+import { WaybillFormOrderEditComponent } from './waybill/waybill-form-order/waybill-form-order-edition/waybill-form-order-edit.component';
+import { WaybillFormOrderNewComponent } from './waybill/waybill-form-order/waybill-form-order-new/waybill-form-order-new.component';
+import { WaybillFormOrderComponent } from './waybill/waybill-form-order/shared/waybill-form-order/waybill-form-order.component';
+import { WaybillFormUnloadComponent } from './waybill/waybill-form-unload/waybill-form-unload.component';
+import { WaybillFormLoadComponent } from './waybill/waybill-form-load/waybill-form-load.component';
 import { WaybillDetailComponent } from './waybill/waybill-detail/waybill-detail.component';
-import { WaybillNewComponent } from './waybill/waybill-order/waybil-new/waybill-new.component';
 import { WaybillService } from './waybill/shared/waybill.service';
-import { WaybillUnloadingComponent } from './waybill/waybill-unloading/waybill-unloading.component';
 import { WaybillLoadValidationComponent } from './waybill/waybill-load-validation/waybill-load-validation.component';
 import { WaybillLoadInfoComponent } from './waybill/shared/waybill-load-info/waybill-load-info.component';
 import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
@@ -24,8 +24,6 @@ import { WaybillOrderInfoComponent } from './waybill/shared/waybill-order-info/w
 import { DashboardComponent } from './waybill/dashboard/dashboard.component';
 import { WaybillOptionsComponent } from './waybill/shared/waybill-options/waybill-options.component';
 import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
-import { WaybillShareComponent } from './waybill/shared/waybill-share/waybill-share.component';
-import { NotifyService } from './waybill/shared/notify.service';
 import { ContactsService } from './waybill/shared/contacts.service';
 import { LoadStatusNotificationComponent } from './waybill/waybill-detail/load-status-notification.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
@@ -34,20 +32,22 @@ import { LoadValidationService } from './waybill/shared/load-validation.service'
 import { UnloadValidationService } from './waybill/shared/unload-validation.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotFoundInterceptor } from './core/not-found.interceptor';
+import { WaybillShareComponent } from './waybill/waybill-detail/waybill-share/waybill-share.component';
+import { WaybillShareService } from './waybill/waybill-detail/waybill-share/waybill-share.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    WaybillNewComponent,
-    WaybillEditionComponent,
-    WaybillLoadingComponent,
+    WaybillFormOrderComponent,
+    WaybillFormOrderNewComponent,
+    WaybillFormOrderEditComponent,
+    WaybillFormLoadComponent,
+    WaybillFormUnloadComponent,
     WaybillOrderInfoComponent,
-    WaybillOrderFormComponent,
     WaybillDetailComponent,
     LoadStatusNotificationComponent,
-    WaybillUnloadingComponent,
     WaybillLoadValidationComponent,
     WaybillLoadInfoComponent,
     WaybillUnloadValidationComponent,
@@ -71,7 +71,7 @@ import { NotFoundInterceptor } from './core/not-found.interceptor';
     WaybillService,
     LoadValidationService,
     UnloadValidationService,
-    NotifyService,
+    WaybillShareService,
     ContactsService,
     {
       provide: HTTP_INTERCEPTORS,

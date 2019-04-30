@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { WaybillOrderFormComponent } from './waybill-order-form.component';
+import { WaybillFormOrderComponent } from './waybill-form-order.component';
 import { FormFieldComponent } from '../../../../shared/form-field.component';
 import { DatetimePickerDirective } from '../../../../shared/datetime-picker.directive';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 import { DatePickerDirective } from '../../../../shared/date-picker.directive';
 import { buildPerson } from '../../../../../test.utils';
 
-describe('WaybillOrderFormComponent', () => {
-  let component: WaybillOrderFormComponent;
-  let fixture: ComponentFixture<WaybillOrderFormComponent>;
+describe('WaybillFormOrderComponent', () => {
+  let component: WaybillFormOrderComponent;
+  let fixture: ComponentFixture<WaybillFormOrderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        WaybillOrderFormComponent,
+        WaybillFormOrderComponent,
         FormFieldComponent,
         DatetimePickerDirective,
         DatePickerDirective
@@ -23,7 +23,7 @@ describe('WaybillOrderFormComponent', () => {
       imports: [ReactiveFormsModule]
     });
 
-    fixture = TestBed.createComponent(WaybillOrderFormComponent);
+    fixture = TestBed.createComponent(WaybillFormOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

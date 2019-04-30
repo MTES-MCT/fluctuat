@@ -4,7 +4,7 @@ import { catchError, shareReplay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { WaybillService } from '../../shared/waybill.service';
-import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
+import { WaybillFormOrderComponent } from '../shared/waybill-form-order/waybill-form-order.component';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 import { ContactsService } from '../../shared/contacts.service';
@@ -13,13 +13,13 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { Waybill } from '../../shared/models/waybill.model';
 
 @Component({
-  selector: 'flu-waybill-edition',
-  templateUrl: './waybill-edition.component.html'
+  selector: 'flu-waybill-form-order-edit',
+  templateUrl: './waybill-form-order-edit.component.html'
 })
-export class WaybillEditionComponent implements OnInit {
+export class WaybillFormOrderEditComponent implements OnInit {
 
-  @ViewChild(WaybillOrderFormComponent)
-  orderFormComponent: WaybillOrderFormComponent;
+  @ViewChild(WaybillFormOrderComponent)
+  orderFormComponent: WaybillFormOrderComponent;
 
   result: ResultHelper = new ResultHelper();
 
