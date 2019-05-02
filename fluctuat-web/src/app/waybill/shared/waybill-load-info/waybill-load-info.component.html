@@ -3,8 +3,8 @@
 <p>Le transporteur déclare avoir reçu <strong>{{waybill.loadInfo.merchandiseWeight}}</strong> tonnes de
   <strong>{{waybill.order.merchandise.nature}}</strong> au <strong>{{waybill.order.originInfo.port}}</strong>.</p>
 
-<p>Le chargement, commencé le <strong>{{waybill.loadInfo.startDate}}</strong>
-  s'est terminé le <strong>{{waybill.loadInfo.endDate}}</strong>.</p>
+<p>Le chargement, commencé le <strong>{{waybill.loadInfo.startDate | date: "dd/MM/y, HH:mm"}}</strong>
+  s'est terminé le <strong>{{waybill.loadInfo.endDate | date: "dd/MM/y, HH:mm"}}</strong>.</p>
 
 <ng-container *ngIf="waybill.loadInfo.comments">
   <h4>Commentaires</h4>

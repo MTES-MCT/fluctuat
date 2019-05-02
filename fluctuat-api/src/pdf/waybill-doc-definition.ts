@@ -124,8 +124,8 @@ const printLoadBlock = (loadInfo: LoadInfo, order: OrderInfo) => {
     { text: 'Chargement', style: 'title2' },
     chainText('Le transporteur déclare avoir reçu ', bold(loadInfo.merchandiseWeight), ' tonnes de ',
       bold(order.merchandise.nature), ' au ', bold(order.originInfo.port), '.'),
-    chainText('Le chargement, commencé le ', bold(loadInfo.startDate), ' s\'est terminé le ',
-      bold(loadInfo.endDate), '.'),
+    chainText('Le chargement, commencé le ', bold(fullDate(loadInfo.startDate)), ' s\'est terminé le ',
+      bold(fullDate(loadInfo.endDate)), '.'),
     '\n',
     printCommentBlock(loadInfo.comments),
   ];
@@ -141,8 +141,8 @@ const printUnloadBlock = (unloadInfo: LoadInfo, order: OrderInfo) => {
     { text: 'Déchargement', style: 'title2' },
     chainText('Le transporteur déclare avoir remis ', bold(unloadInfo.merchandiseWeight), ' tonnes de ',
       bold(order.merchandise.nature), ' au ', bold(order.destinationInfo.port), '.'),
-    chainText('Le déchargement, commencé le ', bold(unloadInfo.startDate), ' s\'est terminé le ',
-      bold(unloadInfo.endDate), '.'),
+    chainText('Le déchargement, commencé le ', bold(fullDate(unloadInfo.startDate)), ' s\'est terminé le ',
+      bold(fullDate(unloadInfo.endDate)), '.'),
     '\n',
     printCommentBlock(unloadInfo.comments),
   ];
@@ -180,6 +180,7 @@ const printCommentBlock = (comments) => {
     }
   };
 };
-
+const shortDate = (date) => format(date, 'DD/MM/YYYY', { locale: fr });
+const fullDate = (date) => format(date, 'DD/MM/YYYY, HH:mm', { locale: fr });
 const bold = (text: string) => ({ text: text ? text.toUpperCase() : '', bold: true });
 const chainText = (...parts) => ({ text: [...parts], style: 'level' });

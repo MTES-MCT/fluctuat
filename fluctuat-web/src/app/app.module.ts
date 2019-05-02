@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NotFoundInterceptor } from './core/not-found.interceptor';
 import { WaybillShareComponent } from './waybill/waybill-detail/waybill-share/waybill-share.component';
 import { WaybillShareService } from './waybill/waybill-detail/waybill-share/waybill-share.service';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,8 @@ import { WaybillShareService } from './waybill/waybill-detail/waybill-share/wayb
     UnloadValidationService,
     WaybillShareService,
     ContactsService,
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,

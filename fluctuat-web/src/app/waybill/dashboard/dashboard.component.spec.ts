@@ -10,6 +10,9 @@ import { WaybillService } from '../shared/waybill.service';
 import { Waybill } from '../shared/models/waybill.model';
 import { StatusOption } from './status-option.enum';
 import { SharedModule } from '../../shared/shared.module';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import localeFr from '@angular/common/locales/fr';
 
 describe('DashboardComponent', () => {
 
@@ -19,13 +22,18 @@ describe('DashboardComponent', () => {
   const MockWaybillService = { getAllMe: () => of([]) };
 
   beforeEach(() => {
+    registerLocaleData(localeFr, 'fr');
 
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
         WaybillOptionsComponent
       ],
-      providers: [{ provide: WaybillService, useValue: MockWaybillService }],
+      providers: [
+        { provide: WaybillService, useValue: MockWaybillService },
+        { provide: LOCALE_ID, useValue: 'fr-FR' },
+        DatePipe
+      ],
       imports: [RouterTestingModule, SharedModule, FormsModule]
     });
 
@@ -74,6 +82,33 @@ describe('DashboardComponent', () => {
     const shownWaybills = fixture.debugElement.queryAll(By.css('.card'));
 
     expect(shownWaybills).toHaveLength(1);
+  });
+
+  it('loadInfoDate format loadInfo date', () => {
+    const waybill = new Waybill();
+    waybill.order.originInfo.expectedDate = new Date('2020-10-01');
+    waybill.loadInfo.endDate = new Date('2020-10-02T09:55');
+
+    const loadInfoDate = component.getLoadInfoDate(waybill);
+
+    expect(loadInfoDate).toBe('02/10/2020, 09:55');
+  });
+
+  it('loadInfoDate format origin expected date if no loadInfo', () => {
+    const waybill = new Waybill();
+    waybill.order.originInfo.expectedDate = new Date('2020-10-01');
+
+    const loadInfoDate = component.getLoadInfoDate(waybill);
+
+    expect(loadInfoDate).toBe('01/10/2020');
+  });
+
+  it('loadInfoDAte returns non renseignée if both are undefined', () => {
+    const waybill = new Waybill();
+
+    const loadInfoDate = component.getLoadInfoDate(waybill);
+
+    expect(loadInfoDate).toBe('non renseignée');
   });
 
 });

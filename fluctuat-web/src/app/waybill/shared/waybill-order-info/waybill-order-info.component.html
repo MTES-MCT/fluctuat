@@ -23,9 +23,9 @@
   </ng-container>
   <ng-template #notprice> (sans valeur déclarée)</ng-template>
   que le transporteur s’engage à transporter depuis le <strong>{{order.originInfo.port}}</strong>
-  <ng-container *ngIf="order.originInfo.expectedDate">, le <strong>{{order.originInfo.expectedDate}}</strong>,</ng-container>
+  <ng-container *ngIf="order.originInfo.expectedDate">, le <strong>{{order.originInfo.expectedDate | date: "shortDate"}}</strong>,</ng-container>
   jusqu’au <strong>{{order.destinationInfo.port}}</strong>
-  <ng-container *ngIf="order.destinationInfo.expectedDate">, le <strong>{{order.destinationInfo.expectedDate}}</strong></ng-container>.
+  <ng-container *ngIf="order.destinationInfo.expectedDate">, le <strong>{{order.destinationInfo.expectedDate | date: "shortDate"}}</strong></ng-container>.
 </p>
 
 <p>
