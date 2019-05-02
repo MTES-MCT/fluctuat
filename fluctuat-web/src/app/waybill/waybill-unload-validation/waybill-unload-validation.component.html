@@ -14,7 +14,7 @@
     <flu-waybill-unload-info class="box has-background-light" [waybill]="waybill"></flu-waybill-unload-info>
 
     <flu-success *ngIf="waybill.unloadInfo.validatedAt">
-      Déchargement confirmé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}
+      Déchargement confirmé le {{ waybill.unloadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm"}}
     </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>

@@ -24,10 +24,10 @@
       <td>{{waybill.order.sender.name || 'non renseigné'}}</td>
       <td>{{waybill.order.receiver.name || 'non renseigné'}}</td>
       <td>{{waybill.order.ship.name || 'non renseigné'}}</td>
-      <td>{{waybill.loadInfo.sentAt | date: "short":'':'fr' }}</td>
-      <td>{{waybill.loadInfo.validatedAt | date: "short":'':'fr' }}</td>
-      <td>{{waybill.unloadInfo.sentAt | date: "short":'':'fr' }}</td>
-      <td>{{waybill.unloadInfo.validatedAt | date: "short":'':'fr' }}</td>
+      <td>{{waybill.loadInfo.sentAt | date: "short"}}</td>
+      <td>{{waybill.loadInfo.validatedAt | date: "short"}}</td>
+      <td>{{waybill.unloadInfo.sentAt | date: "short"}}</td>
+      <td>{{waybill.unloadInfo.validatedAt | date: "short"}}</td>
       <td>{{waybill.order.merchandise.weight}}</td>
     </tr>
     </tbody>
