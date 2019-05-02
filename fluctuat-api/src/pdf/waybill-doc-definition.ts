@@ -95,7 +95,7 @@ const printOrderInfo = (order: OrderInfo) => {
         ' en sa qualité de ', bold(`${middleman.isBroker ? 'courtier' : 'commissionnaire'}`))];
   };
 
-  const printDate = (date, suffix = '') => date ? [', le ', bold(order.originInfo.expectedDate), suffix] : [];
+  const printDate = (date, suffix = '') => date ? [', le ', bold(shortDate(date)), suffix] : [];
 
   const printWeight = (weight) => weight ? ['de ', bold(order.merchandise.weight), ' tonnes'] : ['à determiner'];
 
