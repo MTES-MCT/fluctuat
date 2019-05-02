@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Person } from '../../../shared/models/person.model';
 import { Contacts } from '../../../shared/models/contacts';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
@@ -29,7 +30,7 @@ export class WaybillFormOrderComponent {
       receiver: this.fillPersonForm(order.receiver),
       middleman: this.formBuilder.group({
         name: [order.middleman.name],
-        email: [order.middleman.email, [Validators.email,  FluValidators.withDomain]],
+        email: [order.middleman.email, [Validators.email, FluValidators.withDomain]],
         isBroker: [order.middleman.isBroker]
       }),
       transporter: this.formBuilder.group({

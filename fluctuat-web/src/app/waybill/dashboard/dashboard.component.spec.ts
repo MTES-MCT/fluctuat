@@ -22,7 +22,7 @@ describe('DashboardComponent', () => {
   const MockWaybillService = { getAllMe: () => of([]) };
 
   beforeEach(() => {
-    registerLocaleData(localeFr, 'fr');
+    registerLocaleData(localeFr);
 
     TestBed.configureTestingModule({
       declarations: [
