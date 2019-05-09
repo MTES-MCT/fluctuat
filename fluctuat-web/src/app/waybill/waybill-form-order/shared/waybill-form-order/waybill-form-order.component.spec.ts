@@ -1,29 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { WaybillOrderFormComponent } from './waybill-order-form.component';
+import { WaybillFormOrderComponent } from './waybill-form-order.component';
 import { FormFieldComponent } from '../../../../shared/form-field.component';
-import { DatetimePickerDirective } from '../../../../shared/datetime-picker.directive';
 import { OrderInfo } from '../../../shared/models/order-info.model';
-import { DatePickerDirective } from '../../../../shared/date-picker.directive';
+import { DatePickerDirective } from '../../../../shared/date-picker/date-picker.directive';
 import { buildPerson } from '../../../../../test.utils';
 
-describe('WaybillOrderFormComponent', () => {
-  let component: WaybillOrderFormComponent;
-  let fixture: ComponentFixture<WaybillOrderFormComponent>;
+describe('WaybillFormOrderComponent', () => {
+  let component: WaybillFormOrderComponent;
+  let fixture: ComponentFixture<WaybillFormOrderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        WaybillOrderFormComponent,
+        WaybillFormOrderComponent,
         FormFieldComponent,
-        DatetimePickerDirective,
         DatePickerDirective
       ],
       imports: [ReactiveFormsModule]
     });
 
-    fixture = TestBed.createComponent(WaybillOrderFormComponent);
+    fixture = TestBed.createComponent(WaybillFormOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -42,8 +40,8 @@ describe('WaybillOrderFormComponent', () => {
     order.transporter = { name: 'transporter name', email: 'trasporter@test', cellphone: '123456' };
     order.ship = { name: 'shipname', regNumber: 'FR 123' };
     order.merchandise = { nature: 'ble', price: '2', weight: '42' };
-    order.originInfo = { port: 'origin port', expectedDate: '12/12/2020', email: 'load@test' };
-    order.destinationInfo = { port: 'destination port', expectedDate: '12/12/2020', email: 'unload@test' };
+    order.originInfo = { port: 'origin port', expectedDate: new Date('2020-12-12'), email: 'load@test' };
+    order.destinationInfo = { port: 'destination port', expectedDate: new Date('2020-12-12'), email: 'unload@test' };
 
     component.setValue(order);
 

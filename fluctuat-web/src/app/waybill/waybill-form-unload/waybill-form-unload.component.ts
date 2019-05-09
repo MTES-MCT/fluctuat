@@ -11,10 +11,10 @@ import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
-  selector: 'flu-waybill-unloading',
-  templateUrl: './waybill-unloading.component.html'
+  selector: 'flu-waybill-form-unload',
+  templateUrl: './waybill-form-unload.component.html'
 })
-export class WaybillUnloadingComponent implements OnInit {
+export class WaybillFormUnloadComponent implements OnInit {
 
   unloadInfoForm: FormGroup;
 

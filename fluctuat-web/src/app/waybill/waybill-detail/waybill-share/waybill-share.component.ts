@@ -2,10 +2,10 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NotifyService } from '../notify.service';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
-import { WaybillNotify } from '../models/waybill-notify.model';
+import { WaybillShareService } from './waybill-share.service';
+import { WaybillShare } from './waybill-share.model';
 
 @Component({
   selector: 'flu-waybill-share',
@@ -19,7 +19,7 @@ export class WaybillShareComponent {
 
   sent: boolean;
 
-  constructor(private notifyService: NotifyService) {
+  constructor(private waybillShareService: WaybillShareService) {
   }
 
   @Input()
@@ -29,7 +29,7 @@ export class WaybillShareComponent {
   }
 
   @Input()
-  waybillNotify: WaybillNotify;
+  waybillShare: WaybillShare;
 
   @Output()
   showChange = new EventEmitter();
@@ -53,7 +53,7 @@ export class WaybillShareComponent {
   send() {
     this.result.waiting();
 
-    this.notifyService.sendNotification(this.waybillNotify)
+    this.waybillShareService.sendNotification(this.waybillShare)
       .pipe(catchError(() => throwError(GENERIC_ERROR_MSG)))
       .subscribe(() => {
         this.sent = true;

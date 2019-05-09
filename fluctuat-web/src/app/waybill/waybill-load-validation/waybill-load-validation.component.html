@@ -10,7 +10,7 @@
     <flu-waybill-load-info class="box has-background-light" [waybill]="waybill"></flu-waybill-load-info>
 
     <flu-success *ngIf="waybill.loadInfo.validatedAt">
-      Chargement confirmé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr'}}
+      Chargement confirmé le {{waybill.loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm"}}
     </flu-success>
 
     <flu-error [errorMsg]="result.errorMsg"></flu-error>

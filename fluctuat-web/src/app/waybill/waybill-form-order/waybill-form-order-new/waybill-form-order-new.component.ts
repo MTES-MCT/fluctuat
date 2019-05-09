@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { catchError, shareReplay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { WaybillOrderFormComponent } from '../shared/waybill-order-form/waybill-order-form.component';
+import { WaybillFormOrderComponent } from '../shared/waybill-form-order/waybill-form-order.component';
 import { WaybillService } from '../../shared/waybill.service';
 import { Waybill } from '../../shared/models/waybill.model';
 import { ResultHelper } from '../../../core/result-helper';
@@ -13,13 +13,13 @@ import { Contacts } from '../../shared/models/contacts';
 import { OrderInfo } from '../../shared/models/order-info.model';
 
 @Component({
-  selector: 'flu-waybill-new',
-  templateUrl: './waybill-new.component.html'
+  selector: 'flu-waybill-form-order-new',
+  templateUrl: './waybill-form-order-new.component.html'
 })
-export class WaybillNewComponent implements OnInit {
+export class WaybillFormOrderNewComponent implements OnInit {
 
-  @ViewChild(WaybillOrderFormComponent)
-  orderFormComponent: WaybillOrderFormComponent;
+  @ViewChild(WaybillFormOrderComponent)
+  orderFormComponent: WaybillFormOrderComponent;
 
   result: ResultHelper = new ResultHelper();
 

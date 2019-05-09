@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+
 import { Waybill } from '../shared/models/waybill.model';
 import { WaybillService } from '../shared/waybill.service';
 import { StatusOption } from './status-option.enum';
+import { PortInfo } from '../shared/models/port-info';
+import { LoadInfo } from '../shared/models/load-info.model';
 
 @Component({
   selector: 'flu-dashboard',
@@ -18,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
   public readonly STATUS_OPTION = StatusOption;
 
-  constructor(public waybillService: WaybillService) {
+  constructor(public waybillService: WaybillService, public datePipe: DatePipe) {
   }
 
   ngOnInit() {
@@ -65,4 +69,21 @@ export class DashboardComponent implements OnInit {
 
     return 'Crée';
   }
+
+  getLoadInfoDate = (waybill: Waybill) => this.formatLoadInfoDate(waybill.order.originInfo, waybill.loadInfo);
+
+  getUnloadInfoDate = (waybill: Waybill) => this.formatLoadInfoDate(waybill.order.destinationInfo, waybill.unloadInfo);
+
+  private formatLoadInfoDate(portInfo: PortInfo, loadInfo: LoadInfo) {
+    if (loadInfo.endDate) {
+      return this.datePipe.transform(loadInfo.endDate, 'dd/MM/y, HH:mm');
+    }
+
+    if (portInfo.expectedDate) {
+      return this.datePipe.transform(portInfo.expectedDate, 'shortDate');
+    }
+
+    return 'non renseignée';
+  }
+
 }

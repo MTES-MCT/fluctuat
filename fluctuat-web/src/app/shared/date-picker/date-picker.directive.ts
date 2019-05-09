@@ -1,10 +1,12 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import flatpickr from 'flatpickr';
+import { French } from 'flatpickr/dist/l10n/fr';
+import { DatePickerConfig } from './date-picker.config';
 
 @Directive({
-  selector: '[fluTimePicker]'
+  selector: '[fluDatePicker]'
 })
-export class TimePickerDirective implements OnDestroy {
+export class DatePickerDirective implements OnDestroy {
 
   fp: any;
 
@@ -14,10 +16,10 @@ export class TimePickerDirective implements OnDestroy {
   constructor(el: ElementRef) {
 
     this.fp = flatpickr(el.nativeElement, {
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: 'H:i',
-      time_24hr: true,
+      locale: French,
+      dateFormat: 'Z',
+      altFormat: DatePickerConfig.dateFormat,
+      altInput: true
     });
   }
 
@@ -31,7 +33,7 @@ export class TimePickerDirective implements OnDestroy {
     this.fp.open();
   }
 
-  @HostListener('change', [ '$event.target.value' ])
+  @HostListener('change', ['$event.target.value'])
   change(value) {
     this.dateChange.emit(value);
   }
@@ -39,4 +41,5 @@ export class TimePickerDirective implements OnDestroy {
   ngOnDestroy() {
     this.fp.destroy();
   }
+
 }

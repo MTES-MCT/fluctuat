@@ -1,5 +1,5 @@
 export class PortInfo {
   port: string;
-  expectedDate: string;
+  expectedDate: Date;
   email: string;
 }

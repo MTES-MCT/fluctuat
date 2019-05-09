@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Person } from '../../../shared/models/person.model';
 import { Contacts } from '../../../shared/models/contacts';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
@@ -7,10 +8,10 @@ import { PortList } from '../../../shared/ports-list';
 import { OrderInfo } from '../../../shared/models/order-info.model';
 
 @Component({
-  selector: 'flu-waybill-order-form',
-  templateUrl: './waybill-order-form.component.html'
+  selector: 'flu-waybill-form-order',
+  templateUrl: './waybill-form-order.component.html'
 })
-export class WaybillOrderFormComponent {
+export class WaybillFormOrderComponent {
 
   orderForm: FormGroup;
 
@@ -29,7 +30,7 @@ export class WaybillOrderFormComponent {
       receiver: this.fillPersonForm(order.receiver),
       middleman: this.formBuilder.group({
         name: [order.middleman.name],
-        email: [order.middleman.email, [Validators.email,  FluValidators.withDomain]],
+        email: [order.middleman.email, [Validators.email, FluValidators.withDomain]],
         isBroker: [order.middleman.isBroker]
       }),
       transporter: this.formBuilder.group({

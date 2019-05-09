@@ -2,8 +2,8 @@ import { LoadManager } from './load-manager';
 
 export class LoadInfo {
 
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   merchandiseWeight: string;
   comments: string;
   loadManager: LoadManager = new LoadManager();

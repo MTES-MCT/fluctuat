@@ -12,10 +12,10 @@ import { GENERIC_ERROR_MSG } from '../../core/generic-error';
 import { FluValidators } from '../../core/form-validators/flu-validators';
 
 @Component({
-  selector: 'flu-waybill-loading',
-  templateUrl: './waybill-loading.component.html'
+  selector: 'flu-waybill-form-load',
+  templateUrl: './waybill-form-load.component.html'
 })
-export class WaybillLoadingComponent implements OnInit {
+export class WaybillFormLoadComponent implements OnInit {
 
   loadInfoForm: FormGroup;
 

@@ -25,7 +25,7 @@
           <a [routerLink]="['/lettre-de-voiture', waybill.code, 'detail']">{{waybill.code}}</a>
         </p>
         <p class="subtitle" style="font-size: 0.90rem">
-          Envoyée le <span class="has-text-weight-bold">{{waybill.order.sentAt | date: "shortDate":'':'fr' }}</span>
+          Envoyée le <span class="has-text-weight-bold">{{waybill.order.sentAt | date: "shortDate"}}</span>
         </p>
 
 
@@ -44,9 +44,9 @@
         <div class="columns">
           <div class="column is-narrow">
             <span class="icon"><i class="far fa-calendar-alt"></i></span>
-            {{waybill.loadInfo.endDate ? waybill.loadInfo.endDate : waybill.order.originInfo.expectedDate || 'non renseignée'}}
+            <span [title]="waybill.loadInfo.endDate ? 'Date de fin du chargement': 'Date de départ'">{{ getLoadInfoDate(waybill)}}</span>
             <span class="icon"><i class="fa fa-arrow-right"></i></span>
-            {{waybill.unloadInfo.endDate ? waybill.unloadInfo.endDate : waybill.order.destinationInfo.expectedDate || 'non renseignée'}}
+            <span [title]="waybill.unloadInfo.endDate ? 'Date de fin du déchargemnet': 'Date d\'arrivée'">{{ getUnloadInfoDate(waybill)}}</span>
           </div>
         </div>
 

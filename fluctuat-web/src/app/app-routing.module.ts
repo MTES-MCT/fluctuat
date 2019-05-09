@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './waybill/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './core/auth/auth.guard';
-import { WaybillNewComponent } from './waybill/waybill-order/waybil-new/waybill-new.component';
-import { WaybillEditionComponent } from './waybill/waybill-order/waybill-edition/waybill-edition.component';
-import { WaybillLoadingComponent } from './waybill/waybill-loading/waybill-loading.component';
-import { WaybillUnloadingComponent } from './waybill/waybill-unloading/waybill-unloading.component';
+import { WaybillFormOrderNewComponent } from './waybill/waybill-form-order/waybill-form-order-new/waybill-form-order-new.component';
+import { WaybillFormOrderEditComponent } from './waybill/waybill-form-order/waybill-form-order-edition/waybill-form-order-edit.component';
+import { WaybillFormLoadComponent } from './waybill/waybill-form-load/waybill-form-load.component';
+import { WaybillFormUnloadComponent } from './waybill/waybill-form-unload/waybill-form-unload.component';
 import { WaybillLoadValidationComponent } from './waybill/waybill-load-validation/waybill-load-validation.component';
 import { WaybillUnloadValidationComponent } from './waybill/waybill-unload-validation/waybill-unload-validation.component';
 import { WaybillDetailComponent } from './waybill/waybill-detail/waybill-detail.component';
@@ -17,11 +17,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'acces-lettre-de-voiture', component: WaybillAccessComponent },
-  { path: 'lettre-de-voiture/new', component: WaybillNewComponent, canActivate: [AuthGuard] },
+  { path: 'lettre-de-voiture/new', component: WaybillFormOrderNewComponent, canActivate: [AuthGuard] },
   { path: 'lettre-de-voiture/:id/detail', component: WaybillDetailComponent },
-  { path: 'lettre-de-voiture/:id/commande', component: WaybillEditionComponent },
-  { path: 'lettre-de-voiture/:id/chargement', component: WaybillLoadingComponent },
-  { path: 'lettre-de-voiture/:id/dechargement', component: WaybillUnloadingComponent },
+  { path: 'lettre-de-voiture/:id/commande', component: WaybillFormOrderEditComponent },
+  { path: 'lettre-de-voiture/:id/chargement', component: WaybillFormLoadComponent },
+  { path: 'lettre-de-voiture/:id/dechargement', component: WaybillFormUnloadComponent },
   { path: 'confirmation-chargement/:id', component: WaybillLoadValidationComponent },
   { path: 'confirmation-dechargement/:id', component: WaybillUnloadValidationComponent },
   { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [AuthGuard] },

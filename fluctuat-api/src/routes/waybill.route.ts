@@ -45,6 +45,7 @@ waybillRoute.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: Waybill
     res.setHeader('Content-Type', 'application/pdf');
     res.send(pdf);
   } catch (error) {
+    console.error(error);
     res.sendStatus(500);
   }
 });

@@ -1,7 +1,7 @@
 <div class="columns notification is-marginless">
   <div class="column">
     <span class="is-capitalized">{{ stepName() }}</span> validé le
-    <strong class="is-inline-block">{{ loadInfo.sentAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}</strong>
+    <strong class="is-inline-block">{{ loadInfo.sentAt | date: "d LLLL y \'à\' H'h' mm" }}</strong>
     par <strong class="is-inline-block is-uppercase">{{ loadInfo.loadManager.name }}</strong>
     en sa qualité de <strong class="is-inline-block is-uppercase">{{ loadInfo.loadManager.jobFunction }}</strong>
   </div>
@@ -12,7 +12,7 @@
 
     <ng-template #loadFinished>
       <span class="is-capitalized">{{ stepName() }}</span> confirmé par le transporteur le
-      <strong>{{ loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm":'':'fr' }}</strong>
+      <strong>{{ loadInfo.validatedAt | date: "d LLLL y \'à\' H'h' mm" }}</strong>
     </ng-template>
 
   </div>
