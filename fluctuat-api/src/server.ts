@@ -11,6 +11,7 @@ import { waybillUnloadValidationRoute } from './routes/waybill-unload-validation
 import { waybillRoute } from './routes/waybill.route';
 import { getConfig } from './service/config.service';
 import { mongoClient } from './storage/mongo-client';
+import { statsRoute } from './routes/stats.route';
 
 const app = express();
 
@@ -30,6 +31,7 @@ const main = async () => {
   app.use('/api/unload-validation', waybillUnloadValidationRoute);
   app.use('/api/notify', notifyRoute);
   app.use('/api/contacts', contactsRoute);
+  app.use('/api/stats', statsRoute);
 
   /* Start server **/
   const port = process.argv[2] || 9000;

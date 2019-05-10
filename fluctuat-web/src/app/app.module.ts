@@ -36,6 +36,9 @@ import { WaybillShareComponent } from './waybill/waybill-detail/waybill-share/wa
 import { WaybillShareService } from './waybill/waybill-detail/waybill-share/waybill-share.service';
 import { DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
+import { StatCardComponent } from './stats/stat-card/stat-card.component';
+import { StatsService } from './stats/stats.service';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,8 @@ import { FooterComponent } from './footer/footer.component';
     WaybillShareComponent,
     NotFoundComponent,
     FooterComponent,
+    StatsComponent,
+    StatCardComponent,
   ],
   imports: [
     AccountModule,
@@ -76,6 +81,7 @@ import { FooterComponent } from './footer/footer.component';
     UnloadValidationService,
     WaybillShareService,
     ContactsService,
+    StatsService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
