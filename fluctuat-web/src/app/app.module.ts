@@ -35,6 +35,7 @@ import { NotFoundInterceptor } from './core/not-found.interceptor';
 import { WaybillShareComponent } from './waybill/waybill-detail/waybill-share/waybill-share.component';
 import { WaybillShareService } from './waybill/waybill-detail/waybill-share/waybill-share.service';
 import { DatePipe } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { DatePipe } from '@angular/common';
     WaybillAccessComponent,
     WaybillShareComponent,
     NotFoundComponent,
+    FooterComponent,
   ],
   imports: [
     AccountModule,
