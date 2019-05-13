@@ -1,0 +1,42 @@
+<section class="hero is-fullheight">
+  <div class="hero-body">
+
+    <div class="container" *ngIf="stats$| async as stats; else loading">
+      <h1 class="title">Nos stats</h1>
+
+      <div class="columns">
+        <div class="column">
+
+          <flu-stat-card
+            [info]="{title: 'Nombre d\'utilisateur·ices', content: stats.userCount, icon: 'fa-user'}">
+          </flu-stat-card>
+
+        </div>
+        <div class="column">
+
+          <flu-stat-card [info]="{title: 'Voyages suivies', content: stats.waybillCount, icon: 'fa-ship'}">
+          </flu-stat-card>
+
+        </div>
+        <div class="column">
+
+          <flu-stat-card
+            [info]="{title: 'Total marchandise suivie', content: stats.totalWeight + ' tonnes', icon: 'fa-weight-hanging'}">
+          </flu-stat-card>
+
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #loading>
+      <div class="container">
+        <flu-loading></flu-loading>
+      </div>
+    </ng-template>
+  </div>
+
+  <flu-footer class="hero-foot"></flu-footer>
+
+</section>
+

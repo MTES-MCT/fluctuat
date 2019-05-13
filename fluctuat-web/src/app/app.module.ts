@@ -35,6 +35,10 @@ import { NotFoundInterceptor } from './core/not-found.interceptor';
 import { WaybillShareComponent } from './waybill/waybill-detail/waybill-share/waybill-share.component';
 import { WaybillShareService } from './waybill/waybill-detail/waybill-share/waybill-share.service';
 import { DatePipe } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
+import { StatCardComponent } from './stats/stat-card/stat-card.component';
+import { StatsService } from './stats/stats.service';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +63,9 @@ import { DatePipe } from '@angular/common';
     WaybillAccessComponent,
     WaybillShareComponent,
     NotFoundComponent,
+    FooterComponent,
+    StatsComponent,
+    StatCardComponent,
   ],
   imports: [
     AccountModule,
@@ -74,6 +81,7 @@ import { DatePipe } from '@angular/common';
     UnloadValidationService,
     WaybillShareService,
     ContactsService,
+    StatsService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     {

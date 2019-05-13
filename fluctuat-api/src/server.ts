@@ -6,6 +6,7 @@ import * as logger from 'morgan';
 import { authRoute } from './routes/auth.route';
 import { contactsRoute } from './routes/contacts.route';
 import { notifyRoute } from './routes/notify.route';
+import { statsRoute } from './routes/stats.route';
 import { waybillLoadValidationRoute } from './routes/waybill-load-validation.route';
 import { waybillUnloadValidationRoute } from './routes/waybill-unload-validation.route';
 import { waybillRoute } from './routes/waybill.route';
@@ -30,6 +31,7 @@ const main = async () => {
   app.use('/api/unload-validation', waybillUnloadValidationRoute);
   app.use('/api/notify', notifyRoute);
   app.use('/api/contacts', contactsRoute);
+  app.use('/api/stats', statsRoute);
 
   /* Start server **/
   const port = process.argv[2] || 9000;

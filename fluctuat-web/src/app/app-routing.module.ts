@@ -13,6 +13,7 @@ import { WaybillDetailComponent } from './waybill/waybill-detail/waybill-detail.
 import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.component';
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'confirmation-dechargement/:id', component: WaybillUnloadValidationComponent },
   { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'suivi-lettres-de-voiture', component: DashboardAdminComponent, canActivate: [AuthGuard] },
+  { path: 'stats', component: StatsComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/' }
 
