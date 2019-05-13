@@ -6,12 +6,12 @@ import * as logger from 'morgan';
 import { authRoute } from './routes/auth.route';
 import { contactsRoute } from './routes/contacts.route';
 import { notifyRoute } from './routes/notify.route';
+import { statsRoute } from './routes/stats.route';
 import { waybillLoadValidationRoute } from './routes/waybill-load-validation.route';
 import { waybillUnloadValidationRoute } from './routes/waybill-unload-validation.route';
 import { waybillRoute } from './routes/waybill.route';
 import { getConfig } from './service/config.service';
 import { mongoClient } from './storage/mongo-client';
-import { statsRoute } from './routes/stats.route';
 
 const app = express();
 

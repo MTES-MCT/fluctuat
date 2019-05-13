@@ -1,15 +1,17 @@
 import { Router } from 'express';
+import { getStats } from '../service/stats.service';
 
 const statsRoute = Router();
 
-statsRoute.get('/', (req, res) => {
-  const stats: StatsInfo = {
-    userCount: 4,
-    waybillCount: 14,
-    totalWeight: 13000
-  };
+statsRoute.get('/', async (req, res) => {
+  try {
+    const stats = await getStats();
 
-  res.json(stats);
+    res.json(stats);
+  } catch (e) {
+    console.error(e);
+    res.sendStatus(500);
+  }
 });
 
 export { statsRoute };
