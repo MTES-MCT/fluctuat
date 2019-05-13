@@ -1,5 +1,5 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { connect, disconnect } from 'mongoose';
+import { connect, connection, disconnect } from 'mongoose';
 import { Waybill } from '../models/waybill';
 import { findByEmail, getAll, put } from './waybill-storage';
 
@@ -22,6 +22,10 @@ describe('waybill storage tests', () => {
   afterAll(async () => {
     await disconnect();
     await mongoServer.stop();
+  });
+
+  afterEach(async () => {
+    await connection.db.dropDatabase();
   });
 
   test('waybills are sorted by order.sentAt', async () => {
