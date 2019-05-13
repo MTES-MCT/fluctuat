@@ -7,17 +7,22 @@
       <div class="columns">
         <div class="column">
 
-          <flu-stat-card [info]="{title: 'Nombre d\'utilisateur·ices', content: stats.userCount}"></flu-stat-card>
+          <flu-stat-card
+            [info]="{title: 'Nombre d\'utilisateur·ices', content: stats.userCount, icon: 'fa-user'}">
+          </flu-stat-card>
 
         </div>
         <div class="column">
 
-          <flu-stat-card [info]="{title: 'Voyages suivies', content: stats.waybillCount}"></flu-stat-card>
+          <flu-stat-card [info]="{title: 'Voyages suivies', content: stats.waybillCount, icon: 'fa-ship'}">
+          </flu-stat-card>
 
         </div>
         <div class="column">
 
-          <flu-stat-card [info]="{title: 'Total marchandise suivie', content: stats.totalWeight + ' tonnes'}"></flu-stat-card>
+          <flu-stat-card
+            [info]="{title: 'Total marchandise suivie', content: stats.totalWeight + ' tonnes', icon: 'fa-weight-hanging'}">
+          </flu-stat-card>
 
         </div>
       </div>
