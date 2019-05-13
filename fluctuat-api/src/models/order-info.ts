@@ -12,6 +12,7 @@ export class OrderInfo {
   middleman: Middleman;
   transporter: Transporter;
   ship: Ship;
+
   originInfo: PortInfo;
   destinationInfo: PortInfo;
   merchandise: Merchandise;
