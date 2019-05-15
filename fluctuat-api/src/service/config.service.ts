@@ -1,8 +1,15 @@
+import * as dotenv from 'dotenv';
+
 import { AppConfig } from '../models/app-config';
 
-// tslint:disable-next-line
-const config: AppConfig = require('../../.data/config.json');
+const loadConfig = dotenv.config();
+if (loadConfig.error) {
+  // TODO maybe warning
+  throw loadConfig.error;
+}
 
-export const getConfig = (): AppConfig => config;
+const config: AppConfig = loadConfig.parsed;
 
-export const getBaseUrl = (): string => config.secure ? `https://${config.host}` : `http://${config.host}`;
+const getBaseUrl = (): string => config.SECURE === 'true' ? `https://${config.HOST}` : `http://${config.HOST}`;
+
+export { config, getBaseUrl };

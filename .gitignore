@@ -39,3 +39,5 @@ Thumbs.db
 *.pem
 
 fluctuat-api/.data
+.env*
+!.env-template

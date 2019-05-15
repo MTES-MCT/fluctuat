@@ -30,7 +30,7 @@ Start a local db
 Run as docker container
 
     # run init script (only the first time)
-    ./scripts/init-config.js
+    ./scripts/init-env.js
 
     # build docker image if first time of if you have made changes
     docker build --no-cache -f Dockerfile -t fluctuat-api .

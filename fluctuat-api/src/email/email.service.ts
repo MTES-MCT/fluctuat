@@ -1,21 +1,18 @@
 import * as mailjet from 'node-mailjet';
-import { HasEmail } from '../models/has-email.interface';
-import { getConfig } from '../service/config.service';
+import { config } from '../service/config.service';
 import { EmailData } from './email-data';
 import { getValidReceivers } from './email.utils';
 
-const config = getConfig();
-const emailConfig = config.email;
-
 export class EmailService {
 
-  static emailService = new EmailService(emailConfig.user, emailConfig.pass, emailConfig.sender, config.debug);
+  static emailService = new EmailService(config.EMAIL_API_KEY, config.EMAIL_API_PASSWORD,
+    config.EMAIL_USER, config.EMAIL_NAME, config.DEBUG === 'true');
 
   mailjetService;
 
-  private constructor(user: string, password: string, private sender: HasEmail, private debug = false) {
-    console.log(`Init email service: send from ${sender.email} with debug: ${debug}`);
-    this.mailjetService = mailjet.connect(user, password, { version: 'v3.1', perform_api_call: !debug });
+  private constructor(apiKey: string, apiPassword: string, private senderEmail: string, private senderName: string, private debug = false) {
+    console.log(`Init email service: send from ${senderEmail} with debug: ${debug}`);
+    this.mailjetService = mailjet.connect(apiKey, apiPassword, { version: 'v3.1', perform_api_call: !debug });
   }
 
   static getInstance(): EmailService {
@@ -27,7 +24,7 @@ export class EmailService {
     const request: any = {
       Messages: [
         {
-          From: { Name: this.sender.name, Email: this.sender.email },
+          From: { Name: this.senderName, Email: this.senderEmail },
           To: getValidReceivers(data.to),
           Subject: data.subject,
           TextPart: data.body.text,
