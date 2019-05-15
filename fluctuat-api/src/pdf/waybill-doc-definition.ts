@@ -1,16 +1,16 @@
 import { format } from 'date-fns';
 import * as fr from 'date-fns/locale/fr';
 
+import { AppConfig } from '../app.config';
 import { LoadInfo } from '../models/load-info';
 import { LoadManager } from '../models/load-manager';
 import { Middleman } from '../models/middleman';
 import { OrderInfo } from '../models/order-info';
 import { Waybill } from '../models/waybill';
-import { config, getBaseUrl } from '../service/config.service';
 import { logo } from './logo';
 
-const host = config.HOST;
-const baseUrl = getBaseUrl();
+const host = AppConfig.HOST;
+const baseUrl = AppConfig.getBaseUrl();
 
 export const waybillDocDefinition = (waybill: Waybill) => {
   const order = waybill.order;

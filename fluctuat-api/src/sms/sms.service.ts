@@ -1,9 +1,9 @@
 import * as mailjet from 'node-mailjet';
-import { config } from '../service/config.service';
+import { AppConfig } from '../app.config';
 import { convert } from './sms.utils';
 
 export class SmsService {
-  static smsService = new SmsService(config.SMS_API_TOKEN, config.DEBUG === 'true');
+  static smsService = new SmsService(AppConfig.SMS_API_TOKEN, AppConfig.DEBUG);
 
   mailjetService;
 

@@ -1,12 +1,12 @@
 import * as mailjet from 'node-mailjet';
-import { config } from '../service/config.service';
+import { AppConfig } from '../app.config';
 import { EmailData } from './email-data';
 import { getValidReceivers } from './email.utils';
 
 export class EmailService {
 
-  static emailService = new EmailService(config.EMAIL_API_KEY, config.EMAIL_API_PASSWORD,
-    config.EMAIL_USER, config.EMAIL_NAME, config.DEBUG === 'true');
+  static emailService = new EmailService(AppConfig.EMAIL_API_KEY, AppConfig.EMAIL_API_PASSWORD,
+    AppConfig.EMAIL_USER, AppConfig.EMAIL_NAME, AppConfig.DEBUG);
 
   mailjetService;
 

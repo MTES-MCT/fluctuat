@@ -1,11 +1,11 @@
 import * as randomstring from 'randomstring';
 
+import { AppConfig } from '../app.config';
 import { LoadValidation } from '../models/load-validation';
 import { Waybill } from '../models/waybill';
 import { loadValidationStorage } from '../storage/load-validation.storage';
 import { unloadValidationStorage } from '../storage/unload-validation.storage';
 import * as waybillStorage from '../storage/waybill-storage';
-import { getBaseUrl } from './config.service';
 import {
   sendWaybill,
   sendWaybillLoaded,
@@ -13,7 +13,7 @@ import {
   sendWaybillUnloadValidation
 } from './send-waybill.service';
 
-const baseUrl = getBaseUrl();
+const baseUrl = AppConfig.getBaseUrl();
 
 const validateLoadInfo = async (waybill: Waybill) => {
   const loadInfo = waybill.loadInfo;

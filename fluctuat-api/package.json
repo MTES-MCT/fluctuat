@@ -9,7 +9,7 @@
     "test:ci": "jest --ci",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start:db": "./scripts/start-db.js",
-    "start": "ts-node-dev --respawn --transpileOnly src/server.ts",
+    "start": "ts-node-dev --respawn --transpileOnly -r dotenv/config src/server.ts",
     "start:prod": "pm2 start ecosystem.config.js",
     "postinstall": "node scripts/init-env.js"
   },
