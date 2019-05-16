@@ -2,6 +2,9 @@
 // see https://pm2.io/doc/en/runtime/guide/ecosystem-file
 //
 
+const loadEnv = require('dotenv').config();
+const envConfig = loadEnv.parsed;
+
 const fullDate = 'YYYY-MM-DD HH:mm:ss';
 
 module.exports = {
@@ -12,7 +15,8 @@ module.exports = {
       log_date_format: fullDate,
       restart_delay: 1000,
       max_restarts: 10,
-      min_uptime: 3000
+      min_uptime: 3000,
+      env: envConfig
     }
   ]
 }
