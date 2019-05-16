@@ -13,8 +13,7 @@ services:
     restart: always
     ports:
       - "9000:9000"
-    volumes:
-      - ./fluctuat-api/.data/:/fluctuat-api/.data
+    env_file: ./fluctuat-api/.env
     depends_on:
       - mongodb
     network_mode: host
