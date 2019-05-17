@@ -1,14 +1,15 @@
 import { connect } from 'mongoose';
+import { AppConfig } from '../app.config';
 
-const mongoClient = (configMongo) => {
-  console.log(`Connecting to mongo db ${configMongo.dbName}...`);
-  const uri = `${`mongodb${configMongo.isDns ? '+srv' : ''}://${configMongo.cluster}/?retryWrites=true`}`;
+const mongoClient = () => {
+  console.log(`Connecting to mongo db ${AppConfig.DB_NAME}...`);
+  const uri = `${`mongodb${AppConfig.DB_IS_DNS ? '+srv' : ''}://${AppConfig.DB_CLUSTER}/?retryWrites=true`}`;
   return connect(uri,
     {
       useNewUrlParser: true,
-      user: configMongo.user,
-      pass: configMongo.password,
-      dbName: configMongo.dbName
+      user: AppConfig.DB_USER,
+      pass: AppConfig.DB_PASSWORD,
+      dbName: AppConfig.DB_NAME
     })
     .then(() => console.log('MongoDB connected!'));
 };

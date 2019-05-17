@@ -8,7 +8,7 @@ RUN  yarn && \
 FROM nginx:alpine AS runner
 RUN apk add --no-cache curl
 COPY --from=builder /fluctuat-web/dist /usr/share/nginx/html
-COPY ./nginx/fluctuat.conf /etc/nginx/conf.d/flucuat.conf
+COPY ./nginx/fluctuat.conf /etc/nginx/conf.d/fluctuat.conf
 
 EXPOSE 4200
 CMD ["nginx", "-g", "daemon off;"]

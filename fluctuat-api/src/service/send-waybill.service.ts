@@ -1,10 +1,10 @@
+import { AppConfig } from '../app.config';
 import { EmailData } from '../email/email-data';
 import { EmailService } from '../email/email.service';
 import { Waybill } from '../models/waybill';
 import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
 import { SmsService } from '../sms/sms.service';
-import { getBaseUrl } from './config.service';
 import { waybillAccessEmailBody } from './waybill-access-email-body/waybill-access-email-body';
 import { waybillLoadValidationEmailBody } from './waybill-load-validation-email-body/waybill-load-validation-email-body';
 import { waybillLoadedEmailBody } from './waybill-loaded-email-body/waybill-loaded-email-body';
@@ -13,7 +13,7 @@ import { waybillUnLoadValidationEmailBody } from './waybill-unload-validation-em
 
 const emailService = EmailService.getInstance();
 const smsService = SmsService.getInstance();
-const baseUrl = getBaseUrl();
+const baseUrl = AppConfig.getBaseUrl();
 
 const sendWaybill = (waybill: Waybill) => {
   const accessLink = getWaybillAccessLink(waybill.code);

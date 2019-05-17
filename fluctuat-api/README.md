@@ -30,13 +30,13 @@ Start a local db
 Run as docker container
 
     # run init script (only the first time)
-    ./scripts/init-config.js
+    ./scripts/init-env.js
 
     # build docker image if first time of if you have made changes
     docker build --no-cache -f Dockerfile -t fluctuat-api .
 
     # run fluctuat-api container
-    docker container run --rm --network="host" -v $PWD/.data:/fluctuat-api/.data fluctuat-api
+    docker container run --rm --network="host" --env-file=.env fluctuat-api
 
 ### Installation
 
@@ -44,7 +44,7 @@ Launch
 
     yarn
 
-after install `init-config.js` are executed and it creates `./data/config.json` file.
+after install `init-env.js` are executed and it creates `.env` file.
 
 ### Run in dev mode
 
@@ -61,8 +61,7 @@ Server are listening in http://localhost:9000
 
 ### Change default config
 
-Edit file `.data/config.json` if you want to change default values.
- See doc of [AppConfig](./src/models/app-config.ts) for more details.
+Set up env values editing `.env` file. See jsdoc of [AppConfig](./src/app.config.ts) for more details.
 
 ### Run in production
 

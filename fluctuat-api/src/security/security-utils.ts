@@ -2,11 +2,10 @@ import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-import { getConfig } from '../service/config.service';
+import { AppConfig } from '../app.config';
 
-const config = getConfig();
-const JWT_SECRET = config.jwtSecret;
-const SECURE = config.secure;
+const JWT_SECRET = AppConfig.JWT_SECRET;
+const SECURE = AppConfig.SECURE;
 
 /** Generate hash for a given password */
 export const generateHash = (password) => bcrypt.hashSync(password, 10);

@@ -1,18 +1,18 @@
+import { format } from 'date-fns';
+import * as fr from 'date-fns/locale/fr';
+
+import { AppConfig } from '../app.config';
 import { LoadInfo } from '../models/load-info';
 import { LoadManager } from '../models/load-manager';
 import { Middleman } from '../models/middleman';
 import { OrderInfo } from '../models/order-info';
 import { Waybill } from '../models/waybill';
-import { getBaseUrl, getConfig } from '../service/config.service';
 import { logo } from './logo';
 
-import { format } from 'date-fns';
-import * as fr from 'date-fns/locale/fr';
+const host = AppConfig.HOST;
+const baseUrl = AppConfig.getBaseUrl();
 
-const host = getConfig().host;
-const baseUrl = getBaseUrl();
-
-export function waybillDocDefinition(waybill: Waybill) {
+export const waybillDocDefinition = (waybill: Waybill) => {
   const order = waybill.order;
   const loadInfo = waybill.loadInfo;
   const unloadInfo = waybill.unloadInfo;
@@ -77,7 +77,7 @@ export function waybillDocDefinition(waybill: Waybill) {
       }
     }
   };
-}
+};
 
 const printOrderInfo = (order: OrderInfo) => {
 

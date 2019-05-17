@@ -21,7 +21,7 @@ Suivre le README de chacun des projets pour la installation et le lancement en m
 
 Seulement la prémière fois, exécuter le script
 
-    ./flucuat-api/scripts/init-config.js
+    ./fluctuat-api/scripts/init-env.js
 
 Lancer l'environnement avec docker-compose
 
