@@ -14,14 +14,14 @@ services:
     ports:
       - "9000:9000"
     env_file: ./fluctuat-api/.env
+    environment:
+      DB_CLUSTER: mongodb
     depends_on:
       - mongodb
-    network_mode: host
   mongodb:
     image: mongo:4.0
     restart: always
-    network_mode: host
     ports:
-      - "27010:27010"
+      - "27017:27017"
     volumes:
       - ./fluctuat-api/.data/fluctuat-db/:/data/db/
