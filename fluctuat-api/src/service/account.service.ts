@@ -1,11 +1,10 @@
 import { AppConfig } from '../app.config';
 import { EmailData } from '../email/email-data';
-import { EmailService } from '../email/email.service';
+import { emailService } from '../email/email.service';
 import { User } from '../models/user';
 import { resetPasswordEmailBody } from './reset-password-email-body/reset-password-email-body';
 import { welcomeEmailBody } from './welcome-email-body/welcome-email-body';
 
-const emailService = EmailService.getInstance();
 const baseUrl = AppConfig.getBaseUrl();
 
 const getChangePasswordLink = (token) =>
