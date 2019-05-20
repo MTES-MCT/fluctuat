@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { Contacts } from '../models/contacts';
-import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
+import { verifyJWT } from '../security/verify-jwt.middleware';
 import * as waybillStorage from '../storage/waybill-storage';
+import { UserRequest } from '../types';
 
 const contactsRoute = Router();
 

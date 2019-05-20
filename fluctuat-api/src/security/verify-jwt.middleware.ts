@@ -1,11 +1,8 @@
-import { Request } from 'express';
-import { User } from '../models/user';
-import { getTokenFromCookie, getTokenFromHeaders, tokenDecode } from './security-utils';
-
-export type UserRequest = Request & { user: User };
+import { UserRequest } from '../types';
+import { getTokenFromCookie, tokenDecode } from './security-utils';
 
 export const verifyJWT = (req: UserRequest, res, next) => {
-  const token = getTokenFromHeaders(req) || getTokenFromCookie(req);
+  const token = getTokenFromCookie(req);
 
   try {
     req.user = tokenDecode(token);

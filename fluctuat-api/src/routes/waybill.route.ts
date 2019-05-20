@@ -2,11 +2,12 @@ import { Router } from 'express';
 
 import { Waybill } from '../models/waybill';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
-import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
+import { verifyJWT } from '../security/verify-jwt.middleware';
 import { sendLoadValidation, sendUnLoadValidation } from '../service/waybill-validation.service';
 import { createWaybill, saveLoadInfo, saveOrderInfo, saveUnloadInfo } from '../service/waybill.service';
 import * as waybillStorage from '../storage/waybill-storage';
-import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
+import { UserRequest, WaybillRequest } from '../types';
+import { fetchWaybill } from './fetch-waybill.middleware';
 
 const waybillRoute = Router();
 
