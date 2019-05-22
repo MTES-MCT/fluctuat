@@ -19,7 +19,13 @@ const publicWaybillRoute = Router();
  * @apiSuccess {Waybill} waybill the requested waybill
  *
  */
-publicWaybillRoute.get('/:id', verifyApiKey, fetchWaybill, (req: WaybillRequest, res) => {
+publicWaybillRoute.get('/:id', verifyApiKey, fetchWaybill, (req: any, res) => {
+
+  // User can get only their own waybills
+  if (req.waybill.owner !== req.owner) {
+    res.status(404).send(`La lettre de voiture "${req.waybill.code}" n'existe pas.`);
+  }
+
   res.json(req.waybill);
 });
 
@@ -29,11 +35,11 @@ publicWaybillRoute.get('/:id', verifyApiKey, fetchWaybill, (req: WaybillRequest,
  * @apiName CreateWaybill
  * @apiVersion 1.0.0
  */
-publicWaybillRoute.post('/', verifyApiKey, async (req: UserRequest, res) => {
-  const userEmail = req.user.email;
+publicWaybillRoute.post('/', verifyApiKey, async (req: any, res) => {
+  const userEmail = req.owner;
   const waybill: Waybill = await createWaybill(req.body, userEmail);
 
-  console.log(`${userEmail} creates waybill ${waybill.code}`);
+  console.log(`${userEmail} creates waybill ${waybill.code} by api`);
 
   res.status(201).json(waybill);
 });
@@ -46,8 +52,13 @@ publicWaybillRoute.post('/', verifyApiKey, async (req: UserRequest, res) => {
  *
  * @apiParam {String} id waybill id
  */
-publicWaybillRoute.put('/:id/order-info', verifyApiKey, fetchWaybill, async (req: WaybillRequest, res) => {
+publicWaybillRoute.put('/:id/order-info', verifyApiKey, fetchWaybill, async (req: any, res) => {
   const waybill: Waybill = req.waybill;
+
+  // User can get only their own waybills
+  if (waybill.owner !== req.owner) {
+    res.status(404).send(`La lettre de voiture "${waybill.code}" n'existe pas.`);
+  }
 
   if (waybill.loadInfo.sentAt) {
     res.status(400).send(`Le chargement a démarré. La modification n'est plus possible`);
