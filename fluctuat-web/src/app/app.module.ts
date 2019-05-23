@@ -39,6 +39,8 @@ import { FooterComponent } from './footer/footer.component';
 import { StatCardComponent } from './stats/stat-card/stat-card.component';
 import { StatsService } from './stats/stats.service';
 import { StatsComponent } from './stats/stats.component';
+import { ApiKeyAdminComponent } from './api-key-admin/api-key-admin.component';
+import { ApiKeyService } from './api-key-admin/api-key.service';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { StatsComponent } from './stats/stats.component';
     FooterComponent,
     StatsComponent,
     StatCardComponent,
+    ApiKeyAdminComponent,
   ],
   imports: [
     AccountModule,
@@ -76,6 +79,7 @@ import { StatsComponent } from './stats/stats.component';
   ],
   providers: [
     AuthService,
+    ApiKeyService,
     WaybillService,
     LoadValidationService,
     UnloadValidationService,

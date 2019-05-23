@@ -14,6 +14,7 @@ import { WaybillAccessComponent } from './waybill/waybill-access/waybill-access.
 import { DashboardAdminComponent } from './waybill/dahsboard-admin/dashboard-admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { StatsComponent } from './stats/stats.component';
+import { ApiKeyAdminComponent } from './api-key-admin/api-key-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,16 +29,17 @@ const routes: Routes = [
   { path: 'mes-lettres-de-voiture', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'suivi-lettres-de-voiture', component: DashboardAdminComponent, canActivate: [AuthGuard] },
   { path: 'stats', component: StatsComponent },
+  { path: 'cles-api', component: ApiKeyAdminComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/' }
 
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {
+  imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'enabled',
-  }) ],
-  exports: [ RouterModule ]
+  })],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule {
