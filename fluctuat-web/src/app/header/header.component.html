@@ -28,8 +28,13 @@
 
       <ng-container *ngIf="authenticated$ | async; else notAuthenticated">
 
-        <div class="navbar-item" *ngIf="isAdmin">
-          <a routerLink="/suivi-lettres-de-voiture" class="button is-white is-medium">Suivi lettres de voiture</a>
+        <div class="navbar-item has-dropdown is-hoverable" *ngIf="isAdmin">
+          <a class="navbar-link"><button class=" button is-white is-medium">Admin</button> </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" routerLink="/suivi-lettres-de-voiture" >Suivi lettres de voiture</a>
+            <a class="navbar-item" routerLink="/cles-api" >Clés API</a>
+          </div>
         </div>
 
         <div class="navbar-item">
