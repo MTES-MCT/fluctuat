@@ -1,19 +1,14 @@
 import { Router } from 'express';
 
 import { generateToken } from '../security/security-utils';
+import { verifyAdmin } from '../security/verify-admin.middleware';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import * as apiKeyStorage from '../storage/api-key.storage';
-import { UserRequest } from '../types';
 
 const apiKeyRoute = Router();
 
 /** Only admins can use this api */
-apiKeyRoute.use(verifyJWT, (req: UserRequest, res, next) => {
-  if (!req.user.admin) {
-    return res.status(403).send('Not allowed');
-  }
-  next();
-});
+apiKeyRoute.use(verifyJWT, verifyAdmin);
 
 /** get all api keys */
 apiKeyRoute.get('/', async (req, res) => {

@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import { Waybill } from '../../models/waybill';
 import { createWaybill, saveOrderInfo } from '../../service/waybill.service';
-import { UserRequest, WaybillRequest } from '../../types';
 import { fetchWaybill } from '../fetch-waybill.middleware';
 import { verifyApiKey } from './verify-api-key.middleware';
 
