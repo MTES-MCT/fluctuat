@@ -37,7 +37,9 @@ publicWaybillRoute.get('/:id', verifyApiKey, fetchWaybill, (req: any, res) => {
  */
 publicWaybillRoute.post('/', verifyApiKey, async (req: any, res) => {
   const userEmail = req.owner;
-  const waybill: Waybill = await createWaybill(req.body, userEmail);
+  let waybill: Waybill = req.body;
+
+  waybill = await createWaybill(waybill.order, userEmail);
 
   console.log(`${userEmail} creates waybill ${waybill.code} by api`);
 

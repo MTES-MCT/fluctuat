@@ -53,8 +53,10 @@ waybillRoute.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: Waybill
 
 /* Create waybill */
 waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
+  let waybill: Waybill = req.body;
   const userEmail = req.user.email;
-  const waybill: Waybill = await createWaybill(req.body, userEmail);
+
+  waybill = await createWaybill(waybill.order, userEmail);
 
   console.log(`${userEmail} creates waybill ${waybill.code}`);
 
