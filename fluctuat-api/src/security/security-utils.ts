@@ -27,11 +27,10 @@ export const getTokenFromHeaders = (req: Request) => {
   return authorization.replace('Bearer ', '');
 };
 
-export const getTokenFromCookie = (req: Request) => {
-  return req.cookies.sid;
-};
+export const getTokenFromCookie = (req: Request) =>
+  req.cookies.sid;
 
-export const setTokenCookie = (res: Response, token: string, maxAge = 0) => {
+export const setTokenCookie = (res: Response, token: string, maxAge = 0) =>
   res.cookie('sid', token, {
     httpOnly: true,
     secure: SECURE,
@@ -39,7 +38,6 @@ export const setTokenCookie = (res: Response, token: string, maxAge = 0) => {
     path: '/api',
     maxAge: maxAge * 1000
   });
-};
 
 /** given a token verify if corresponds of public api token and then return the owner
  * @param token the token to decode

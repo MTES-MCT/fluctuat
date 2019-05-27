@@ -56,7 +56,7 @@ publicWaybillRoute.post('/', verifyApiKey, async (req: any, res) => {
 publicWaybillRoute.put('/:id/order-info', verifyApiKey, fetchWaybill, async (req: any, res) => {
   const waybill: Waybill = req.waybill;
 
-  // User can get only their own waybills
+  // User can update only their own waybills
   if (waybill.owner !== req.owner) {
     res.status(404).send(`La lettre de voiture "${waybill.code}" n'existe pas.`);
   }
