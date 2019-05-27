@@ -40,3 +40,29 @@ export const setTokenCookie = (res: Response, token: string, maxAge = 0) => {
     maxAge: maxAge * 1000
   });
 };
+
+/** given a token verify if corresponds of public api token and then return the owner
+ * @param token the token to decode
+ * @return the email of the owner
+ */
+export const getApiKeyOwner = (token: string): string => {
+  const apiKeyPayload = tokenDecode(token);
+  if (apiKeyPayload.aud !== 'public_api') {
+    return;
+  }
+
+  return apiKeyPayload.sub;
+};
+
+/**
+ * build a apiKey of an owner
+ * @param owner
+ * @return the api key
+ */
+export const buildApiKeyToken = (owner: string): string => {
+  const apiKeyPayload = {
+    sub: owner,
+    aud: 'public_api'
+  };
+  return generateToken(apiKeyPayload);
+};

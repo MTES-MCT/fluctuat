@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { generateToken } from '../security/security-utils';
+import { buildApiKeyToken } from '../security/security-utils';
 import { verifyAdmin } from '../security/verify-admin.middleware';
 import { verifyJWT } from '../security/verify-jwt.middleware';
 import * as apiKeyStorage from '../storage/api-key.storage';
@@ -20,14 +20,10 @@ apiKeyRoute.get('/', async (req, res) => {
 /** create a new api key */
 apiKeyRoute.post('/', async (req, res) => {
 
-  const owner = req.body.owner;
+  const owner: string = req.body.owner;
 
-  const apiKeyPayload = {
-    sub: owner,
-    aud: 'public_api'
-  };
+  const key = buildApiKeyToken(owner);
 
-  const key = generateToken(apiKeyPayload);
   let apiKey = { key, owner };
 
   apiKey = await apiKeyStorage.put(apiKey);

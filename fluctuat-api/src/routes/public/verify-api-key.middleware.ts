@@ -1,13 +1,13 @@
-import { getTokenFromHeaders, tokenDecode } from '../../security/security-utils';
+import { getApiKeyOwner, getTokenFromHeaders } from '../../security/security-utils';
 import * as apiKeyStorage from '../../storage/api-key.storage';
 
 export const verifyApiKey = async (req, res, next) => {
   const apiKey = getTokenFromHeaders(req);
 
   try {
-    const apiKeyPayload = tokenDecode(apiKey);
+    req.owner = getApiKeyOwner(apiKey);
 
-    if (apiKeyPayload.aud !== 'public_api') {
+    if (!req.owner) {
       return res.status(401).send('Invalid api key');
     }
 
@@ -15,8 +15,6 @@ export const verifyApiKey = async (req, res, next) => {
     if (!apiKeyStored) {
       return res.status(401).send('Api key expired');
     }
-
-    req.owner = apiKeyPayload.sub;
 
     next();
   } catch (error) {
