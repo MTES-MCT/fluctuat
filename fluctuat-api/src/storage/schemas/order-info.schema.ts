@@ -19,4 +19,4 @@ export const OrderInfoSchema: Schema = new Schema({
   merchandise: MerchandiseSchema,
 
   sentAt: Date
-});
+}, { _id: false });

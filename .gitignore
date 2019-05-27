@@ -41,3 +41,5 @@ Thumbs.db
 fluctuat-api/.data
 .env*
 !.env-template
+
+fluctuat-api/docs_api

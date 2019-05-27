@@ -6,16 +6,16 @@ import { Ship } from './ship';
 import { Transporter } from './transporter';
 
 export class OrderInfo {
-  customer: Person;
-  sender: Person;
-  receiver: Person;
-  middleman: Middleman;
-  transporter: Transporter;
-  ship: Ship;
+  customer: Person = new Person();
+  sender: Person = new Person();
+  receiver: Person = new Person();
+  middleman: Middleman = new Middleman();
+  transporter: Transporter = new Transporter();
+  ship: Ship = new Ship();
 
-  originInfo: PortInfo;
-  destinationInfo: PortInfo;
-  merchandise: Merchandise;
+  originInfo: PortInfo = new PortInfo();
+  destinationInfo: PortInfo = new PortInfo();
+  merchandise: Merchandise = new Merchandise();
 
   sentAt: Date;
 }

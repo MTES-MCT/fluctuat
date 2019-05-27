@@ -10,4 +10,4 @@ export const LoadInfoSchema: Schema = new Schema({
 
   sentAt: Date,
   validatedAt: Date,
-});
+}, { _id: false });

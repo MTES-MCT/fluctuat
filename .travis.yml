@@ -12,14 +12,25 @@ before_install:
 
 script:
   - cd $DIRNAME/fluctuat-api && yarn && yarn test:ci && yarn lint
-  - yarn build
+  - yarn build && yarn apidoc
   - cd $DIRNAME/fluctuat-web && yarn && yarn test:ci && yarn lint
   - yarn build --prod
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: bash $DIRNAME/scripts/deploy.sh
-  on:
-    branch: master
-    repo: MTES-MCT/fluctuat
+  - provider: script
+    skip_cleanup: true
+    script: bash $DIRNAME/scripts/deploy.sh
+    on:
+      branch: master
+      repo: MTES-MCT/fluctuat
+  - provider: pages
+    local_dir: fluctuat-api/docs_api
+    repo: MTES-MCT/fluctuat-apidoc
+    skip_cleanup: true
+    keep-history: true
+    github_token: $GH_TOKEN
+    target-branch: master
+    committer-from-gh: true
+    on:
+      branch: master
+      repo: MTES-MCT/fluctuat

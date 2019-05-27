@@ -3,20 +3,16 @@ import { AppConfig } from '../app.config';
 import { EmailData } from './email-data';
 import { getValidReceivers } from './email.utils';
 
-export class EmailService {
+class EmailService {
 
-  static emailService = new EmailService(AppConfig.EMAIL_API_KEY, AppConfig.EMAIL_API_PASSWORD,
-    AppConfig.EMAIL_USER, AppConfig.EMAIL_NAME, AppConfig.DEBUG);
+  private readonly mailjetService;
 
-  mailjetService;
+  private readonly sender: { Name: string, Email: string };
 
-  private constructor(apiKey: string, apiPassword: string, private senderEmail: string, private senderName: string, private debug = false) {
+  constructor(apiKey: string, apiPassword: string, senderEmail: string, senderName: string, private debug = false) {
     console.log(`Init email service: send from ${senderEmail} with debug: ${debug}`);
+    this.sender = { Name: senderName, Email: senderEmail };
     this.mailjetService = mailjet.connect(apiKey, apiPassword, { version: 'v3.1', perform_api_call: !debug });
-  }
-
-  static getInstance(): EmailService {
-    return this.emailService;
   }
 
   sendEmail(data: EmailData, pdf?: { name: string, content: string }) {
@@ -24,7 +20,7 @@ export class EmailService {
     const request: any = {
       Messages: [
         {
-          From: { Name: this.senderName, Email: this.senderEmail },
+          From: this.sender,
           To: getValidReceivers(data.to),
           Subject: data.subject,
           TextPart: data.body.text,
@@ -49,3 +45,6 @@ export class EmailService {
       .request(request);
   }
 }
+
+export const emailService = new EmailService(AppConfig.EMAIL_API_KEY, AppConfig.EMAIL_API_PASSWORD,
+  AppConfig.EMAIL_USER, AppConfig.EMAIL_NAME, AppConfig.DEBUG);

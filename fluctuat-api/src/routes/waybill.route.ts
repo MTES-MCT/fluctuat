@@ -2,19 +2,17 @@ import { Router } from 'express';
 
 import { Waybill } from '../models/waybill';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
-import { UserRequest, verifyJWT } from '../security/verify-jwt.middleware';
+import { verifyAdmin } from '../security/verify-admin.middleware';
+import { verifyJWT } from '../security/verify-jwt.middleware';
 import { sendLoadValidation, sendUnLoadValidation } from '../service/waybill-validation.service';
 import { createWaybill, saveLoadInfo, saveOrderInfo, saveUnloadInfo } from '../service/waybill.service';
 import * as waybillStorage from '../storage/waybill-storage';
-import { fetchWaybill, WaybillRequest } from './fetch-waybill.middleware';
+import { UserRequest, WaybillRequest } from '../types';
+import { fetchWaybill } from './fetch-waybill.middleware';
 
 const waybillRoute = Router();
 
-waybillRoute.get('/', verifyJWT, async (req: UserRequest, res) => {
-  if (!req.user.admin) {
-    return res.status(403).send('Not allowed');
-  }
-
+waybillRoute.get('/', verifyJWT, verifyAdmin, async (req: UserRequest, res) => {
   const waybills = await waybillStorage.getAll();
 
   console.log(`admin ${req.user.email} get all waybills`);
@@ -52,8 +50,10 @@ waybillRoute.get('/:id/lettre-de-voiture.pdf', fetchWaybill, async (req: Waybill
 
 /* Create waybill */
 waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
+  let waybill: Waybill = req.body;
   const userEmail = req.user.email;
-  const waybill: Waybill = await createWaybill(req.body, userEmail);
+
+  waybill = await createWaybill(waybill.order, userEmail);
 
   console.log(`${userEmail} creates waybill ${waybill.code}`);
 

@@ -1,8 +1,8 @@
 import { Response, Router } from 'express';
 import { validateLoadInfo } from '../service/waybill-validation.service';
 import { loadValidationStorage } from '../storage/load-validation.storage';
+import { WaybillRequest } from '../types';
 import { buildFetchWaybillForValidation } from './build-fetch-waybill-for-validation';
-import { WaybillRequest } from './fetch-waybill.middleware';
 
 const waybillLoadValidationRoute = Router();
 

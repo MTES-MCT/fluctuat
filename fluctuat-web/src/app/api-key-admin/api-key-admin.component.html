@@ -1,0 +1,69 @@
+<flu-hero-container class="content">
+  <h1 class="title">Tableau des clés api</h1>
+
+  <button class="button is-link" (click)="openModal()">Nouvelle clé API</button>
+
+  <flu-error closable [errorMsg]="deleteResult.errorMsg"></flu-error>
+
+  <table class="table is-striped" *ngIf="apiKeys$ | async as apiKeys; else loading">
+    <thead>
+    <th>Clé</th>
+    <th>Propietaire</th>
+    <th>Options</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let apiKey of apiKeys">
+
+      <td style="max-width: 200px"><p style="overflow-wrap: break-word;">{{apiKey.key}}</p></td>
+      <td class="">{{apiKey.owner}}</td>
+      <td class="is-narrow">
+        <button class="button is-danger" (click)="deleteKey(apiKey._id)">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</flu-hero-container>
+
+<div class="modal" [ngClass]="{'is-active': active}">
+  <div class="modal-background"></div>
+
+  <div class="modal-card">
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">Nouvelle clé</p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+    <form class="modal-card-body" [formGroup]="createKeyForm">
+
+      <div class="field">
+        <div class="control">
+          <label class="label">Email du proprietaire de la clé</label>
+          <input class="input is-medium" type="email" formControlName="owner" autocomplete="email"
+                 [ngClass]="{'is-danger': showError(createKeyForm.get('owner'))}">
+        </div>
+        <p *ngIf="showError(createKeyForm.get('owner'))" class="help is-danger">L'email n'est pas valide</p>
+      </div>
+
+      <flu-error [errorMsg]="result.errorMsg"></flu-error>
+
+    </form>
+
+
+    <footer class="modal-card-foot">
+
+      <div class="buttons">
+        <button class="button is-link" (click)="createKey()"
+                [ngClass]="{'is-loading': result.pending}"
+                [disabled]="createKeyForm.invalid || result.pending">
+          Créer
+        </button>
+        <button class="button" (click)="closeModal()">Annuler</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<ng-template #loading>
+  <flu-loading></flu-loading>
+</ng-template>

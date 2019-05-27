@@ -1,6 +1,6 @@
 import { LoadValidation } from '../models/load-validation';
 import * as waybillStorage from '../storage/waybill-storage';
-import { WaybillRequest } from './fetch-waybill.middleware';
+import { WaybillRequest } from '../types';
 
 const buildFetchWaybillForValidation = (get: (id: string) => any) => async (req: WaybillRequest, res, next) => {
   const id = req.params.id;

@@ -18,7 +18,7 @@ const authRoute = Router();
 const getUserFromCredentials = async (credentials: UserCredentials) => {
   const user = await userStorage.get(credentials.email);
 
-  if (!user || !isPasswordMatch(credentials.password, user.hash)) {
+  if (!user || !user.hash || !isPasswordMatch(credentials.password, user.hash)) {
     return;
   }
 

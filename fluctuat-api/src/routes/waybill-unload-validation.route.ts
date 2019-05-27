@@ -2,8 +2,8 @@ import { Response, Router } from 'express';
 import { Waybill } from '../models/waybill';
 import { validateUnloadInfo } from '../service/waybill-validation.service';
 import { unloadValidationStorage } from '../storage/unload-validation.storage';
+import { WaybillRequest } from '../types';
 import { buildFetchWaybillForValidation } from './build-fetch-waybill-for-validation';
-import { WaybillRequest } from './fetch-waybill.middleware';
 
 const waybillUnloadValidationRoute = Router();
 

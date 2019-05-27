@@ -1,18 +1,16 @@
 import { AppConfig } from '../app.config';
 import { EmailData } from '../email/email-data';
-import { EmailService } from '../email/email.service';
+import { emailService } from '../email/email.service';
 import { Waybill } from '../models/waybill';
 import { WaybillNotify } from '../models/waybill.notify';
 import { generateWaybillPdf } from '../pdf/generate-waybill-pdf';
-import { SmsService } from '../sms/sms.service';
+import { smsService } from '../sms/sms.service';
 import { waybillAccessEmailBody } from './waybill-access-email-body/waybill-access-email-body';
 import { waybillLoadValidationEmailBody } from './waybill-load-validation-email-body/waybill-load-validation-email-body';
 import { waybillLoadedEmailBody } from './waybill-loaded-email-body/waybill-loaded-email-body';
 import { waybillNotificationEmailBody } from './waybill-notification-email-body/waybill-notification-email-body';
 import { waybillUnLoadValidationEmailBody } from './waybill-unload-validation-email-body/waybill-unload-validation-email-body';
 
-const emailService = EmailService.getInstance();
-const smsService = SmsService.getInstance();
 const baseUrl = AppConfig.getBaseUrl();
 
 const sendWaybill = (waybill: Waybill) => {

@@ -3,9 +3,11 @@ import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import * as logger from 'morgan';
 
+import { apiKeyRoute } from './routes/api-key.route';
 import { authRoute } from './routes/auth.route';
 import { contactsRoute } from './routes/contacts.route';
 import { notifyRoute } from './routes/notify.route';
+import { publicWaybillRoute } from './routes/public/public-waybill.route';
 import { statsRoute } from './routes/stats.route';
 import { waybillLoadValidationRoute } from './routes/waybill-load-validation.route';
 import { waybillUnloadValidationRoute } from './routes/waybill-unload-validation.route';
@@ -30,6 +32,9 @@ const main = async () => {
   app.use('/api/notify', notifyRoute);
   app.use('/api/contacts', contactsRoute);
   app.use('/api/stats', statsRoute);
+  app.use('/api/api-key', apiKeyRoute);
+
+  app.use('/public_api/v1/waybill', publicWaybillRoute);
 
   /* Start server **/
   const port = process.argv[2] || 9000;

@@ -2,12 +2,11 @@ import * as mailjet from 'node-mailjet';
 import { AppConfig } from '../app.config';
 import { convert } from './sms.utils';
 
-export class SmsService {
-  static smsService = new SmsService(AppConfig.SMS_API_TOKEN, AppConfig.DEBUG);
+class SmsService {
 
-  mailjetService;
+  private mailjetService;
 
-  constructor(apiToken: string, debug = false) {
+  constructor(apiToken: string, private debug = false) {
     console.log('init sms service debug:', debug);
 
     this.mailjetService = mailjet.connect(apiToken, {
@@ -17,10 +16,6 @@ export class SmsService {
     });
   }
 
-  static getInstance(): SmsService {
-    return this.smsService;
-  }
-
   sendSms(cellphone: string, text: string) {
     if (!cellphone) {
       console.log('No cellphone to send sms');
@@ -28,14 +23,19 @@ export class SmsService {
     }
 
     const smsData = {
-      Text: text,
+      From: 'Fluctuat',
       To: convert(cellphone),
-      From: 'Fluctuat'
+      Text: text
     };
 
-    console.log('sending sms', smsData);
+    if (this.debug) {
+      console.log('sms sent', smsData);
+    }
+
     return this.mailjetService.post('sms-send')
       .request(smsData);
   }
 
 }
+
+export const smsService = new SmsService(AppConfig.SMS_API_TOKEN, AppConfig.DEBUG);
