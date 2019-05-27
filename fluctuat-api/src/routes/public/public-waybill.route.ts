@@ -8,14 +8,43 @@ import { verifyApiKey } from './verify-api-key.middleware';
 const publicWaybillRoute = Router();
 
 /**
- * @api {get} /waybill/:id Get waybill
- * @apiGroup Waybill
- * @apiName GetWaybill
+ * @api {get} /waybill/:id  Consulter une lettre de voiture
  * @apiVersion 1.0.0
+ * @apiName GetWaybill
+ * @apiGroup Waybill
  *
- * @apiParam {String} id waybill id
+ * @apiDescription Permet de recuperer une lettre de voiture existante. <br/>
+ * L'utilisateur peut seulement consulter les lettres de voiture crées avec sa clé.
  *
- * @apiSuccess {Waybill} waybill the requested waybill
+ * @apiParam {String} id Le code de la lettre de voiture
+ *
+ * @apiSuccess {String} code Le code de la lettre de voiture
+ * @apiSuccess {String} owner L'email de le proprietaire de la lettre de voiture
+ * @apiSuccess {OrderInfo} order Les informations préalables de la lettre de voiture.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "code": "LVDEMO",
+ *       "owner": "email@example.com",
+ *       "order: {
+ *            "customer": {},
+ *            "sender": {},
+ *            "receiver": {},
+ *            "middleman": {
+ *            "isBroker": true
+ *         },
+ *         "transporter": {},
+ *         "ship": {},
+ *         "originInfo": {
+ *         },
+ *         "destinationInfo": {
+ *         },
+ *         "merchandise": {
+ *         },
+ *        "sentAt": "2019-05-27T15:15:00.491Z"
+ *       }
+ *     }
  *
  */
 publicWaybillRoute.get('/:id', verifyApiKey, fetchWaybill, (req: any, res) => {
@@ -29,10 +58,15 @@ publicWaybillRoute.get('/:id', verifyApiKey, fetchWaybill, (req: any, res) => {
 });
 
 /**
- * @api {post} /waybill create new waybill
- * @apiGroup Waybill
- * @apiName CreateWaybill
+ * @api {post} /waybill Créer une lettre de voiture
  * @apiVersion 1.0.0
+ * @apiName CreateWaybill
+ * @apiGroup Waybill
+ *
+ * @apiSuccess (Created 201) {String} code Le code de la lettre de voiture
+ * @apiSuccess (Created 201) {String} owner L'email de le proprietaire de la lettre de voiture
+ * @apiSuccess (Created 201) {OrderInfo} order Les informations préalables de la lettre de voiture.
+ *
  */
 publicWaybillRoute.post('/', verifyApiKey, async (req: any, res) => {
   const userEmail = req.owner;
@@ -46,12 +80,13 @@ publicWaybillRoute.post('/', verifyApiKey, async (req: any, res) => {
 });
 
 /**
- * @api {put} /waybill/:id/order-info Modify existing waybill
- * @apiGroup Waybill
- * @apiName UpdateWaybillOrderInfo
+ * @api {put} /waybill/:id/order-info Modifier les informations d'une lettre de voiture existante.
  * @apiVersion 1.0.0
+ * @apiName UpdateWaybillOrderInfo
+ * @apiGroup Waybill
  *
- * @apiParam {String} id waybill id
+ * @apiParam {String} id Le code de la lettre de voiture
+ * @apiParam {OrderInfo} order informations préalables de la lettre de voiture
  */
 publicWaybillRoute.put('/:id/order-info', verifyApiKey, fetchWaybill, async (req: any, res) => {
   const waybill: Waybill = req.waybill;

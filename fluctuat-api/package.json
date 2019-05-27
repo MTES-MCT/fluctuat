@@ -50,7 +50,9 @@
     "collectCoverage": true
   },
   "apidoc": {
-     "title": "Fluctuat public api",
+     "name": "API du projet Fluctu@t (en construction)",
+     "description": "L'utilisation de cette API nécessite d'une clé d'accès personnelle pour obtenir une clé merci de nous contacter.",
+     "title": "API du projet Fluctu@t",
      "version": "1.0.0"
    }
 }

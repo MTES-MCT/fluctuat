@@ -40,6 +40,12 @@ Créez un compte depuis la page http://localhost:4200/inscription pour commencer
 Notez que si l'envoie de mail est désactivé (mode debug activé) vous pourrez récupérer les liens de validation en
 regardant le contenu des emails sur les logs du container `fluctuat-api`.
 
+### Api publique
+
+Notre API publique permet de créer de lettres de voiture à nos utilisateur.
+La documentation de l'API est consultable ici https://mtes-mct.github.io/fluctuat-apidoc/.
+
+Vous pouvez demander un accès à l'API en nous envoyant un email à l'addresse contact@fluctuat.beta.gouv.fr
 
 ## Crédits
 
