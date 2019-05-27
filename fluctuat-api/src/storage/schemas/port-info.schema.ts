@@ -4,4 +4,4 @@ export const PortInfoSchema = new Schema({
   port: String,
   expectedDate: Date,
   email: String
-});
+}, { _id: false });
