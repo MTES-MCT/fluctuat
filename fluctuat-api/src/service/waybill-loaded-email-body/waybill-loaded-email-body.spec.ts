@@ -4,7 +4,7 @@ import { waybillLoadedEmailBody } from './waybill-loaded-email-body';
 test('Waybill loaded email body', () => {
   const waybill = Waybill.fromObj({
     code: 'ZQ92PU',
-    order: {
+    orderInfo: {
       customer: { name: 'a customer' },
       sender: { name: 'a sender' },
       receiver: { name: 'a receiver' },

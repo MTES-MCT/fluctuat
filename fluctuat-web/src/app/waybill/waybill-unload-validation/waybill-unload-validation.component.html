@@ -3,7 +3,7 @@
   <ng-container *ngIf="waybill$ | async as waybill; else loading">
     <h1>Lettre de voiture nº {{waybill.code}}</h1>
 
-    <flu-waybill-order-info class="box" [order]="waybill.order"></flu-waybill-order-info>
+    <flu-waybill-order-info class="box" [order]="waybill.orderInfo"></flu-waybill-order-info>
 
     <div class="level"></div>
 

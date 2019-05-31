@@ -53,7 +53,7 @@ waybillRoute.post('/', verifyJWT, async (req: UserRequest, res) => {
   let waybill: Waybill = req.body;
   const userEmail = req.user.email;
 
-  waybill = await createWaybill(waybill.order, userEmail);
+  waybill = await createWaybill(waybill.orderInfo, userEmail);
 
   console.log(`${userEmail} creates waybill ${waybill.code}`);
 

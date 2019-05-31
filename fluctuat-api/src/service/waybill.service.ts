@@ -20,15 +20,15 @@ const createWaybill = async (orderInfo: OrderInfo, owner: string) => {
   const waybill = new Waybill();
   waybill.code = await generateCode();
   waybill.owner = owner;
-  waybill.order = Object.assign(waybill.order, orderInfo);
-  waybill.order.sentAt = new Date();
+  waybill.orderInfo = Object.assign(waybill.orderInfo, orderInfo);
+  waybill.orderInfo.sentAt = new Date();
 
   return await waybillStorage.put(waybill);
 };
 
 const saveOrderInfo = async (waybill: Waybill, orderInfo: OrderInfo) => {
-  waybill.order = orderInfo;
-  waybill.order.sentAt = new Date();
+  waybill.orderInfo = orderInfo;
+  waybill.orderInfo.sentAt = new Date();
 
   return await waybillStorage.put(waybill);
 };

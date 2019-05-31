@@ -13,7 +13,7 @@ const host = AppConfig.HOST;
 const baseUrl = AppConfig.getBaseUrl();
 
 export const waybillDocDefinition = (waybill: Waybill) => {
-  const order = waybill.order;
+  const orderInfo = waybill.orderInfo;
   const loadInfo = waybill.loadInfo;
   const unloadInfo = waybill.unloadInfo;
   return {
@@ -26,12 +26,12 @@ export const waybillDocDefinition = (waybill: Waybill) => {
         style: 'level'
       },
       '\n',
-      ...printOrderInfo(order),
+      ...printOrderInfo(orderInfo),
       '\n',
-      ...printLoadBlock(loadInfo, order),
+      ...printLoadBlock(loadInfo, orderInfo),
       ...printValidationBlock(loadInfo),
       '\n',
-      ...printUnloadBlock(unloadInfo, order),
+      ...printUnloadBlock(unloadInfo, orderInfo),
       ...printValidationBlock(unloadInfo)
     ],
     footer: [

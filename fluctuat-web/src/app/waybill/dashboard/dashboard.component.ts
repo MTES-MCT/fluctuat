@@ -70,9 +70,9 @@ export class DashboardComponent implements OnInit {
     return 'Crée';
   }
 
-  getLoadInfoDate = (waybill: Waybill) => this.formatLoadInfoDate(waybill.order.originInfo, waybill.loadInfo);
+  getLoadInfoDate = (waybill: Waybill) => this.formatLoadInfoDate(waybill.orderInfo.originInfo, waybill.loadInfo);
 
-  getUnloadInfoDate = (waybill: Waybill) => this.formatLoadInfoDate(waybill.order.destinationInfo, waybill.unloadInfo);
+  getUnloadInfoDate = (waybill: Waybill) => this.formatLoadInfoDate(waybill.orderInfo.destinationInfo, waybill.unloadInfo);
 
   private formatLoadInfoDate(portInfo: PortInfo, loadInfo: LoadInfo) {
     if (loadInfo.endDate) {

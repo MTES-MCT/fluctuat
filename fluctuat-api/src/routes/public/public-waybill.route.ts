@@ -27,7 +27,7 @@ const publicWaybillRoute = Router();
  *     {
  *       "code": "LVDEMO",
  *       "owner": "email@example.com",
- *       "order: {
+ *       "orderInfo: {
  *            "customer": {},
  *            "sender": {},
  *            "receiver": {},
@@ -72,7 +72,7 @@ publicWaybillRoute.post('/', verifyApiKey, async (req: any, res) => {
   const userEmail = req.owner;
   let waybill: Waybill = req.body;
 
-  waybill = await createWaybill(waybill.order, userEmail);
+  waybill = await createWaybill(waybill.orderInfo, userEmail);
 
   console.log(`${userEmail} creates waybill ${waybill.code} by api`);
 

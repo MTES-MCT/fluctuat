@@ -41,7 +41,7 @@ export class WaybillFormOrderNewComponent implements OnInit {
 
     this.result.waiting();
     const waybill = new Waybill();
-    waybill.order = this.orderFormComponent.getValue();
+    waybill.orderInfo = this.orderFormComponent.getValue();
 
     this.waybillService.create(waybill).pipe(
       catchError((error) => {

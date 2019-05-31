@@ -51,9 +51,9 @@ describe('stats service tests', () => {
   });
 
   test('stats counts total weight', async () => {
-    await put(buildWaybill({ owner: 'me@test', order: { merchandise: { weight: '500' } } }));
-    await put(buildWaybill({ owner: 'me2@test', order: { merchandise: { weight: '1000' } } }));
-    await put(buildWaybill({ owner: 'me2@test', order: { merchandise: { weight: '1000' } } }));
+    await put(buildWaybill({ owner: 'me@test', orderInfo: { merchandise: { weight: '500' } } }));
+    await put(buildWaybill({ owner: 'me2@test', orderInfo: { merchandise: { weight: '1000' } } }));
+    await put(buildWaybill({ owner: 'me2@test', orderInfo: { merchandise: { weight: '1000' } } }));
 
     const stats: StatsInfo = await getStats();
 
@@ -61,7 +61,7 @@ describe('stats service tests', () => {
   });
 
   test(' stats as not field _id', async () => {
-    await put(buildWaybill({ owner: 'me@test', order: { merchandise: { weight: '500' } } }));
+    await put(buildWaybill({ owner: 'me@test', orderInfo: { merchandise: { weight: '500' } } }));
 
     const stats: StatsInfo = await getStats();
 

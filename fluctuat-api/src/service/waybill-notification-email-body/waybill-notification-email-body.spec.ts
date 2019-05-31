@@ -3,7 +3,7 @@ import { waybillNotificationEmailBody } from './waybill-notification-email-body'
 
 test('Waybill notification email body', () => {
   const waybill = Waybill.fromObj({
-    order: {
+    orderInfo: {
       customer: { name: 'a customer', email: 'customer@test' },
       sender: { name: 'a sender', email: 'sender@test' },
       receiver: { name: 'a receiver', email: 'receiver@test' },
@@ -41,7 +41,7 @@ test('Waybill notification email body', () => {
 
 test('Waybill notification email body with missing fields', () => {
   const waybill = Waybill.fromObj({
-    order: {
+    orderInfo: {
       customer: { name: 'a customer', email: 'customer@test' },
       sender: { name: 'a sender', email: 'sender@test' },
       receiver: { name: 'a receiver', email: 'receiver@test' },

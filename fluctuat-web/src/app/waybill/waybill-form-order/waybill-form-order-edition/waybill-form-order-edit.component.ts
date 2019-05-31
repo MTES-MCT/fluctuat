@@ -39,7 +39,7 @@ export class WaybillFormOrderEditComponent implements OnInit {
     this.waybill$ = this.waybillService.get(this.waybillId).pipe(shareReplay(1));
 
     this.waybill$.subscribe((waybill) => {
-      return this.orderFormComponent.setValue(waybill.order);
+      return this.orderFormComponent.setValue(waybill.orderInfo);
     });
 
     if (this.authService.isAuthenticated()) {

@@ -20,15 +20,15 @@
     <tr *ngFor="let waybill of waybills">
       <td><a [routerLink]="['/lettre-de-voiture', waybill.code, 'detail']">{{waybill.code}}</a></td>
       <td>{{waybill.owner}}</td>
-      <td>{{waybill.order.customer.name || 'non renseigné'}}</td>
-      <td>{{waybill.order.sender.name || 'non renseigné'}}</td>
-      <td>{{waybill.order.receiver.name || 'non renseigné'}}</td>
-      <td>{{waybill.order.ship.name || 'non renseigné'}}</td>
+      <td>{{waybill.orderInfo.customer.name || 'non renseigné'}}</td>
+      <td>{{waybill.orderInfo.sender.name || 'non renseigné'}}</td>
+      <td>{{waybill.orderInfo.receiver.name || 'non renseigné'}}</td>
+      <td>{{waybill.orderInfo.ship.name || 'non renseigné'}}</td>
       <td>{{waybill.loadInfo.sentAt | date: "short"}}</td>
       <td>{{waybill.loadInfo.validatedAt | date: "short"}}</td>
       <td>{{waybill.unloadInfo.sentAt | date: "short"}}</td>
       <td>{{waybill.unloadInfo.validatedAt | date: "short"}}</td>
-      <td>{{waybill.order.merchandise.weight}}</td>
+      <td>{{waybill.orderInfo.merchandise.weight}}</td>
     </tr>
     </tbody>
   </table>

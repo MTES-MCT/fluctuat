@@ -86,7 +86,7 @@ describe('DashboardComponent', () => {
 
   it('loadInfoDate format loadInfo date', () => {
     const waybill = new Waybill();
-    waybill.order.originInfo.expectedDate = new Date('2020-10-01');
+    waybill.orderInfo.originInfo.expectedDate = new Date('2020-10-01');
     waybill.loadInfo.endDate = new Date('2020-10-02T09:55');
 
     const loadInfoDate = component.getLoadInfoDate(waybill);
@@ -96,7 +96,7 @@ describe('DashboardComponent', () => {
 
   it('loadInfoDate format origin expected date if no loadInfo', () => {
     const waybill = new Waybill();
-    waybill.order.originInfo.expectedDate = new Date('2020-10-01');
+    waybill.orderInfo.originInfo.expectedDate = new Date('2020-10-01');
 
     const loadInfoDate = component.getLoadInfoDate(waybill);
 

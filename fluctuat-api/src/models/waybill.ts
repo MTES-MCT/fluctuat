@@ -7,7 +7,7 @@ export class Waybill {
 
   owner: string;
 
-  order: OrderInfo = new OrderInfo();
+  orderInfo: OrderInfo = new OrderInfo();
   loadInfo: LoadInfo = new LoadInfo();
   unloadInfo: LoadInfo = new LoadInfo();
 

@@ -1,7 +1,7 @@
 <h3>Déchargement</h3>
 
 <p>Le transporteur déclare avoir remis <strong>{{waybill.unloadInfo.merchandiseWeight}}</strong> tonnes de
-  <strong>{{waybill.order.merchandise.nature}}</strong> au <strong>{{waybill.order.destinationInfo.port}}</strong>.</p>
+  <strong>{{waybill.orderInfo.merchandise.nature}}</strong> au <strong>{{waybill.orderInfo.destinationInfo.port}}</strong>.</p>
 
 <p>Le déchargement, commencé le <strong>{{waybill.unloadInfo.startDate | date: "dd/MM/y, HH:mm"}}</strong>
   s'est terminé le <strong>{{waybill.unloadInfo.endDate | date: "dd/MM/y, HH:mm"}}.</strong>

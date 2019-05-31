@@ -13,23 +13,23 @@ const put = (waybill: Waybill) => new WaybillDao(waybill).save();
 
 const getAll = () => {
   return WaybillDao.find()
-    .sort({ 'order.sentAt': 'desc', });
+    .sort({ 'orderInfo.sentAt': 'desc', });
 };
 
 const findByEmail = (email: string) => {
   return WaybillDao.find({
     $or: [
       { owner: email },
-      { 'order.customer.email': email },
-      { 'order.sender.email': email },
-      { 'order.receiver.email': email },
-      { 'order.middleman.email': email },
-      { 'order.transporter.email': email },
-      { 'order.originInfo.email': email },
-      { 'order.destinationInfo.email': email },
+      { 'orderInfo.customer.email': email },
+      { 'orderInfo.sender.email': email },
+      { 'orderInfo.receiver.email': email },
+      { 'orderInfo.middleman.email': email },
+      { 'orderInfo.transporter.email': email },
+      { 'orderInfo.originInfo.email': email },
+      { 'orderInfo.destinationInfo.email': email },
     ]
   })
-    .sort({ 'order.sentAt': 'desc', });
+    .sort({ 'orderInfo.sentAt': 'desc', });
 };
 
 const findContacts = (owner: string) => {
@@ -48,27 +48,27 @@ const findContacts = (owner: string) => {
     {
       $group: {
         _id: '$owner',
-        customerNames: { $addToSet: '$order.customer.name' },
-        customerEmails: { $addToSet: '$order.customer.email' },
-        senderNames: { $addToSet: '$order.sender.name' },
-        senderEmails: { $addToSet: '$order.sender.email' },
-        receiverNames: { $addToSet: '$order.receiver.name' },
-        receiverEmails: { $addToSet: '$order.receiver.email' },
-        middlemanNames: { $addToSet: '$order.middleman.name' },
-        middlemanEmails: { $addToSet: '$order.middleman.email' },
-        transporterNames: { $addToSet: '$order.transporter.name' },
-        transporterEmails: { $addToSet: '$order.transporter.email' },
-        transporterCellphones: { $addToSet: '$order.transporter.cellphone' },
-        shipNames: { $addToSet: '$order.ship.name' },
-        shipRegNumbers: { $addToSet: '$order.ship.regNumber' },
-        loadManagerEmails: { $addToSet: '$order.originInfo.email' },
-        unloadManagerEmails: { $addToSet: '$order.destinationInfo.email' },
-        customers: { $addToSet: '$order.customer' },
-        senders: { $addToSet: '$order.sender' },
-        receivers: { $addToSet: '$order.receiver' },
-        middlemen: { $addToSet: '$order.middleman' },
-        transporters: { $addToSet: '$order.transporter' },
-        ships: { $addToSet: '$order.ship' }
+        customerNames: { $addToSet: '$orderInfo.customer.name' },
+        customerEmails: { $addToSet: '$orderInfo.customer.email' },
+        senderNames: { $addToSet: '$orderInfo.sender.name' },
+        senderEmails: { $addToSet: '$orderInfo.sender.email' },
+        receiverNames: { $addToSet: '$orderInfo.receiver.name' },
+        receiverEmails: { $addToSet: '$orderInfo.receiver.email' },
+        middlemanNames: { $addToSet: '$orderInfo.middleman.name' },
+        middlemanEmails: { $addToSet: '$orderInfo.middleman.email' },
+        transporterNames: { $addToSet: '$orderInfo.transporter.name' },
+        transporterEmails: { $addToSet: '$orderInfo.transporter.email' },
+        transporterCellphones: { $addToSet: '$orderInfo.transporter.cellphone' },
+        shipNames: { $addToSet: '$orderInfo.ship.name' },
+        shipRegNumbers: { $addToSet: '$orderInfo.ship.regNumber' },
+        loadManagerEmails: { $addToSet: '$orderInfo.originInfo.email' },
+        unloadManagerEmails: { $addToSet: '$orderInfo.destinationInfo.email' },
+        customers: { $addToSet: '$orderInfo.customer' },
+        senders: { $addToSet: '$orderInfo.sender' },
+        receivers: { $addToSet: '$orderInfo.receiver' },
+        middlemen: { $addToSet: '$orderInfo.middleman' },
+        transporters: { $addToSet: '$orderInfo.transporter' },
+        ships: { $addToSet: '$orderInfo.ship' }
       }
     },
     {

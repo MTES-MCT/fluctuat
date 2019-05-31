@@ -5,7 +5,7 @@ const getStats = async (): Promise<StatsInfo> => {
     {
       $group: {
         _id: { owner: '$owner' },
-        totalWeight: { $sum: { $toInt: '$order.merchandise.weight' } },
+        totalWeight: { $sum: { $toInt: '$orderInfo.merchandise.weight' } },
         waybillCount: { $sum: 1 },
       },
     },

@@ -18,12 +18,12 @@ const sendWaybill = (waybill: Waybill) => {
 
   const email: EmailData = {
     to: [
-      waybill.order.customer,
-      waybill.order.receiver,
-      waybill.order.transporter,
-      waybill.order.sender,
-      waybill.order.middleman,
-      { name: '', email: waybill.order.destinationInfo.email },
+      waybill.orderInfo.customer,
+      waybill.orderInfo.receiver,
+      waybill.orderInfo.transporter,
+      waybill.orderInfo.sender,
+      waybill.orderInfo.middleman,
+      { name: '', email: waybill.orderInfo.destinationInfo.email },
       { name: '', email: waybill.owner },
     ],
     subject: `⚓ Lettre de voiture ${waybill.code} - déchargement confirmé`,
@@ -48,13 +48,13 @@ const sendWaybillLoaded = (waybill: Waybill) => {
 
   const email: EmailData = {
     to: [
-      waybill.order.customer,
-      waybill.order.receiver,
-      waybill.order.transporter,
-      waybill.order.sender,
-      waybill.order.middleman,
-      { name: '', email: waybill.order.originInfo.email },
-      { name: '', email: waybill.order.destinationInfo.email },
+      waybill.orderInfo.customer,
+      waybill.orderInfo.receiver,
+      waybill.orderInfo.transporter,
+      waybill.orderInfo.sender,
+      waybill.orderInfo.middleman,
+      { name: '', email: waybill.orderInfo.originInfo.email },
+      { name: '', email: waybill.orderInfo.destinationInfo.email },
       { name: '', email: waybill.owner },
     ],
     subject: `⚓  Lettre de voiture nº ${waybill.code} - chargement confirmé️ `,
@@ -75,7 +75,7 @@ const sendWaybillLoaded = (waybill: Waybill) => {
 };
 
 const sendWaybillLoadValidation = (waybill: Waybill, confirmationLink: string) => {
-  const transporter = waybill.order.transporter;
+  const transporter = waybill.orderInfo.transporter;
 
   const email: EmailData = {
     to: [transporter],
@@ -94,7 +94,7 @@ const sendWaybillLoadValidation = (waybill: Waybill, confirmationLink: string) =
 };
 
 const sendWaybillUnloadValidation = (waybill: Waybill, confirmationLink: string) => {
-  const transporter = waybill.order.transporter;
+  const transporter = waybill.orderInfo.transporter;
 
   const email: EmailData = {
     to: [transporter],
