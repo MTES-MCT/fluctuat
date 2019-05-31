@@ -20,14 +20,14 @@ const publicWaybillRoute = Router();
  *
  * @apiSuccess {String} code Le code de la lettre de voiture
  * @apiSuccess {String} owner L'email de le proprietaire de la lettre de voiture
- * @apiSuccess {OrderInfo} order Les informations préalables de la lettre de voiture.
+ * @apiSuccess {OrderInfo} orderInfo Les informations préalables de la lettre de voiture.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *       "code": "LVDEMO",
  *       "owner": "email@example.com",
- *       "orderInfo: {
+ *       "orderInfo": {
  *            "customer": {},
  *            "sender": {},
  *            "receiver": {},
