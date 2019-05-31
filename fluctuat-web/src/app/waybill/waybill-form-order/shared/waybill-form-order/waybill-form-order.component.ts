@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Person } from '../../../shared/models/person.model';
-import { Contacts } from '../../../shared/models/contacts';
+import { Contacts } from '../../../shared/models/contacts.model';
 import { FluValidators } from '../../../../core/form-validators/flu-validators';
 import { PortList } from '../../../shared/ports-list';
 import { OrderInfo } from '../../../shared/models/order-info.model';

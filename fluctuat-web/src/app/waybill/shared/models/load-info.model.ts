@@ -1,4 +1,4 @@
-import { LoadManager } from './load-manager';
+import { LoadManager } from './load-manager.model';
 
 export class LoadInfo {
 

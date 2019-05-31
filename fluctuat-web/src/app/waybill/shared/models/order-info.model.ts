@@ -1,8 +1,8 @@
 import { Person } from './person.model';
 import { Ship } from './ship.model';
 import { Middleman } from './middleman.model';
-import { Merchandise } from './merchandise';
-import { PortInfo } from './port-info';
+import { Merchandise } from './merchandise.model';
+import { PortInfo } from './port-info.model';
 import { Transporter } from './transporter.model';
 
 export class OrderInfo {

@@ -6,7 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Waybill } from '../shared/models/waybill.model';
 import { WaybillService } from '../shared/waybill.service';
 import { StatusOption } from './status-option.enum';
-import { PortInfo } from '../shared/models/port-info';
+import { PortInfo } from '../shared/models/port-info.model';
 import { LoadInfo } from '../shared/models/load-info.model';
 
 @Component({

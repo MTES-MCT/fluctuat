@@ -9,7 +9,7 @@ import { Waybill } from '../../shared/models/waybill.model';
 import { ResultHelper } from '../../../core/result-helper';
 import { GENERIC_ERROR_MSG } from '../../../core/generic-error';
 import { ContactsService } from '../../shared/contacts.service';
-import { Contacts } from '../../shared/models/contacts';
+import { Contacts } from '../../shared/models/contacts.model';
 import { OrderInfo } from '../../shared/models/order-info.model';
 
 @Component({

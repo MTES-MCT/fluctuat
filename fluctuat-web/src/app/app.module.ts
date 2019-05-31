@@ -9,7 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './core/auth/auth.service';
 import { UnauthorizedInterceptor } from './core/auth/unauthorized.interceptor';
-import { WaybillFormOrderEditComponent } from './waybill/waybill-form-order/waybill-form-order-edition/waybill-form-order-edit.component';
+import { WaybillFormOrderEditComponent } from './waybill/waybill-form-order/waybill-form-order-edit/waybill-form-order-edit.component';
 import { WaybillFormOrderNewComponent } from './waybill/waybill-form-order/waybill-form-order-new/waybill-form-order-new.component';
 import { WaybillFormOrderComponent } from './waybill/waybill-form-order/shared/waybill-form-order/waybill-form-order.component';
 import { WaybillFormUnloadComponent } from './waybill/waybill-form-unload/waybill-form-unload.component';

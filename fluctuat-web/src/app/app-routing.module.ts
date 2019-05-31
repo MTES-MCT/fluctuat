@@ -4,7 +4,7 @@ import { DashboardComponent } from './waybill/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { WaybillFormOrderNewComponent } from './waybill/waybill-form-order/waybill-form-order-new/waybill-form-order-new.component';
-import { WaybillFormOrderEditComponent } from './waybill/waybill-form-order/waybill-form-order-edition/waybill-form-order-edit.component';
+import { WaybillFormOrderEditComponent } from './waybill/waybill-form-order/waybill-form-order-edit/waybill-form-order-edit.component';
 import { WaybillFormLoadComponent } from './waybill/waybill-form-load/waybill-form-load.component';
 import { WaybillFormUnloadComponent } from './waybill/waybill-form-unload/waybill-form-unload.component';
 import { WaybillLoadValidationComponent } from './waybill/waybill-load-validation/waybill-load-validation.component';
